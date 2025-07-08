@@ -1,0 +1,10 @@
+# Ignore OS and editor temp files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore local backups or caches
+*.bak
+*.tmp
+.cache/
+
