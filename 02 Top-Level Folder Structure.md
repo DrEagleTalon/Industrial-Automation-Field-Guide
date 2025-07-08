@@ -1,3 +1,22 @@
+---
+title: ""
+version: ""
+status: ""
+author: [""]
+editors: [""]
+contributors: [""]
+category: [""]
+tags: [""]
+difficulty: ""
+related-topics: [""]
+standards: [""]
+equipment: [""]
+to-be-completed-by: ""
+last-updated: ""
+reviewed: ""
+---
+
+
 ## **Top-Level Folder Structure
 
 > Recommended root folder name: `Industrial Automation Field Guide`

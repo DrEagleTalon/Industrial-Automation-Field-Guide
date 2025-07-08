@@ -31,7 +31,7 @@ reviewed: 2025-07-07
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 > *Use this to navigate. Folder numbers keep things sorted in Obsidian. Individual topics don’t need numbering inside their files.*
 

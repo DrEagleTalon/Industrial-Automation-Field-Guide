@@ -1,3 +1,20 @@
+---
+title: ""
+version: ""
+status: ""
+author: [""]
+editors: [""]
+contributors: [""]
+category: [""]
+tags: [""]
+difficulty: ""
+related-topics: [""]
+standards: [""]
+equipment: [""]
+to-be-completed-by: ""
+last-updated: ""
+reviewed: ""
+---
 
 # How to Use This Vault / Field Guide
 

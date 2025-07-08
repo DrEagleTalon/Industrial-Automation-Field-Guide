@@ -1,4 +1,5 @@
 ---
+
 title: CHANGELOG
 version: 0.1.1
 status: draft
@@ -24,6 +25,7 @@ equipment:
 to-be-completed-by: 2025-09-01
 last-updated: 2025-07-07
 reviewed: 2025-07-07
+
 ---
 
 # Master Field Guide Change Log
