@@ -148,17 +148,12 @@ Without these basics, you’d never confidently size a starter, fuse, or wire ru
 
   
 
-| Parameter      | Typical Value / Range      | Notes                                  |
-
-|----------------|---------------------------|----------------------------------------|
-
-| Control Voltage| 24 VDC, 120 VAC            | Common for control circuits            |
-
-| Line Voltage   | 120/240/480 VAC            | Typical industrial power supplies      |
-
-| Current Ranges | Milliamps to hundreds of A | From sensors to large motors           |
-
-| Resistance     | 0.1 Ω to MΩ                | Depends on load or insulation context  |
+| Parameter        | Typical Value / Range      | Notes                                 |
+|------------------|---------------------------|---------------------------------------|
+| Control Voltage  | 24 VDC, 120 VAC           | Common for control circuits           |
+| Line Voltage     | 120/240/480 VAC           | Typical industrial power supplies     |
+| Current Ranges   | Milliamps to hundreds of A| From sensors to large motors          |
+| Resistance       | 0.1 Ω to MΩ               | Depends on load or insulation context |
 
   
 
@@ -168,66 +163,49 @@ Without these basics, you’d never confidently size a starter, fuse, or wire ru
 
 ## Wiring & Diagrams
 
-Basic DC Circuit Example:
+***Basic DC Circuit Example:**
 
-  
-
+```
 +24VDC ––[ Fuse ]––[ Switch ]––[ Lamp ]–– 0VDC
-
+```
   
 
 - When the switch closes, voltage pushes current through the lamp’s resistance, lighting it up.
 - The fuse protects against short circuits by melting if current is too high.
 
-  
+**Simple AC Motor Circuit:**
 
-  
+```
+L1 --[ Breaker ]--[ Contactor ]--[ Motor ]
 
-Simple AC Motor Circuit:
-
-  
-
-L1 ––[ Breaker ]––[ Contactor ]––[ Motor ]
-
-N ––––––––––[ Contactor ]––[ Motor ]
-
-  
+N ----------------[ Contactor ]--[ Motor ]
+```
 
 - Breaker protects against overcurrent (shorts, overloads).
 - Contactor is an electrically controlled switch.
 - Motor is the load. N (neutral) provides return path.
 
-  
+**Three-Phase Example (typical industrial motor):**
 
-  
-
-Three-Phase Example (typical industrial motor):
-
-  
+```
 
 L1 ––[ Overload ]––+
 
 L2 ––[ Overload ]––+––[ Motor ]
 
 L3 ––[ Overload ]––+
-
-  
+```
 
 - Overload relay cuts the circuit if any phase draws too much current.
 
-  
-
 ---
-
-  
 
 ## Troubleshooting & Diagnostics
 
 Common problems in simple circuits:
 
-|   |   |   |   |
-|---|---|---|---|
 |Symptom|Likely Cause|Diagnostic Step|Tool Needed|
+|---|---|---|---|
 |No voltage at load|Open fuse, loose wire|Check continuity across fuse & wire|Multimeter|
 |Motor won’t start|Contactor not pulling in|Verify coil voltage present|Multimeter|
 |Overload tripping|Phase imbalance or dirt|Clamp each phase for imbalance|Clamp meter|
@@ -237,11 +215,7 @@ Always check for voltage under load — an unloaded circuit might appear fine.
 
 ---
 
-  
-
 ## Field Checklist
-
-  
 
 - Verify line voltage at incoming terminals.
 - Confirm control circuit voltage (e.g. 24 VDC or 120 VAC) matches device spec.
@@ -249,17 +223,11 @@ Always check for voltage under load — an unloaded circuit might appear fine.
 - Inspect terminals for tight, clean connections.
 - Perform voltage drop checks under full load.
 
-  
-
 ---
-
-  
 
 ## Reference Notes
 
 Standards and references:
-
-  
 
 - NEC Article 210 (branch circuits)
 - NEC 240 (overcurrent protection)
@@ -267,39 +235,20 @@ Standards and references:
 - IEC 60364 series for global installations
 - Manufacturer data sheets for motor, starter, or panel ratings
 
-  
-
 ---
-
-  
 
 ## Related Topics
 
-  
-
 - [[Lockout Tagout (LOTO) Procedures]]
-
 - [[Tools of the Trade]]
-
 - [[Wire Color Codes (US & IEC)]]
 
-  
-
 ---
-
-  
 
 ## Local Changelog
 
-  
-
 | Date       | Version | Author                | Notes                                       |
-
 |------------|---------|-----------------------|---------------------------------------------|
-
 | 2025-07-07 | 1.0.0   | Yusuf Talan Saunders  | Created complete first edition of topic.    |
 
-  
-
 ---
-
