@@ -33,12 +33,12 @@ Lockout/Tagout (LOTO) is a safety procedure used to ensure that machines are pro
 
 ## Core Concepts
 
-### 🔹 What is it?
+### What is it?
 > - LOTO is a formal system for controlling hazardous energy.  
 > - Involves isolating energy sources and applying locks & tags.  
 > - Required by OSHA 29 CFR 1910.147 in the US.
 
-### 🔹 How it works
+### How it works
 > - Identify all energy sources (electrical, hydraulic, pneumatic, mechanical).  
 > - Shut down equipment.  
 > - Isolate energy sources (disconnect switches, valves).  
@@ -46,25 +46,25 @@ Lockout/Tagout (LOTO) is a safety procedure used to ensure that machines are pro
 > - Release stored energy (bleed air, discharge capacitors).  
 > - Verify zero energy state before starting work.
 
-### 🔹 When to Use
+### When to Use
 > - During maintenance, cleaning, adjustments.  
 > - Anytime removing guards or exposing hazardous parts.  
 > - Not typically used for minor tool changes if alternative protection is in place.
 
 ---
 
-## 🛠️ Troubleshooting & Diagnostics
+## Troubleshooting & Diagnostics
 
 | Symptom                    | Likely Cause                  | Diagnostic Step                     | Tool(s) Needed  |
 |-----------------------------|------------------------------|------------------------------------|-----------------|
 | Power still present         | Incomplete isolation         | Test each terminal point for zero voltage | Multimeter |
 | Tag found but no lock       | Procedure violation          | Audit lock ownership, retrain team | LOTO log, checklist |
 
-> 💡 **Pro Tip:** Always attempt to start the equipment after lockout to verify it does NOT run.
+> **Pro Tip:** Always attempt to start the equipment after lockout to verify it does NOT run.
 
 ---
 
-## 📏 Specifications & Parameters
+## Specifications & Parameters
 
 | Parameter         | Typical Value/Range | Notes                         |
 |-------------------|---------------------|-------------------------------|
@@ -74,7 +74,7 @@ Lockout/Tagout (LOTO) is a safety procedure used to ensure that machines are pro
 
 ---
 
-## 📐 Wiring & Diagrams
+## Wiring & Diagrams
 
 ```
 [No wiring - LOTO is mechanical & procedural]
@@ -83,7 +83,7 @@ Use schematics to identify disconnects and control power sources.
 
 ---
 
-## 📎 Reference Notes
+## Reference Notes
 
 - OSHA 29 CFR 1910.147 Lockout/Tagout standard.  
 - NFPA 70E covers electrical safety.  
@@ -91,7 +91,7 @@ Use schematics to identify disconnects and control power sources.
 
 ---
 
-## 📂 Related Topics
+## Related Topics
 
 - [[Electrical Safety & PPE]]
 - [[Arc Flash Safety]]
@@ -99,7 +99,7 @@ Use schematics to identify disconnects and control power sources.
 
 ---
 
-## ✅ Field Checklist
+## Field Checklist
 
 - [ ] All energy sources identified
 - [ ] Lock applied by person performing work

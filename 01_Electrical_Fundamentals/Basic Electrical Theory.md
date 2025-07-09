@@ -84,7 +84,7 @@ If you imagine water in a pipe:
 
 The fundamental equation that ties voltage, current, and resistance:
 
-V = I × R
+$V = I × R$
 
 This means:
 
@@ -95,35 +95,35 @@ Example:
 
 If you have 120 volts across a 12 ohm heater coil:
 
-I = V / R = 120V / 12Ω = 10A
+$I = V / R = 120V / 12Ω = 10A$
 
 #### Power
 
 The rate of doing electrical work, measured in watts (W):
 
-P = V × I
+$P = V × I$
 
 or for purely resistive loads:
 
-P = I² × R
+$P = I² × R$
 
 Example:
 
 A 10 amp current at 120V:
 
-P = 120V × 10A = 1200W (1.2 kW)
+$P = 120V × 10A = 1200W (1.2 kW)$
 
 #### Energy
 
 Power used over time, measured in kilowatt-hours (kWh):
 
-Energy = Power × Time
+$Energy = Power × Time$
 
 Example:
 
 A 2 kW motor running for 5 hours:
 
-Energy = 2 kW × 5 h = 10 kWh
+$Energy = 2 kW × 5 h = 10 kWh$
 
 ---
 
