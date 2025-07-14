@@ -1,19 +1,19 @@
 ---
-title: ""
-version: ""
-status: ""
-author: [""]
-editors: [""]
-contributors: [""]
-category: [""]
-tags: [""]
-difficulty: ""
-related-topics: [""]
-standards: [""]
-equipment: [""]
+title: "Lockout/Tagout (LOTO) Procedures"
+version: "1.0.0"
+status: "draft"
+author: ["Yusuf Talan Saunders"]
+editors: ["Yusuf Talan Saunders"]
+contributors: ["Yusuf Talan Saunders"]
+category: ["Safety"]
+tags: ["#safety", "#loto", "#fieldguide"]
+difficulty: "Beginner"
+related-topics: ["Electrical Safety & PPE", "Arc Flash Safety", "Root Cause Analysis"]
+standards: ["OSHA 29 CFR 1910.147", "NFPA 70E"]
+equipment: ["Padlocks", "Tags", "Hasps", "Multimeter"]
 to-be-completed-by: ""
-last-updated: ""
-reviewed: ""
+last-updated: "2025-06-29"
+reviewed: "2025-06-29"
 ---
 
 # Lockout/Tagout (LOTO) Procedures

@@ -1,33 +1,18 @@
 ---
-
 title: "Basic Electrical Theory"
-
 version: "1.0.0"
-
 status: "final"
-
 author: ["Yusuf Talan Saunders"]
-
 editors: []
-
 contributors: []
-
 category: ["Electrical Fundamentals"]
-
 tags: ["#electrical", "#ohmslaw", "#power", "#basic-theory"]
-
 difficulty: "Beginner"
-
 related-topics: ["Lockout Tagout (LOTO) Procedures", "Tools of the Trade"]
-
 standards: ["NEC", "IEC Basics"]
-
 equipment: ["none"]
-
 to-be-completed-by: "2025-09-01"
-
 last-updated: "2025-07-07"
-
 reviewed: "2025-07-07"
 
 ---
@@ -35,15 +20,10 @@ reviewed: "2025-07-07"
 # Basic Electrical Theory
 
 **Category:** `Electrical Fundamentals`  
-
-**Tags:** `#electrical #ohmslaw #power #basic-theory`  
-
+**Tags:** `#electrical #ohmslaw #power #basic-theory` 
 **Difficulty:** `Beginner`  
-
 **Last Updated:** `2025-07-07`  
-
 **Version:** `1.0.0`  
-
 **Status:** `Final`  
 
 ---
@@ -93,13 +73,13 @@ This means:
 
 Example:
 
-If you have 120 volts across a 12 ohm heater coil:
+If you have $120 volts$ across a $12 ohm$ heater coil:
 
 $I = V / R = 120V / 12Ω = 10A$
 
 #### Power
 
-The rate of doing electrical work, measured in watts (W):
+The rate of doing electrical work, measured in$ watts (W)$:
 
 $P = V × I$
 
@@ -109,19 +89,19 @@ $P = I² × R$
 
 Example:
 
-A 10 amp current at 120V:
+A $10 amp$ current at $120V$:
 
 $P = 120V × 10A = 1200W (1.2 kW)$
 
 #### Energy
 
-Power used over time, measured in kilowatt-hours (kWh):
+Power used over time, measured in $kilowatt-hours (kWh)$:
 
 $Energy = Power × Time$
 
 Example:
 
-A 2 kW motor running for 5 hours:
+A $2 kW$ motor running for $5 hours$:
 
 $Energy = 2 kW × 5 h = 10 kWh$
 
@@ -142,11 +122,8 @@ Without these basics, you’d never confidently size a starter, fuse, or wire ru
 
 ---
 
-  
-
 ## Specifications & Parameters
 
-  
 
 | Parameter        | Typical Value / Range      | Notes                                 |
 |------------------|---------------------------|---------------------------------------|
@@ -155,11 +132,7 @@ Without these basics, you’d never confidently size a starter, fuse, or wire ru
 | Current Ranges   | Milliamps to hundreds of A| From sensors to large motors          |
 | Resistance       | 0.1 Ω to MΩ               | Depends on load or insulation context |
 
-  
-
 ---
-
-  
 
 ## Wiring & Diagrams
 

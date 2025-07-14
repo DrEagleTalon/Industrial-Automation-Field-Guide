@@ -42,14 +42,14 @@ reviewed: 2025-07-07
 - [[Electrical Safety & PPE]]
 - [[Lockout Tagout (LOTO) Procedures]]
 - [[Basic Electrical Theory]]
-  - Ohm’s Law, Power, Energy
-  - AC vs DC
-  - Single-phase vs Three-phase
+  - [[Basic Electrical Theory-Ohm’s Law, Power, Energy]]
+  - [[Basic Electrical Theory-AC vs DC]]
+  - [[Basic Electrical Theory-Single-phase vs Three-phase]]
 - [[Tools of the Trade]]
-  - Multimeter usage
-  - Clamp meter
-  - Megger (Insulation Tester)
-  - Control voltage testers
+  - [[Tools of the Trade-Multimeter usage]]
+  - [[Tools of the Trade-Clamp meter]]
+  - [[Tools of the Trade-Megger or Insulation Tester]]
+  - [[Tools of the Trade-Control voltage testers]]
 
 ---
 
@@ -165,7 +165,7 @@ reviewed: 2025-07-07
 ## **X. System Integration & Commissioning**
 
 - [[Control Panel Layout & BOM]]
-- [[I/O Checkout & Loop Testing]]
+- [[IO Checkout & Loop Testing]]
 - [[PLC-HMI-VFD Integration]]
 - [[Startup Sequences]]
 - [[PID Tuning Basics]]
