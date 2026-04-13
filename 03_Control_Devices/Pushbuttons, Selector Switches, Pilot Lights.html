@@ -375,96 +375,85 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Pushbuttons, Selector Switches, Pilot Lights</h1>
 
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<h1 id="pushbuttons-selector-switches-pilot-lights">Pushbuttons, Selector Switches, Pilot Lights</h1>
+<p><strong>Category:</strong> <code>Control Devices</code><br />
+<strong>Tags:</strong> <code>#pushbuttons #selectors #pilotlights #operators #paneldoor</code><br />
+<strong>Difficulty:</strong> <code>Beginner</code><br />
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Operator devices are the human interface at the panel door. Pushbuttons, selector switches, and pilot lights let people start, stop, reset, and monitor machine status without opening the enclosure. Correct selection and wiring of these devices is a core skill for control technicians.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h3 id="what-they-are">What they are</h3>
+<ul>
+<li><strong>Pushbutton:</strong> Momentary operator input, normally open (NO) or normally closed (NC).</li>
+<li><strong>Selector switch:</strong> Maintained position input, typically 2-position or 3-position.</li>
+<li><strong>Pilot light:</strong> Visual output indicator showing status such as RUN, FAULT, or POWER ON.</li>
+</ul>
+<h3 id="how-they-work">How they work</h3>
+<p>Mechanical action changes contact state. In control circuits this contact transition energizes a relay, PLC input, or starter coil. Pilot lights illuminate when fed by a control output or monitoring contact.</p>
+<h3 id="when-to-use">When to use</h3>
+<ul>
+<li>Pushbuttons for start/stop/jog/reset commands.</li>
+<li>Selector switches for mode control (AUTO-OFF-MANUAL).</li>
+<li>Pilot lights for fast status visibility at distance.</li>
+</ul>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
+<thead><tr><th>Parameter</th><th>Typical Value / Range</th><th>Notes</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Mounting hole size</td><td>22 mm or 30 mm</td><td>Match enclosure and accessory ecosystem</td></tr>
+<tr><td>Contact blocks</td><td>1NO, 1NC, 2NO, 2NC combinations</td><td>Add blocks for required logic</td></tr>
+<tr><td>Pilot light voltage</td><td>24 VDC, 120 VAC, 230 VAC</td><td>Use exact rated lamp module</td></tr>
+<tr><td>Ingress rating</td><td>IP65-IP67 common</td><td>Required in washdown or dusty areas</td></tr>
+<tr><td>Mechanical life</td><td>Hundreds of thousands to millions of cycles</td><td>Use high-cycle models for frequent operation</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>24V+ -> STOP (NC) -> START (NO) -> Relay coil -> 0V
+
+Pilot Light RUN:
+24V+ -> PLC output or aux contact -> Green lamp -> 0V
+</code></pre>
+<p>Use clear device tags like PB-START, PB-STOP, SS-AUTO-MAN, PL-RUN, PL-FAULT.</p>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
+<thead><tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Start button does nothing</td><td>Open STOP contact or no control voltage</td><td>Trace voltage through series chain</td><td>Multimeter</td></tr>
+<tr><td>Selector switch stuck in one mode</td><td>Mechanical failure or wrong contact block stack</td><td>Inspect operator and verify continuity by position</td><td>Continuity tester</td></tr>
+<tr><td>Pilot light always off</td><td>Burned lamp module or no source from output</td><td>Measure voltage across lamp terminals</td><td>Multimeter</td></tr>
+<tr><td>Pilot light dim/flicker</td><td>Loose terminal or wrong voltage module</td><td>Retorque terminals and confirm lamp rating</td><td>Torque driver, meter</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li>Verify device legend plate text matches panel drawing nomenclature.</li>
+<li>Confirm NO/NC contact usage matches control logic and safety intent.</li>
+<li>Check illumination color standards are consistent across the machine line.</li>
+<li>Validate operator function in all machine modes during FAT/SAT.</li>
+<li>Document spare part numbers for contact blocks and lamp modules.</li>
 </ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Wiring &amp; Testing Control Circuits.html">Wiring &amp; Testing Control Circuits</a></li>
+<li><a href="Relays &amp; Interposing Relays.html">Relays &amp; Interposing Relays</a></li>
+<li><a href="Latching Circuits &amp; Seal-in Logic.html">Latching Circuits &amp; Seal-in Logic</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+<thead><tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr></thead>
+<tbody><tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Initial full content release.</td></tr></tbody>
 </table>
 <hr />
       </article>
