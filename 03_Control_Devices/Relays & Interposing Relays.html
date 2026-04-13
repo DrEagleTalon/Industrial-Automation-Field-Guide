@@ -375,96 +375,85 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Relays &amp; Interposing Relays</h1>
 
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<h1 id="relays-interposing-relays">Relays &amp; Interposing Relays</h1>
+<p><strong>Category:</strong> <code>Control Devices</code><br />
+<strong>Tags:</strong> <code>#relays #interposing #coil #contacts #isolation</code><br />
+<strong>Difficulty:</strong> <code>Intermediate</code><br />
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Relays use a low-power control signal to switch one or more isolated contacts. Interposing relays are used between PLC outputs and field loads when voltage/current conversion, contact multiplication, or electrical isolation is needed.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
 <h3 id="what-is-it">What is it?</h3>
+<p>A control relay has a coil and contacts. Energizing the coil changes contact state. Contacts may be NO, NC, or changeover (SPDT/DPDT).</p>
 <h3 id="how-it-works">How it works</h3>
+<ul>
+<li>PLC output or control switch energizes relay coil.</li>
+<li>Relay contact switches power to another circuit.</li>
+<li>Interposing relay isolates fragile output electronics from inductive loads.</li>
+</ul>
 <h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>When PLC output cannot directly drive load current.</li>
+<li>When voltage levels differ, such as 24 VDC PLC to 120 VAC solenoid.</li>
+<li>When one command must drive multiple independent contacts.</li>
+</ul>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
+<thead><tr><th>Parameter</th><th>Typical Value / Range</th><th>Notes</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Coil voltage</td><td>24 VDC, 120 VAC</td><td>Must match control source</td></tr>
+<tr><td>Contact rating</td><td>3 A to 10 A common</td><td>Use utilization category, not only resistive rating</td></tr>
+<tr><td>Contact form</td><td>SPST, SPDT, DPDT</td><td>Select by logic and isolation needs</td></tr>
+<tr><td>Response time</td><td>5 ms to 20 ms typical</td><td>Important for pulse or fast sequence work</td></tr>
+<tr><td>Suppression</td><td>Diode, RC snubber, MOV</td><td>Protect output devices from coil kickback</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>PLC DO -> Interposing relay coil (24VDC)
+Relay NO contact -> 120VAC hot to solenoid
+Neutral -> solenoid return
+
+Add flyback diode across DC relay coil with correct polarity.
+</code></pre>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
+<thead><tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Relay LED on, load not energizing</td><td>Damaged contact or wrong wiring side used</td><td>Check contact continuity under coil energized state</td><td>Multimeter</td></tr>
+<tr><td>PLC output card faults</td><td>No suppression on relay/solenoid circuit</td><td>Inspect for diode/snubber and transient evidence</td><td>Meter, visual inspection</td></tr>
+<tr><td>Relay chatter</td><td>Low coil voltage or unstable source</td><td>Measure coil voltage during switching event</td><td>Meter with min/max</td></tr>
+<tr><td>Contacts welded closed</td><td>Load current too high or inrush not considered</td><td>Compare load type and current to contact category</td><td>Datasheet review, clamp meter</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li>Confirm coil voltage and polarity before energizing.</li>
+<li>Verify contact utilization category for the actual load type.</li>
+<li>Install suppression components on inductive circuits.</li>
+<li>Label relay socket, coil terminals, and contact terminal numbers.</li>
+<li>Stock critical relay models as maintenance spares.</li>
 </ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Pushbuttons, Selector Switches, Pilot Lights.html">Pushbuttons, Selector Switches, Pilot Lights</a></li>
+<li><a href="Latching Circuits &amp; Seal-in Logic.html">Latching Circuits &amp; Seal-in Logic</a></li>
+<li><a href="Wiring &amp; Testing Control Circuits.html">Wiring &amp; Testing Control Circuits</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+<thead><tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr></thead>
+<tbody><tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Initial full content release.</td></tr></tbody>
 </table>
 <hr />
       </article>

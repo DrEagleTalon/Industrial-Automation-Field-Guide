@@ -375,96 +375,86 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Wiring &amp; Testing Control Circuits</h1>
 
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<h1 id="wiring-testing-control-circuits">Wiring &amp; Testing Control Circuits</h1>
+<p><strong>Category:</strong> <code>Control Devices</code><br />
+<strong>Tags:</strong> <code>#controlwiring #pointtopoint #continuity #commissioning #verification</code><br />
+<strong>Difficulty:</strong> <code>Intermediate</code><br />
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>This page provides a practical workflow for wiring and proving control circuits before startup. It focuses on safe sequencing, documentation discipline, and repeatable test steps that prevent commissioning delays.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
 <h3 id="what-is-it">What is it?</h3>
+<p>Control circuit wiring is the installation of low-energy command, status, and interlock conductors between devices, terminal blocks, PLC I/O, and control power components.</p>
 <h3 id="how-it-works">How it works</h3>
+<ol>
+<li>Build from approved drawings and wire list.</li>
+<li>Terminate and label each conductor at both ends.</li>
+<li>Perform point-to-point continuity verification.</li>
+<li>Energize control power and validate live behavior.</li>
+</ol>
 <h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>New panel build and machine install.</li>
+<li>Retrofit work and I/O expansion.</li>
+<li>Troubleshooting after field modifications.</li>
+</ul>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
+<thead><tr><th>Parameter</th><th>Typical Value / Range</th><th>Notes</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Control voltage</td><td>24 VDC or 120 VAC</td><td>Keep mixed voltages clearly separated</td></tr>
+<tr><td>Wire labeling</td><td>Both ends mandatory</td><td>Must match schematic wire numbers</td></tr>
+<tr><td>Terminal torque</td><td>Per manufacturer spec</td><td>Critical for long-term reliability</td></tr>
+<tr><td>Test order</td><td>Power off then power on</td><td>Never skip dead-circuit checks</td></tr>
+<tr><td>Acceptance evidence</td><td>Signed checkout sheet</td><td>Required for handover and troubleshooting history</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>Control power source -> fuse -> terminal block +24V bus
+Device contact -> PLC DI channel
+PLC DO channel -> relay coil -> return/common
+
+Always reference terminal numbers and wire IDs from drawings.
+</code></pre>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
+<thead><tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Input never changes state</td><td>Open conductor or wrong terminal landing</td><td>Perform continuity from device to PLC point</td><td>Continuity tester, drawings</td></tr>
+<tr><td>Output LED on but field device off</td><td>Wrong common reference or open return path</td><td>Measure voltage at output and load terminals</td><td>Multimeter</td></tr>
+<tr><td>Unexpected cross-signals</td><td>Wire number swap in terminal strip</td><td>Point-to-point audit with wire list</td><td>Drawings, marker labels</td></tr>
+<tr><td>Intermittent behavior after startup</td><td>Loose terminations</td><td>Retorque and vibration check critical terminals</td><td>Torque driver</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li>Verify drawing revision and panel markups before starting.</li>
+<li>Confirm all conductors are labeled both ends before continuity test.</li>
+<li>Complete point-to-point and record each check on commissioning sheet.</li>
+<li>Verify input status and output forcing in PLC diagnostics.</li>
+<li>Perform functional sequence test with operations and safety stakeholders.</li>
 </ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Relays &amp; Interposing Relays.html">Relays &amp; Interposing Relays</a></li>
+<li><a href="Pushbuttons, Selector Switches, Pilot Lights.html">Pushbuttons, Selector Switches, Pilot Lights</a></li>
+<li><a href="Latching Circuits &amp; Seal-in Logic.html">Latching Circuits &amp; Seal-in Logic</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+<thead><tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr></thead>
+<tbody><tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Initial full content release.</td></tr></tbody>
 </table>
 <hr />
       </article>

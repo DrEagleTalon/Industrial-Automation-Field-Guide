@@ -375,96 +375,85 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Proximity Sensors Inductive Capacitive</h1>
 
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<h1 id="proximity-sensors-inductive-capacitive">Proximity Sensors Inductive Capacitive</h1>
+<p><strong>Category:</strong> <code>Control Devices</code><br />
+<strong>Tags:</strong> <code>#proximity #inductive #capacitive #sensorselection</code><br />
+<strong>Difficulty:</strong> <code>Beginner</code><br />
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Proximity sensors detect objects without physical contact. Inductive sensors detect metal targets, while capacitive sensors detect a wider range of materials including plastics, liquids, and powders. Correct sensor choice prevents false trips and missed detections.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
 <h3 id="what-is-it">What is it?</h3>
+<p>Electronic sensors that switch output state when target material enters the sensing field.</p>
 <h3 id="how-it-works">How it works</h3>
+<ul>
+<li><strong>Inductive:</strong> Electromagnetic field is disturbed by conductive metal target.</li>
+<li><strong>Capacitive:</strong> Electric field capacitance changes with nearby material dielectric constant.</li>
+</ul>
 <h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>Inductive for robust metal part detection on conveyors and fixtures.</li>
+<li>Capacitive for level sensing in bins, non-metal presence, or package detection.</li>
+</ul>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
+<thead><tr><th>Parameter</th><th>Typical Value / Range</th><th>Notes</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Sensing distance</td><td>1 mm to 40 mm common</td><td>Depends on size, target material, mounting style</td></tr>
+<tr><td>Output type</td><td>PNP or NPN, NO or NC</td><td>Must match PLC input architecture</td></tr>
+<tr><td>Supply voltage</td><td>10-30 VDC common</td><td>Check ripple and brownout tolerance</td></tr>
+<tr><td>Shielded vs unshielded</td><td>Flush or non-flush mounting</td><td>Affects sensing distance and installation rules</td></tr>
+<tr><td>Adjustability</td><td>Sensitivity trim on capacitive types</td><td>Tune carefully to avoid nuisance detection</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>3-wire DC sensor:
+Brown -> +24V
+Blue  -> 0V
+Black -> PLC digital input
+
+PNP sensor sources +24V to input when active.
+NPN sensor sinks input to 0V when active.
+</code></pre>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
+<thead><tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Sensor LED changes, PLC input does not</td><td>PNP/NPN mismatch</td><td>Confirm input card type and sensor output style</td><td>Wiring diagram, multimeter</td></tr>
+<tr><td>Missed metal parts</td><td>Target outside rated sensing distance</td><td>Measure standoff and adjust mounting</td><td>Calipers, setup gauge</td></tr>
+<tr><td>False triggers on capacitive sensor</td><td>Sensitivity too high or moisture buildup</td><td>Retune sensitivity and inspect contamination</td><td>Small screwdriver, cleaning supplies</td></tr>
+<tr><td>Intermittent dropouts</td><td>Voltage dip or cable flex damage</td><td>Measure supply under load and wiggle test cable</td><td>Meter, visual inspection</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li>Confirm target material and choose inductive vs capacitive correctly.</li>
+<li>Verify sensor output type matches PLC input module.</li>
+<li>Set sensing gap with mechanical tolerance margin.</li>
+<li>Protect cables from sharp bends and mechanical abrasion.</li>
+<li>Record sensor model and setup distance in maintenance docs.</li>
 </ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Limit Switches &amp; Mechanical Sensors.html">Limit Switches &amp; Mechanical Sensors</a></li>
+<li><a href="Photoelectric Sensors.html">Photoelectric Sensors</a></li>
+<li><a href="Timers &amp; Counters.html">Timers &amp; Counters</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+<thead><tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr></thead>
+<tbody><tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Initial full content release.</td></tr></tbody>
 </table>
 <hr />
       </article>

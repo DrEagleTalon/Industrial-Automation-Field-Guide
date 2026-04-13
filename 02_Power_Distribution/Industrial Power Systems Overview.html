@@ -385,143 +385,132 @@ a:hover { text-decoration: underline; }
 <div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#powerdistribution</span> <span class="tag">#wiring</span> <span class="tag">#industrialpower</span></span></div>
 </div>
       </header>
-
       <article id="content">
 <h1 id="industrial-power-systems-overview">Industrial Power Systems Overview</h1>
 <p><strong>Category:</strong> <code>Power Distribution &amp; Wiring</code><br />
-<strong>Tags:</strong> <code>#powerdistribution #wiring #industrialpower</code><br />
+<strong>Tags:</strong> <code>#powerdistribution #serviceentrance #transformers #panels #loads</code><br />
 <strong>Difficulty:</strong> <code>Intermediate</code><br />
-<strong>Last Updated:</strong> <code>2025-07-10</code><br />
-<strong>Version:</strong> <code>0.1.0</code><br />
-<strong>Status:</strong> <code>Draft</code></p>
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
-<p>An overview of industrial power distribution systems, outlining how electrical power is safely and efficiently distributed throughout industrial facilities. This topic covers the main components, typical layouts, and essential considerations for effective power management in an industrial environment.</p>
+<p>This page explains how electrical power gets from the utility to machines in an industrial plant. It covers the path of power, the hardware used at each stage, common voltages, and the practical checks technicians perform in the field. The goal is to give you a working mental model before moving into detailed topics like protection, conduit, and panel wiring.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<p>Industrial power distribution involves managing the transmission of electrical power from the main power source, such as utility or onsite generation, to various equipment and machinery within a facility.</p>
-<h3 id="how-it-works">How it works</h3>
-<p>Power enters an industrial facility through service entrances or substations, where voltage is stepped down by transformers to usable levels. Distribution panels, breakers, busbars, and wiring then distribute power throughout the facility, supplying individual circuits.</p>
-<h3 id="when-to-use">When to Use</h3>
-<p>Understanding industrial power systems is essential during facility planning, maintenance, troubleshooting, and when performing modifications or expansions to existing systems.</p>
+<h3 id="what-is-an-industrial-power-system">What is an industrial power system?</h3>
+<p>An industrial power system is the complete set of equipment that receives, transforms, distributes, protects, and monitors electrical energy for a facility. It includes service entrance gear, transformers, switchgear, distribution panels, branch circuits, grounding and bonding, and the final connected loads such as motors, heaters, and control panels.</p>
+<h3 id="how-power-flows-through-a-plant">How power flows through a plant</h3>
+<ol>
+<li><strong>Incoming source:</strong> Utility feed or onsite generator enters the facility at medium or low voltage.</li>
+<li><strong>Main disconnect and protection:</strong> A main breaker or fused disconnect provides isolation and fault clearing.</li>
+<li><strong>Transformation:</strong> Transformers step voltage up or down based on distribution and equipment needs.</li>
+<li><strong>Primary distribution:</strong> Switchboards, MCCs, and panelboards divide power into feeder circuits.</li>
+<li><strong>Secondary distribution:</strong> Feeders supply local panels, machine disconnects, and control transformers.</li>
+<li><strong>Utilization:</strong> Loads consume power and convert it to motion, heat, light, or control signals.</li>
+</ol>
+<h3 id="why-this-matters-for-automation">Why this matters for automation</h3>
+<p>Automation reliability starts with stable power. PLC scan faults, VFD trips, contactor chatter, nuisance breaker trips, communication errors, and unexplained sensor behavior are often power quality or distribution issues before they are logic issues.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="common-industrial-voltage-architectures">Common Industrial Voltage Architectures</h2>
 <table>
 <thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
+<tr><th>System</th><th>Typical Use</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>Distribution Voltage</td>
-<td>480 VAC (common in the US)</td>
-<td>Common for industrial machinery</td>
-</tr>
-<tr>
-<td>Control Voltage</td>
-<td>120 VAC, 24 VDC</td>
-<td>For industrial control systems</td>
-</tr>
-<tr>
-<td>Transformer Ratings</td>
-<td>25 kVA - 500 kVA</td>
-<td>Based on facility size and equipment</td>
-</tr>
-<tr>
-<td>Frequency</td>
-<td>50 Hz (Europe), 60 Hz (US)</td>
-<td>Region-specific</td>
-</tr>
+<tr><td>480Y/277 VAC, 3-phase, 4-wire</td><td>Motors, HVAC, large loads</td><td>Most common heavy industrial distribution in US plants</td></tr>
+<tr><td>208Y/120 VAC, 3-phase, 4-wire</td><td>Small machinery, office and receptacle loads</td><td>Often derived from a step-down transformer</td></tr>
+<tr><td>240 VAC, 3-phase delta</td><td>Legacy motor systems</td><td>Watch for high-leg delta on some installations</td></tr>
+<tr><td>120 VAC, single-phase</td><td>Control power and auxiliary circuits</td><td>Common for solenoids, relays, and small loads</td></tr>
+<tr><td>24 VDC</td><td>PLC I/O, sensors, safety relays</td><td>Usually generated from a regulated power supply</td></tr>
 </tbody>
 </table>
+<p>Use the machine nameplate and electrical drawings to confirm required voltage. Never assume based on connector type or wire color alone.</p>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<p>Basic Layout Example:</p>
-<pre><code>Utility --&gt; Substation Transformer (High Voltage)
-                |
-                --&gt; Distribution Panel --&gt; Circuit Breakers
-                                           |
-                                           --&gt; Equipment Loads
+<h2 id="major-equipment-in-distribution">Major Equipment in Distribution</h2>
+<h3 id="service-entrance-and-main-switchgear">Service Entrance and Main Switchgear</h3>
+<ul>
+<li>Main utility connection point.</li>
+<li>Includes main overcurrent protection and metering.</li>
+<li>Provides lockable isolation for maintenance and emergency response.</li>
+</ul>
+<h3 id="transformers">Transformers</h3>
+<ul>
+<li>Adjust voltage between distribution levels.</li>
+<li>Can provide isolation between source and load.</li>
+<li>Need protection on primary and secondary sides based on code and design.</li>
+</ul>
+<h3 id="distribution-panels-and-mccs">Distribution Panels and MCCs</h3>
+<ul>
+<li>Panelboards split power into branch circuits.</li>
+<li>MCCs organize motor starters, drives, and feeder breakers in one lineup.</li>
+<li>Labeling quality strongly affects troubleshooting speed.</li>
+</ul>
+<h3 id="final-disconnects-and-load-circuits">Final Disconnects and Load Circuits</h3>
+<ul>
+<li>Local machine disconnects protect personnel and simplify service.</li>
+<li>Branch circuit conductors must be sized for current and installation conditions.</li>
+<li>Each load must have suitable short circuit and overload protection.</li>
+</ul>
+<hr />
+<h2 id="single-line-thinking-for-beginners">Single-Line Thinking for Beginners</h2>
+<p>A single-line diagram shows how power flows at a system level. It uses one line per three-phase feeder to simplify large systems.</p>
+<pre><code>Utility Service
+   |
+Main Switchgear / Main Breaker
+   |
+Step-Down Transformer (if needed)
+   |
+Main Distribution Panel or MCC
+   |----------------------------|
+Feeder A                     Feeder B
+   |                            |
+Machine Panel 1             Machine Panel 2
+   |                            |
+Drives / Motors             Control Transformer - 120 VAC
 </code></pre>
+<p>When troubleshooting, trace this path from source to load and verify voltage at each transition point.</p>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
 <thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
+<tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>Loss of power at machine</td>
-<td>Tripped breaker, loose wiring</td>
-<td>Check breaker status, inspect wiring</td>
-<td>Multimeter, clamp meter</td>
-</tr>
-<tr>
-<td>Voltage fluctuations</td>
-<td>Undersized wiring, transformer issues</td>
-<td>Measure voltage drop</td>
-<td>Multimeter</td>
-</tr>
-<tr>
-<td>Frequent breaker trips</td>
-<td>Overcurrent, short circuit</td>
-<td>Check current load on circuits</td>
-<td>Clamp meter</td>
-</tr>
+<tr><td>Entire machine dead</td><td>Open disconnect or upstream feeder loss</td><td>Check line-side and load-side voltage at disconnect</td><td>Rated multimeter, PPE</td></tr>
+<tr><td>Control power present, motors dead</td><td>Tripped motor feeder or blown power fuse</td><td>Verify 3-phase at starter line terminals</td><td>Multimeter, clamp meter</td></tr>
+<tr><td>Random PLC and network resets</td><td>Voltage sag or loose control power feed</td><td>Trend supply voltage and inspect terminations</td><td>Power quality meter, screwdriver/torque tool</td></tr>
+<tr><td>Frequent breaker trips on startup</td><td>Inrush exceeds trip curve or short circuit fault</td><td>Capture startup current and inspect cable insulation</td><td>Inrush clamp meter, insulation tester</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <ul>
-<li>
-<p>Always adhere to local electrical codes and standards.</p>
-</li>
-<li>
-<p>Follow manufacturer specifications for equipment installation and maintenance.</p>
-</li>
+<li>Read the single-line and panel schedules before touching conductors.</li>
+<li>Verify lockout/tagout status and test for absence of voltage.</li>
+<li>Confirm actual voltage and phase configuration match the drawing.</li>
+<li>Inspect breaker and fuse ratings against equipment nameplate FLA.</li>
+<li>Check grounding and bonding continuity at panels and machine frames.</li>
+<li>Verify torque on lugs and terminals per manufacturer specs.</li>
+<li>Record measurements with date, load condition, and instrument used.</li>
 </ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>
-<p><a href="Wire Color Codes (US & IEC).html">Wire Color Codes (US &amp; IEC)</a></p>
-</li>
-<li>
-<p><a href="Fuses vs Breakers.html">Fuses vs Breakers</a></p>
-</li>
-<li>
-<p><a href="Voltage Drop – Planning and Testing.html">Voltage Drop – Planning and Testing</a></p>
-</li>
+<li><a href="Fuses vs Breakers.html">Fuses vs Breakers</a></li>
+<li><a href="Voltage Drop – Planning and Testing.html">Voltage Drop - Planning and Testing</a></li>
+<li><a href="Control Transformers.html">Control Transformers</a></li>
+<li><a href="Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></li>
+<li><a href="Wire Color Codes (US &amp; IEC).html">Wire Color Codes (US &amp; IEC)</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
 <thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
+<tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>2025-07-10</td>
-<td>0.1.0</td>
-<td>Yusuf Talan Saunders</td>
-<td>Initial draft created.</td>
-</tr>
+<tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Full rewrite with beginner-first flow, architecture tables, diagnostics, and checklist.</td></tr>
 </tbody>
 </table>
 <hr />

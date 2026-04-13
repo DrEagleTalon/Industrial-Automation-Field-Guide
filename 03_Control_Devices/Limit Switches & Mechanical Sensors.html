@@ -375,96 +375,83 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Limit Switches &amp; Mechanical Sensors</h1>
 
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<h1 id="limit-switches-mechanical-sensors">Limit Switches &amp; Mechanical Sensors</h1>
+<p><strong>Category:</strong> <code>Control Devices</code><br />
+<strong>Tags:</strong> <code>#limitswitch #mechanicalsensor #positionfeedback #actuator</code><br />
+<strong>Difficulty:</strong> <code>Beginner</code><br />
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Limit switches provide physical position feedback when contacted by a cam, arm, or moving machine part. They are reliable, low-cost devices commonly used for end-of-travel detection, guard position, cylinder state, and mechanical sequencing.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
 <h3 id="what-is-it">What is it?</h3>
+<p>A limit switch is an electromechanical sensor with an actuator head and internal contacts that change state when mechanically moved.</p>
 <h3 id="how-it-works">How it works</h3>
+<ul>
+<li>Machine motion physically actuates plunger, roller, or lever.</li>
+<li>Internal snap-action contacts transition between NO and NC states.</li>
+<li>Control logic uses contact state for position confirmation or permissive.</li>
+</ul>
 <h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>End stops on linear travel systems.</li>
+<li>Proof-of-position for moving guards and gates.</li>
+<li>Harsh environments where optical sensing is unreliable.</li>
+</ul>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
+<thead><tr><th>Parameter</th><th>Typical Value / Range</th><th>Notes</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Actuator type</td><td>Plunger, roller lever, wobble stick</td><td>Select by machine motion geometry</td></tr>
+<tr><td>Electrical rating</td><td>Up to several amps, AC/DC variants</td><td>Use relay interface for PLC inputs where needed</td></tr>
+<tr><td>Repeatability</td><td>High for quality snap-action models</td><td>Critical for precise positioning</td></tr>
+<tr><td>Mechanical life</td><td>Millions of operations</td><td>Depends on actuation force and alignment</td></tr>
+<tr><td>Environmental rating</td><td>IP67 common</td><td>Important in coolant and washdown zones</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>24V+ -> Limit switch (NO) -> PLC DI -> 0V common
+
+Safety-style stop permissive often uses NC contact monitoring.
+</code></pre>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
+<thead><tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>No detection at end of travel</td><td>Actuator misalignment or broken lever</td><td>Manually actuate switch and verify signal state</td><td>Multimeter, PLC monitor</td></tr>
+<tr><td>Intermittent state change</td><td>Mechanical vibration or loose mounting</td><td>Inspect bracket rigidity and fastener torque</td><td>Hand tools, visual check</td></tr>
+<tr><td>False trips</td><td>Overtravel impact or wrong actuator profile</td><td>Review cam shape and strike point setup</td><td>Mechanical inspection</td></tr>
+<tr><td>Contact failure over time</td><td>Load exceeds contact rating</td><td>Measure switched current and compare rating</td><td>Clamp meter</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li>Mount switch on rigid structure with repeatable actuation geometry.</li>
+<li>Set actuation point before hard mechanical stop when possible.</li>
+<li>Use strain relief and protect cable from flex-fatigue.</li>
+<li>Validate NO/NC state mapping in PLC diagnostics page.</li>
+<li>Include switch replacement model in spare parts list.</li>
 </ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Proximity Sensors Inductive Capacitive.html">Proximity Sensors Inductive Capacitive</a></li>
+<li><a href="Photoelectric Sensors.html">Photoelectric Sensors</a></li>
+<li><a href="Wiring &amp; Testing Control Circuits.html">Wiring &amp; Testing Control Circuits</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+<thead><tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr></thead>
+<tbody><tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Initial full content release.</td></tr></tbody>
 </table>
 <hr />
       </article>

@@ -375,96 +375,84 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Latching Circuits &amp; Seal-in Logic</h1>
 
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<h1 id="latching-circuits-seal-in-logic">Latching Circuits &amp; Seal-in Logic</h1>
+<p><strong>Category:</strong> <code>Control Devices</code><br />
+<strong>Tags:</strong> <code>#latching #seal-in #startstop #maintainedstate #controllogic</code><br />
+<strong>Difficulty:</strong> <code>Intermediate</code><br />
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Seal-in logic keeps an output energized after a momentary start command. It is a foundational pattern in relay logic and PLC ladder logic for motor starters, conveyors, and process equipment where maintained run state is required.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
 <h3 id="what-is-it">What is it?</h3>
+<p>A seal-in circuit uses an auxiliary NO contact in parallel with the START button to hold coil power after START is released.</p>
 <h3 id="how-it-works">How it works</h3>
+<ol>
+<li>Press START momentarily to energize coil.</li>
+<li>Auxiliary NO contact closes and bypasses START path.</li>
+<li>Circuit remains energized until STOP (NC) opens or fault interlock opens.</li>
+</ol>
 <h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>Motor run command with STOP priority.</li>
+<li>Machine cycle enable where reset is manual.</li>
+<li>Any process requiring maintained command from momentary input.</li>
+</ul>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
+<thead><tr><th>Parameter</th><th>Typical Value / Range</th><th>Notes</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Control voltage</td><td>24 VDC or 120 VAC</td><td>Match coil and pushbutton ratings</td></tr>
+<tr><td>STOP contact type</td><td>NC</td><td>Fail-safe behavior on wire break</td></tr>
+<tr><td>START contact type</td><td>NO momentary</td><td>Provides pulse to begin latch</td></tr>
+<tr><td>Holding contact</td><td>Auxiliary NO</td><td>Must be on the energized device</td></tr>
+<tr><td>Drop-out conditions</td><td>STOP, fault relay, E-stop chain</td><td>Define all reset paths clearly</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>24V+ -> STOP(NC) -> START(NO) -----> Coil M
+                      |               |
+                      +-> M Aux (NO) -+
+0V ------------------------------------
+</code></pre>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
+<thead><tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Starts only while button held</td><td>Aux holding contact not wired or failed</td><td>Verify parallel branch continuity on aux contact</td><td>Multimeter</td></tr>
+<tr><td>Cannot stop with STOP button</td><td>STOP contact miswired as NO or bypassed</td><td>Trace STOP chain and confirm NC behavior</td><td>Continuity tester</td></tr>
+<tr><td>Drops out randomly</td><td>Loose terminal or undervoltage on control bus</td><td>Monitor coil voltage during vibration/load events</td><td>Meter with min/max</td></tr>
+<tr><td>Will not reset after fault</td><td>Fault contact remains open</td><td>Check reset logic and fault relay status</td><td>Multimeter, HMI diagnostics</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li>Confirm STOP is hard-wired NC and first in series chain.</li>
+<li>Verify holding contact is the correct auxiliary contact reference.</li>
+<li>Test sequence: START, hold, STOP, fault trip, reset.</li>
+<li>Document all permissive and interlock contacts in the rung notes.</li>
+<li>Ensure safety circuits are separate and do not rely on standard seal-in logic.</li>
 </ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Relays &amp; Interposing Relays.html">Relays &amp; Interposing Relays</a></li>
+<li><a href="Pushbuttons, Selector Switches, Pilot Lights.html">Pushbuttons, Selector Switches, Pilot Lights</a></li>
+<li><a href="Wiring &amp; Testing Control Circuits.html">Wiring &amp; Testing Control Circuits</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+<thead><tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr></thead>
+<tbody><tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Initial full content release.</td></tr></tbody>
 </table>
 <hr />
       </article>
