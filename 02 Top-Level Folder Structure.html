@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 Top-Level Folder Structure | Industrial Automation Field Guide</title>
+  <style>
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #f4f4f0;
+}
+a { color: #1a56a0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+#layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+#sidebar {
+  background: #1e2736;
+  color: #c8d0dc;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid #141b27;
+  scrollbar-width: thin;
+  scrollbar-color: #2e3a4e transparent;
+}
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-thumb { background: #2e3a4e; border-radius: 3px; }
+
+#sidebar-header {
+  padding: 1.4rem 1.25rem 1.1rem;
+  border-bottom: 1px solid #2e3a4e;
+}
+.site-title {
+  color: #e8ecf1;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+}
+.site-title:hover { text-decoration: none; color: #fff; }
+
+#toc { padding: 1rem 1.25rem; }
+#toc ul { list-style: none; padding: 0; margin: 0; }
+#toc ul li { margin: 0.1rem 0; }
+#toc ul li a {
+  color: #9aa5b4;
+  font-size: 0.8rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  transition: background 0.12s, color 0.12s;
+  line-height: 1.4;
+}
+#toc ul li a:hover { background: #2e3a4e; color: #e8ecf1; text-decoration: none; }
+#toc ul ul { padding-left: 0.85rem; margin-top: 0.05rem; }
+#toc ul ul li a { font-size: 0.75rem; }
+#toc ul ul ul li a { font-size: 0.71rem; color: #6b7585; }
+
+/* ── Main area ───────────────────────────────────────────────────────────── */
+#main {
+  background: #ffffff;
+  padding: 2.5rem 3.5rem;
+  max-width: 960px;
+  min-height: 100vh;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 0.76rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+}
+.bc-sep    { color: #ccc; margin: 0 0.05rem; }
+.bc-part   { color: #888; }
+.bc-current { color: #444; font-weight: 500; }
+
+/* ── Page title ──────────────────────────────────────────────────────────── */
+.page-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Meta block ──────────────────────────────────────────────────────────── */
+.meta-block {
+  border: 1px solid #e4e4de;
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 2rem;
+  background: #fafaf7;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.8rem;
+}
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+.meta-label {
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  font-size: 0.67rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.meta-value { color: #333; }
+
+.status-badge {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.status-final    { background: #d4edda; color: #155724; }
+.status-draft    { background: #fff3cd; color: #856404; }
+.status-inreview { background: #cce5ff; color: #004085; }
+.status-review   { background: #cce5ff; color: #004085; }
+
+.tag {
+  display: inline-block;
+  background: #eef1f8;
+  color: #3b5ea6;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-size: 0.71rem;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* ── Article typography ──────────────────────────────────────────────────── */
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111;
+  margin-top: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+#content h1 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #e6e6e2;
+  padding-bottom: 0.4rem;
+}
+#content h2 {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 0.3rem;
+}
+#content h3 { font-size: 1.1rem; }
+#content h4 { font-size: 1rem; }
+#content h5 { font-size: 0.9rem; }
+#content h6 { font-size: 0.85rem; color: #555; }
+
+#content p { margin-bottom: 1rem; }
+
+#content strong { font-weight: 700; }
+#content em     { font-style: italic; }
+
+#content code {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Courier New", monospace;
+  font-size: 0.84em;
+  background: #f0f0ec;
+  padding: 0.15em 0.38em;
+  border-radius: 3px;
+  border: 1px solid #deded8;
+}
+
+#content pre {
+  background: #1e2736;
+  color: #c8d0dc;
+  padding: 1.15rem 1.4rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.1rem 0 1.4rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  border: 1px solid #141b27;
+}
+#content pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+#content blockquote {
+  border-left: 4px solid #b8c4d0;
+  padding: 0.55rem 1.1rem;
+  margin: 1.1rem 0;
+  background: #f6f7fa;
+  color: #555;
+  border-radius: 0 5px 5px 0;
+}
+#content blockquote p:last-child { margin-bottom: 0; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.6rem;
+}
+#content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+#content thead th {
+  background: #1e2736;
+  color: #e8ecf1;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  font-weight: 600;
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid #141b27;
+}
+#content tbody tr:nth-child(even) { background: #f8f9fa; }
+#content tbody tr:hover { background: #edf1f8; }
+#content tbody td {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #e0e2e6;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────────── */
+#content ul,
+#content ol {
+  padding-left: 1.7rem;
+  margin-bottom: 1rem;
+}
+#content li { margin-bottom: 0.3rem; }
+#content li > ul,
+#content li > ol { margin-top: 0.2rem; margin-bottom: 0; }
+
+/* ── Task / checklist ────────────────────────────────────────────────────── */
+#content li.task {
+  list-style: none;
+  margin-left: -1.7rem;
+  padding-left: 2rem;
+  position: relative;
+}
+#content li.task .checkbox {
+  position: absolute;
+  left: 0.15rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+#content li.task.checked  { color: #555; }
+#content li.task.checked  .checkbox { color: #2e7d32; }
+#content li.task.unchecked .checkbox { color: #888; }
+
+/* ── Horizontal rule ─────────────────────────────────────────────────────── */
+#content hr {
+  border: none;
+  border-top: 1px solid #e6e6e2;
+  margin: 1.75rem 0;
+}
+
+/* ── Broken wikilinks ────────────────────────────────────────────────────── */
+.broken-link {
+  color: #b22222;
+  border-bottom: 1px dashed #b22222;
+  font-style: italic;
+  cursor: not-allowed;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+#page-footer {
+  margin-top: 3.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e6e6e2;
+  font-size: 0.76rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ── Responsive: tablet / mobile ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #layout { grid-template-columns: 1fr; }
+  #sidebar { position: static; height: auto; }
+  #main { padding: 1.75rem 1.5rem; max-width: 100%; }
+  .page-title { font-size: 1.6rem; }
+}
+@media (max-width: 600px) {
+  #main { padding: 1.25rem 1rem; }
+  .page-title { font-size: 1.35rem; }
+  .meta-block { flex-direction: column; gap: 0.35rem; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  #sidebar { display: none; }
+  #layout  { grid-template-columns: 1fr; }
+  #main    { max-width: 100%; padding: 0; box-shadow: none; }
+  #content a::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; }
+  #content pre { background: #f4f4f0; color: #222; border: 1px solid #ccc; }
+  #page-header, #page-footer { page-break-inside: avoid; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="layout">
+
+    <!-- Sidebar / page TOC -->
+    <nav id="sidebar" aria-label="Page contents">
+      <div id="sidebar-header">
+        <a href="./index.html" class="site-title">
+          Industrial Automation<br>Field Guide
+        </a>
+      </div>
+      <div id="toc">
+      <div class="toc">
+<ul>
+<li><a href="#top-level-folder-structure">**Top-Level Folder Structure</a><ul>
+<li><a href="#00_index">00_Index</a></li>
+<li><a href="#01_electrical_fundamentals">01_Electrical_Fundamentals</a></li>
+<li><a href="#02_power_distribution">02_Power_Distribution</a></li>
+<li><a href="#03_control_devices">03_Control_Devices</a></li>
+<li><a href="#04_motor_control">04_Motor_Control</a></li>
+<li><a href="#05_plcs_hardware">05_PLCs_Hardware</a></li>
+<li><a href="#06_plc_programming">06_PLC_Programming</a></li>
+<li><a href="#07_hmi_scada">07_HMI_SCADA</a></li>
+<li><a href="#08_industrial_networking">08_Industrial_Networking</a></li>
+<li><a href="#09_troubleshooting">09_Troubleshooting</a></li>
+<li><a href="#10_commissioning_integration">10_Commissioning_Integration</a></li>
+<li><a href="#11_standards_and_codes">11_Standards_and_Codes</a></li>
+<li><a href="#12_safety_systems">12_Safety_Systems</a></li>
+<li><a href="#13_advanced_systems">13_Advanced_Systems</a></li>
+<li><a href="#14_soft_skills_workflow">14_Soft_Skills_Workflow</a></li>
+</ul>
+</li>
+<li><a href="#suggested-folder-setup-in-obsidian">Suggested Folder Setup in Obsidian</a></li>
+</ul>
+</div>
+
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div id="main">
+      <header id="page-header">
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-current">02 Top-Level Folder Structure</span></nav>
+        <h1 class="page-title">02 Top-Level Folder Structure</h1>
+
+      </header>
+
+      <article id="content">
+<h2 id="top-level-folder-structure">**Top-Level Folder Structure</h2>
+<blockquote>
+<p>Recommended root folder name: <code>Industrial Automation Field Guide</code></p>
+</blockquote>
+<h3 id="00_index"><code>00_Index</code></h3>
+<ul>
+<li>
+<p><code>Master Topic Index.md</code> ← (The list we just built with topic links)</p>
+</li>
+<li>
+<p><code>How to Use This Vault.md</code></p>
+</li>
+<li>
+<p><code>Glossary.md</code></p>
+</li>
+<li>
+<p><code>Quick Reference Symbols.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="01_electrical_fundamentals"><code>01_Electrical_Fundamentals</code></h3>
+<p>Basic theory and safety.</p>
+<ul>
+<li>
+<p><code>Basic Electrical Theory.md</code></p>
+</li>
+<li>
+<p><code>Ohm's Law and Power.md</code></p>
+</li>
+<li>
+<p><code>AC vs DC.md</code></p>
+</li>
+<li>
+<p><code>Three-Phase Power.md</code></p>
+</li>
+<li>
+<p><code>PPE and Electrical Safety.md</code></p>
+</li>
+<li>
+<p><code>Lockout Tagout (LOTO).md</code></p>
+</li>
+<li>
+<p><code>Tool Basics – Multimeter, Clamp Meter, Megger.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="02_power_distribution"><code>02_Power_Distribution</code></h3>
+<p>Incoming power and infrastructure.</p>
+<ul>
+<li>
+<p><code>Industrial Power Systems Overview.md</code></p>
+</li>
+<li>
+<p><code>Panel Wiring Best Practices.md</code></p>
+</li>
+<li>
+<p><code>Fuses vs Breakers.md</code></p>
+</li>
+<li>
+<p><code>Control Transformers.md</code></p>
+</li>
+<li>
+<p><code>Voltage Drop – Testing and Planning.md</code></p>
+</li>
+<li>
+<p><code>Conduit &amp; Fittings.md</code></p>
+</li>
+<li>
+<p><code>Wire Color Codes.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="03_control_devices"><code>03_Control_Devices</code></h3>
+<p>Discrete devices used in control circuits.</p>
+<ul>
+<li>
+<p><code>Pushbuttons and Selector Switches.md</code></p>
+</li>
+<li>
+<p><code>Pilot Lights.md</code></p>
+</li>
+<li>
+<p><code>Limit Switches.md</code></p>
+</li>
+<li>
+<p><code>Proximity Sensors.md</code></p>
+</li>
+<li>
+<p><code>Photoelectric Sensors.md</code></p>
+</li>
+<li>
+<p><code>Relays and Interposing Relays.md</code></p>
+</li>
+<li>
+<p><code>Timers and Counters.md</code></p>
+</li>
+<li>
+<p><code>Latching and Seal-in Circuits.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="04_motor_control"><code>04_Motor_Control</code></h3>
+<p>Motor hardware and control components.</p>
+<ul>
+<li>
+<p><code>3-Phase Motor Basics.md</code></p>
+</li>
+<li>
+<p><code>Reading a Motor Nameplate.md</code></p>
+</li>
+<li>
+<p><code>Motor Contactors.md</code></p>
+</li>
+<li>
+<p><code>Motor Starters.md</code></p>
+</li>
+<li>
+<p><code>Overload Relays.md</code></p>
+</li>
+<li>
+<p><code>Reversing Starters.md</code></p>
+</li>
+<li>
+<p><code>Soft Starters.md</code></p>
+</li>
+<li>
+<p><code>Star-Delta Starters.md</code></p>
+</li>
+<li>
+<p><code>VFDs – Overview.md</code></p>
+</li>
+<li>
+<p><code>VFD Parameters and Setup.md</code></p>
+</li>
+<li>
+<p><code>Motor Braking Methods.md</code></p>
+</li>
+<li>
+<p><code>Motor Megger Testing.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="05_plcs_hardware"><code>05_PLCs_Hardware</code></h3>
+<p>PLC hardware, wiring, and IO.</p>
+<ul>
+<li>
+<p><code>What is a PLC.md</code></p>
+</li>
+<li>
+<p><code>Discrete and Analog I/O.md</code></p>
+</li>
+<li>
+<p><code>Sinking vs Sourcing.md</code></p>
+</li>
+<li>
+<p><code>Wiring Inputs and Outputs.md</code></p>
+</li>
+<li>
+<p><code>Powering the PLC.md</code></p>
+</li>
+<li>
+<p><code>Safety Relays and Safety PLCs.md</code></p>
+</li>
+<li>
+<p><code>Common PLC Brands.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="06_plc_programming"><code>06_PLC_Programming</code></h3>
+<p>Logic building and troubleshooting.</p>
+<ul>
+<li>
+<p><code>Ladder Logic Basics.md</code></p>
+</li>
+<li>
+<p><code>Start Stop Logic.md</code></p>
+</li>
+<li>
+<p><code>Timers.md</code></p>
+</li>
+<li>
+<p><code>Counters.md</code></p>
+</li>
+<li>
+<p><code>Set Reset Logic.md</code></p>
+</li>
+<li>
+<p><code>Interlocks and Permissives.md</code></p>
+</li>
+<li>
+<p><code>Alarm Logic and Fault Detection.md</code></p>
+</li>
+<li>
+<p><code>HMI Tagging Basics.md</code></p>
+</li>
+<li>
+<p><code>State Machine Programming.md</code></p>
+</li>
+<li>
+<p><code>Structured Text Overview.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="07_hmi_scada"><code>07_HMI_SCADA</code></h3>
+<p>Visualization and monitoring.</p>
+<ul>
+<li>
+<p><code>HMI Basics.md</code></p>
+</li>
+<li>
+<p><code>Screen Navigation and Input.md</code></p>
+</li>
+<li>
+<p><code>Tag Linking.md</code></p>
+</li>
+<li>
+<p><code>Alarms and Messaging.md</code></p>
+</li>
+<li>
+<p><code>HMI to PLC Communication.md</code></p>
+</li>
+<li>
+<p><code>SCADA Architecture Overview.md</code></p>
+</li>
+<li>
+<p><code>Data Logging and Trending.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="08_industrial_networking"><code>08_Industrial_Networking</code></h3>
+<p>Protocols and communications.</p>
+<ul>
+<li>
+<p><code>Industrial Ethernet vs Office Ethernet.md</code></p>
+</li>
+<li>
+<p><code>IP Addressing and Subnetting.md</code></p>
+</li>
+<li>
+<p><code>Modbus – RTU and TCP.md</code></p>
+</li>
+<li>
+<p><code>EtherNet/IP Basics.md</code></p>
+</li>
+<li>
+<p><code>Profinet Overview.md</code></p>
+</li>
+<li>
+<p><code>Network Switches and Cabling.md</code></p>
+</li>
+<li>
+<p><code>Network Troubleshooting Tools.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="09_troubleshooting"><code>09_Troubleshooting</code></h3>
+<p>Techniques and real-world diagnostics.</p>
+<ul>
+<li>
+<p><code>Troubleshooting Workflow.md</code></p>
+</li>
+<li>
+<p><code>Power Circuit Issues.md</code></p>
+</li>
+<li>
+<p><code>Control Circuit Failures.md</code></p>
+</li>
+<li>
+<p><code>VFD Fault Codes.md</code></p>
+</li>
+<li>
+<p><code>Motor Trips and Overloads.md</code></p>
+</li>
+<li>
+<p><code>PLC Input/Output Faults.md</code></p>
+</li>
+<li>
+<p><code>Sensor Troubleshooting.md</code></p>
+</li>
+<li>
+<p><code>Network Dropouts.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="10_commissioning_integration"><code>10_Commissioning_Integration</code></h3>
+<p>System setup and handoff.</p>
+<ul>
+<li>
+<p><code>Control Panel BOM and Layout.md</code></p>
+</li>
+<li>
+<p><code>Loop Checks and I/O Checkout.md</code></p>
+</li>
+<li>
+<p><code>Startup Sequences.md</code></p>
+</li>
+<li>
+<p><code>PID Tuning Basics.md</code></p>
+</li>
+<li>
+<p><code>PLC-HMI-VFD Integration.md</code></p>
+</li>
+<li>
+<p><code>Documentation Best Practices.md</code></p>
+</li>
+<li>
+<p><code>Commissioning Reports.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="11_standards_and_codes"><code>11_Standards_and_Codes</code></h3>
+<p>Reference standards and regulatory.</p>
+<ul>
+<li>
+<p><code>NEC 430 Overview.md</code></p>
+</li>
+<li>
+<p><code>UL 508A – Panel Requirements.md</code></p>
+</li>
+<li>
+<p><code>NFPA 79 Summary.md</code></p>
+</li>
+<li>
+<p><code>IEC 61131-3 Programming Standard.md</code></p>
+</li>
+<li>
+<p><code>Intro to Functional Safety.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="12_safety_systems"><code>12_Safety_Systems</code></h3>
+<p>Machine safety design and diagnostics.</p>
+<ul>
+<li>
+<p><code>Emergency Stops.md</code></p>
+</li>
+<li>
+<p><code>Two-Hand Controls.md</code></p>
+</li>
+<li>
+<p><code>Safety Fencing and Interlocks.md</code></p>
+</li>
+<li>
+<p><code>Safety Relays and Circuits.md</code></p>
+</li>
+<li>
+<p><code>Safety PLCs.md</code></p>
+</li>
+<li>
+<p><code>Performing Risk Assessments.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="13_advanced_systems"><code>13_Advanced_Systems</code></h3>
+<p>Specialized and modern tech.</p>
+<ul>
+<li>
+<p><code>Servo Motors and Drives.md</code></p>
+</li>
+<li>
+<p><code>Encoders and Resolvers.md</code></p>
+</li>
+<li>
+<p><code>Robotic Integration.md</code></p>
+</li>
+<li>
+<p><code>IO-Link Overview.md</code></p>
+</li>
+<li>
+<p><code>Industrial Wireless Systems.md</code></p>
+</li>
+<li>
+<p><code>Energy Monitoring Systems.md</code></p>
+</li>
+<li>
+<p><code>IIoT and MQTT.md</code></p>
+</li>
+<li>
+<p><code>Remote PLC Access.md</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="14_soft_skills_workflow"><code>14_Soft_Skills_Workflow</code></h3>
+<p>Real-world tools and habits.</p>
+<ul>
+<li>
+<p><code>Reading Schematics.md</code></p>
+</li>
+<li>
+<p><code>CAD Software Basics.md</code></p>
+</li>
+<li>
+<p><code>Project Handoff Docs.md</code></p>
+</li>
+<li>
+<p><code>Troubleshooting Reports.md</code></p>
+</li>
+<li>
+<p><code>Change Management and Backups.md</code></p>
+</li>
+<li>
+<p><code>Field Communication Tips.md</code></p>
+</li>
+</ul>
+<hr />
+<h2 id="suggested-folder-setup-in-obsidian">Suggested Folder Setup in Obsidian</h2>
+<pre><code>Industrial Automation Field Guide/
+├── 00_Index/
+│   ├── Master Topic Index.md
+│   └── How to Use This Vault.md
+├── 01_Electrical_Fundamentals/
+├── 02_Power_Distribution/
+├── 03_Control_Devices/
+├── 04_Motor_Control/
+├── 05_PLCs_Hardware/
+├── 06_PLC_Programming/
+├── 07_HMI_SCADA/
+├── 08_Industrial_Networking/
+├── 09_Troubleshooting/
+├── 10_Commissioning_Integration/
+├── 11_Standards_and_Codes/
+├── 12_Safety_Systems/
+├── 13_Advanced_Systems/
+├── 14_Soft_Skills_Workflow/
+</code></pre>
+<hr />
+      </article>
+
+      <footer id="page-footer">
+        <p>Industrial Automation Field Guide</p>
+      </footer>
+    </div>
+
+  </div>
+</body>
+</html>

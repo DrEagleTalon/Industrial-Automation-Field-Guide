@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 How to Use This Vault | Industrial Automation Field Guide</title>
+  <style>
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #f4f4f0;
+}
+a { color: #1a56a0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+#layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+#sidebar {
+  background: #1e2736;
+  color: #c8d0dc;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid #141b27;
+  scrollbar-width: thin;
+  scrollbar-color: #2e3a4e transparent;
+}
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-thumb { background: #2e3a4e; border-radius: 3px; }
+
+#sidebar-header {
+  padding: 1.4rem 1.25rem 1.1rem;
+  border-bottom: 1px solid #2e3a4e;
+}
+.site-title {
+  color: #e8ecf1;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+}
+.site-title:hover { text-decoration: none; color: #fff; }
+
+#toc { padding: 1rem 1.25rem; }
+#toc ul { list-style: none; padding: 0; margin: 0; }
+#toc ul li { margin: 0.1rem 0; }
+#toc ul li a {
+  color: #9aa5b4;
+  font-size: 0.8rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  transition: background 0.12s, color 0.12s;
+  line-height: 1.4;
+}
+#toc ul li a:hover { background: #2e3a4e; color: #e8ecf1; text-decoration: none; }
+#toc ul ul { padding-left: 0.85rem; margin-top: 0.05rem; }
+#toc ul ul li a { font-size: 0.75rem; }
+#toc ul ul ul li a { font-size: 0.71rem; color: #6b7585; }
+
+/* ── Main area ───────────────────────────────────────────────────────────── */
+#main {
+  background: #ffffff;
+  padding: 2.5rem 3.5rem;
+  max-width: 960px;
+  min-height: 100vh;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 0.76rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+}
+.bc-sep    { color: #ccc; margin: 0 0.05rem; }
+.bc-part   { color: #888; }
+.bc-current { color: #444; font-weight: 500; }
+
+/* ── Page title ──────────────────────────────────────────────────────────── */
+.page-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Meta block ──────────────────────────────────────────────────────────── */
+.meta-block {
+  border: 1px solid #e4e4de;
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 2rem;
+  background: #fafaf7;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.8rem;
+}
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+.meta-label {
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  font-size: 0.67rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.meta-value { color: #333; }
+
+.status-badge {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.status-final    { background: #d4edda; color: #155724; }
+.status-draft    { background: #fff3cd; color: #856404; }
+.status-inreview { background: #cce5ff; color: #004085; }
+.status-review   { background: #cce5ff; color: #004085; }
+
+.tag {
+  display: inline-block;
+  background: #eef1f8;
+  color: #3b5ea6;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-size: 0.71rem;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* ── Article typography ──────────────────────────────────────────────────── */
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111;
+  margin-top: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+#content h1 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #e6e6e2;
+  padding-bottom: 0.4rem;
+}
+#content h2 {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 0.3rem;
+}
+#content h3 { font-size: 1.1rem; }
+#content h4 { font-size: 1rem; }
+#content h5 { font-size: 0.9rem; }
+#content h6 { font-size: 0.85rem; color: #555; }
+
+#content p { margin-bottom: 1rem; }
+
+#content strong { font-weight: 700; }
+#content em     { font-style: italic; }
+
+#content code {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Courier New", monospace;
+  font-size: 0.84em;
+  background: #f0f0ec;
+  padding: 0.15em 0.38em;
+  border-radius: 3px;
+  border: 1px solid #deded8;
+}
+
+#content pre {
+  background: #1e2736;
+  color: #c8d0dc;
+  padding: 1.15rem 1.4rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.1rem 0 1.4rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  border: 1px solid #141b27;
+}
+#content pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+#content blockquote {
+  border-left: 4px solid #b8c4d0;
+  padding: 0.55rem 1.1rem;
+  margin: 1.1rem 0;
+  background: #f6f7fa;
+  color: #555;
+  border-radius: 0 5px 5px 0;
+}
+#content blockquote p:last-child { margin-bottom: 0; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.6rem;
+}
+#content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+#content thead th {
+  background: #1e2736;
+  color: #e8ecf1;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  font-weight: 600;
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid #141b27;
+}
+#content tbody tr:nth-child(even) { background: #f8f9fa; }
+#content tbody tr:hover { background: #edf1f8; }
+#content tbody td {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #e0e2e6;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────────── */
+#content ul,
+#content ol {
+  padding-left: 1.7rem;
+  margin-bottom: 1rem;
+}
+#content li { margin-bottom: 0.3rem; }
+#content li > ul,
+#content li > ol { margin-top: 0.2rem; margin-bottom: 0; }
+
+/* ── Task / checklist ────────────────────────────────────────────────────── */
+#content li.task {
+  list-style: none;
+  margin-left: -1.7rem;
+  padding-left: 2rem;
+  position: relative;
+}
+#content li.task .checkbox {
+  position: absolute;
+  left: 0.15rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+#content li.task.checked  { color: #555; }
+#content li.task.checked  .checkbox { color: #2e7d32; }
+#content li.task.unchecked .checkbox { color: #888; }
+
+/* ── Horizontal rule ─────────────────────────────────────────────────────── */
+#content hr {
+  border: none;
+  border-top: 1px solid #e6e6e2;
+  margin: 1.75rem 0;
+}
+
+/* ── Broken wikilinks ────────────────────────────────────────────────────── */
+.broken-link {
+  color: #b22222;
+  border-bottom: 1px dashed #b22222;
+  font-style: italic;
+  cursor: not-allowed;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+#page-footer {
+  margin-top: 3.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e6e6e2;
+  font-size: 0.76rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ── Responsive: tablet / mobile ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #layout { grid-template-columns: 1fr; }
+  #sidebar { position: static; height: auto; }
+  #main { padding: 1.75rem 1.5rem; max-width: 100%; }
+  .page-title { font-size: 1.6rem; }
+}
+@media (max-width: 600px) {
+  #main { padding: 1.25rem 1rem; }
+  .page-title { font-size: 1.35rem; }
+  .meta-block { flex-direction: column; gap: 0.35rem; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  #sidebar { display: none; }
+  #layout  { grid-template-columns: 1fr; }
+  #main    { max-width: 100%; padding: 0; box-shadow: none; }
+  #content a::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; }
+  #content pre { background: #f4f4f0; color: #222; border: 1px solid #ccc; }
+  #page-header, #page-footer { page-break-inside: avoid; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="layout">
+
+    <!-- Sidebar / page TOC -->
+    <nav id="sidebar" aria-label="Page contents">
+      <div id="sidebar-header">
+        <a href="./index.html" class="site-title">
+          Industrial Automation<br>Field Guide
+        </a>
+      </div>
+      <div id="toc">
+      <div class="toc">
+<ul>
+<li><a href="#versioning-system">Versioning System</a><ul>
+<li><a href="#examples-of-versions">Examples of Versions</a></li>
+</ul>
+</li>
+<li><a href="#yaml-frontmatter-properties">YAML Frontmatter Properties</a><ul>
+<li><a href="#example-format">Example Format</a></li>
+<li><a href="#description-of-each-yaml-property">Description of Each YAML Property</a><ul>
+<li><a href="#title">title</a></li>
+<li><a href="#version">version</a></li>
+<li><a href="#status">status</a></li>
+<li><a href="#author">author</a></li>
+<li><a href="#editors">editors</a></li>
+<li><a href="#contributors">contributors</a></li>
+<li><a href="#category">category</a></li>
+<li><a href="#tags">tags</a></li>
+<li><a href="#difficulty">difficulty</a></li>
+<li><a href="#related-topics">related-topics</a></li>
+<li><a href="#standards">standards</a></li>
+<li><a href="#equipment">equipment</a></li>
+<li><a href="#to-be-completed-by">to-be-completed-by</a></li>
+<li><a href="#last-updated">last-updated</a></li>
+<li><a href="#reviewed">reviewed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#using-the-local-changelog-on-each-page">Using the Local Changelog on Each Page</a><ul>
+<li><a href="#format-example">Format Example</a><ul>
+<li><a href="#local-changelog">Local Changelog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#best-practices-for-editing-this-field-guide">Best Practices for Editing This Field Guide</a><ul>
+<li><a href="#where-to-keep-global-changes">Where to Keep Global Changes</a></li>
+</ul>
+</li>
+<li><a href="#summary-of-key-lists-for-yaml">Summary of Key Lists for YAML</a></li>
+</ul>
+</div>
+
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div id="main">
+      <header id="page-header">
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-current">01 How to Use This Vault</span></nav>
+        <h1 class="page-title">01 How to Use This Vault</h1>
+
+      </header>
+
+      <article id="content">
+<h1 id="how-to-use-this-vault-field-guide">How to Use This Vault / Field Guide</h1>
+<p>This document explains how to maintain, edit, and expand the Industrial Automation Field Guide vault.</p>
+<p>It includes standards for versioning, descriptions of all YAML properties, and guidelines for adding changelogs.</p>
+<p>This ensures that anyone contributing to this field guide can follow consistent practices.</p>
+<h2 id="versioning-system">Versioning System</h2>
+<p>The version system follows this structure:</p>
+<p><code>XX.YY.ZZ</code></p>
+<ul>
+<li><code>XX</code> = MAJOR: Major milestone releases. Significant new sections, major structure changes, or complete reorganizations (for example, adding an entire Robotics section, or restructuring all troubleshooting content).</li>
+<li><code>YY</code> = MINOR: Adding new topics, new subsections, major new examples, substantial improvements to explanations, or new diagrams and illustrations in existing topics.</li>
+<li><code>ZZ</code> = PATCH: Minor edits, typo fixes, slight wording changes, small new examples, or other incremental additions.</li>
+</ul>
+<h3 id="examples-of-versions">Examples of Versions</h3>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0.0</td>
+<td>First “official” complete draft of the field guide with all core sections.</td>
+</tr>
+<tr>
+<td>1.1.0</td>
+<td>Added a whole new section on IO-Link Devices.</td>
+</tr>
+<tr>
+<td>1.1.3</td>
+<td>Fixed typos in the PLC chapter, added two example diagrams.</td>
+</tr>
+<tr>
+<td>2.0.0</td>
+<td>Major overhaul: moved Troubleshooting to top, added Learning Paths.</td>
+</tr>
+<tr>
+<td>2.1.0</td>
+<td>Added SCADA Cloud chapter.</td>
+</tr>
+<tr>
+<td>2.1.1</td>
+<td>Added two photos of control panels.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="yaml-frontmatter-properties">YAML Frontmatter Properties</h2>
+<p>Every topic page in this vault starts with a YAML frontmatter block.</p>
+<p>This metadata powers advanced linking, querying, and version control throughout the field guide.</p>
+<p>It must always be placed at the very top of the markdown file.</p>
+<h3 id="example-format">Example Format</h3>
+<hr />
+<p>title: "Motor Contactors"</p>
+<p>version: "1.0.0"</p>
+<p>status: "final"</p>
+<p>author: ["Yusuf Talan Saunders"]</p>
+<p>editors: ["Fatou Cham"]</p>
+<p>contributors: ["Rickena Saunders", "Team at Huhtamaki"]</p>
+<p>category: ["Motor Control Systems"]</p>
+<p>tags: ["#motor", "#starter", "#troubleshooting"]</p>
+<p>difficulty: "Intermediate"</p>
+<p>related-topics: ["Overload Relays", "Motor Wiring &amp; Rotation Checking"]</p>
+<p>standards: ["NEC 430", "IEC 60947-4-1"]</p>
+<p>equipment: ["Allen Bradley 100-C09", "Siemens Sirius"]</p>
+<p>to-be-completed-by: "2025-09-01"</p>
+<p>last-updated: "2025-07-07"</p>
+<p>reviewed: "2025-07-07"</p>
+<hr />
+<h3 id="description-of-each-yaml-property">Description of Each YAML Property</h3>
+<h4 id="title">title</h4>
+<ul>
+<li>The main title of this topic.</li>
+<li>Does not need to match the filename.</li>
+<li>Example:  title: "Motor Contactors"</li>
+</ul>
+<h4 id="version">version</h4>
+<ul>
+<li>Tracks this topic’s specific version, using the field guide’s MAJOR.MINOR.PATCH system.</li>
+<li>Example: version: "1.0.0"</li>
+</ul>
+<h4 id="status">status</h4>
+<ul>
+<li>Current editorial or technical status of this topic.</li>
+<li>Allowed values:  <ul>
+<li>draft</li>
+<li>in-review</li>
+<li>final  </li>
+</ul>
+</li>
+<li>Example:  status: "draft"</li>
+</ul>
+<h4 id="author">author</h4>
+<ul>
+<li>Original author(s) of this topic page.</li>
+<li>Type: list of names.</li>
+<li>Example: author: ["Yusuf Talan Saunders"]</li>
+</ul>
+<h4 id="editors">editors</h4>
+<ul>
+<li>Those who provided editorial review or substantive revisions.</li>
+<li>Type: list of names.</li>
+<li>Example: editors: ["Fatou Cham"]</li>
+</ul>
+<h4 id="contributors">contributors</h4>
+<ul>
+<li>Anyone who submitted ideas, field examples, or troubleshooting help.</li>
+<li>Type: list of names.</li>
+<li>Example: contributors: ["Rickena Saunders", "Team at Huhtamaki"]</li>
+</ul>
+<h4 id="category">category</h4>
+<ul>
+<li>The section of the field guide this topic belongs to.</li>
+<li>Type: list of strings.</li>
+<li>Examples: <ul>
+<li>category: ["Motor Control Systems"]</li>
+<li>category: ["PLCs &amp; Automation Hardware"]</li>
+</ul>
+</li>
+</ul>
+<h4 id="tags">tags</h4>
+<ul>
+<li>Free-form hashtags for quick linking and search.</li>
+<li>Type: list of strings.</li>
+<li>Example: tags: ["#motor", "#starter", "#fieldguide"]</li>
+</ul>
+<h4 id="difficulty">difficulty</h4>
+<ul>
+<li>The technical depth of this topic.</li>
+<li>Allowed values:  <ul>
+<li>Beginner</li>
+<li>Intermediate</li>
+<li>Advanced</li>
+</ul>
+</li>
+<li>Example: difficulty: "Intermediate"</li>
+</ul>
+<h4 id="related-topics">related-topics</h4>
+<ul>
+<li>Points to other topic pages that are closely linked to this one.</li>
+<li>Type: list of strings.</li>
+<li>Example: related-topics: ["Overload Relays", "Motor Wiring &amp; Rotation Checking"]</li>
+</ul>
+<h4 id="standards">standards</h4>
+<ul>
+<li>Any official standards or codes referenced on this page.</li>
+<li>Type: list of strings.</li>
+<li>Examples:<ul>
+<li>standards: ["NEC 430", "IEC 60947-4-1"]</li>
+<li>standards: ["none"]</li>
+</ul>
+</li>
+</ul>
+<h4 id="equipment">equipment</h4>
+<ul>
+<li>Specific devices, manufacturers, or models discussed on this page.</li>
+<li>Type: list of strings.</li>
+<li>Example:<ul>
+<li>equipment: ["Allen Bradley PowerFlex 525", "Siemens Sirius"]</li>
+<li>equipment: ["none"]</li>
+</ul>
+</li>
+</ul>
+<h4 id="to-be-completed-by">to-be-completed-by</h4>
+<ul>
+<li>The target date for getting this topic to at least in-review state.</li>
+<li>Example: to-be-completed-by: "2025-09-01"</li>
+</ul>
+<h4 id="last-updated">last-updated</h4>
+<ul>
+<li>The date of the last meaningful content change on this topic.</li>
+<li>Example: last-updated: "2025-07-07"</li>
+</ul>
+<h4 id="reviewed">reviewed</h4>
+<ul>
+<li>The last date this topic was technically reviewed for accuracy.</li>
+<li>Example: reviewed: "2025-07-07"  </li>
+</ul>
+<h2 id="using-the-local-changelog-on-each-page">Using the Local Changelog on Each Page</h2>
+<p>Each topic page should end with a ## Local Changelog section. This provides an audit trail for when and why changes were made.</p>
+<h3 id="format-example">Format Example</h3>
+<h4 id="local-changelog">Local Changelog</h4>
+<p>| Date       | Version | Author                | Notes                                       |</p>
+<p>|------------|---------|-----------------------|---------------------------------------------|</p>
+<p>| 2025-07-07 | 0.1.0   | Yusuf Talan Saunders  | Created initial draft of Motor Contactors.  |</p>
+<p>| 2025-07-12 | 0.1.1   | Yusuf Talan Saunders  | Added overload wiring diagram.              |</p>
+<h2 id="best-practices-for-editing-this-field-guide">Best Practices for Editing This Field Guide</h2>
+<ul>
+<li>Always update the version, last-updated, and reviewed fields in the YAML when making any changes.</li>
+<li>Use the Local Changelog to record what you did, why, and by whom.</li>
+<li>Keep explanations in clear, concise language with examples relevant to industrial environments.</li>
+<li>When adding troubleshooting tables, prefer bullet points and short diagnostic instructions.</li>
+<li>When adding new topics or moving sections, also update the master INDEX.md and CHANGELOG.md.</li>
+</ul>
+<h3 id="where-to-keep-global-changes">Where to Keep Global Changes</h3>
+<p>Global changes to the entire field guide — such as reorganizing multiple sections, adding major new chapters, or performing global style edits — should be documented in the root CHANGELOG.md file.</p>
+<h2 id="summary-of-key-lists-for-yaml">Summary of Key Lists for YAML</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Typical or Allowed Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>draft, in-review, final</td>
+</tr>
+<tr>
+<td>difficulty</td>
+<td>Beginner, Intermediate, Advanced</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Always use hashtags, e.g. ["#motor", "#fieldguide"]</td>
+</tr>
+<tr>
+<td>standards</td>
+<td>Any standards, or ["none"]</td>
+</tr>
+<tr>
+<td>equipment</td>
+<td>Specific devices, or ["none"]</td>
+</tr>
+</tbody>
+</table>
+      </article>
+
+      <footer id="page-footer">
+        <p>Industrial Automation Field Guide</p>
+      </footer>
+    </div>
+
+  </div>
+</body>
+</html>

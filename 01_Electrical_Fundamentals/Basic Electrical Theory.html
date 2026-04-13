@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Electrical Theory | Industrial Automation Field Guide</title>
+  <style>
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #f4f4f0;
+}
+a { color: #1a56a0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+#layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+#sidebar {
+  background: #1e2736;
+  color: #c8d0dc;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid #141b27;
+  scrollbar-width: thin;
+  scrollbar-color: #2e3a4e transparent;
+}
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-thumb { background: #2e3a4e; border-radius: 3px; }
+
+#sidebar-header {
+  padding: 1.4rem 1.25rem 1.1rem;
+  border-bottom: 1px solid #2e3a4e;
+}
+.site-title {
+  color: #e8ecf1;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+}
+.site-title:hover { text-decoration: none; color: #fff; }
+
+#toc { padding: 1rem 1.25rem; }
+#toc ul { list-style: none; padding: 0; margin: 0; }
+#toc ul li { margin: 0.1rem 0; }
+#toc ul li a {
+  color: #9aa5b4;
+  font-size: 0.8rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  transition: background 0.12s, color 0.12s;
+  line-height: 1.4;
+}
+#toc ul li a:hover { background: #2e3a4e; color: #e8ecf1; text-decoration: none; }
+#toc ul ul { padding-left: 0.85rem; margin-top: 0.05rem; }
+#toc ul ul li a { font-size: 0.75rem; }
+#toc ul ul ul li a { font-size: 0.71rem; color: #6b7585; }
+
+/* ── Main area ───────────────────────────────────────────────────────────── */
+#main {
+  background: #ffffff;
+  padding: 2.5rem 3.5rem;
+  max-width: 960px;
+  min-height: 100vh;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 0.76rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+}
+.bc-sep    { color: #ccc; margin: 0 0.05rem; }
+.bc-part   { color: #888; }
+.bc-current { color: #444; font-weight: 500; }
+
+/* ── Page title ──────────────────────────────────────────────────────────── */
+.page-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Meta block ──────────────────────────────────────────────────────────── */
+.meta-block {
+  border: 1px solid #e4e4de;
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 2rem;
+  background: #fafaf7;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.8rem;
+}
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+.meta-label {
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  font-size: 0.67rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.meta-value { color: #333; }
+
+.status-badge {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.status-final    { background: #d4edda; color: #155724; }
+.status-draft    { background: #fff3cd; color: #856404; }
+.status-inreview { background: #cce5ff; color: #004085; }
+.status-review   { background: #cce5ff; color: #004085; }
+
+.tag {
+  display: inline-block;
+  background: #eef1f8;
+  color: #3b5ea6;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-size: 0.71rem;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* ── Article typography ──────────────────────────────────────────────────── */
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111;
+  margin-top: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+#content h1 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #e6e6e2;
+  padding-bottom: 0.4rem;
+}
+#content h2 {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 0.3rem;
+}
+#content h3 { font-size: 1.1rem; }
+#content h4 { font-size: 1rem; }
+#content h5 { font-size: 0.9rem; }
+#content h6 { font-size: 0.85rem; color: #555; }
+
+#content p { margin-bottom: 1rem; }
+
+#content strong { font-weight: 700; }
+#content em     { font-style: italic; }
+
+#content code {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Courier New", monospace;
+  font-size: 0.84em;
+  background: #f0f0ec;
+  padding: 0.15em 0.38em;
+  border-radius: 3px;
+  border: 1px solid #deded8;
+}
+
+#content pre {
+  background: #1e2736;
+  color: #c8d0dc;
+  padding: 1.15rem 1.4rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.1rem 0 1.4rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  border: 1px solid #141b27;
+}
+#content pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+#content blockquote {
+  border-left: 4px solid #b8c4d0;
+  padding: 0.55rem 1.1rem;
+  margin: 1.1rem 0;
+  background: #f6f7fa;
+  color: #555;
+  border-radius: 0 5px 5px 0;
+}
+#content blockquote p:last-child { margin-bottom: 0; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.6rem;
+}
+#content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+#content thead th {
+  background: #1e2736;
+  color: #e8ecf1;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  font-weight: 600;
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid #141b27;
+}
+#content tbody tr:nth-child(even) { background: #f8f9fa; }
+#content tbody tr:hover { background: #edf1f8; }
+#content tbody td {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #e0e2e6;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────────── */
+#content ul,
+#content ol {
+  padding-left: 1.7rem;
+  margin-bottom: 1rem;
+}
+#content li { margin-bottom: 0.3rem; }
+#content li > ul,
+#content li > ol { margin-top: 0.2rem; margin-bottom: 0; }
+
+/* ── Task / checklist ────────────────────────────────────────────────────── */
+#content li.task {
+  list-style: none;
+  margin-left: -1.7rem;
+  padding-left: 2rem;
+  position: relative;
+}
+#content li.task .checkbox {
+  position: absolute;
+  left: 0.15rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+#content li.task.checked  { color: #555; }
+#content li.task.checked  .checkbox { color: #2e7d32; }
+#content li.task.unchecked .checkbox { color: #888; }
+
+/* ── Horizontal rule ─────────────────────────────────────────────────────── */
+#content hr {
+  border: none;
+  border-top: 1px solid #e6e6e2;
+  margin: 1.75rem 0;
+}
+
+/* ── Broken wikilinks ────────────────────────────────────────────────────── */
+.broken-link {
+  color: #b22222;
+  border-bottom: 1px dashed #b22222;
+  font-style: italic;
+  cursor: not-allowed;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+#page-footer {
+  margin-top: 3.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e6e6e2;
+  font-size: 0.76rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ── Responsive: tablet / mobile ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #layout { grid-template-columns: 1fr; }
+  #sidebar { position: static; height: auto; }
+  #main { padding: 1.75rem 1.5rem; max-width: 100%; }
+  .page-title { font-size: 1.6rem; }
+}
+@media (max-width: 600px) {
+  #main { padding: 1.25rem 1rem; }
+  .page-title { font-size: 1.35rem; }
+  .meta-block { flex-direction: column; gap: 0.35rem; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  #sidebar { display: none; }
+  #layout  { grid-template-columns: 1fr; }
+  #main    { max-width: 100%; padding: 0; box-shadow: none; }
+  #content a::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; }
+  #content pre { background: #f4f4f0; color: #222; border: 1px solid #ccc; }
+  #page-header, #page-footer { page-break-inside: avoid; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="layout">
+
+    <!-- Sidebar / page TOC -->
+    <nav id="sidebar" aria-label="Page contents">
+      <div id="sidebar-header">
+        <a href="../index.html" class="site-title">
+          Industrial Automation<br>Field Guide
+        </a>
+      </div>
+      <div id="toc">
+      <div class="toc">
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#core-concepts">Core Concepts</a><ul>
+<li><a href="#what-is-it">What is it?</a><ul>
+<li><a href="#core-units">Core units:</a></li>
+</ul>
+</li>
+<li><a href="#how-it-works">How it works</a><ul>
+<li><a href="#ohms-law">Ohm’s Law</a></li>
+<li><a href="#power">Power</a></li>
+<li><a href="#energy">Energy</a></li>
+</ul>
+</li>
+<li><a href="#when-to-use">When to Use</a></li>
+</ul>
+</li>
+<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
+<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#field-checklist">Field Checklist</a></li>
+<li><a href="#reference-notes">Reference Notes</a></li>
+<li><a href="#related-topics">Related Topics</a></li>
+<li><a href="#local-changelog">Local Changelog</a></li>
+</ul>
+</div>
+
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div id="main">
+      <header id="page-header">
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">01_Electrical_Fundamentals</span><span class="bc-sep"> / </span><span class="bc-current">Basic Electrical Theory</span></nav>
+        <h1 class="page-title">Basic Electrical Theory</h1>
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Electrical Fundamentals</span></div>
+<div class="meta-row"><span class="meta-label">Author</span><span class="meta-value">Yusuf Talan Saunders</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2025-07-07</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">NEC, IEC Basics</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#electrical</span> <span class="tag">#ohmslaw</span> <span class="tag">#power</span> <span class="tag">#basic-theory</span></span></div>
+</div>
+      </header>
+
+      <article id="content">
+<h1 id="basic-electrical-theory">Basic Electrical Theory</h1>
+<p><strong>Category:</strong> <code>Electrical Fundamentals</code>  
+<strong>Tags:</strong> <code>#electrical #ohmslaw #power #basic-theory</code> 
+<strong>Difficulty:</strong> <code>Beginner</code>  
+<strong>Last Updated:</strong> <code>2025-07-07</code>  
+<strong>Version:</strong> <code>1.0.0</code>  
+<strong>Status:</strong> <code>Final</code>  </p>
+<hr />
+<h2 id="description">Description</h2>
+<p>This topic lays the foundation of basic electrical concepts critical to any work in automation, controls, or industrial maintenance. It covers what electricity is, the fundamental relationships between voltage, current, and resistance (Ohm’s Law), power, energy, and the differences between AC and DC.  </p>
+<p>It also introduces key ideas about single-phase and three-phase power systems, which are essential for understanding how industrial plants operate.  </p>
+<hr />
+<h2 id="core-concepts">Core Concepts</h2>
+<h3 id="what-is-it">What is it?</h3>
+<p>Electricity is the movement of electrons (tiny charged particles) through a conductor like copper wire.</p>
+<h4 id="core-units">Core units:</h4>
+<ul>
+<li>Voltage (V): electrical pressure, measured in volts (V). It pushes electrons.</li>
+<li>Current (I): flow of electrons, measured in amperes (A).</li>
+<li>Resistance (R): opposition to flow, measured in ohms (Ω).  </li>
+</ul>
+<p>If you imagine water in a pipe:</p>
+<ul>
+<li>Voltage = water pressure</li>
+<li>Current = flow rate (gallons/min)</li>
+<li>Resistance = pipe restrictions</li>
+</ul>
+<hr />
+<h3 id="how-it-works">How it works</h3>
+<h4 id="ohms-law">Ohm’s Law</h4>
+<p>The fundamental equation that ties voltage, current, and resistance:</p>
+<p>$V = I × R$</p>
+<p>This means:</p>
+<ul>
+<li>Increase voltage -&gt; current increases (if resistance is constant).</li>
+<li>Increase resistance -&gt; current decreases (if voltage is constant).</li>
+</ul>
+<p>Example:</p>
+<p>If you have $120 volts$ across a $12 ohm$ heater coil:</p>
+<p>$I = V / R = 120V / 12Ω = 10A$</p>
+<h4 id="power">Power</h4>
+<p>The rate of doing electrical work, measured in$ watts (W)$:</p>
+<p>$P = V × I$</p>
+<p>or for purely resistive loads:</p>
+<p>$P = I² × R$</p>
+<p>Example:</p>
+<p>A $10 amp$ current at $120V$:</p>
+<p>$P = 120V × 10A = 1200W (1.2 kW)$</p>
+<h4 id="energy">Energy</h4>
+<p>Power used over time, measured in $kilowatt-hours (kWh)$:</p>
+<p>$Energy = Power × Time$</p>
+<p>Example:</p>
+<p>A $2 kW$ motor running for $5 hours$:</p>
+<p>$Energy = 2 kW × 5 h = 10 kWh$</p>
+<hr />
+<h3 id="when-to-use">When to Use</h3>
+<p>Basic electrical theory is used daily by technicians and engineers to:</p>
+<ul>
+<li>Calculate circuit current for wire sizing and overloads.</li>
+<li>Troubleshoot voltage drops causing machines to fault.</li>
+<li>Understand overheating wires or motors (overcurrent).</li>
+<li>Diagnose control circuits that under-voltage and fail to pull in contactors.</li>
+</ul>
+<p>Without these basics, you’d never confidently size a starter, fuse, or wire run.</p>
+<hr />
+<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Typical Value / Range</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control Voltage</td>
+<td>24 VDC, 120 VAC</td>
+<td>Common for control circuits</td>
+</tr>
+<tr>
+<td>Line Voltage</td>
+<td>120/240/480 VAC</td>
+<td>Typical industrial power supplies</td>
+</tr>
+<tr>
+<td>Current Ranges</td>
+<td>Milliamps to hundreds of A</td>
+<td>From sensors to large motors</td>
+</tr>
+<tr>
+<td>Resistance</td>
+<td>0.1 Ω to MΩ</td>
+<td>Depends on load or insulation context</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<p><strong>*Basic DC Circuit Example:</strong></p>
+<pre><code>+24VDC ––[ Fuse ]––[ Switch ]––[ Lamp ]–– 0VDC
+</code></pre>
+<ul>
+<li>When the switch closes, voltage pushes current through the lamp’s resistance, lighting it up.</li>
+<li>The fuse protects against short circuits by melting if current is too high.</li>
+</ul>
+<p><strong>Simple AC Motor Circuit:</strong></p>
+<pre><code>L1 --[ Breaker ]--[ Contactor ]--[ Motor ]
+
+N ----------------[ Contactor ]--[ Motor ]
+</code></pre>
+<ul>
+<li>Breaker protects against overcurrent (shorts, overloads).</li>
+<li>Contactor is an electrically controlled switch.</li>
+<li>Motor is the load. N (neutral) provides return path.</li>
+</ul>
+<p><strong>Three-Phase Example (typical industrial motor):</strong></p>
+<pre><code>
+L1 ––[ Overload ]––+
+
+L2 ––[ Overload ]––+––[ Motor ]
+
+L3 ––[ Overload ]––+
+</code></pre>
+<ul>
+<li>Overload relay cuts the circuit if any phase draws too much current.</li>
+</ul>
+<hr />
+<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<p>Common problems in simple circuits:</p>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely Cause</th>
+<th>Diagnostic Step</th>
+<th>Tool Needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No voltage at load</td>
+<td>Open fuse, loose wire</td>
+<td>Check continuity across fuse &amp; wire</td>
+<td>Multimeter</td>
+</tr>
+<tr>
+<td>Motor won’t start</td>
+<td>Contactor not pulling in</td>
+<td>Verify coil voltage present</td>
+<td>Multimeter</td>
+</tr>
+<tr>
+<td>Overload tripping</td>
+<td>Phase imbalance or dirt</td>
+<td>Clamp each phase for imbalance</td>
+<td>Clamp meter</td>
+</tr>
+<tr>
+<td>Low voltage at load</td>
+<td>Undersized wiring run</td>
+<td>Measure voltage at source vs load</td>
+<td>Multimeter</td>
+</tr>
+</tbody>
+</table>
+<p>Always check for voltage under load — an unloaded circuit might appear fine.</p>
+<hr />
+<h2 id="field-checklist">Field Checklist</h2>
+<ul>
+<li>Verify line voltage at incoming terminals.</li>
+<li>Confirm control circuit voltage (e.g. 24 VDC or 120 VAC) matches device spec.</li>
+<li>Ensure wire size matches load current draw.</li>
+<li>Inspect terminals for tight, clean connections.</li>
+<li>Perform voltage drop checks under full load.</li>
+</ul>
+<hr />
+<h2 id="reference-notes">Reference Notes</h2>
+<p>Standards and references:</p>
+<ul>
+<li>NEC Article 210 (branch circuits)</li>
+<li>NEC 240 (overcurrent protection)</li>
+<li>NEC 250 (grounding &amp; bonding)</li>
+<li>IEC 60364 series for global installations</li>
+<li>Manufacturer data sheets for motor, starter, or panel ratings</li>
+</ul>
+<hr />
+<h2 id="related-topics">Related Topics</h2>
+<ul>
+<li><a href="Lockout Tagout (LOTO) Procedures.html">Lockout Tagout (LOTO) Procedures</a></li>
+<li><a href="Tools of the Trade.html">Tools of the Trade</a></li>
+<li><a href="../02_Power_Distribution/Wire Color Codes (US & IEC).html">Wire Color Codes (US &amp; IEC)</a></li>
+</ul>
+<hr />
+<h2 id="local-changelog">Local Changelog</h2>
+<table>
+<thead>
+<tr>
+<th>Date      </th>
+<th>Version</th>
+<th>Author               </th>
+<th>Notes                                      </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025-07-07</td>
+<td>1.0.0  </td>
+<td>Yusuf Talan Saunders </td>
+<td>Created complete first edition of topic.   </td>
+</tr>
+</tbody>
+</table>
+<hr />
+      </article>
+
+      <footer id="page-footer">
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
+      </footer>
+    </div>
+
+  </div>
+</body>
+</html>
