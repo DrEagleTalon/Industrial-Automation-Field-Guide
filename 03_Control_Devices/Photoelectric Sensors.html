@@ -375,96 +375,84 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Photoelectric Sensors</h1>
 
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<h1 id="photoelectric-sensors">Photoelectric Sensors</h1>
+<p><strong>Category:</strong> <code>Control Devices</code><br />
+<strong>Tags:</strong> <code>#photoelectric #diffuse #retroreflective #throughbeam #objectdetection</code><br />
+<strong>Difficulty:</strong> <code>Intermediate</code><br />
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Photoelectric sensors detect objects using emitted light. They are essential where non-contact detection is needed across larger distances than proximity sensors or where target material varies.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
 <h3 id="what-is-it">What is it?</h3>
+<p>An optical sensor system with emitter and receiver that changes output based on light interruption or reflection.</p>
 <h3 id="how-it-works">How it works</h3>
+<ul>
+<li><strong>Through-beam:</strong> Separate emitter and receiver, highest reliability and range.</li>
+<li><strong>Retroreflective:</strong> Sensor and emitter in one body with reflector opposite side.</li>
+<li><strong>Diffuse:</strong> Single device detects reflected light from target.</li>
+</ul>
 <h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>Part presence on conveyor lanes.</li>
+<li>Counting carton or bottle flow.</li>
+<li>Detection where mechanical contact is not acceptable.</li>
+</ul>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
+<thead><tr><th>Parameter</th><th>Typical Value / Range</th><th>Notes</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Sensing range</td><td>0.05 m to 20 m+</td><td>Depends heavily on mode and target</td></tr>
+<tr><td>Light source</td><td>Visible red, infrared, laser</td><td>Laser for precision spot, IR for general detection</td></tr>
+<tr><td>Response time</td><td>&lt;1 ms to tens of ms</td><td>Important for high-speed counting</td></tr>
+<tr><td>Output type</td><td>PNP/NPN, NO/NC</td><td>Match I/O module and fail-state philosophy</td></tr>
+<tr><td>Background suppression</td><td>Available on advanced diffuse types</td><td>Improves accuracy in cluttered scenes</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>24VDC sensor wiring:
+Brown +24V, Blue 0V, Black output to PLC DI
+
+Through-beam requires separate alignment of emitter and receiver.
+</code></pre>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
+<thead><tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>No detection at expected distance</td><td>Mode mismatch or dirty lens</td><td>Clean optics and verify sensor mode setup</td><td>Cleaning kit, manual</td></tr>
+<tr><td>Frequent false detect</td><td>Ambient light reflection or shiny target effects</td><td>Adjust sensitivity and beam angle</td><td>Setup tool, test targets</td></tr>
+<tr><td>Detection drifts during shift</td><td>Vibration or thermal movement</td><td>Check mounting rigidity and alignment</td><td>Mechanical inspection</td></tr>
+<tr><td>PLC input unstable</td><td>Power noise or cable shielding issue</td><td>Measure supply quality and inspect routing</td><td>Multimeter, scope if available</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li>Select sensor mode based on target and background conditions.</li>
+<li>Mount with adjustment travel for final alignment.</li>
+<li>Clean lens and reflector surfaces during PM routine.</li>
+<li>Verify sensor output state in PLC diagnostics at line speed.</li>
+<li>Lock setup potentiometers after final tuning where applicable.</li>
 </ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Proximity Sensors Inductive Capacitive.html">Proximity Sensors Inductive Capacitive</a></li>
+<li><a href="Timers &amp; Counters.html">Timers &amp; Counters</a></li>
+<li><a href="Wiring &amp; Testing Control Circuits.html">Wiring &amp; Testing Control Circuits</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+<thead><tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr></thead>
+<tbody><tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Initial full content release.</td></tr></tbody>
 </table>
 <hr />
       </article>

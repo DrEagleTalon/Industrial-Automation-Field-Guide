@@ -374,99 +374,121 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Control Transformers</h1>
 
       </header>
-
       <article id="content">
 <h1 id="control-transformers">Control Transformers</h1>
 <p><strong>Category:</strong> <code>Power Distribution &amp; Wiring</code><br />
-<strong>Tags:</strong> <code>#transformers #controlvoltage #wiring</code><br />
+<strong>Tags:</strong> <code>#controltransformer #120vac #24vac #inrush #controlpower</code><br />
 <strong>Difficulty:</strong> <code>Intermediate</code><br />
-<strong>Last Updated:</strong> <code>2025-07-10</code><br />
-<strong>Version:</strong> <code>0.0.0</code><br />
-<strong>Status:</strong> <code>draft</code></p>
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
-<p>Details the purpose, operation, and selection criteria of control transformers, vital for supplying safe, isolated control voltage to industrial control circuits.</p>
+<p>Control transformers provide isolated, reduced voltage for contactors, relays, pilot devices, and other control components. This guide explains transformer operation, VA sizing, fuse selection basics, and practical commissioning checks.</p>
+<hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<p>A transformer designed to step down high distribution voltage to lower, safer voltages for operating control components.</p>
+<h3 id="what-it-is">What it is</h3>
+<p>A control transformer is a step-down transformer designed to handle high momentary inrush current from control devices, then provide stable lower voltage during steady operation.</p>
 <h3 id="how-it-works">How it works</h3>
-<p>Uses magnetic induction to convert high input voltage (e.g., 480VAC) into lower output voltages (e.g., 120VAC or 24VAC).</p>
-<h3 id="when-to-use">When to Use</h3>
-<p>Use in control systems requiring isolated, lower-voltage power sources.</p>
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <ul>
-<li>
-<p>Typical Ratings: 50VA to 1000VA</p>
-</li>
-<li>
-<p>Input Voltage: 240VAC, 480VAC</p>
-</li>
-<li>
-<p>Output Voltage: 24VAC, 120VAC</p>
-</li>
+<li>Primary winding connects to distribution voltage, often 480 VAC or 240 VAC.</li>
+<li>Magnetic coupling transfers energy to the secondary winding.</li>
+<li>Secondary provides control voltage, commonly 120 VAC or 24 VAC.</li>
+<li>Primary and secondary are electrically isolated, improving safety and noise immunity.</li>
 </ul>
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h3 id="where-used">Where used</h3>
 <ul>
-<li>Simple transformer wiring diagrams illustrating primary and secondary connections.</li>
+<li>Motor starter panels.</li>
+<li>Machine control cabinets.</li>
+<li>Legacy relay logic panels.</li>
+<li>PLC panels requiring AC control power.</li>
 </ul>
+<hr />
+<h2 id="critical-sizing-concepts">Critical Sizing Concepts</h2>
+<h3 id="va-load">VA load</h3>
+<p>Transformer size is rated in VA (volt-amps). Total connected control load must stay within the transformer rating with margin.</p>
+<p><strong>Basic method:</strong></p>
+<ol>
+<li>List all devices powered by the secondary.</li>
+<li>Add seal/steady VA for continuous load.</li>
+<li>Add inrush VA for devices that energize at startup.</li>
+<li>Apply diversity if not all inrush events occur simultaneously.</li>
+<li>Select the next standard transformer size with safety margin.</li>
+</ol>
+<h3 id="inrush-vs-seal">Inrush vs seal current</h3>
+<p>Contactors and relays often draw much higher current for a short instant at pull-in. A transformer that can handle seal load but not inrush causes nuisance voltage collapse and chattering coils.</p>
+<h3 id="tap-selection">Tap selection</h3>
+<p>Many transformers have primary taps to match actual supply voltage. Use the tap that best matches measured line voltage under normal operating load.</p>
+<hr />
+<h2 id="protection-and-wiring-basics">Protection and Wiring Basics</h2>
+<ul>
+<li>Provide primary overcurrent protection per design and code.</li>
+<li>Protect the secondary conductors and control circuit distribution.</li>
+<li>Bond and ground according to panel design standards.</li>
+<li>Keep control secondary wiring separated from high-noise power conductors when practical.</li>
+<li>Label primary and secondary terminal points clearly.</li>
+</ul>
+<p>Typical arrangement:</p>
+<pre><code>480 VAC feeder -> Primary fuse/breaker -> Control transformer
+                                 |
+                          Secondary fuse
+                                 |
+                    120 VAC control circuit bus
+</code></pre>
+<hr />
+<h2 id="commissioning-checks">Commissioning Checks</h2>
+<table>
+<thead>
+<tr><th>Check</th><th>Target</th><th>Why it matters</th></tr>
+</thead>
+<tbody>
+<tr><td>Primary voltage</td><td>Matches selected tap range</td><td>Wrong tap causes high or low secondary voltage</td></tr>
+<tr><td>No-load secondary voltage</td><td>Near nominal value</td><td>Confirms wiring and tap selection</td></tr>
+<tr><td>Loaded secondary voltage</td><td>Within component tolerance</td><td>Confirms transformer is not undersized</td></tr>
+<tr><td>Temperature rise</td><td>Normal after warm-up</td><td>Detects overload or poor ventilation</td></tr>
+<tr><td>Terminal torque</td><td>Per manufacturer spec</td><td>Prevents heating and intermittent faults</td></tr>
+</tbody>
+</table>
+<hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
 <thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
+<tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>No control voltage</td>
-<td>Blown fuse, damaged transformer</td>
-<td>Check fuse, measure transformer output</td>
-<td>Multimeter</td>
-</tr>
+<tr><td>No secondary voltage</td><td>Open primary fuse or wrong primary wiring</td><td>Verify primary voltage at transformer terminals</td><td>Multimeter</td></tr>
+<tr><td>Low control voltage under load</td><td>Transformer undersized or excessive inrush</td><td>Measure voltage during coil pull-in events</td><td>Meter with min/max capture</td></tr>
+<tr><td>Transformer runs hot</td><td>Overload or poor enclosure cooling</td><td>Measure secondary current and enclosure temperature</td><td>Clamp meter, IR thermometer</td></tr>
+<tr><td>Frequent control fuse failures</td><td>Short on secondary circuit</td><td>Isolate branches and test insulation resistance</td><td>Insulation tester, multimeter</td></tr>
 </tbody>
 </table>
+<hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li>
-<p>Verify correct transformer sizing.</p>
-</li>
-<li>
-<p>Confirm voltage ratings.</p>
-</li>
-<li>
-<p>Ensure proper grounding and protection.</p>
-</li>
+<li>Confirm transformer voltage ratings match source and control bus requirements.</li>
+<li>Verify primary tap is set for actual measured line voltage.</li>
+<li>Check VA sizing against steady plus inrush demand.</li>
+<li>Install and verify primary and secondary protection devices.</li>
+<li>Measure loaded secondary voltage during worst-case startup.</li>
+<li>Label secondary common and hot legs consistently in drawings and panel.</li>
+<li>Document all measurements in startup report.</li>
 </ul>
+<hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>
-<p><a href="Fuses vs Breakers.html">Fuses vs Breakers</a></p>
-</li>
-<li>
-<p><a href="Industrial Power Systems Overview.html">Industrial Power Systems Overview</a></p>
-</li>
+<li><a href="Industrial Power Systems Overview.html">Industrial Power Systems Overview</a></li>
+<li><a href="Fuses vs Breakers.html">Fuses vs Breakers</a></li>
+<li><a href="Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></li>
+<li><a href="Voltage Drop – Planning and Testing.html">Voltage Drop - Planning and Testing</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
 <thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
+<tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Full rewrite with VA sizing method, wiring guidance, commissioning checks, and diagnostics.</td></tr>
 </tbody>
 </table>
 <hr />

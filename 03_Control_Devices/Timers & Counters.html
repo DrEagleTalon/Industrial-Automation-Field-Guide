@@ -375,96 +375,84 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Timers &amp; Counters</h1>
 
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<h1 id="timers-counters">Timers &amp; Counters</h1>
+<p><strong>Category:</strong> <code>Control Devices</code><br />
+<strong>Tags:</strong> <code>#timers #counters #delay #sequence #automation</code><br />
+<strong>Difficulty:</strong> <code>Intermediate</code><br />
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Timers and counters add time and event logic to control systems. They are used to delay starts, enforce dwell times, debounce inputs, and count cycles, parts, or pulses for control and maintenance functions.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
 <h3 id="what-is-it">What is it?</h3>
+<ul>
+<li><strong>Timer:</strong> Changes output state after a configured time condition.</li>
+<li><strong>Counter:</strong> Changes output state after a configured number of events.</li>
+</ul>
 <h3 id="how-it-works">How it works</h3>
+<p>Timer relays or PLC instructions track elapsed time while an enable condition is true. Counters increment or decrement when trigger edges are detected. Reset conditions clear accumulated value.</p>
 <h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>Motor start delay after upstream permissive is true.</li>
+<li>Part reject logic based on sensor pulse count.</li>
+<li>Maintenance reminder after cycle count reaches threshold.</li>
+</ul>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
+<thead><tr><th>Parameter</th><th>Typical Value / Range</th><th>Notes</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Timer function</td><td>ON-delay, OFF-delay, pulse</td><td>Select by sequence requirement</td></tr>
+<tr><td>Time range</td><td>0.1 s to hours</td><td>Watch minimum resolution limits</td></tr>
+<tr><td>Counter mode</td><td>Up, down, up/down</td><td>Confirm trigger edge and reset behavior</td></tr>
+<tr><td>Preset value</td><td>Application dependent</td><td>Should be parameterized on HMI when needed</td></tr>
+<tr><td>Retentive behavior</td><td>Retentive or non-retentive</td><td>Affects restart and recovery behavior</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>Example delay start:
+RUN command -> TON 5s -> Motor starter output
+
+Example part count:
+Photoeye pulse -> CTU preset 100 -> Batch complete output
+</code></pre>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
+<thead><tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr></thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>Delay too short or too long</td><td>Wrong time base or preset</td><td>Verify parameter units and program instruction type</td><td>PLC software, HMI</td></tr>
+<tr><td>Counter misses counts</td><td>Sensor bounce or scan-time limitations</td><td>Check pulse width and use one-shot logic</td><td>Scope, PLC trend</td></tr>
+<tr><td>Counter increments twice</td><td>No edge detection</td><td>Review trigger logic and add rising-edge block</td><td>PLC online monitor</td></tr>
+<tr><td>Timer resets unexpectedly</td><td>Enable rung drops out intermittently</td><td>Trend enable bit for flicker or noise</td><td>PLC trend, multimeter</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li>Verify timer/counter values against process requirement document.</li>
+<li>Confirm retentive behavior for power cycle and fault recovery scenarios.</li>
+<li>Add comments in program for every timing-critical rung.</li>
+<li>Validate count accuracy with manual test samples.</li>
+<li>Protect critical presets with user access levels on HMI.</li>
 </ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Photoelectric Sensors.html">Photoelectric Sensors</a></li>
+<li><a href="Proximity Sensors Inductive Capacitive.html">Proximity Sensors Inductive Capacitive</a></li>
+<li><a href="Wiring &amp; Testing Control Circuits.html">Wiring &amp; Testing Control Circuits</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+<thead><tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr></thead>
+<tbody><tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Initial full content release.</td></tr></tbody>
 </table>
 <hr />
       </article>
