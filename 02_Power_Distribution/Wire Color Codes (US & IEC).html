@@ -390,197 +390,100 @@ a:hover { text-decoration: underline; }
 <div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#wiring</span> <span class="tag">#colorcodes</span> <span class="tag">#us</span> <span class="tag">#iec</span></span></div>
 </div>
       </header>
-
       <article id="content">
 <h1 id="wire-color-codes-us-iec">Wire Color Codes (US &amp; IEC)</h1>
 <p><strong>Category:</strong> <code>Power Distribution &amp; Wiring</code><br />
-<strong>Tags:</strong> <code>#wiring #colorcodes #us #iec</code><br />
+<strong>Tags:</strong> <code>#wirecolors #identification #us #iec #safety</code><br />
 <strong>Difficulty:</strong> <code>Beginner</code><br />
-<strong>Last Updated:</strong> <code>2025-07-10</code><br />
-<strong>Version:</strong> <code>0.1.1</code><br />
-<strong>Status:</strong> <code>Draft</code></p>
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
-<p>This topic covers standard wire color codes used in electrical wiring for industrial systems, comparing US (NEC/NFPA) and IEC international standards. Clear identification of wires using standard colors is crucial for safety, maintenance, and troubleshooting.</p>
+<p>Wire color coding is a fast visual safety system. It helps installers, operators, and technicians identify conductor function before testing and during maintenance. This page compares common US and IEC conventions and explains where confusion usually happens in mixed-standard facilities.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<p>Wire color codes are standardized colors assigned to wires based on their electrical function. They ensure clarity and safety during installation, maintenance, and troubleshooting.</p>
-<h3 id="how-it-works">How it works</h3>
-<p>Wires are assigned specific colors based on their function (e.g., phase conductors, neutral, grounding, control circuits). Consistency prevents confusion and errors.</p>
-<h3 id="when-to-use">When to Use</h3>
-<p>Use color coding anytime wiring or rewiring circuits, especially in industrial and automation control panels.</p>
+<h3 id="what-color-coding-solves">What color coding solves</h3>
+<ul>
+<li>Reduces wiring mistakes during installation.</li>
+<li>Speeds troubleshooting and commissioning.</li>
+<li>Helps prevent shock risk from misidentified conductors.</li>
+<li>Improves consistency between drawings and physical panels.</li>
+</ul>
+<h3 id="important-rule">Important rule</h3>
+<p>Color is an aid, not proof. Always verify with meter testing and drawings before touching or moving conductors.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="common-us-and-iec-conventions">Common US and IEC Conventions</h2>
 <table>
 <thead>
-<tr>
-<th>Function</th>
-<th>US Standard (NEC/NFPA)</th>
-<th>IEC Standard (IEC 60446)</th>
-</tr>
+<tr><th>Function</th><th>Common US Practice</th><th>Common IEC Practice</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>Ground</td>
-<td>Green or Green/Yellow</td>
-<td>Green/Yellow</td>
-</tr>
-<tr>
-<td>Neutral</td>
-<td>White or Grey</td>
-<td>Blue</td>
-</tr>
-<tr>
-<td>Phase 1</td>
-<td>Black</td>
-<td>Brown</td>
-</tr>
-<tr>
-<td>Phase 2</td>
-<td>Red</td>
-<td>Black</td>
-</tr>
-<tr>
-<td>Phase 3</td>
-<td>Blue</td>
-<td>Grey</td>
-</tr>
-<tr>
-<td>DC Positive</td>
-<td>Red</td>
-<td>Brown or Red</td>
-</tr>
-<tr>
-<td>DC Negative</td>
-<td>Black</td>
-<td>Blue or Grey</td>
-</tr>
-<tr>
-<td>Control circuits</td>
-<td>Usually Blue or Yellow</td>
-<td>Usually Orange or Yellow</td>
-</tr>
+<tr><td>Protective Earth (PE)</td><td>Green or green/yellow</td><td>Green/yellow</td><td>Reserve only for protective earth conductors</td></tr>
+<tr><td>Neutral (N)</td><td>White or gray</td><td>Blue</td><td>Do not reuse neutral colors for other functions</td></tr>
+<tr><td>L1</td><td>Black</td><td>Brown</td><td>Three-phase phase identification differs by standard</td></tr>
+<tr><td>L2</td><td>Red</td><td>Black</td><td>Confirm against panel legend</td></tr>
+<tr><td>L3</td><td>Blue</td><td>Gray</td><td>Avoid assumptions when retrofits are involved</td></tr>
+<tr><td>Ungrounded DC +</td><td>Red (common practice)</td><td>Brown or red</td><td>Project standard may define exact choice</td></tr>
+<tr><td>Ungrounded DC -</td><td>Black (common practice)</td><td>Blue or gray</td><td>Use consistent legend within one machine</td></tr>
+<tr><td>External/interlock sources</td><td>Orange often used</td><td>Orange common in many plants</td><td>Used to indicate energized from external source</td></tr>
 </tbody>
 </table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<h3 id="example-of-us-standard-three-phase">Example of US Standard (Three-Phase):</h3>
-<pre><code>L1 (Black)
-L2 (Red)
-L3 (Blue)
-Neutral (White)
-Ground (Green)
-</code></pre>
-<h3 id="example-of-iec-standard-three-phase">Example of IEC Standard (Three-Phase):</h3>
-<pre><code>L1 (Brown)
-L2 (Black)
-L3 (Grey)
-Neutral (Blue)
-Ground (Green/Yellow)
-</code></pre>
-<h3 id="typical-control-and-dc-wiring">Typical Control and DC Wiring:</h3>
-<p><strong>US Standard:</strong></p>
-<pre><code>Control Circuits: Blue or Yellow
-DC Positive: Red
-DC Negative: Black
-Ground: Green or Green/Yellow
-</code></pre>
-<p><strong>IEC Standard:</strong></p>
-<pre><code>Control Circuits: Orange or Yellow
-DC Positive: Brown or Red
-DC Negative: Blue or Grey
-Ground: Green/Yellow
-</code></pre>
+<h2 id="mixed-standard-facility-risks">Mixed-Standard Facility Risks</h2>
+<ul>
+<li>Imported machines may use IEC colors inside a US plant.</li>
+<li>Legacy expansions may mix historical company standards.</li>
+<li>Panel rebuilds can leave old colors if conductors are extended instead of replaced.</li>
+<li>Inconsistent color meaning across contractors can create startup delays and safety concerns.</li>
+</ul>
+<p>Best practice is to publish a site-wide color legend and require it in every panel drawing set.</p>
+<hr />
+<h2 id="labeling-practices-that-back-up-color-codes">Labeling Practices That Back Up Color Codes</h2>
+<ol>
+<li>Apply unique wire numbers at both ends of every conductor.</li>
+<li>Add terminal block markers that match schematic references.</li>
+<li>Include a color legend on panel door documentation pocket.</li>
+<li>Flag any non-standard color use with clear warning labels.</li>
+<li>Update drawings immediately after field modifications.</li>
+</ol>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
 <thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
+<tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>Incorrect voltage</td>
-<td>Incorrect wire connections</td>
-<td>Verify correct color coding matches function</td>
-<td>Multimeter</td>
-</tr>
-<tr>
-<td>Grounding issues</td>
-<td>Misidentified ground wire</td>
-<td>Verify continuity to earth ground</td>
-<td>Multimeter</td>
-</tr>
+<tr><td>Unexpected voltage on "neutral" conductor</td><td>Misidentified conductor color or wiring error</td><td>Trace to source using drawings and verify with meter</td><td>Multimeter, prints</td></tr>
+<tr><td>Ground fault trips after retrofit</td><td>PE conductor used incorrectly for return path</td><td>Inspect color usage and continuity to earth bar</td><td>Continuity tester, multimeter</td></tr>
+<tr><td>Reversed DC polarity at sensor</td><td>Color convention mismatch across teams</td><td>Verify polarity at terminal and device connector</td><td>Multimeter</td></tr>
+<tr><td>Long troubleshooting time</td><td>Missing labels and mixed conductor colors</td><td>Perform wire ID audit and relabel panel</td><td>Label printer, drawings</td></tr>
 </tbody>
 </table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
 <ul>
-<li>
-<p>Verify wire color coding during installation.</p>
-</li>
-<li>
-<p>Ensure clear labeling in control panels.</p>
-</li>
-<li>
-<p>Check wiring diagrams for compliance with local standards.</p>
-</li>
-<li>
-<p>Regularly inspect and maintain wire integrity.</p>
-</li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
-<ul>
-<li>
-<p>Always adhere to local electrical codes.</p>
-</li>
-<li>
-<p>IEC standards generally preferred internationally.</p>
-</li>
-<li>
-<p>Use wire labels if deviations from standard occur.</p>
-</li>
+<li>Confirm applicable standard for project or machine package.</li>
+<li>Verify PE and neutral colors are reserved for their intended functions.</li>
+<li>Cross-check conductor color with wire number and schematic.</li>
+<li>Mark any exceptions directly in panel and as-built drawings.</li>
+<li>Train maintenance staff on local legend before handover.</li>
 </ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>
-<p><a href="Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></p>
-</li>
-<li>
-<p><a href="Industrial Power Systems Overview.html">Industrial Power Systems Overview</a></p>
-</li>
+<li><a href="Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></li>
+<li><a href="Industrial Power Systems Overview.html">Industrial Power Systems Overview</a></li>
+<li><a href="Control Transformers.html">Control Transformers</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
 <thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
+<tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>2025-07-10</td>
-<td>0.1.0</td>
-<td>Yusuf Talan Saunders</td>
-<td>Initial draft created.</td>
-</tr>
-<tr>
-<td>2025-07-10</td>
-<td>0.1.1</td>
-<td>Yusuf Talan Saunders</td>
-<td>Expanded with control and DC wiring.</td>
-</tr>
+<tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Reworked for mixed-standard environments with stronger safety notes, table updates, and field checklist.</td></tr>
 </tbody>
 </table>
 <hr />

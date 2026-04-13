@@ -370,59 +370,106 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">Fuses vs Breakers</h1>
 
       </header>
-
       <article id="content">
 <h1 id="fuses-vs-breakers">Fuses vs Breakers</h1>
 <p><strong>Category:</strong> <code>Power Distribution &amp; Wiring</code><br />
-<strong>Tags:</strong> <code>#fuses #breakers #circuitprotection</code><br />
+<strong>Tags:</strong> <code>#fuses #breakers #protection #overcurrent</code><br />
 <strong>Difficulty:</strong> <code>Beginner</code><br />
-<strong>Last Updated:</strong> <code>2025-07-10</code><br />
-<strong>Version:</strong> <code>0.0.0</code><br />
-<strong>Status:</strong> <code>draft</code></p>
+<strong>Last Updated:</strong> <code>2026-04-13</code><br />
+<strong>Version:</strong> <code>1.0.0</code><br />
+<strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
-<p>Explains differences, advantages, and proper selection criteria between fuses and circuit breakers for industrial applications.</p>
+<p>This page explains how fuses and circuit breakers protect industrial equipment from overloads and short circuits. You will learn what each device does, where each is commonly used, and how to choose protection that keeps both people and equipment safe.</p>
+<hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<p>Devices used for overcurrent protection, safeguarding electrical systems from damage due to short circuits and overloads.</p>
-<h3 id="how-it-works">How it works</h3>
+<h3 id="what-overcurrent-protection-does">What overcurrent protection does</h3>
+<p>Overcurrent protection devices disconnect power when current is too high for conductors or equipment. Without proper protection, excessive current can overheat insulation, damage motors and drives, and create fire risk.</p>
+<h3 id="fuse-basics">Fuse basics</h3>
+<p>A fuse contains a calibrated element that melts when current exceeds its time-current rating. Once opened, it must be replaced.</p>
 <ul>
-<li>
-<p><strong>Fuses:</strong> Melt internal elements to interrupt current.</p>
-</li>
-<li>
-<p><strong>Breakers:</strong> Mechanically interrupt current, resettable.</p>
-</li>
+<li>Fast fault clearing for high short circuit currents.</li>
+<li>Simple and reliable with no moving parts.</li>
+<li>Requires correct spare fuse management.</li>
 </ul>
-<h3 id="when-to-use">When to Use</h3>
-<p>Fuses are suitable for sensitive or critical circuits, breakers are ideal for convenience and maintenance ease.</p>
+<h3 id="breaker-basics">Breaker basics</h3>
+<p>A breaker uses thermal, magnetic, or electronic trip mechanisms to open a circuit during overload or short circuit conditions. It can usually be reset after fault correction.</p>
+<ul>
+<li>Convenient reset and clear trip indication.</li>
+<li>Supports adjustable trip settings on many models.</li>
+<li>May not always clear as fast as current-limiting fuses in severe faults.</li>
+</ul>
+<hr />
+<h2 id="selection-guidelines">Selection Guidelines</h2>
+<table>
+<thead>
+<tr><th>Decision Factor</th><th>Fuse Advantage</th><th>Breaker Advantage</th></tr>
+</thead>
+<tbody>
+<tr><td>Fault current limitation</td><td>Excellent on current-limiting types</td><td>Good, but depends on design and interrupt rating</td></tr>
+<tr><td>Maintenance speed after trip</td><td>Needs replacement</td><td>Reset after fault verification</td></tr>
+<tr><td>Selective coordination</td><td>Often easier with engineered fuse pairs</td><td>Possible with adjustable trip units and studies</td></tr>
+<tr><td>Lifecycle cost</td><td>Low initial, recurring replacement cost</td><td>Higher initial, lower replacement frequency</td></tr>
+<tr><td>Operator behavior risk</td><td>No reset option reduces forced restart risk</td><td>Reset convenience can encourage unsafe repeated resets</td></tr>
+</tbody>
+</table>
+<p>Always verify <strong>interrupting rating</strong> (AIC for breakers, AIR for fuses) against available fault current at the installation point.</p>
+<hr />
+<h2 id="common-industrial-use-cases">Common Industrial Use Cases</h2>
+<ul>
+<li><strong>Main service and feeder protection:</strong> Molded case or insulated case breakers are common for visibility and reset convenience.</li>
+<li><strong>Motor branch circuits:</strong> Fused disconnects are common where fast short circuit clearing is needed.</li>
+<li><strong>Control transformers:</strong> Small fuses on primary and secondary protect control wiring from faults.</li>
+<li><strong>Semiconductor protection:</strong> High-speed fuses are used for drives and power electronics where standard breakers may not react fast enough.</li>
+</ul>
+<hr />
+<h2 id="coordination-and-safety-basics">Coordination and Safety Basics</h2>
+<ul>
+<li>Choose ratings so the device closest to the fault opens first.</li>
+<li>Do not oversize devices to stop nuisance trips without root cause analysis.</li>
+<li>Match trip curves to load behavior, especially motor inrush.</li>
+<li>Use only listed replacement fuses of identical class, voltage, and amp rating unless the design is updated and approved.</li>
+<li>After any trip event, inspect for heat damage, odor, and insulation failure before re-energizing.</li>
+</ul>
+<hr />
+<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<table>
+<thead>
+<tr><th>Symptom</th><th>Likely Cause</th><th>Diagnostic Step</th><th>Tool(s) Needed</th></tr>
+</thead>
+<tbody>
+<tr><td>Fuse opens instantly on startup</td><td>Short circuit or wrong fuse class</td><td>Check downstream insulation and verify fuse specification</td><td>Multimeter, insulation tester</td></tr>
+<tr><td>Breaker trips after several minutes</td><td>Overload condition</td><td>Measure running current and compare to nameplate FLA</td><td>Clamp meter</td></tr>
+<tr><td>Breaker will not reset</td><td>Persistent fault or failed mechanism</td><td>Isolate load and test breaker operation unloaded</td><td>Multimeter, breaker test procedure</td></tr>
+<tr><td>Frequent nuisance trips</td><td>Improper trip curve for inrush profile</td><td>Capture startup current waveform and review protection curve</td><td>Inrush meter, PQ logger</td></tr>
+</tbody>
+</table>
+<hr />
+<h2 id="field-checklist">Field Checklist</h2>
+<ul>
+<li>Confirm voltage rating and interrupting rating are adequate.</li>
+<li>Verify amp rating aligns with conductor and load design.</li>
+<li>Check torque on terminals and inspect for heat discoloration.</li>
+<li>Label all protection devices with circuit ID and destination load.</li>
+<li>Keep approved spare fuses onsite with clear class and rating labels.</li>
+<li>Document every trip event with measured current and operating condition.</li>
+</ul>
+<hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>
-<p><a href="Voltage Drop – Planning and Testing.html">Voltage Drop – Planning and Testing</a></p>
-</li>
-<li>
-<p><a href="Control Transformers.html">Control Transformers</a></p>
-</li>
+<li><a href="Industrial Power Systems Overview.html">Industrial Power Systems Overview</a></li>
+<li><a href="Control Transformers.html">Control Transformers</a></li>
+<li><a href="Voltage Drop – Planning and Testing.html">Voltage Drop - Planning and Testing</a></li>
+<li><a href="Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
 <thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
+<tr><th>Date</th><th>Version</th><th>Author</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td>2026-04-13</td><td>1.0.0</td><td>Field Guide Team</td><td>Expanded to full guide with selection table, coordination basics, troubleshooting, and checklist.</td></tr>
 </tbody>
 </table>
 <hr />
