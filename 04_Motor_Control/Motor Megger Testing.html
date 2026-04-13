@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motor Megger Testing | Industrial Automation Field Guide</title>
+  <style>
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #f4f4f0;
+}
+a { color: #1a56a0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+#layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+#sidebar {
+  background: #1e2736;
+  color: #c8d0dc;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid #141b27;
+  scrollbar-width: thin;
+  scrollbar-color: #2e3a4e transparent;
+}
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-thumb { background: #2e3a4e; border-radius: 3px; }
+
+#sidebar-header {
+  padding: 1.4rem 1.25rem 1.1rem;
+  border-bottom: 1px solid #2e3a4e;
+}
+.site-title {
+  color: #e8ecf1;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+}
+.site-title:hover { text-decoration: none; color: #fff; }
+
+#toc { padding: 1rem 1.25rem; }
+#toc ul { list-style: none; padding: 0; margin: 0; }
+#toc ul li { margin: 0.1rem 0; }
+#toc ul li a {
+  color: #9aa5b4;
+  font-size: 0.8rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  transition: background 0.12s, color 0.12s;
+  line-height: 1.4;
+}
+#toc ul li a:hover { background: #2e3a4e; color: #e8ecf1; text-decoration: none; }
+#toc ul ul { padding-left: 0.85rem; margin-top: 0.05rem; }
+#toc ul ul li a { font-size: 0.75rem; }
+#toc ul ul ul li a { font-size: 0.71rem; color: #6b7585; }
+
+/* ── Main area ───────────────────────────────────────────────────────────── */
+#main {
+  background: #ffffff;
+  padding: 2.5rem 3.5rem;
+  max-width: 960px;
+  min-height: 100vh;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 0.76rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+}
+.bc-sep    { color: #ccc; margin: 0 0.05rem; }
+.bc-part   { color: #888; }
+.bc-current { color: #444; font-weight: 500; }
+
+/* ── Page title ──────────────────────────────────────────────────────────── */
+.page-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Meta block ──────────────────────────────────────────────────────────── */
+.meta-block {
+  border: 1px solid #e4e4de;
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 2rem;
+  background: #fafaf7;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.8rem;
+}
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+.meta-label {
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  font-size: 0.67rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.meta-value { color: #333; }
+
+.status-badge {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.status-final    { background: #d4edda; color: #155724; }
+.status-draft    { background: #fff3cd; color: #856404; }
+.status-inreview { background: #cce5ff; color: #004085; }
+.status-review   { background: #cce5ff; color: #004085; }
+
+.tag {
+  display: inline-block;
+  background: #eef1f8;
+  color: #3b5ea6;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-size: 0.71rem;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* ── Article typography ──────────────────────────────────────────────────── */
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111;
+  margin-top: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+#content h1 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #e6e6e2;
+  padding-bottom: 0.4rem;
+}
+#content h2 {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 0.3rem;
+}
+#content h3 { font-size: 1.1rem; }
+#content h4 { font-size: 1rem; }
+#content h5 { font-size: 0.9rem; }
+#content h6 { font-size: 0.85rem; color: #555; }
+
+#content p { margin-bottom: 1rem; }
+
+#content strong { font-weight: 700; }
+#content em     { font-style: italic; }
+
+#content code {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Courier New", monospace;
+  font-size: 0.84em;
+  background: #f0f0ec;
+  padding: 0.15em 0.38em;
+  border-radius: 3px;
+  border: 1px solid #deded8;
+}
+
+#content pre {
+  background: #1e2736;
+  color: #c8d0dc;
+  padding: 1.15rem 1.4rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.1rem 0 1.4rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  border: 1px solid #141b27;
+}
+#content pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+#content blockquote {
+  border-left: 4px solid #b8c4d0;
+  padding: 0.55rem 1.1rem;
+  margin: 1.1rem 0;
+  background: #f6f7fa;
+  color: #555;
+  border-radius: 0 5px 5px 0;
+}
+#content blockquote p:last-child { margin-bottom: 0; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.6rem;
+}
+#content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+#content thead th {
+  background: #1e2736;
+  color: #e8ecf1;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  font-weight: 600;
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid #141b27;
+}
+#content tbody tr:nth-child(even) { background: #f8f9fa; }
+#content tbody tr:hover { background: #edf1f8; }
+#content tbody td {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #e0e2e6;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────────── */
+#content ul,
+#content ol {
+  padding-left: 1.7rem;
+  margin-bottom: 1rem;
+}
+#content li { margin-bottom: 0.3rem; }
+#content li > ul,
+#content li > ol { margin-top: 0.2rem; margin-bottom: 0; }
+
+/* ── Task / checklist ────────────────────────────────────────────────────── */
+#content li.task {
+  list-style: none;
+  margin-left: -1.7rem;
+  padding-left: 2rem;
+  position: relative;
+}
+#content li.task .checkbox {
+  position: absolute;
+  left: 0.15rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+#content li.task.checked  { color: #555; }
+#content li.task.checked  .checkbox { color: #2e7d32; }
+#content li.task.unchecked .checkbox { color: #888; }
+
+/* ── Horizontal rule ─────────────────────────────────────────────────────── */
+#content hr {
+  border: none;
+  border-top: 1px solid #e6e6e2;
+  margin: 1.75rem 0;
+}
+
+/* ── Broken wikilinks ────────────────────────────────────────────────────── */
+.broken-link {
+  color: #b22222;
+  border-bottom: 1px dashed #b22222;
+  font-style: italic;
+  cursor: not-allowed;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+#page-footer {
+  margin-top: 3.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e6e6e2;
+  font-size: 0.76rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ── Responsive: tablet / mobile ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #layout { grid-template-columns: 1fr; }
+  #sidebar { position: static; height: auto; }
+  #main { padding: 1.75rem 1.5rem; max-width: 100%; }
+  .page-title { font-size: 1.6rem; }
+}
+@media (max-width: 600px) {
+  #main { padding: 1.25rem 1rem; }
+  .page-title { font-size: 1.35rem; }
+  .meta-block { flex-direction: column; gap: 0.35rem; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  #sidebar { display: none; }
+  #layout  { grid-template-columns: 1fr; }
+  #main    { max-width: 100%; padding: 0; box-shadow: none; }
+  #content a::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; }
+  #content pre { background: #f4f4f0; color: #222; border: 1px solid #ccc; }
+  #page-header, #page-footer { page-break-inside: avoid; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="layout">
+
+    <!-- Sidebar / page TOC -->
+    <nav id="sidebar" aria-label="Page contents">
+      <div id="sidebar-header">
+        <a href="../index.html" class="site-title">
+          Industrial Automation<br>Field Guide
+        </a>
+      </div>
+      <div id="toc">
+      <div class="toc">
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#core-concepts">Core Concepts</a><ul>
+<li><a href="#what-is-it">What is it?</a></li>
+<li><a href="#how-it-works">How it works</a></li>
+<li><a href="#when-to-use">When to Use</a></li>
+</ul>
+</li>
+<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
+<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#field-checklist">Field Checklist</a></li>
+<li><a href="#reference-notes">Reference Notes</a></li>
+<li><a href="#related-topics">Related Topics</a></li>
+<li><a href="#local-changelog">Local Changelog</a></li>
+</ul>
+</div>
+
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div id="main">
+      <header id="page-header">
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Motor Megger Testing</span></nav>
+        <h1 class="page-title">Motor Megger Testing</h1>
+
+      </header>
+
+      <article id="content">
+<h1 id="_1"></h1>
+<p><strong>Category:</strong> <code>**Tags:**</code><br />
+<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
+<strong>Version:</strong> <code>**Status:**</code>  </p>
+<hr />
+<h2 id="description">Description</h2>
+<hr />
+<h2 id="core-concepts">Core Concepts</h2>
+<h3 id="what-is-it">What is it?</h3>
+<h3 id="how-it-works">How it works</h3>
+<h3 id="when-to-use">When to Use</h3>
+<hr />
+<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Typical Value / Range</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<hr />
+<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely Cause</th>
+<th>Diagnostic Step</th>
+<th>Tool(s) Needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="field-checklist">Field Checklist</h2>
+<ul>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
+</ul>
+<hr />
+<h2 id="reference-notes">Reference Notes</h2>
+<hr />
+<h2 id="related-topics">Related Topics</h2>
+<ul>
+<li>[[]]</li>
+<li>[[]]</li>
+<li>[[]]</li>
+</ul>
+<hr />
+<h2 id="local-changelog">Local Changelog</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Version</th>
+<th>Author</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+      </article>
+
+      <footer id="page-footer">
+        <p>Industrial Automation Field Guide</p>
+      </footer>
+    </div>
+
+  </div>
+</body>
+</html>

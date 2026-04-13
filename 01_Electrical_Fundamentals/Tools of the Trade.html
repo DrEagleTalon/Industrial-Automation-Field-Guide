@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools of the Trade | Industrial Automation Field Guide</title>
+  <style>
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #f4f4f0;
+}
+a { color: #1a56a0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+#layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+#sidebar {
+  background: #1e2736;
+  color: #c8d0dc;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid #141b27;
+  scrollbar-width: thin;
+  scrollbar-color: #2e3a4e transparent;
+}
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-thumb { background: #2e3a4e; border-radius: 3px; }
+
+#sidebar-header {
+  padding: 1.4rem 1.25rem 1.1rem;
+  border-bottom: 1px solid #2e3a4e;
+}
+.site-title {
+  color: #e8ecf1;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+}
+.site-title:hover { text-decoration: none; color: #fff; }
+
+#toc { padding: 1rem 1.25rem; }
+#toc ul { list-style: none; padding: 0; margin: 0; }
+#toc ul li { margin: 0.1rem 0; }
+#toc ul li a {
+  color: #9aa5b4;
+  font-size: 0.8rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  transition: background 0.12s, color 0.12s;
+  line-height: 1.4;
+}
+#toc ul li a:hover { background: #2e3a4e; color: #e8ecf1; text-decoration: none; }
+#toc ul ul { padding-left: 0.85rem; margin-top: 0.05rem; }
+#toc ul ul li a { font-size: 0.75rem; }
+#toc ul ul ul li a { font-size: 0.71rem; color: #6b7585; }
+
+/* ── Main area ───────────────────────────────────────────────────────────── */
+#main {
+  background: #ffffff;
+  padding: 2.5rem 3.5rem;
+  max-width: 960px;
+  min-height: 100vh;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 0.76rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+}
+.bc-sep    { color: #ccc; margin: 0 0.05rem; }
+.bc-part   { color: #888; }
+.bc-current { color: #444; font-weight: 500; }
+
+/* ── Page title ──────────────────────────────────────────────────────────── */
+.page-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Meta block ──────────────────────────────────────────────────────────── */
+.meta-block {
+  border: 1px solid #e4e4de;
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 2rem;
+  background: #fafaf7;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.8rem;
+}
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+.meta-label {
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  font-size: 0.67rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.meta-value { color: #333; }
+
+.status-badge {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.status-final    { background: #d4edda; color: #155724; }
+.status-draft    { background: #fff3cd; color: #856404; }
+.status-inreview { background: #cce5ff; color: #004085; }
+.status-review   { background: #cce5ff; color: #004085; }
+
+.tag {
+  display: inline-block;
+  background: #eef1f8;
+  color: #3b5ea6;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-size: 0.71rem;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* ── Article typography ──────────────────────────────────────────────────── */
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111;
+  margin-top: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+#content h1 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #e6e6e2;
+  padding-bottom: 0.4rem;
+}
+#content h2 {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 0.3rem;
+}
+#content h3 { font-size: 1.1rem; }
+#content h4 { font-size: 1rem; }
+#content h5 { font-size: 0.9rem; }
+#content h6 { font-size: 0.85rem; color: #555; }
+
+#content p { margin-bottom: 1rem; }
+
+#content strong { font-weight: 700; }
+#content em     { font-style: italic; }
+
+#content code {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Courier New", monospace;
+  font-size: 0.84em;
+  background: #f0f0ec;
+  padding: 0.15em 0.38em;
+  border-radius: 3px;
+  border: 1px solid #deded8;
+}
+
+#content pre {
+  background: #1e2736;
+  color: #c8d0dc;
+  padding: 1.15rem 1.4rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.1rem 0 1.4rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  border: 1px solid #141b27;
+}
+#content pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+#content blockquote {
+  border-left: 4px solid #b8c4d0;
+  padding: 0.55rem 1.1rem;
+  margin: 1.1rem 0;
+  background: #f6f7fa;
+  color: #555;
+  border-radius: 0 5px 5px 0;
+}
+#content blockquote p:last-child { margin-bottom: 0; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.6rem;
+}
+#content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+#content thead th {
+  background: #1e2736;
+  color: #e8ecf1;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  font-weight: 600;
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid #141b27;
+}
+#content tbody tr:nth-child(even) { background: #f8f9fa; }
+#content tbody tr:hover { background: #edf1f8; }
+#content tbody td {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #e0e2e6;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────────── */
+#content ul,
+#content ol {
+  padding-left: 1.7rem;
+  margin-bottom: 1rem;
+}
+#content li { margin-bottom: 0.3rem; }
+#content li > ul,
+#content li > ol { margin-top: 0.2rem; margin-bottom: 0; }
+
+/* ── Task / checklist ────────────────────────────────────────────────────── */
+#content li.task {
+  list-style: none;
+  margin-left: -1.7rem;
+  padding-left: 2rem;
+  position: relative;
+}
+#content li.task .checkbox {
+  position: absolute;
+  left: 0.15rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+#content li.task.checked  { color: #555; }
+#content li.task.checked  .checkbox { color: #2e7d32; }
+#content li.task.unchecked .checkbox { color: #888; }
+
+/* ── Horizontal rule ─────────────────────────────────────────────────────── */
+#content hr {
+  border: none;
+  border-top: 1px solid #e6e6e2;
+  margin: 1.75rem 0;
+}
+
+/* ── Broken wikilinks ────────────────────────────────────────────────────── */
+.broken-link {
+  color: #b22222;
+  border-bottom: 1px dashed #b22222;
+  font-style: italic;
+  cursor: not-allowed;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+#page-footer {
+  margin-top: 3.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e6e6e2;
+  font-size: 0.76rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ── Responsive: tablet / mobile ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #layout { grid-template-columns: 1fr; }
+  #sidebar { position: static; height: auto; }
+  #main { padding: 1.75rem 1.5rem; max-width: 100%; }
+  .page-title { font-size: 1.6rem; }
+}
+@media (max-width: 600px) {
+  #main { padding: 1.25rem 1rem; }
+  .page-title { font-size: 1.35rem; }
+  .meta-block { flex-direction: column; gap: 0.35rem; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  #sidebar { display: none; }
+  #layout  { grid-template-columns: 1fr; }
+  #main    { max-width: 100%; padding: 0; box-shadow: none; }
+  #content a::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; }
+  #content pre { background: #f4f4f0; color: #222; border: 1px solid #ccc; }
+  #page-header, #page-footer { page-break-inside: avoid; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="layout">
+
+    <!-- Sidebar / page TOC -->
+    <nav id="sidebar" aria-label="Page contents">
+      <div id="sidebar-header">
+        <a href="../index.html" class="site-title">
+          Industrial Automation<br>Field Guide
+        </a>
+      </div>
+      <div id="toc">
+      <div class="toc">
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#core-concepts">Core Concepts</a><ul>
+<li><a href="#what-is-it">What is it?</a></li>
+<li><a href="#how-it-works">How it works</a></li>
+<li><a href="#when-to-use">When to Use</a></li>
+</ul>
+</li>
+<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
+<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#field-checklist">Field Checklist</a></li>
+<li><a href="#reference-notes">Reference Notes</a></li>
+<li><a href="#electrical-tools">ELECTRICAL TOOLS</a></li>
+<li><a href="#automation-specific-gear">AUTOMATION SPECIFIC GEAR</a></li>
+<li><a href="#hand-tools-mechanical-stuff">HAND TOOLS &amp; MECHANICAL STUFF</a></li>
+<li><a href="#testing-diagnostics">TESTING &amp; DIAGNOSTICS</a></li>
+<li><a href="#carrying-organization">CARRYING &amp; ORGANIZATION</a></li>
+<li><a href="#software-digital-tools">SOFTWARE / DIGITAL TOOLS</a></li>
+<li><a href="#intangibles-the-cant-buy-but-must-have-tools">INTANGIBLES: THE “CAN’T BUY BUT MUST HAVE” TOOLS</a></li>
+<li><a href="#tldr-your-go-bag-checklist">TL;DR: YOUR “GO-BAG” CHECKLIST</a><ul>
+<li><a href="#must-haves">Must-Haves</a></li>
+</ul>
+</li>
+<li><a href="#related-topics">Related Topics</a></li>
+<li><a href="#local-changelog">Local Changelog</a></li>
+</ul>
+</div>
+
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div id="main">
+      <header id="page-header">
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">01_Electrical_Fundamentals</span><span class="bc-sep"> / </span><span class="bc-current">Tools of the Trade</span></nav>
+        <h1 class="page-title">Tools of the Trade</h1>
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-draft">Draft</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">beginner-to-intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">#industrial-automation, #electrical, #tools</span></div>
+<div class="meta-row"><span class="meta-label">Author</span><span class="meta-value">Yusuf Talan Saunders</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">#iec, #nfpa70e</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">#multimeter, #clamp-meter, #laptop, #label-maker</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#automation</span> <span class="tag">#field-guide</span> <span class="tag">#maintenance</span> <span class="tag">#troubleshooting</span> <span class="tag">#hardware</span></span></div>
+</div>
+      </header>
+
+      <article id="content">
+<h1 id="tools-of-the-trade">Tools of the Trade</h1>
+<p><strong>Category:</strong> <code>#industrial-automation, #electrical, #tools</code><br />
+<strong>Tags:</strong> <code>#automation, #field-guide, #maintenance, #troubleshooting, #hardware</code><br />
+<strong>Difficulty:</strong> <code>beginner-to-intermediate</code><br />
+<strong>Last Updated:</strong> <code>`  
+**Version:**</code>1.0.0<code>**Status:**</code>draft`  </p>
+<hr />
+<h2 id="description">Description</h2>
+<p>A comprehensive overview of the essential tools, gear, and habits every industrial automation technician or engineer should have. This guide covers electrical, automation, mechanical, diagnostic, and organizational tools, as well as the critical soft skills that separate good techs from great ones.</p>
+<hr />
+<h2 id="core-concepts">Core Concepts</h2>
+<h3 id="what-is-it">What is it?</h3>
+<p>A curated list and explanation of the tools and equipment required for field work in industrial automation, including both physical and digital tools, as well as intangible skills.</p>
+<h3 id="how-it-works">How it works</h3>
+<p>Each tool or category is described with its purpose and typical use case in the field, helping new and experienced technicians build an effective toolkit.</p>
+<h3 id="when-to-use">When to Use</h3>
+<p>Use this guide when assembling your field kit, preparing for a new job, troubleshooting, or training new team members.</p>
+<hr />
+<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Typical Value / Range</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multimeter</td>
+<td>True RMS, CAT III/IV</td>
+<td>Fluke 117, 87V, or equivalent</td>
+</tr>
+<tr>
+<td>Clamp Meter</td>
+<td>AC &amp; DC capable</td>
+<td>For live current measurement</td>
+</tr>
+<tr>
+<td>Laptop</td>
+<td>Serial, Ethernet, USB</td>
+<td>For interfacing with PLCs, HMIs, drives</td>
+</tr>
+<tr>
+<td>Label Maker</td>
+<td>Industrial grade</td>
+<td>Brother P-Touch, Brady, etc.</td>
+</tr>
+<tr>
+<td>Insulated Tools</td>
+<td>1000V rated</td>
+<td>For safety in live panels</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>OEM-specific</td>
+<td>Studio 5000, TIA Portal, etc.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<ul>
+<li>Always use insulated tools when working in panels.</li>
+<li>Label all wires and cables for future troubleshooting.</li>
+<li>Keep wiring diagrams and panel layouts in your digital toolkit.</li>
+<li>Use wire markers and heat shrink tubing for clean cable management.</li>
+</ul>
+<hr />
+<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely Cause</th>
+<th>Diagnostic Step</th>
+<th>Tool(s) Needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No power to panel/device</td>
+<td>Blown fuse, tripped breaker</td>
+<td>Check voltage at supply terminals</td>
+<td>Multimeter, Non-contact tester</td>
+</tr>
+<tr>
+<td>Motor not starting</td>
+<td>Faulty contactor, wiring</td>
+<td>Check coil voltage, inspect wiring</td>
+<td>Multimeter, Screwdriver</td>
+</tr>
+<tr>
+<td>Intermittent faults</td>
+<td>Loose connections, EMI</td>
+<td>Inspect terminals, check for noise</td>
+<td>Screwdriver, Oscilloscope</td>
+</tr>
+<tr>
+<td>Communication errors (PLC/HMI)</td>
+<td>Bad cable, wrong config</td>
+<td>Ping device, check cable, config</td>
+<td>Laptop, Ethernet tester</td>
+</tr>
+<tr>
+<td>Overheating components</td>
+<td>Overload, poor ventilation</td>
+<td>IR scan, check load, inspect fans</td>
+<td>IR Camera, Clamp Meter</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="field-checklist">Field Checklist</h2>
+<ul>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> True RMS Multimeter</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> Clamp Meter (AC &amp; DC)</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> Laptop with automation software</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> USB/Serial/Ethernet adapters</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> Insulated screwdriver &amp; nut driver set</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> Allen/hex/torx key sets</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> Wire stripper &amp; crimper</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> Label maker, flashlight, tape</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> IR thermometer or temp gun</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> Backup drives, config files, manuals</li>
+<li class="task unchecked"><span class="checkbox">&#x2610;</span> Notebook or digital log</li>
+</ul>
+<hr />
+<h2 id="reference-notes">Reference Notes</h2>
+<ul>
+<li>Always verify absence of voltage before working live.</li>
+<li>Save and label every backup, every time.</li>
+<li>The answer is almost always in the manual.</li>
+<li>Clean wiring is safe wiring.</li>
+<li>Document every change and backup.</li>
+</ul>
+<hr />
+<h2 id="electrical-tools">ELECTRICAL TOOLS</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Why You Need It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True RMS Multimeter (e.g. Fluke 117, 87V)</td>
+<td>Checking voltage, resistance, continuity, diode checks — your bread and butter</td>
+</tr>
+<tr>
+<td>Clamp Meter (AC &amp; DC capable)</td>
+<td>For live current measurement, checking motor load, VFD output, or panel balance</td>
+</tr>
+<tr>
+<td>Non-contact Voltage Tester</td>
+<td>For quick safety checks before working live</td>
+</tr>
+<tr>
+<td>Insulated Screwdriver Set</td>
+<td>You’ll be in hot panels more than you like</td>
+</tr>
+<tr>
+<td>Insulated Nut Drivers</td>
+<td>For control panels, terminal blocks, etc.</td>
+</tr>
+<tr>
+<td>Allen (Hex) Key Set (SAE + Metric)</td>
+<td>Because machines and sensors don’t care what continent you’re from</td>
+</tr>
+<tr>
+<td>Torx Set</td>
+<td>Especially common on European/automation hardware</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="automation-specific-gear">AUTOMATION SPECIFIC GEAR</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Why You Need It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Laptop with Serial, Ethernet, USB</td>
+<td>Essential for interfacing with PLCs, HMIs, drives</td>
+</tr>
+<tr>
+<td>USB-to-Serial Adapter (FTDI preferred)</td>
+<td>So you can talk to older PLCs (Allen-Bradley, Siemens, etc.)</td>
+</tr>
+<tr>
+<td>Ethernet Crossover Cable or USB-to-Ethernet Adapter</td>
+<td>When connecting directly to unmanaged switches or PLCs</td>
+</tr>
+<tr>
+<td>VFD Software / PLC Software</td>
+<td>RSLogix, Studio 5000, TIA Portal, GX Works, etc.</td>
+</tr>
+<tr>
+<td>Breakout Board / IO Simulator Kit</td>
+<td>For testing inputs/outputs without a live machine</td>
+</tr>
+<tr>
+<td>Memory Cards &amp; Flash Drives (for backups)</td>
+<td>Needed to transfer programs or update firmware</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="hand-tools-mechanical-stuff">HAND TOOLS &amp; MECHANICAL STUFF</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Why You Need It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Needle-Nose Pliers</td>
+<td>For wiring tight spots, removing zip ties</td>
+</tr>
+<tr>
+<td>Side Cutters / Dikes</td>
+<td>For clean cuts and stripping wires</td>
+</tr>
+<tr>
+<td>Wire Strippers (adjustable gauge)</td>
+<td>Critical for control panel work</td>
+</tr>
+<tr>
+<td>Crimp Tool &amp; Ferrule Kit</td>
+<td>If you’re doing Euro-style terminal blocks or VFD panels</td>
+</tr>
+<tr>
+<td>Channel Locks / Adjustable Wrench</td>
+<td>For conduit fittings, sensors, fittings</td>
+</tr>
+<tr>
+<td>Digital Caliper or Tape Measure</td>
+<td>For fitting sensors, brackets, enclosures</td>
+</tr>
+<tr>
+<td>Flashlight or Headlamp</td>
+<td>Panels are always dark when you open them</td>
+</tr>
+<tr>
+<td>Magnetic Parts Tray</td>
+<td>So you don’t lose that damn terminal screw again</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="testing-diagnostics">TESTING &amp; DIAGNOSTICS</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Why You Need It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insulation Resistance Tester (Megger)</td>
+<td>For checking motor insulation to ground</td>
+</tr>
+<tr>
+<td>Thermal (IR) Camera / Temp Gun</td>
+<td>Diagnose overheating bearings, transformers, motors</td>
+</tr>
+<tr>
+<td>Oscilloscope or Logic Analyzer (optional but powerful)</td>
+<td>For seeing signal noise, pulses, or PWM signals on sensors</td>
+</tr>
+<tr>
+<td>Fieldbus Tester / Protocol Analyzer</td>
+<td>Profibus, Modbus, DeviceNet, Ethernet/IP diagnostics</td>
+</tr>
+<tr>
+<td>Loop Calibrator or Signal Injector</td>
+<td>For testing analog 4–20 mA inputs/outputs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="carrying-organization">CARRYING &amp; ORGANIZATION</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Why You Need It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tool backpack or hard case (Veto Pro Pac, Klein, etc.)</td>
+<td>You’ll walk miles — organize or suffer</td>
+</tr>
+<tr>
+<td>Label maker (Brother P-Touch or Brady)</td>
+<td>Panels that are labeled are panels you understand later</td>
+</tr>
+<tr>
+<td>Wire markers / heat shrink tubing kit</td>
+<td>For clean cable management and retrofits</td>
+</tr>
+<tr>
+<td>Velcro/zip ties / cable wraps</td>
+<td>Clean wiring is safe wiring</td>
+</tr>
+<tr>
+<td>Electrical tape / phase tape</td>
+<td>For marking and patching safely</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="software-digital-tools">SOFTWARE / DIGITAL TOOLS</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Why You Need It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Studio 5000 / RSLogix 500 / FactoryTalk</td>
+<td>For Allen-Bradley systems</td>
+</tr>
+<tr>
+<td>TIA Portal / Step 7</td>
+<td>Siemens PLCs</td>
+</tr>
+<tr>
+<td>CX-One or Sysmac Studio</td>
+<td>Omron</td>
+</tr>
+<tr>
+<td>Codesys or TwinCAT</td>
+<td>SoftPLC and Beckhoff systems</td>
+</tr>
+<tr>
+<td>ModScan32 / Wireshark</td>
+<td>For Modbus / Ethernet IP network traffic diagnosis</td>
+</tr>
+<tr>
+<td>PLC backup/archive folder (cloud + USB)</td>
+<td>You never want to be the tech who lost the only working copy</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="intangibles-the-cant-buy-but-must-have-tools">INTANGIBLES: THE “CAN’T BUY BUT MUST HAVE” TOOLS</h2>
+<table>
+<thead>
+<tr>
+<th>Soft Skill / Habit</th>
+<th>Why It Matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Patience &amp; pattern recognition</td>
+<td>Diagnosing intermittent faults means staying calm and watching for cycles</td>
+</tr>
+<tr>
+<td>Clear communication</td>
+<td>You’ll explain problems to managers and fixes to electricians</td>
+</tr>
+<tr>
+<td>Documentation discipline</td>
+<td>Save and label every backup, every time</td>
+</tr>
+<tr>
+<td>Curiosity and learning</td>
+<td>This field moves fast — what worked in 2010 might be obsolete now</td>
+</tr>
+<tr>
+<td>Willingness to RTFM</td>
+<td>The answer is almost always in the manual… eventually</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tldr-your-go-bag-checklist">TL;DR: YOUR “GO-BAG” CHECKLIST</h2>
+<h3 id="must-haves">Must-Haves</h3>
+<ul>
+<li>Multimeter (True RMS)</li>
+<li>Clamp Meter</li>
+<li>Laptop with automation software</li>
+<li>USB/Serial/Ethernet adapters</li>
+<li>Screwdrivers, nut drivers, Allen/hex/torx</li>
+<li>Wire stripper &amp; crimper</li>
+<li>Label maker, flashlight, tape</li>
+<li>IR thermometer</li>
+<li>Backup drives, config files, manuals</li>
+<li>Notebook or digital log for every machine touched</li>
+</ul>
+<hr />
+<h2 id="related-topics">Related Topics</h2>
+<ul>
+<li><span class="broken-link">PLC Basics</span></li>
+<li><span class="broken-link">Panel Building Essentials</span></li>
+<li><span class="broken-link">Diagnostics and Troubleshooting</span></li>
+</ul>
+<hr />
+<h2 id="local-changelog">Local Changelog</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Version</th>
+<th>Author</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024-07-10</td>
+<td>1.0.0</td>
+<td>Yusuf Talan Saunders</td>
+<td>Initial draft</td>
+</tr>
+</tbody>
+</table>
+      </article>
+
+      <footer id="page-footer">
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Draft</p>
+      </footer>
+    </div>
+
+  </div>
+</body>
+</html>
