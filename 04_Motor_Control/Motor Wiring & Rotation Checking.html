@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,96 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#wiring-configurations">Wiring Configurations</a></li>
+<li><a href="#how-to-check-rotation">How to Check Rotation</a></li>
+<li><a href="#arrow-direction-conventions">Arrow / Direction Conventions</a></li>
 <li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Motor Wiring &amp; Rotation Checking</span></nav>
         <h1 class="page-title">Motor Wiring &amp; Rotation Checking</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEEE 112, NEC 430</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Phase-rotation meter, non-contact strobe or tachometer</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#wiring</span> <span class="tag">#rotation</span> <span class="tag">#phaseorder</span> <span class="tag">#bumptest</span> <span class="tag">#coupling</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#wiring #rotation #phaseorder #bumptest #coupling</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Every three-phase motor has two possible rotation directions. Which one you get depends on the phase sequence of the three supply conductors. The cost of running a pump backwards for even a few seconds can be a cracked impeller or a flooded seal — the cost of running a compressor backwards is usually an immediate cascade of damage. Verifying rotation before coupling to a load is non-negotiable on new installs.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="wiring-configurations">Wiring Configurations</h2>
+<h3>3-lead motors</h3><p>Single connection only — match T1 to L1, T2 to L2, T3 to L3. Swap any two leads to reverse.</p><h3>6-lead motors</h3><p>Designed for wye / delta or dual-voltage operation. Six leads: U1/U2, V1/V2, W1/W2. Follow the nameplate diagram. Common for <a href="Star-Delta Starters.html">star-delta</a> starters.</p><h3>9-lead motors (dual voltage)</h3><p>Most common North American industrial motor. Low voltage = parallel wye; high voltage = series wye. Leads 1–9 per NEMA numbering. See the peckerhead diagram. Wiring the motor for 230 V on a 460 V supply burns out the winding in seconds.</p><h3>12-lead motors</h3><p>Used for dual-voltage with both wye and delta options, or for <a href="Soft Starters.html">soft-starter</a> inside-delta connections.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="how-to-check-rotation">How to Check Rotation</h2>
+<h3>Method 1 — Phase rotation meter</h3><ol><li>Connect the meter's three leads to L1, L2, L3 at the motor disconnect.</li><li>Energize briefly — the meter shows ABC or ACB sequence.</li><li>If ABC, the motor will turn in its 'standard' direction (clockwise viewed from shaft end for most North American motors).</li><li>If ACB, swap any two line leads to correct.</li></ol><h3>Method 2 — Bump test</h3><ol><li>Uncouple the motor from the load, or verify the load can accept either direction.</li><li>Tag the motor shaft with a mark.</li><li>Give a quick jog — a few cycles only.</li><li>Observe the rotation direction.</li><li>Swap two motor leads if needed and re-test.</li></ol><h3>Method 3 — VFD direction</h3><p>On VFD-driven motors, rotation can be flipped in software (direction parameter or motor-phase-order parameter). Still jog and verify visually the first time. Never rely only on the parameter for a brand-new install; confirm physical rotation.</p>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="arrow-direction-conventions">Arrow / Direction Conventions</h2>
+<p>Most motors have a directional arrow on the frame showing the correct rotation. For pumps and fans, the arrow is usually on the driven equipment — follow that, not the motor, when they disagree.</p>
+<p>Pump rotation: almost always specified by pump manufacturer on the casing. Centrifugal pumps will move fluid backwards at reduced flow when run reversed — it's subtle enough to be missed.</p>
+<p>Fan rotation: airflow direction is easy to miss with reversed rotation because the blades still push <em>some</em> air in the wrong direction.</p>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
 <th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</tr></thead><tbody>
+<tr><td>Motor runs reverse after replacement</td><td>Leads not documented before removal</td><td>Swap any two line leads</td></tr>
+<tr><td>Intermittent low output from pump</td><td>Reversed rotation</td><td>Check with phase rotation meter</td></tr>
+<tr><td>New system, large air handler low flow</td><td>Fan reversed</td><td>Visual check against fan arrow</td></tr>
+<tr><td>Motor hums and trips</td><td>Single-phasing (one lead open, not reversed)</td><td>Measure all three line voltages</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Nameplate connection diagram matches actual lead wiring.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Motor leads torqued to spec, strain relief installed at the peckerhead.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Ground lug torqued and bonded to the motor frame.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Rotation verified by bump test or phase meter.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Direction arrow on motor or driven equipment matches observed rotation.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Lead positions documented for future reference.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="3-Phase Motor Basics.html">3-Phase Motor Basics</a></li>
+<li><a href="Motor Nameplate Data.html">Motor Nameplate Data</a></li>
+<li><a href="Reversing Starters.html">Reversing Starters</a></li>
+<li><a href="Star-Delta Starters.html">Star-Delta Starters</a></li>
+<li><a href="Motor Megger Testing.html">Motor Megger Testing</a></li>
+<li><a href="../02_Power_Distribution/Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,90 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#best-practices">Best Practices</a></li>
+<li><a href="#typical-dc-input-wiring">Typical DC Input Wiring</a></li>
+<li><a href="#typical-dc-output-wiring">Typical DC Output Wiring</a></li>
+<li><a href="#grounding-shielding">Grounding &amp; Shielding</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">05_PLCs &amp; Automation Hardware</span><span class="bc-sep"> / </span><span class="bc-current">Wiring Inputs &amp; Outputs to PLCs</span></nav>
         <h1 class="page-title">Wiring Inputs &amp; Outputs to PLCs</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLCs &amp; Automation Hardware</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#wiring</span> <span class="tag">#IO</span> <span class="tag">#surge</span> <span class="tag">#interposing</span> <span class="tag">#labeling</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLCs &amp; Automation Hardware</code><br/><strong>Tags:</strong> <code>#wiring #IO #surge #interposing #labeling</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>PLC I/O wiring is where a lot of field time goes. Good habits on the first install save hours of troubleshooting later.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="best-practices">Best Practices</h2>
+<ul><li>One terminal, one wire. Never double-lug a PLC terminal — use a terminal strip if you need to branch.</li><li>Use ferrules on all stranded wires going into spring-cage or screw terminals.</li><li>Keep 24 VDC control separate from 120 VAC and 480 VAC in trunking — see <a href="../02_Power_Distribution/Panel Wiring Best Practices.html">Panel Wiring Best Practices</a>.</li><li>Fuse each common bus so a shorted field device doesn't take out the module.</li><li>Use <a href="../03_Control_Devices/Relays &amp; Interposing Relays.html">interposing relays</a> for any output driving an inductive load (solenoid, contactor coil).</li><li>Add flyback diodes or RC snubbers on DC inductive loads.</li><li>Label every wire with a unique number that matches the schematic.</li></ul>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="typical-dc-input-wiring">Typical DC Input Wiring</h2>
+<pre><code>Sourcing (PNP sensor to sourcing input):
+  +24VDC -- sensor brown
+  0V     -- sensor blue
+  Output -- sensor black -- PLC input terminal
+  PLC input common terminal -- 0V
+</code></pre>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="typical-dc-output-wiring">Typical DC Output Wiring</h2>
+<pre><code>Sourcing output, 24 VDC solenoid with interposing relay:
+  PLC output --(+)-- relay coil A1
+  0V -- relay coil A2 (with flyback diode A2 to A1, cathode to A1)
+  Relay contact NO -- switches 120 VAC hot to solenoid
+  120 VAC neutral returns from solenoid
+</code></pre>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="grounding-shielding">Grounding &amp; Shielding</h2>
+<ul><li>Signal common 0 V bonded to panel ground at one point.</li><li>Analog cable shields grounded at the PLC only (not at the sensor).</li><li>VFD motor leads shielded and grounded at both ends, drain wire separate.</li><li>Machine frame bonded to ground per <a href="../11_Standards_and_Codes/NFPA 79 – Machinery Electrical.html">NFPA 79</a>.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Every wire labeled and matched to schematic.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Each input / output tested end-to-end during <a href="../10_System_Integration_&_Commissioning/IO Checkout &amp; Loop Testing.html">IO checkout</a>.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Ferrules on stranded conductors at every screw terminal.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Interposing relays and flyback diodes in place on inductive loads.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Spare inputs and outputs terminated or labeled to prevent accidental shorts.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Discrete IO Modules.html">Discrete IO Modules</a></li>
+<li><a href="Sinking vs Sourcing Inputs.html">Sinking vs Sourcing Inputs</a></li>
+<li><a href="../02_Power_Distribution/Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></li>
+<li><a href="../10_System_Integration_&_Commissioning/IO Checkout &amp; Loop Testing.html">IO Checkout &amp; Loop Testing</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

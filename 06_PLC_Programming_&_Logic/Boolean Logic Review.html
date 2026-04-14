@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,111 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#basic-operators">Basic Operators</a></li>
+<li><a href="#de-morgans-laws">De Morgan's Laws</a></li>
+<li><a href="#truth-tables">Truth Tables</a></li>
+<li><a href="#practical-habits">Practical Habits</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">06_PLC_Programming_&amp;_Logic</span><span class="bc-sep"> / </span><span class="bc-current">Boolean Logic Review</span></nav>
         <h1 class="page-title">Boolean Logic Review</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLC Programming &amp; Logic</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#boolean</span> <span class="tag">#AND</span> <span class="tag">#OR</span> <span class="tag">#NOT</span> <span class="tag">#XOR</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLC Programming &amp; Logic</code><br/><strong>Tags:</strong> <code>#boolean #AND #OR #NOT #XOR</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Every rung in ladder logic is a Boolean expression. Clean logic is testable, readable, and fails in predictable ways. Messy logic is the #1 reason machines misbehave.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="basic-operators">Basic Operators</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Operator</th>
+<th>Ladder</th>
+<th>Structured Text</th>
+<th>Description</th>
+</tr></thead><tbody>
+<tr><td>AND</td><td>series contacts</td><td>A AND B</td><td>TRUE when both are TRUE</td></tr>
+<tr><td>OR</td><td>parallel contacts</td><td>A OR B</td><td>TRUE when at least one is TRUE</td></tr>
+<tr><td>NOT</td><td>NC contact</td><td>NOT A</td><td>TRUE when A is FALSE</td></tr>
+<tr><td>XOR</td><td>-- (derived)</td><td>A XOR B</td><td>TRUE when exactly one is TRUE</td></tr>
+<tr><td>NAND</td><td>-- (derived)</td><td>NOT (A AND B)</td><td></td></tr>
+<tr><td>NOR</td><td>-- (derived)</td><td>NOT (A OR B)</td><td></td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="de-morgans-laws">De Morgan's Laws</h2>
+<pre><code>NOT (A AND B) = (NOT A) OR (NOT B)
+NOT (A OR B)  = (NOT A) AND (NOT B)
+
+Practical example — instead of:
+   NOT (Running OR Faulted)
+write:
+   NOT Running AND NOT Faulted
+Easier to read on a ladder rung.
+</code></pre>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<h2 id="truth-tables">Truth Tables</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>A</th>
+<th>B</th>
+<th>A AND B</th>
+<th>A OR B</th>
+<th>A XOR B</th>
+</tr></thead><tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+</tbody></table>
+<hr />
+<h2 id="practical-habits">Practical Habits</h2>
+<ul><li>Write the intent in plain English above each rung — then translate.</li><li>Prefer positive logic (Running = TRUE) over negative (NotRunning).</li><li>Collapse double-negatives. NOT NOT A = A.</li><li>Avoid > 4 conditions in a single rung; factor into named intermediate tags.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> No triple-negated logic anywhere.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Tag names match the Boolean meaning (Running, Faulted, Homed).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Intermediate logic tags documented.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Ladder Logic Basics.html">Ladder Logic Basics</a></li>
+<li><a href="Interlocking &amp; Permissives.html">Interlocking &amp; Permissives</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

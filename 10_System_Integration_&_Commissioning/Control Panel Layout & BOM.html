@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,78 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#layout-principles">Layout Principles</a></li>
+<li><a href="#thermal-design">Thermal Design</a></li>
+<li><a href="#bom-best-practices">BOM Best Practices</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">10_System_Integration_&amp;_Commissioning</span><span class="bc-sep"> / </span><span class="bc-current">Control Panel Layout &amp; BOM</span></nav>
         <h1 class="page-title">Control Panel Layout &amp; BOM</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">System Integration &amp; Commissioning</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">UL 508A, NFPA 79, IEC 60204-1</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#panel</span> <span class="tag">#layout</span> <span class="tag">#BOM</span> <span class="tag">#UL508A</span> <span class="tag">#heat</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>System Integration &amp; Commissioning</code><br/><strong>Tags:</strong> <code>#panel #layout #BOM #UL508A #heat</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Control panel layout and the bill of materials (BOM) are where a good machine design is either set up or hamstrung. The goal: a panel that's serviceable, meets code, fits the heat load, and can be built repeatably.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="layout-principles">Layout Principles</h2>
+<ul><li>Top: incoming power, disconnect, main breaker, transformers.</li><li>Middle: contactors, drives, overloads, safety relays.</li><li>Bottom: PLC, terminal blocks, I/O, comms.</li><li>Heat rises — put heat generators (drives, transformers, DC supplies) near the top or where cooling is.</li><li>Wire ducts horizontal and vertical in a grid; leave 25% spare capacity.</li><li>Space drives for airflow per datasheet.</li><li>Keep 24 VDC and 480 VAC in separate ducts.</li><li>Mount DIN rails at comfortable service height (30–60 in).</li><li>Leave room for future I/O — add blank DIN rail and terminal strip.</li><li>Label every component with a unique tag matching the BOM and schematic.</li></ul>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="thermal-design">Thermal Design</h2>
+<p>Sum the steady-state heat dissipation of every component (use datasheet W). Add margin for worst-case ambient. Compare against enclosure free convection, fan venting, or closed-loop air conditioner rating. See <a href="../13_Specialty_Topics/Panel Cooling &amp; Power Conditioning.html">Panel Cooling</a>.</p>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="bom-best-practices">BOM Best Practices</h2>
+<ul><li>Manufacturer part numbers, revisions, and suppliers.</li><li>Qty per panel, alternates, and approved-equivalents column.</li><li>Footprint or size for layout and spares planning.</li><li>Safety-critical parts flagged — these require exact replacement.</li><li>Include hardware (terminal blocks, end clamps, labels, wire markers).</li><li>Export BOM to procurement / ERP and keep aligned with drawings.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Heat load calculation complete and filed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Spare DIN rail and duct capacity available.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> All components labeled and match schematic.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> UL 508A listing requirements met if needed — see <a href="../11_Standards_and_Codes/UL 508A – Control Panels.html">UL 508A</a>.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Panel photo documented for as-built record.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Documentation Best Practices.html">Documentation Best Practices</a></li>
+<li><a href="../11_Standards_and_Codes/UL 508A – Control Panels.html">UL 508A – Control Panels</a></li>
+<li><a href="../11_Standards_and_Codes/NFPA 79 – Machinery Electrical.html">NFPA 79 – Machinery Electrical</a></li>
+<li><a href="../13_Specialty_Topics/Panel Cooling &amp; Power Conditioning.html">Panel Cooling &amp; Power Conditioning</a></li>
+<li><a href="../02_Power_Distribution/Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

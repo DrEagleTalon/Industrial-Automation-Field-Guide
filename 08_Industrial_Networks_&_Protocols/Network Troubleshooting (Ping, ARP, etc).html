@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Network Troubleshooting (Ping, ARP, etc) | Industrial Automation Field Guide</title>
+  <title>Network Troubleshooting (Ping, ARP, etc.) | Industrial Automation Field Guide</title>
   <style>
 
 /* ── Reset ───────────────────────────────────────────────────────────────── */
@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,104 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#basic-toolkit">Basic Toolkit</a></li>
+<li><a href="#workflow">Workflow</a></li>
+<li><a href="#common-patterns">Common Patterns</a></li>
+<li><a href="#ethernetip-specific">EtherNet/IP Specific</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
-        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">08_Industrial_Networks_&amp;_Protocols</span><span class="bc-sep"> / </span><span class="bc-current">Network Troubleshooting (Ping, ARP, etc)</span></nav>
-        <h1 class="page-title">Network Troubleshooting (Ping, ARP, etc)</h1>
-
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">08_Industrial_Networks_&amp;_Protocols</span><span class="bc-sep"> / </span><span class="bc-current">Network Troubleshooting (Ping, ARP, etc.)</span></nav>
+        <h1 class="page-title">Network Troubleshooting (Ping, ARP, etc.)</h1>
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Industrial Networks &amp; Protocols</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#ping</span> <span class="tag">#arp</span> <span class="tag">#traceroute</span> <span class="tag">#wireshark</span> <span class="tag">#netstat</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Industrial Networks &amp; Protocols</code><br/><strong>Tags:</strong> <code>#ping #arp #traceroute #wireshark #netstat</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>When network comm breaks, a methodical checklist beats guessing. These are the tools every controls tech should be fluent with.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="basic-toolkit">Basic Toolkit</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr></thead><tbody>
+<tr><td>ping</td><td>Layer-3 reachability. ICMP echo.</td></tr>
+<tr><td>arp -a</td><td>MAC-to-IP mapping in the local cache</td></tr>
+<tr><td>tracert / traceroute</td><td>Hop-by-hop path to a remote host</td></tr>
+<tr><td>ipconfig / ifconfig</td><td>Local interface settings</td></tr>
+<tr><td>netstat -an</td><td>TCP/UDP ports and connections on this host</td></tr>
+<tr><td>nslookup</td><td>DNS resolution</td></tr>
+<tr><td>nmap</td><td>Port scanning (use only with authorization)</td></tr>
+<tr><td>Wireshark</td><td>Packet capture and protocol analysis</td></tr>
+<tr><td>Managed switch web UI</td><td>Port counters, duplex, speed, errors</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="workflow">Workflow</h2>
+<ol><li>Verify link light and cable first — most 'network' problems are physical.</li><li>ipconfig — is the PC/PLC on the expected subnet?</li><li>ping the gateway, then the peer.</li><li>arp -a — is the MAC of the peer what you expect? Duplicate MAC causes chaos.</li><li>tracert — where does the traffic stop?</li><li>Switch port counters — CRC errors, runts, duplex mismatches, collisions.</li><li>Packet capture if the problem is a protocol handshake failure.</li></ol>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<h2 id="common-patterns">Common Patterns</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</tr></thead><tbody>
+<tr><td>Link light off</td><td>Cable, transceiver, wrong media</td></tr>
+<tr><td>Link on, no traffic</td><td>Duplex mismatch, wrong VLAN, port disabled</td></tr>
+<tr><td>Intermittent drop</td><td>Bad cable, loose RJ45, EMI</td></tr>
+<tr><td>Slow performance</td><td>Broadcast storm, failing cable, mismatched speed</td></tr>
+<tr><td>Works on one PC, not another</td><td>ACL / firewall rule</td></tr>
+<tr><td>One machine floods the network</td><td>Stuck ARP, runaway device, loop without STP</td></tr>
+</tbody></table>
+<hr />
+<h2 id="ethernetip-specific">EtherNet/IP Specific</h2>
+<ul><li>Implicit I/O uses multicast on some networks — need IGMP querier + snooping.</li><li>Connection Timeout Multiplier x RPI = time before the PLC faults.</li><li>Check CIP connection status on the Rockwell module diagnostic page (/en/connections.html).</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Cable tested with a proper tester (not just link lights).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Switch port counters reviewed, cleared, and re-reviewed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Duplex/speed set manually where auto-negotiation has proven unreliable.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Packet capture saved to help the next tech.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="IP Addressing &amp; Subnetting.html">IP Addressing &amp; Subnetting</a></li>
+<li><a href="../09_Troubleshooting_&_Diagnostics/Network Communication Loss.html">Network Communication Loss</a></li>
+<li><a href="Switches &amp; Managed Networks.html">Switches &amp; Managed Networks</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

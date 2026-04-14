@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,92 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#tag-organization">Tag Organization</a></li>
+<li><a href="#alarm-priorities">Alarm Priorities</a></li>
+<li><a href="#alarm-history-journaling">Alarm History &amp; Journaling</a></li>
+<li><a href="#performance">Performance</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">07_HMI_SCADA_Systems</span><span class="bc-sep"> / </span><span class="bc-current">Tag Management &amp; Alarms</span></nav>
         <h1 class="page-title">Tag Management &amp; Alarms</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">HMI / SCADA</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">ISA-18.2</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#tags</span> <span class="tag">#alarms</span> <span class="tag">#UDT</span> <span class="tag">#history</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>HMI / SCADA</code><br/><strong>Tags:</strong> <code>#tags #alarms #UDT #history</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Tags are the HMI's view into PLC data. Alarms are the most important tag category because they direct operator attention. Both need discipline to stay useful at scale.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="tag-organization">Tag Organization</h2>
+<ul><li>Group tags by area or machine, then by equipment.</li><li>Use UDT-based faceplates so a single motor data structure drives one reusable graphic.</li><li>Prefer browsed/imported tags over manually re-created ones — eliminates drift.</li><li>Standard prefixes: PV (process value), SP (setpoint), OUT (output), CMD (command), STS (status).</li></ul>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="alarm-priorities">Alarm Priorities</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Priority</th>
+<th>Response Time</th>
+<th>Example</th>
+</tr></thead><tbody>
+<tr><td>Critical</td><td>Immediate, safe shutdown</td><td>E-stop active, reactor pressure high-high</td></tr>
+<tr><td>High</td><td>< 1 minute</td><td>Motor overload, pump seal failure</td></tr>
+<tr><td>Medium</td><td>< 10 minutes</td><td>Tank level high, sensor drift</td></tr>
+<tr><td>Low</td><td>End of shift</td><td>Filter cycle count reached</td></tr>
+<tr><td>Info</td><td>No action</td><td>Recipe changed, shift started</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="alarm-history-journaling">Alarm History &amp; Journaling</h2>
+<ul><li>Store alarm history in a database (SQL typically) for weeks to years.</li><li>Each record: ID, time, area, message, severity, acked-by, acked-time.</li><li>Expose the history in a searchable view with filters.</li><li>Monthly rationalization review — remove or consolidate alarms that fired > 10× with no real response.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="performance">Performance</h2>
+<ul><li>HMI polls add up — too many update groups slow the whole system.</li><li>Use change-driven or subscription-based update where the PLC supports it (Logix optimized tags, S7 optimized access).</li><li>Diagnostic tags on their own group so they don't compete with operator screens.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Tag list versioned and backed up.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Alarm priorities reviewed and documented.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Alarm history verified end-to-end (PLC → HMI → database).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Unused tags purged quarterly.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Comm quality visible on every screen.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="HMI Basics.html">HMI Basics</a></li>
+<li><a href="../06_PLC_Programming_&_Logic/HMI IO Tags &amp; Linking.html">HMI IO Tags &amp; Linking</a></li>
+<li><a href="../06_PLC_Programming_&_Logic/Alarms &amp; Fault Detection.html">Alarms &amp; Fault Detection</a></li>
+<li><a href="Data Logging &amp; Trends.html">Data Logging &amp; Trends</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

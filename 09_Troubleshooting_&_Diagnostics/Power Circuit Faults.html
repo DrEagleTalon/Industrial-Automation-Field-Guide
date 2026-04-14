@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,90 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#common-fault-types">Common Fault Types</a></li>
+<li><a href="#diagnostic-workflow">Diagnostic Workflow</a></li>
+<li><a href="#common-field-causes">Common Field Causes</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">09_Troubleshooting_&amp;_Diagnostics</span><span class="bc-sep"> / </span><span class="bc-current">Power Circuit Faults</span></nav>
         <h1 class="page-title">Power Circuit Faults</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Troubleshooting &amp; Diagnostics</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#power</span> <span class="tag">#breaker</span> <span class="tag">#fuse</span> <span class="tag">#shortcircuit</span> <span class="tag">#groundfault</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Troubleshooting &amp; Diagnostics</code><br/><strong>Tags:</strong> <code>#power #breaker #fuse #shortcircuit #groundfault</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Power-side faults are the ones that pop breakers, blow fuses, and can hurt people. They demand slower, safer diagnostics than control-side problems.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="common-fault-types">Common Fault Types</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Fault</th>
+<th>Signature</th>
+<th>Typical Cause</th>
+</tr></thead><tbody>
+<tr><td>Short circuit</td><td>Breaker trips instantly or fuse blows violently</td><td>Pinched cable, loose lug touching case, motor winding-to-winding</td></tr>
+<tr><td>Ground fault</td><td>GFCI/GFI trips; phase current mismatch</td><td>Damaged insulation, moisture, worn motor winding</td></tr>
+<tr><td>Overload</td><td>Breaker trips slowly (thermal curve)</td><td>Mechanical bind, undersized conductor</td></tr>
+<tr><td>Single-phasing</td><td>Motor hums, one phase at zero current</td><td>Blown one fuse, open wire</td></tr>
+<tr><td>Voltage unbalance > 1%</td><td>High motor temperature, reduced torque</td><td>Uneven loading, transformer tap, loose connection</td></tr>
+<tr><td>Over-voltage</td><td>All equipment runs hot</td><td>Lost neutral, utility issue, wrong tap</td></tr>
+<tr><td>Arc fault</td><td>Loud bang, scorching, carbon tracks</td><td>Loose connection, insulation breakdown, stab worn</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="diagnostic-workflow">Diagnostic Workflow</h2>
+<ol><li>LOTO and verify dead before any internal inspection.</li><li>Visual: look for scorching, melted lugs, bowed bus, discolored insulation.</li><li>Check torque on every power lug with a calibrated torque wrench.</li><li>Megger motor leads separately from the panel — see <a href="../04_Motor_Control/Motor Megger Testing.html">Motor Megger Testing</a>.</li><li>With system re-energized and load off, measure line-to-line and line-to-ground voltages at the main.</li><li>Re-energize the load slowly — watch for rising current with an amp clamp.</li></ol>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="common-field-causes">Common Field Causes</h2>
+<ul><li>A loose lug at a contactor that looks fine until you torque it — loose for years, then fails fast.</li><li>Rodent damage on flexible cord to a motor that runs intermittently.</li><li>A flex conduit that rubs through insulation at a sharp bend.</li><li>A neutral on a 120/240 split-phase that opens, swinging voltages wildly.</li><li>Water in a junction box after a wash-down.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> LOTO applied and verified.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Megger before closing any breaker on a newly-wired circuit.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> All lugs torqued to spec.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> IR camera scan after first energization.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Fault investigated to root cause before a repair is signed off.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Control Circuit Faults.html">Control Circuit Faults</a></li>
+<li><a href="Motor Overheating &amp; Tripping.html">Motor Overheating &amp; Tripping</a></li>
+<li><a href="../04_Motor_Control/Motor Megger Testing.html">Motor Megger Testing</a></li>
+<li><a href="../02_Power_Distribution/Fuses vs Breakers.html">Fuses vs Breakers</a></li>
+<li><a href="General Troubleshooting Methodology.html">General Troubleshooting Methodology</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

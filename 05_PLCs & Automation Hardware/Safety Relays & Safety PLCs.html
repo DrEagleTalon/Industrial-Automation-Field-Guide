@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,105 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#safety-relay-vs-safety-plc">Safety Relay vs Safety PLC</a></li>
+<li><a href="#safety-categories">Safety Categories</a></li>
+<li><a href="#how-they-work">How They Work</a></li>
+<li><a href="#when-a-safety-plc-wins">When a Safety PLC Wins</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">05_PLCs &amp; Automation Hardware</span><span class="bc-sep"> / </span><span class="bc-current">Safety Relays &amp; Safety PLCs</span></nav>
         <h1 class="page-title">Safety Relays &amp; Safety PLCs</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLCs &amp; Automation Hardware</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">ISO 13849-1, IEC 62061, IEC 61508</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#safety</span> <span class="tag">#SIL</span> <span class="tag">#PL</span> <span class="tag">#GuardLogix</span> <span class="tag">#redundancy</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLCs &amp; Automation Hardware</code><br/><strong>Tags:</strong> <code>#safety #SIL #PL #GuardLogix #redundancy</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Safety relays and safety PLCs are specifically certified to process functional-safety signals — E-stops, light curtains, guard switches, two-hand controls — and bring the machine to a safe state even in the presence of internal faults. An ordinary PLC is <em>not</em> a substitute unless it is certified as a safety PLC.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="safety-relay-vs-safety-plc">Safety Relay vs Safety PLC</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Aspect</th>
+<th>Safety Relay</th>
+<th>Safety PLC</th>
+</tr></thead><tbody>
+<tr><td>Application</td><td>1–3 safety functions</td><td>Many safety functions, complex logic</td></tr>
+<tr><td>Configuration</td><td>DIP switches, fixed logic</td><td>Programmed in certified safety blocks</td></tr>
+<tr><td>Cost</td><td>Low</td><td>Higher</td></tr>
+<tr><td>Flexibility</td><td>Low</td><td>High</td></tr>
+<tr><td>Examples</td><td>Allen-Bradley MSR, Pilz PNOZ, Sick UE</td><td>GuardLogix, S7-1500 F, Pilz PSS4000</td></tr>
+<tr><td>Typical SIL / PL</td><td>SIL 3 / PL e</td><td>SIL 3 / PL e</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<h2 id="safety-categories">Safety Categories</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Spec</th>
+<th>Meaning</th>
+</tr></thead><tbody>
+<tr><td>Category B</td><td>No specific safety measures — minimal</td></tr>
+<tr><td>Category 1</td><td>Well-tried components, single channel</td></tr>
+<tr><td>Category 2</td><td>Single channel with periodic testing</td></tr>
+<tr><td>Category 3</td><td>Single fault doesn't cause loss of safety function</td></tr>
+<tr><td>Category 4</td><td>Single fault detected, no accumulation of faults</td></tr>
+<tr><td>SIL 1–4</td><td>IEC 61508 / 62061 risk-reduction levels</td></tr>
+<tr><td>PL a–e</td><td>ISO 13849-1 performance levels</td></tr>
+</tbody></table>
+<hr />
+<h2 id="how-they-work">How They Work</h2>
+<ul><li>Dual-channel input sensing with cross-monitoring to detect stuck or shorted wiring.</li><li>Force-guided safety contacts on the output relays so a welded contact is detected.</li><li>Periodic self-tests of internal circuitry.</li><li>Safety PLCs additionally run diverse code paths on redundant CPUs and compare results every scan.</li></ul>
+<hr />
+<h2 id="when-a-safety-plc-wins">When a Safety PLC Wins</h2>
+<ul><li>More than 3–4 safety functions.</li><li>Muting, blanking, speed monitoring, or safe-stop-category-1 (SS1) required.</li><li>Shared I/O between safety and standard control (via integrated GuardLogix or F-PLC).</li><li>Auditability — version history, change tracking, signed programs.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Safety function risk assessment completed and signed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Architecture (Cat / PL) matches risk.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Safety I/O verified with forced-fault testing during commissioning.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Safety program and settings locked with a password; signed and archived.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Stop category documented for each E-stop — see <a href="../12_Safety_Systems_Advanced/Emergency Stops (E-Stops).html">E-Stops</a>.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../12_Safety_Systems_Advanced/Emergency Stops (E-Stops).html">Emergency Stops (E-Stops)</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Risk Assessments &amp; Functional Safety.html">Risk Assessments &amp; Functional Safety</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Safety Fencing &amp; Interlocks.html">Safety Fencing &amp; Interlocks</a></li>
+<li><a href="../11_Standards_and_Codes/SIL - PL Functional Safety Intro.html">SIL - PL Functional Safety Intro</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

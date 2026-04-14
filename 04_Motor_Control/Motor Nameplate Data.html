@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,109 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#key-fields-decoded">Key Fields Decoded</a></li>
+<li><a href="#dual-voltage-dual-winding-nameplates">Dual-Voltage / Dual-Winding Nameplates</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
 <li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Motor Nameplate Data</span></nav>
         <h1 class="page-title">Motor Nameplate Data</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">NEMA MG 1, IEC 60034, NEC 430.7</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">All industrial motors</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#nameplate</span> <span class="tag">#FLA</span> <span class="tag">#SF</span> <span class="tag">#NEMA</span> <span class="tag">#motors</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#nameplate #FLA #SF #NEMA #motors</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>The motor nameplate is the single most important document on any motor. Before you size protection, set a <a href="Overload Relays.html">overload</a>, program a <a href="Variable Frequency Drives (VFDs) Basics.html">VFD</a>, pick a <a href="Motor Contactors &amp; Starters.html">contactor</a>, or replace a burnt-out unit, the nameplate tells you what the motor actually is — not what someone wrote on the print twenty years ago.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h3>What a nameplate gives you</h3><ul><li>Electrical ratings: HP (or kW), voltage, FLA, frequency, phases, service factor.</li><li>Mechanical ratings: speed, frame, enclosure, service conditions.</li><li>Design and performance class: NEMA Design letter, efficiency, code letter.</li><li>Insulation class and temperature rise.</li><li>Bearings, lubrication, and winding connection diagrams.</li></ul><h3>Why it matters</h3><p>NEC 430.6(A)(1) says you size conductors and short-circuit protection from NEC tables, but you size overload protection from the actual nameplate FLA. Getting these two confused is one of the most common mistakes.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="key-fields-decoded">Key Fields Decoded</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Field</th>
+<th>What it means</th>
+<th>How to use it</th>
+</tr></thead><tbody>
+<tr><td>HP</td><td>Horsepower output at shaft, full load</td><td>Don't confuse with input kW</td></tr>
+<tr><td>kW</td><td>Mechanical output power (metric)</td><td>HP = kW × 1.341</td></tr>
+<tr><td>Volts</td><td>Rated line-to-line voltage</td><td>Multiple values mean the motor is dual-voltage</td></tr>
+<tr><td>Hz</td><td>Rated frequency (50 or 60)</td><td>Operating off-frequency requires re-rating</td></tr>
+<tr><td>FLA (Amps)</td><td>Full-load amps at rated voltage and HP</td><td>Set <a href="Overload Relays.html">overloads</a> to this value</td></tr>
+<tr><td>SF</td><td>Service factor (1.0, 1.15, 1.25)</td><td>Continuous overload capability. SF amps = FLA × SF. Do NOT use SF amps to set overloads — use FLA.</td></tr>
+<tr><td>RPM</td><td>Full-load speed</td><td>Subtract from synchronous to get slip</td></tr>
+<tr><td>Frame</td><td>NEMA frame (143T, 256T, etc.)</td><td>Determines shaft size, bolt pattern, coupling</td></tr>
+<tr><td>Enclosure</td><td>ODP, TEFC, TENV, XP</td><td>Dictates environment where the motor can live</td></tr>
+<tr><td>NEMA Design</td><td>A, B, C, D</td><td>Torque/slip characteristic</td></tr>
+<tr><td>Code Letter</td><td>A–V</td><td>Locked-rotor kVA/HP, used for short-circuit protection sizing</td></tr>
+<tr><td>Insulation Class</td><td>B, F, H</td><td>Maximum winding temperature rise</td></tr>
+<tr><td>Ambient</td><td>40 °C standard</td><td>Higher ambient requires derating</td></tr>
+<tr><td>Duty</td><td>Continuous (S1), short-time (S2), intermittent (S3)</td><td>Match to load profile</td></tr>
+<tr><td>PF</td><td>Power factor at full load</td><td>Affects kVA sizing of upstream equipment</td></tr>
+<tr><td>Efficiency</td><td>Full-load efficiency</td><td>Higher is better — NEMA Premium / IE3</td></tr>
+<tr><td>Bearing</td><td>DE / ODE bearing numbers</td><td>For ordering replacements</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="dual-voltage-dual-winding-nameplates">Dual-Voltage / Dual-Winding Nameplates</h2>
+<p>Many motors list two voltages and two FLAs. A common 9-lead motor is shown as 230/460 V and, say, 26/13 A. The same motor is being sold as a low-voltage (parallel) or high-voltage (series) machine — the FLA halves when voltage doubles because HP is constant.</p>
+<p>The nameplate or peckerhead cover shows the connection diagram. See <a href="Motor Wiring &amp; Rotation Checking.html">Motor Wiring &amp; Rotation Checking</a> for the physical wiring.</p>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Take a clear photo of the full nameplate before install.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Record FLA, voltage, connection, and frame on the commissioning sheet.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Cross-check FLA against the overload setting and the feeder conductor ampacity.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Verify enclosure type is appropriate for the room (wash-down, hazardous area, etc.).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Note bearings for spare parts stock.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> If motor is on a VFD, confirm VFD parameters match nameplate — see <a href="VFD Parameters &amp; Setup.html">VFD Parameters &amp; Setup</a>.</li></ul>
 <hr />
 <h2 id="reference-notes">Reference Notes</h2>
+<p>NEC 430.7 lists the marking requirements for every motor sold in the US.</p>
+<p>IEC motors typically mark kW, full-load current at multiple voltages, efficiency class (IE1–IE4), duty cycle (S1–S10), and IP rating for the enclosure.</p>
+<p>A TEFC motor has Totally Enclosed Fan-Cooled frame; it does not breathe plant air. This is the default industrial enclosure.</p>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="3-Phase Motor Basics.html">3-Phase Motor Basics</a></li>
+<li><a href="Overload Relays.html">Overload Relays</a></li>
+<li><a href="Motor Contactors &amp; Starters.html">Motor Contactors &amp; Starters</a></li>
+<li><a href="Variable Frequency Drives (VFDs) Basics.html">Variable Frequency Drives (VFDs) Basics</a></li>
+<li><a href="../11_Standards_and_Codes/NEC 430 – Motors &amp; Controllers.html">NEC 430 – Motors &amp; Controllers</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

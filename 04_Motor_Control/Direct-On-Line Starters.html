@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,172 +347,129 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">🔹 What is it?</a></li>
-<li><a href="#how-it-works">🔹 How it works</a></li>
-<li><a href="#when-to-use">🔹 When to Use</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#typical-power-and-control-schematic">Typical Power and Control Schematic</a></li>
+<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
+<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#field-checklist">Field Checklist</a></li>
+<li><a href="#reference-notes">Reference Notes</a></li>
+<li><a href="#related-topics">Related Topics</a></li>
+<li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</li>
-<li><a href="#troubleshooting-diagnostics">🛠️ Troubleshooting &amp; Diagnostics</a></li>
-<li><a href="#specifications-parameters">📏 Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">📐 Wiring &amp; Diagrams</a></li>
-<li><a href="#reference-notes">📎 Reference Notes</a></li>
-<li><a href="#related-topics">📂 Related Topics</a></li>
-<li><a href="#field-checklist">✅ Field Checklist</a></li>
-</ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Direct-On-Line Starters</span></nav>
         <h1 class="page-title">Direct-On-Line Starters</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">NEC 430, IEC 60947-4-1</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Magnetic contactor, overload relay, pushbutton control</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#DOL</span> <span class="tag">#starter</span> <span class="tag">#contactor</span> <span class="tag">#fullvoltagestart</span> <span class="tag">#motors</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="direct-on-line-dol-starters">Direct-On-Line (DOL) Starters</h1>
-<p><strong>Category:</strong> <code>Motor Control</code><br />
-<strong>Tags:</strong> <code>#motorcontrol #starter #troubleshooting #fieldguide</code><br />
-<strong>Difficulty:</strong> <code>Beginner</code><br />
-<strong>Last Updated:</strong> <code>2025-06-29</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#DOL #starter #contactor #fullvoltagestart #motors</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
-<p>A Direct-On-Line (DOL) starter applies full line voltage directly to the motor terminals to start the motor. It’s simple and economical, commonly used for small to medium 3-phase motors.</p>
+<p>Direct-on-line (DOL) or 'across-the-line' starting is the simplest method of energizing a 3-phase motor: close a contactor and apply full line voltage to all three windings at once. It delivers maximum torque but also draws 500–800% of full-load amps as inrush.</p>
+<p>DOL is the starting method assumed in most ladder schematics and the default method for motors up to about 15 HP on stiff supplies. Above that, the inrush begins to sag the bus, trip upstream breakers, or mechanically shock driven equipment.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">🔹 What is it?</h3>
-<blockquote>
-<ul>
-<li>Motor starter that connects motor directly to supply line.  </li>
-<li>Key components: Contactor, overload relay, start/stop buttons.  </li>
-<li>Suitable for motors typically under 10 HP depending on supply.</li>
-</ul>
-</blockquote>
-<h3 id="how-it-works">🔹 How it works</h3>
-<blockquote>
-<ul>
-<li>Pressing START energizes contactor coil.  </li>
-<li>Main contacts close, supplying power to motor.  </li>
-<li>Auxiliary NO contact seals circuit to maintain contactor.  </li>
-<li>STOP opens circuit, de-energizes coil.  </li>
-<li>Overload relay protects against overcurrent.</li>
-</ul>
-</blockquote>
-<h3 id="when-to-use">🔹 When to Use</h3>
-<blockquote>
-<ul>
-<li>For applications with low starting torque needs.  </li>
-<li>Not ideal where high inrush current can cause voltage dips.</li>
-</ul>
-</blockquote>
+<h3>What makes a DOL starter</h3><ul><li>Short-circuit protection — fuses or a motor-rated circuit breaker (MCP/MCCB).</li><li>A 3-pole magnetic <a href="Motor Contactors &amp; Starters.html">contactor</a> — the switching device.</li><li>A thermal or electronic <a href="Overload Relays.html">overload relay</a> — protects the winding.</li><li>A control circuit — Start/Stop pushbuttons, aux contact for seal-in, optional reset.</li></ul><h3>How the control circuit works</h3><p>The classic DOL control uses <a href="../06_PLC_Programming_&amp;_Logic/Start-Stop Logic.html">start-stop logic</a>: a momentary Start PB energizes the contactor coil; an aux contact in parallel with Start seals the coil in; a momentary Stop PB or an overload aux contact opens the seal-in, dropping out the coil.</p><h3>When to use DOL</h3><ul><li>Supply transformer is stiff enough that a 6–8× inrush is acceptable (typical facility ≤ about 15 HP @ 480 V).</li><li>Load can tolerate full starting torque (no belt slippage, gear shock, or fluid hammer).</li><li>Simplicity and cost are more important than soft-start features.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">🛠️ Troubleshooting &amp; Diagnostics</h2>
+<h2 id="typical-power-and-control-schematic">Typical Power and Control Schematic</h2>
+<pre><code>POWER:
+  L1 L2 L3
+   |  |  |
+  [Fuses or MCP]          short-circuit / branch-circuit protection
+   |  |  |
+  [Contactor M]            3-pole 3-phase switching device
+   |  |  |
+  [Overload Relay]         senses motor current, trips on sustained overload
+   |  |  |
+  T1 T2 T3 -> Motor
+
+CONTROL (120 VAC):
+  H1 --- FU --- Stop PB (NC) --- Start PB (NO) --+--- OL aux (NC) --- M coil --- H2
+                                                  |
+                                M aux NO (13/14) -+  (seal-in)
+</code></pre>
+<hr />
+<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
+<th>Parameter</th>
+<th>Typical Value</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr><td>Starting current</td><td>500–800% FLA</td><td>About 6× FLA for 6 to 10 line cycles</td></tr>
+<tr><td>Starting torque</td><td>100–250% of rated</td><td>Design B around 150%</td></tr>
+<tr><td>Acceleration time</td><td>0.5–5 s</td><td>Depends on load inertia</td></tr>
+<tr><td>Max practical HP on stiff 480 V</td><td>≈ 15–25 HP</td><td>Confirm with utility / source impedance</td></tr>
+<tr><td>Control voltage</td><td>24 VDC or 120 VAC</td><td>Use a dedicated <a href="../02_Power_Distribution/Control Transformers.html">control transformer</a></td></tr>
+<tr><td>Contactor category</td><td>AC-3</td><td>Switching squirrel-cage motors</td></tr>
+</tbody></table>
+<hr />
+<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<table>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
 <th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Motor won't start</td>
-<td>Contactor coil not energizing</td>
-<td>Measure control voltage at coil</td>
-<td>Multimeter</td>
-</tr>
-<tr>
-<td>Contactor chatters</td>
-<td>Low voltage / loose wires</td>
-<td>Tighten terminals, check supply</td>
-<td>Multimeter, screwdriver</td>
-</tr>
-<tr>
-<td>Trips on start</td>
-<td>OLR set too low / mechanical jam</td>
-<td>Check overload setting, inspect motor shaft</td>
-<td>Multimeter, inspection</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>💡 <strong>Pro Tip:</strong> Always manually spin the motor shaft if possible to check for binding.</p>
-</blockquote>
+<th>Tools Needed</th>
+</tr></thead><tbody>
+<tr><td>Motor doesn't start, contactor doesn't pick</td><td>No control voltage, Stop PB open, OL tripped</td><td>Check control voltage at M coil; inspect OL aux</td><td>DMM</td></tr>
+<tr><td>Contactor picks, motor does nothing</td><td>Missing phase, contactor power contacts welded/open</td><td>Measure voltage both sides of contactor with motor called</td><td>DMM</td></tr>
+<tr><td>Overload trips within seconds</td><td>Locked rotor, single-phasing, overload set too low</td><td>Check all 3 phases of motor current; compare to FLA</td><td>Clamp meter</td></tr>
+<tr><td>Contactor chatters</td><td>Weak coil voltage, worn magnet, low control supply</td><td>Measure coil voltage when energized</td><td>DMM</td></tr>
+<tr><td>Upstream breaker trips on start</td><td>DOL start too large for supply</td><td>Consider soft-starter or reduced-voltage method</td><td>Current logger</td></tr>
+</tbody></table>
 <hr />
-<h2 id="specifications-parameters">📏 Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value/Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Coil Voltage</td>
-<td>24 VDC / 120 VAC / 230 VAC</td>
-<td>Must match control power</td>
-</tr>
-<tr>
-<td>Contactor Rating</td>
-<td>9A, 12A, 25A</td>
-<td>Based on motor FLA</td>
-</tr>
-<tr>
-<td>Overload Dial</td>
-<td>0.7–1.0 × motor FLA</td>
-<td>Adjust based on nameplate</td>
-</tr>
-</tbody>
-</table>
+<h2 id="field-checklist">Field Checklist</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Confirm overload is set to the nameplate FLA (not SF amps).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Verify short-circuit protection size per NEC Table 430.52 (typically 175–250% FLA for ITB breakers).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Check that contactor is rated AC-3 for motor duty.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Seal-in wire must pick up from the contactor's own aux, not from the Start PB terminal.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Stop PB must be wired NC so a broken wire = stop.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Verify proper grounding of the motor frame and bonding of the enclosure.</li></ul>
 <hr />
-<h2 id="wiring-diagrams">📐 Wiring &amp; Diagrams</h2>
-<pre><code>Power:
- L1 ---[Contactor]---+
- L2 -----------------+--- Motor
- L3 -----------------+
-
-Control:
- L --- Stop --- Start --- Contactor Coil --- N
-            +--- Auxiliary NO seal-in
-            +--- OLR NC contact
-</code></pre>
+<h2 id="reference-notes">Reference Notes</h2>
+<p>DOL starters are covered by IEC 60947-4-1. Utilization categories AC-3 (motor starting) and AC-4 (plugging/jogging) describe the switching duty.</p>
+<p>If the plant has voltage flicker complaints when a big motor starts, move to a <a href="Soft Starters.html">Soft Starter</a> or VFD before adding a reduced-voltage starter.</p>
 <hr />
-<h2 id="reference-notes">📎 Reference Notes</h2>
+<h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>NEC Article 430 for motor protection.  </li>
-<li>IEC 60947-4-1 for contactors and motor starters.</li>
-</ul>
-<hr />
-<h2 id="related-topics">📂 Related Topics</h2>
-<ul>
-<li><span class="broken-link">Motor Contactors</span></li>
+<li><a href="Motor Contactors &amp; Starters.html">Motor Contactors &amp; Starters</a></li>
 <li><a href="Overload Relays.html">Overload Relays</a></li>
+<li><a href="../06_PLC_Programming_&_Logic/Start-Stop Logic.html">Start-Stop Logic</a></li>
+<li><a href="Reversing Starters.html">Reversing Starters</a></li>
 <li><a href="Soft Starters.html">Soft Starters</a></li>
+<li><a href="Star-Delta Starters.html">Star-Delta Starters</a></li>
 </ul>
 <hr />
-<h2 id="field-checklist">✅ Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Coil voltage matches spec</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Overload relay set to FLA</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> All terminals tight</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Rotation confirmed after wiring</li>
-</ul>
+<h2 id="local-changelog">Local Changelog</h2>
+<table>
+<thead><tr>
+<th>Date</th>
+<th>Version</th>
+<th>Author</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
+</tr>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

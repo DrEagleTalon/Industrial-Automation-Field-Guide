@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,89 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#logging-strategies">Logging Strategies</a></li>
+<li><a href="#storage">Storage</a></li>
+<li><a href="#trend-design">Trend Design</a></li>
+<li><a href="#kpis-oee">KPIs &amp; OEE</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">07_HMI_SCADA_Systems</span><span class="bc-sep"> / </span><span class="bc-current">Data Logging &amp; Trends</span></nav>
         <h1 class="page-title">Data Logging &amp; Trends</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">HMI / SCADA</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#historian</span> <span class="tag">#trends</span> <span class="tag">#dataset</span> <span class="tag">#KPI</span> <span class="tag">#OEE</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>HMI / SCADA</code><br/><strong>Tags:</strong> <code>#historian #trends #dataset #KPI #OEE</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Data logging captures the state of key tags over time. Trends plot that data for operators, engineers, and management. Good trends let you see problems that aren't obvious in a real-time value.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="logging-strategies">Logging Strategies</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Strategy</th>
+<th>When to Use</th>
+</tr></thead><tbody>
+<tr><td>Periodic (e.g., 1 s)</td><td>Slow-changing process values (temperature, level)</td></tr>
+<tr><td>On-change / deadband</td><td>Values that are mostly flat but sometimes spike</td></tr>
+<tr><td>Event-driven</td><td>Alarms, machine state changes, batch steps</td></tr>
+<tr><td>Rate grouped</td><td>Mix periodic and on-change in one tag group</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="storage">Storage</h2>
+<ul><li>Local HMI datalog files (small, rolling).</li><li>Plant historian (PI, Canary, Ignition) for long-term.</li><li>Time-series database (InfluxDB, TimescaleDB) for self-hosted.</li><li>Enterprise data lake for analytics and ML.</li><li>Plan retention: raw for weeks, aggregated hourly/daily for years.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="trend-design">Trend Design</h2>
+<ul><li>One plot = one decision. Don't overlay 10 unrelated variables.</li><li>Include setpoint alongside process value.</li><li>Show alarms as annotations on the time axis.</li><li>Time-zoom controls: 1 min, 15 min, 1 hr, 8 hr, shift, day.</li><li>Export to CSV for offline analysis.</li></ul>
+<hr />
+<h2 id="kpis-oee">KPIs &amp; OEE</h2>
+<p>Overall Equipment Effectiveness (OEE) = Availability × Performance × Quality. All three factors can be derived from tags you probably already have: uptime (from running state), rate (from counters), and good part count (from QC tags). SCADA / historian is where OEE dashboards live.</p>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Logging groups configured with appropriate periods and deadbands.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Disk usage monitored; retention enforced.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> NTP running on all data sources.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Time zone / DST handling documented.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Backup + restore of historian tested.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Basic SCADA Architecture.html">Basic SCADA Architecture</a></li>
+<li><a href="Tag Management &amp; Alarms.html">Tag Management &amp; Alarms</a></li>
+<li><a href="../13_Specialty_Topics/Cloud SCADA &amp; MQTT.html">Cloud SCADA &amp; MQTT</a></li>
+<li><a href="../13_Specialty_Topics/IIoT Gateways &amp; Edge.html">IIoT Gateways &amp; Edge</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

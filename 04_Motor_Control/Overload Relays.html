@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,13 +347,8 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#sizing-setting">Sizing &amp; Setting</a></li>
 <li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
 <li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
@@ -363,117 +356,113 @@ a:hover { text-decoration: underline; }
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Overload Relays</span></nav>
         <h1 class="page-title">Overload Relays</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">NEC 430 Part III, IEC 60947-4-1</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Bi-metallic, eutectic, electronic overload relays</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#overload</span> <span class="tag">#thermal</span> <span class="tag">#electronic</span> <span class="tag">#classtrip</span> <span class="tag">#motorprotection</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#overload #thermal #electronic #classtrip #motorprotection</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>The overload relay protects the motor winding from prolonged operation at currents above full-load amps. It does <em>not</em> protect against short circuits — that's the job of the fuse or breaker upstream. Overloads respond to the heating effect of current over time, mimicking the thermal behavior of the motor itself.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h3>Types</h3><ul><li><strong>Thermal bi-metallic</strong> — classic heater elements; two bi-metal strips bend as they heat and trip a lever. Rugged, cheap, moderately accurate.</li><li><strong>Eutectic (melting-alloy)</strong> — an older design that uses a solder pot. Largely replaced by bi-metallic and electronic.</li><li><strong>Electronic (solid-state)</strong> — current transformer-based; programmable trip class, phase loss, ground fault, jam, stall. More accurate and feature-rich.</li><li><strong>Thermistor (PTC)</strong> — winding-embedded sensors used with a relay monitor. Directly measures winding temperature rather than current.</li></ul><h3>Trip Class</h3><table>
+<thead><tr>
+<th>Class</th>
+<th>Trip time at 600% FLA</th>
+<th>Typical Use</th>
+</tr></thead><tbody>
+<tr><td>Class 10</td><td>≤ 10 s</td><td>Hermetic / submersible / tight-coupled pumps, VFD output</td></tr>
+<tr><td>Class 20</td><td>≤ 20 s</td><td>General-purpose — default in North America</td></tr>
+<tr><td>Class 30</td><td>≤ 30 s</td><td>High-inertia loads — large fans, crushers</td></tr>
+<tr><td>Class 5</td><td>≤ 5 s</td><td>Special-purpose, very tight thermal protection</td></tr>
+</tbody></table><h3>Phase-loss protection</h3><p>Most modern electronic overloads trip fast on single-phasing because unbalanced current heats the remaining phases dramatically. Older bi-metallic units may not trip fast enough — specify three-heater or phase-loss-sensitive types for critical motors.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="sizing-setting">Sizing &amp; Setting</h2>
+<p>The overload is set to the motor nameplate FLA — not the service-factor amps, not the feeder breaker size. NEC 430.32 requires overload pickup no higher than 115% of FLA for motors with SF ≤ 1.15, and 125% of FLA for motors with SF ≥ 1.15.</p>
+<p>Example: a 10 HP, 460 V motor with FLA = 13 A, SF = 1.15. Set overload FLA to 13 A. Allowed trip window is up to 125% × 13 = 16.25 A.</p>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>Bi-metallic overload mounting (stacked under contactor):
+  Contactor T1 T2 T3
+        |  |  |
+       Heaters (sized for FLA)
+        |  |  |
+   Motor T1 T2 T3
+
+Overload auxiliary contacts:
+  95/96 NC  -> wired in series with contactor coil (drops coil on trip)
+  97/98 NO  -> to PLC input for fault signaling
+</code></pre>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
 <th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>Tools Needed</th>
+</tr></thead><tbody>
+<tr><td>Nuisance trips on start</td><td>Class 10 used on high-inertia load</td><td>Change to Class 20 or 30</td><td>Datasheet</td></tr>
+<tr><td>Nuisance trips in hot weather</td><td>Ambient compensation not provided</td><td>Use ambient-compensated bi-metal or electronic</td><td>Thermometer</td></tr>
+<tr><td>Doesn't trip on single-phasing</td><td>Non-phase-loss-sensitive older unit</td><td>Upgrade to electronic or 3-heater type</td><td>Clamp meter</td></tr>
+<tr><td>Trips after a long run</td><td>Actual overload — undersized motor, bearing drag, coupling bind</td><td>Measure running amps vs. FLA</td><td>Clamp meter</td></tr>
+<tr><td>Trips exactly at stop</td><td>Overload sensing deceleration current</td><td>Check class; review duty cycle</td><td>Review logs</td></tr>
+<tr><td>Can't be reset</td><td>Auto-reset jumper set wrong, or electronic unit in lockout</td><td>Cycle power; check DIP switches</td><td>Manual</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> FLA dial or parameter matches motor nameplate.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Trip class is appropriate for the load (default Class 20).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> NC aux wired in series with contactor coil so trip drops the motor.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> NO aux wired to PLC input for alarm.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Manual vs. auto reset is set per site standard (manual = safer).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Electronic units: set phase loss, jam, stall, and ground fault per the application.</li></ul>
 <hr />
 <h2 id="reference-notes">Reference Notes</h2>
+<p>NEC Article 430 Part III details motor overload requirements including the 115%/125% rule.</p>
+<p>When a VFD is used, the motor overload function is typically handled inside the drive via the motor thermal model (I²t). A separate external overload is then only used if the drive is bypassed.</p>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Motor Contactors &amp; Starters.html">Motor Contactors &amp; Starters</a></li>
+<li><a href="Direct-On-Line Starters.html">Direct-On-Line Starters</a></li>
+<li><a href="../09_Troubleshooting_&_Diagnostics/Motor Overheating &amp; Tripping.html">Motor Overheating &amp; Tripping</a></li>
+<li><a href="Motor Nameplate Data.html">Motor Nameplate Data</a></li>
+<li><a href="../11_Standards_and_Codes/NEC 430 – Motors &amp; Controllers.html">NEC 430 – Motors &amp; Controllers</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

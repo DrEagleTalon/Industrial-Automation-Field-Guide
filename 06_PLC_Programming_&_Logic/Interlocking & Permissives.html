@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,97 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#programming-patterns">Programming Patterns</a></li>
+<li><a href="#safety-vs-logic-interlocks">Safety vs. Logic Interlocks</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">06_PLC_Programming_&amp;_Logic</span><span class="bc-sep"> / </span><span class="bc-current">Interlocking &amp; Permissives</span></nav>
         <h1 class="page-title">Interlocking &amp; Permissives</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLC Programming &amp; Logic</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#interlock</span> <span class="tag">#permissive</span> <span class="tag">#safety</span> <span class="tag">#logic</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLC Programming &amp; Logic</code><br/><strong>Tags:</strong> <code>#interlock #permissive #safety #logic</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>An interlock prevents an action while a condition is unsafe or incorrect. A permissive is the opposite: a set of preconditions that must be TRUE before an action is allowed to start. Both appear in nearly every PLC program.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="examples">Examples</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Scenario</th>
+<th>Interlock / Permissive</th>
+</tr></thead><tbody>
+<tr><td>Reversing starter</td><td>Interlock: can't energize Reverse while Forward is energized</td></tr>
+<tr><td>Conveyor line</td><td>Permissive: downstream must be running before upstream can start</td></tr>
+<tr><td>Guarded cell</td><td>Interlock: robot cannot move when guard door is open</td></tr>
+<tr><td>Hydraulic press</td><td>Permissive: two-hand controls, guard closed, cycle request</td></tr>
+<tr><td>Heated tank</td><td>Interlock: heater disabled without liquid-level sensor covered</td></tr>
+<tr><td>Mixer</td><td>Permissive: lid closed, motor thermal OK, VFD ready</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="programming-patterns">Programming Patterns</h2>
+<h3>Permissive block</h3><pre><code>Conveyor_Ready := Motor_OK
+                  AND Guard_Closed
+                  AND Downstream_Ready
+                  AND NOT Faulted
+                  AND Auto_Mode;
+
+Conveyor_Run_Rung:
+|--| Conveyor_Ready |--| Start_PB |--+--( Conveyor_Run )--|
+                                     |
+                                     +--| Conveyor_Run |--+
+</code></pre><h3>Always roll permissives up into named tags</h3><p>A rung with 12 contacts in series is unreadable at 2 am. Define Conveyor_Ready and the rung becomes one contact.</p>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="safety-vs-logic-interlocks">Safety vs. Logic Interlocks</h2>
+<p>An interlock implemented in ladder protects <em>process</em>, not people. Safety interlocks (E-stop, guard switches, light curtains) must be implemented in hardware or a <a href="../05_PLCs & Automation Hardware/Safety Relays &amp; Safety PLCs.html">safety PLC</a> — see <a href="../12_Safety_Systems_Advanced/Safety Fencing &amp; Interlocks.html">Safety Fencing</a>.</p>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Each permissive has a named tag describing it.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Interlocks tested with deliberate fault injection during commissioning.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Safety interlocks are independent of process interlocks.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Diagnostic display on HMI shows which permissive is missing.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Ladder Logic Basics.html">Ladder Logic Basics</a></li>
+<li><a href="Start-Stop Logic.html">Start-Stop Logic</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Safety Fencing &amp; Interlocks.html">Safety Fencing &amp; Interlocks</a></li>
+<li><a href="Alarms &amp; Fault Detection.html">Alarms &amp; Fault Detection</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

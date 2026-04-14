@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,77 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#core-requirements">Core Requirements</a></li>
+<li><a href="#sccr">SCCR</a></li>
+<li><a href="#common-mistakes">Common Mistakes</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">11_Standards_and_Codes</span><span class="bc-sep"> / </span><span class="bc-current">UL 508A – Control Panels</span></nav>
         <h1 class="page-title">UL 508A – Control Panels</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Standards &amp; Codes</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">UL 508A</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#UL508A</span> <span class="tag">#panel</span> <span class="tag">#SCCR</span> <span class="tag">#listing</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Standards &amp; Codes</code><br/><strong>Tags:</strong> <code>#UL508A #panel #SCCR #listing</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>UL 508A is the North American standard for industrial control panels. If your panel needs a UL listing (most AHJs require it), it must be built by a UL 508A shop to UL 508A rules.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="core-requirements">Core Requirements</h2>
+<ul><li>Components must be individually listed or recognized (UL Listed, UR, CSA).</li><li>Short-Circuit Current Rating (SCCR) documented on the panel nameplate.</li><li>Wire and component sizing per the standard's tables.</li><li>Spacing and insulation per voltage class.</li><li>Grounding and bonding of enclosure parts.</li><li>Protective devices coordinated with SCCR.</li><li>Panel nameplate with listing mark, voltage, current, SCCR, and builder ID.</li></ul>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="sccr">SCCR</h2>
+<p>Short-Circuit Current Rating is the maximum fault current the panel can handle at its supply terminals without damage. It is limited by the lowest-rated component in the fault current path. Common values: 5 kA (default), 10 kA, 22 kA, 65 kA, 100 kA. To raise SCCR, use higher-rated components or an approved current-limiting device (Type 2 coordination).</p>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="common-mistakes">Common Mistakes</h2>
+<ul><li>Mixing non-listed components with listed ones — voids the UL listing.</li><li>Claiming default 5 kA SCCR on a panel with a 22 kA service — AHJ rejects it.</li><li>Not using the proper Supplementary Information (SSI) or UL's SI guidance for current limiters.</li><li>Incorrect conductor sizing between the main and branch circuits.</li><li>Shop not UL 508A certified — builder doesn't have authority to apply the label.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> UL 508A shop builds or field-labels the panel.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> All components appear on the UL-approved BOM.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> SCCR documented with worst-case calculation.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Nameplate applied and panel is complete before energizing.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Panel drawing includes SCCR and component listings.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../10_System_Integration_&_Commissioning/Control Panel Layout &amp; BOM.html">Control Panel Layout &amp; BOM</a></li>
+<li><a href="../02_Power_Distribution/Fuses vs Breakers.html">Fuses vs Breakers</a></li>
+<li><a href="NEC 430 – Motors &amp; Controllers.html">NEC 430 – Motors &amp; Controllers</a></li>
+<li><a href="NFPA 79 – Machinery Electrical.html">NFPA 79 – Machinery Electrical</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

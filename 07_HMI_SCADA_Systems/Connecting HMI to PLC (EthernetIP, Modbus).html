@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connecting HMI to PLC (EthernetIP, Modbus) | Industrial Automation Field Guide</title>
+  <title>Connecting HMI to PLC | Industrial Automation Field Guide</title>
   <style>
 
 /* ── Reset ───────────────────────────────────────────────────────────────── */
@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,104 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#common-protocols">Common Protocols</a></li>
+<li><a href="#connection-setup-generic">Connection Setup (Generic)</a></li>
+<li><a href="#typical-failure-modes">Typical Failure Modes</a></li>
+<li><a href="#security">Security</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
-        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">07_HMI_SCADA_Systems</span><span class="bc-sep"> / </span><span class="bc-current">Connecting HMI to PLC (EthernetIP, Modbus)</span></nav>
-        <h1 class="page-title">Connecting HMI to PLC (EthernetIP, Modbus)</h1>
-
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">07_HMI_SCADA_Systems</span><span class="bc-sep"> / </span><span class="bc-current">Connecting HMI to PLC</span></nav>
+        <h1 class="page-title">Connecting HMI to PLC</h1>
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">HMI / SCADA</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#EthernetIP</span> <span class="tag">#Modbus</span> <span class="tag">#OPCUA</span> <span class="tag">#comms</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>HMI / SCADA</code><br/><strong>Tags:</strong> <code>#EthernetIP #Modbus #OPCUA #comms</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Getting the HMI to talk to the PLC reliably is 80% of a field commissioning job. A handful of protocols cover nearly all cases.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="common-protocols">Common Protocols</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
+<thead><tr>
+<th>Protocol</th>
+<th>PLC Family</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</tr></thead><tbody>
+<tr><td>EtherNet/IP (CIP)</td><td>Rockwell, Omron, Opto 22</td><td>Allen-Bradley native. Implicit messaging for I/O, explicit for tags.</td></tr>
+<tr><td>PROFINET</td><td>Siemens</td><td>Dominant in Europe. TIA Portal imports/maps tags natively.</td></tr>
+<tr><td>Modbus TCP</td><td>Almost everyone</td><td>The universal interop protocol; function codes 03, 04, 06, 16.</td></tr>
+<tr><td>Modbus RTU</td><td>Legacy, small devices</td><td>Serial, RS-485, 9600/19200 baud typical</td></tr>
+<tr><td>OPC UA</td><td>Any</td><td>Vendor-neutral, secure. Good for SCADA / IT integration.</td></tr>
+<tr><td>EtherCAT</td><td>Beckhoff, Omron, B&R</td><td>For very fast I/O and motion</td></tr>
+<tr><td>BACnet / LON</td><td>Building automation</td><td>Rare in plant floor, common in HVAC</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="connection-setup-generic">Connection Setup (Generic)</h2>
+<ol><li>Confirm IP addressing and subnet — HMI and PLC must be on same subnet or a route must exist (see <a href="../08_Industrial_Networks_&_Protocols/IP Addressing &amp; Subnetting.html">IP Addressing</a>).</li><li>Open the PLC's remote-access firewall / permissions if any.</li><li>In the HMI project, create a 'device' or 'driver' entry with PLC IP, slot/rack (AB), or connection parameters.</li><li>Test the connection using the HMI software's built-in tag browser.</li><li>Add tags (preferably by browsing) to the HMI tag database.</li><li>Place a quality indicator on the main screen.</li></ol>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<h2 id="typical-failure-modes">Typical Failure Modes</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>Step</th>
+</tr></thead><tbody>
+<tr><td>All tags show ???</td><td>Driver not connected — wrong IP or firewall</td><td>Ping PLC; check port / firewall</td></tr>
+<tr><td>Some tags OK, others ??</td><td>Tag names don't match PLC</td><td>Re-browse and rebind</td></tr>
+<tr><td>Tags update slowly</td><td>Poll rate too fast, too many tags</td><td>Split into update groups</td></tr>
+<tr><td>Intermittent #COMM</td><td>Network issue (switch, cable, duplex mismatch)</td><td>See <a href="../09_Troubleshooting_&_Diagnostics/Network Communication Loss.html">Network Comm Loss</a></td></tr>
+<tr><td>Values correct but writes fail</td><td>Write access denied; tag external-access flag wrong</td><td>Check tag's external access attribute in PLC</td></tr>
+</tbody></table>
+<hr />
+<h2 id="security">Security</h2>
+<ul><li>Use per-user logins on the HMI, not shared accounts.</li><li>Disable unused protocols on the PLC.</li><li>Segregate control network from business network — see <a href="../08_Industrial_Networks_&_Protocols/Industrial Ethernet vs IT Ethernet.html">Industrial vs IT Ethernet</a>.</li><li>Harden OPC UA with certificates, not anonymous connections.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> PLC IP, port, and slot documented on the drawing.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> HMI comms quality visible on screen.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Tag browsing confirmed (not only manual tag entry).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Writes from HMI tested end-to-end.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Protocol logs or traces captured during commissioning.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="HMI Basics.html">HMI Basics</a></li>
+<li><a href="../08_Industrial_Networks_&_Protocols/Common Protocols.html">Common Protocols</a></li>
+<li><a href="../08_Industrial_Networks_&_Protocols/IP Addressing &amp; Subnetting.html">IP Addressing &amp; Subnetting</a></li>
+<li><a href="../09_Troubleshooting_&_Diagnostics/Network Communication Loss.html">Network Communication Loss</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

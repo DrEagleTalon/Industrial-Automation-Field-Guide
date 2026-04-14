@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,92 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#common-causes">Common Causes</a></li>
+<li><a href="#measurements-worth-logging">Measurements Worth Logging</a></li>
+<li><a href="#reference-numbers">Reference Numbers</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">09_Troubleshooting_&amp;_Diagnostics</span><span class="bc-sep"> / </span><span class="bc-current">Motor Overheating &amp; Tripping</span></nav>
         <h1 class="page-title">Motor Overheating &amp; Tripping</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Troubleshooting &amp; Diagnostics</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#motor</span> <span class="tag">#overload</span> <span class="tag">#overheat</span> <span class="tag">#unbalance</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Troubleshooting &amp; Diagnostics</code><br/><strong>Tags:</strong> <code>#motor #overload #overheat #unbalance</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>A motor that trips or runs hot is complaining about something. Before replacing the overload or winding, diagnose what is causing the heat.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="common-causes">Common Causes</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Cause</th>
+<th>Evidence</th>
+<th>Fix</th>
+</tr></thead><tbody>
+<tr><td>Mechanical overload</td><td>High running current, close to FLA or above</td><td>Reduce load, check bearings, realign, clean</td></tr>
+<tr><td>Voltage unbalance</td><td>Phase voltages differ > 1%</td><td>Measure, find the source — often a loose lug upstream</td></tr>
+<tr><td>Single-phasing</td><td>One phase current zero</td><td>Find the open phase — fuse, cable, breaker</td></tr>
+<tr><td>Blocked cooling</td><td>Dust / debris on fan or frame</td><td>Clean frame and fan; verify airflow</td></tr>
+<tr><td>VFD running low-speed too long</td><td>Temp climbs on TEFC motor</td><td>Add blower or use inverter-duty motor</td></tr>
+<tr><td>Ambient too high</td><td>> 40 °C room temp</td><td>Cool the room or derate the motor</td></tr>
+<tr><td>Bearing failure</td><td>Noise, current rising slowly</td><td>Replace bearings; check coupling alignment</td></tr>
+<tr><td>Aged insulation</td><td>Low IR on megger</td><td>Rewind or replace</td></tr>
+<tr><td>Wrong overload setting</td><td>Trips on normal start</td><td>Reset to nameplate FLA; check trip class</td></tr>
+<tr><td>Frequent starts</td><td>Exceeded starts/hour</td><td>VFD or soft-start; schedule starts</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="measurements-worth-logging">Measurements Worth Logging</h2>
+<ul><li>All three line-to-line voltages, running and stopped.</li><li>All three line currents at steady state.</li><li>Percent unbalance (max deviation / average × 100).</li><li>Surface temperature on the motor frame with an IR thermometer.</li><li>Motor winding temperature if a PTC / RTD is fitted.</li><li>Cooling air temperature entering the motor.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="reference-numbers">Reference Numbers</h2>
+<ul><li>Voltage unbalance < 1% is good; 2% causes 15–20% current unbalance; > 5% is a fault.</li><li>TEFC frame temperature ~40–60 °C above ambient is normal at full load.</li><li>Class F motor handles 105 °C rise over 40 °C ambient.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Megger tested and recorded — see <a href="../04_Motor_Control/Motor Megger Testing.html">Megger Testing</a>.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Voltage and current unbalance calculated.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Bearings listened to with a stethoscope.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Frame clear of debris and airflow unobstructed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Overload setting confirmed at FLA.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../04_Motor_Control/Overload Relays.html">Overload Relays</a></li>
+<li><a href="../04_Motor_Control/Motor Megger Testing.html">Motor Megger Testing</a></li>
+<li><a href="../04_Motor_Control/3-Phase Motor Basics.html">3-Phase Motor Basics</a></li>
+<li><a href="VFD Trips &amp; Fault Codes.html">VFD Trips &amp; Fault Codes</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

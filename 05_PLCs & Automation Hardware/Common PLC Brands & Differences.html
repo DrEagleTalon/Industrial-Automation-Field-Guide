@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,87 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#the-big-five">The Big Five</a></li>
+<li><a href="#honorable-mentions">Honorable Mentions</a></li>
+<li><a href="#picking-a-platform">Picking a Platform</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">05_PLCs &amp; Automation Hardware</span><span class="bc-sep"> / </span><span class="bc-current">Common PLC Brands &amp; Differences</span></nav>
         <h1 class="page-title">Common PLC Brands &amp; Differences</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLCs &amp; Automation Hardware</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#rockwell</span> <span class="tag">#siemens</span> <span class="tag">#omron</span> <span class="tag">#mitsubishi</span> <span class="tag">#schneider</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLCs &amp; Automation Hardware</code><br/><strong>Tags:</strong> <code>#rockwell #siemens #omron #mitsubishi #schneider</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Every major PLC vendor follows IEC 61131-3 broadly, but the software, hardware, and philosophy differ. Knowing the strengths and quirks helps you pick tools, hire techs, and work on existing machines without surprises.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="the-big-five">The Big Five</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Brand</th>
+<th>Platforms</th>
+<th>Software</th>
+<th>Notable Quirks</th>
+</tr></thead><tbody>
+<tr><td>Rockwell / Allen-Bradley</td><td>ControlLogix, CompactLogix, Micro800, MicroLogix</td><td>Studio 5000 Logix Designer, Connected Components</td><td>Tag-based data, AOIs, Ethernet/IP native. Dominant in North America.</td></tr>
+<tr><td>Siemens</td><td>S7-1500, S7-1200, S7-300 (legacy), S7-400 (legacy), LOGO!</td><td>TIA Portal</td><td>Dominant in Europe. PROFINET native. Powerful SCL (Structured Text) implementation.</td></tr>
+<tr><td>Schneider Electric</td><td>Modicon M580/M340, M221</td><td>EcoStruxure Machine Expert, Unity Pro, Control Expert</td><td>Tight integration with their HMIs (Magelis) and drives (Altivar).</td></tr>
+<tr><td>Mitsubishi</td><td>MELSEC iQ-R, iQ-F, Q, FX</td><td>GX Works3</td><td>Very common in Asia. Compact form factor. Fast execution.</td></tr>
+<tr><td>Omron</td><td>NJ/NX, CJ2, CP1</td><td>Sysmac Studio</td><td>Motion-control strong. EtherCAT native on NJ/NX.</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="honorable-mentions">Honorable Mentions</h2>
+<ul><li>Beckhoff TwinCAT — software-PLC running on industrial PC, EtherCAT native, popular in high-performance motion.</li><li>B&R Automation — integrated machine-control platform, now owned by ABB.</li><li>Phoenix Contact / WAGO — PC-based and IEC 61131-3 open platforms.</li><li>AutomationDirect (Productivity, CLICK, Do-more) — low-cost US brand, straightforward software.</li><li>IDEC, Keyence — panel-mount micro PLCs for small OEM machines.</li><li>GE (now Emerson) PACSystems — process-heavy.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="picking-a-platform">Picking a Platform</h2>
+<ul><li>Does the plant already standardize on a brand? Match it — spares, training, support matter more than 'which is best'.</li><li>Does the OEM require a specific brand? Machine warranty often depends on not swapping the controller.</li><li>Is motion required? EtherCAT-based (Beckhoff, Omron NJ, Kollmorgen, B&R) give you the easiest path.</li><li>Is safety required? <a href="Safety Relays &amp; Safety PLCs.html">Safety PLCs</a> are brand-specific — plan early.</li><li>Are ladder programmers in the labor market? Rockwell dominates for that skillset in North America.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Firmware, software, and license info archived in the panel binder.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Vendor support contract valid for the deployed firmware.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Replacement strategy: identical module in spares or same firmware family.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> IDE installation media + license archived off-machine.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="What is a PLC.html">What is a PLC</a></li>
+<li><a href="../11_Standards_and_Codes/IEC 61131-3 – PLC Programming.html">IEC 61131-3 – PLC Programming</a></li>
+<li><a href="../08_Industrial_Networks_&_Protocols/Common Protocols.html">Common Protocols</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

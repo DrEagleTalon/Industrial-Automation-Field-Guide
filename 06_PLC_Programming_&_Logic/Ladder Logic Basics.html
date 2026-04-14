@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,96 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#program-organization">Program Organization</a></li>
+<li><a href="#common-mistakes">Common Mistakes</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">06_PLC_Programming_&amp;_Logic</span><span class="bc-sep"> / </span><span class="bc-current">Ladder Logic Basics</span></nav>
         <h1 class="page-title">Ladder Logic Basics</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLC Programming &amp; Logic</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 61131-3</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#ladder</span> <span class="tag">#LD</span> <span class="tag">#IEC61131</span> <span class="tag">#rung</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLC Programming &amp; Logic</code><br/><strong>Tags:</strong> <code>#ladder #LD #IEC61131 #rung</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Ladder logic (LD) is a graphical PLC programming language that mimics relay schematics. It's the most common and the easiest for electricians to read because every rung looks like a control wire.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h3>The ladder</h3><p>Two vertical rails represent power. Horizontal rungs between them contain contacts (inputs) and coils (outputs). A rung 'executes' when there is a continuous path of true contacts from left rail to right rail.</p><h3>Core contacts and coils</h3><table>
+<thead><tr>
+<th>Symbol</th>
+<th>Name</th>
+<th>Meaning</th>
+</tr></thead><tbody>
+<tr><td>-| |-</td><td>NO contact (XIC)</td><td>Passes power when the tag is TRUE</td></tr>
+<tr><td>-|/|-</td><td>NC contact (XIO)</td><td>Passes power when the tag is FALSE</td></tr>
+<tr><td>-( )-</td><td>Output coil (OTE)</td><td>Tag equals the rung state</td></tr>
+<tr><td>-(L)-</td><td>Latch (OTL)</td><td>Sets the tag TRUE when rung is true; stays set</td></tr>
+<tr><td>-(U)-</td><td>Unlatch (OTU)</td><td>Resets a latched tag</td></tr>
+<tr><td>-[ONS]-</td><td>One-shot</td><td>TRUE for one scan on rising edge</td></tr>
+</tbody></table><h3>Sample rung</h3><pre><code>|--| StartPB |--+--| Running |--+--( Running )--|
+               |                |
+               +--| SealIn |----+
+
+Rung reads: 'Start PB OR (SealIn AND Running) -> Running'
+A textbook <a href="Start-Stop Logic.html">start-stop</a> rung.
+</code></pre>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="program-organization">Program Organization</h2>
+<ul><li>Use routines or program blocks for each machine function (Filler, Capper, Conveyor).</li><li>Keep one function per routine; name tags descriptively (Conveyor1_Motor_Running, not M103).</li><li>Use Add-On Instructions (AOIs) / Function Blocks for repeated logic.</li><li>Tasks: periodic task for control logic, continuous for slower things, event-triggered for interrupts.</li></ul>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="common-mistakes">Common Mistakes</h2>
+<ul><li>Dual-coil: the same output written on two different rungs — last rung wins; the first appears dead.</li><li>Latches without an obvious reset — leaves outputs stuck after a fault.</li><li>No first-scan initialization for retentive tags — unknown state after a power cycle.</li><li>Relying on scan order between unrelated routines — tasks may be re-ordered.</li><li>Hard-coded timer presets instead of configuration tags.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Every coil has exactly one rung that writes it.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> First-scan logic initializes retained outputs to a safe state.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Function block / AOI version documented and locked.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Rung comments explain intent, not just the symbol names.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Safety logic is <em>not</em> in ladder on a standard PLC — use a safety PLC.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Boolean Logic Review.html">Boolean Logic Review</a></li>
+<li><a href="Start-Stop Logic.html">Start-Stop Logic</a></li>
+<li><a href="Set - Reset Latch.html">Set - Reset Latch</a></li>
+<li><a href="Timers (TON - TOF - TP).html">Timers (TON - TOF - TP)</a></li>
+<li><a href="../05_PLCs & Automation Hardware/What is a PLC.html">What is a PLC</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

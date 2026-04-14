@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,127 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#open-vs-closed-transition">Open vs. Closed Transition</a></li>
 <li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
 <li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Star-Delta Starters</span></nav>
         <h1 class="page-title">Star-Delta Starters</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 60947-4-1, NEC 430</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Three contactors, timer, overload, 6-lead motor</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#stardelta</span> <span class="tag">#wyedelta</span> <span class="tag">#reducedvoltage</span> <span class="tag">#starter</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#stardelta #wyedelta #reducedvoltage #starter</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>A star-delta (wye-delta) starter reduces inrush current on large motors by starting the motor in wye — where each winding sees 1/√3 of line voltage — and then transitioning to delta for normal running. It's an older, purely electromechanical reduced-voltage method, still common on pumps, fans, and compressors between roughly 15 HP and 200 HP.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h3>Why star (wye) lowers inrush</h3><p>In wye connection each phase winding sees line voltage divided by √3. Voltage per winding is ~58% of delta, so starting current drops to about 33% of a DOL start and starting torque drops to about 33% of full. The motor must have access to all six winding ends (a 6-lead motor).</p><h3>The three contactors</h3><ul><li><strong>Main (M)</strong> — connects line to motor terminals U1, V1, W1.</li><li><strong>Star (S)</strong> — shorts motor terminals U2, V2, W2 together to form the neutral of the wye.</li><li><strong>Delta (D)</strong> — connects motor terminals U2, V2, W2 back to the other end of the windings (L3, L1, L2 in the classic cross-connection) to form the delta.</li></ul><h3>Sequence of operation</h3><ol><li>M + S energize together → motor runs in wye at reduced voltage.</li><li>Timer (typically 5–15 s) counts.</li><li>S drops out → brief open transition.</li><li>D energizes → motor is in delta, full voltage.</li></ol>
+<hr />
+<h2 id="open-vs-closed-transition">Open vs. Closed Transition</h2>
+<p>Open-transition star-delta opens all contactors briefly between star and delta — the motor coasts free for a few cycles and a current spike occurs on delta pickup. Closed-transition adds a transition resistor bank so the windings never fully disconnect; it is gentler on the motor and supply but costs more and is rarely used anymore. If you need a smoother profile, a <a href="Soft Starters.html">soft starter</a> or VFD is the modern answer.</p>
+<hr />
+<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>Power (6-lead motor):
+  L1 L2 L3
+     \ | /
+     [M contactor]
+      | | |
+      U1 V1 W1  (motor winding 'starts')
+      U2 V2 W2  (motor winding 'ends')
+       \ | /
+       [S] --- shorts U2 V2 W2 together (wye point)
+      or
+       [D] --- cross-connects U2-L3, V2-L1, W2-L2 (delta)
+
+Control sequence:
+  Start  -> M + S energize
+  Timer  -> drop S
+          -> energize D after short dead-band
+  Stop   -> M drops; D drops
+</code></pre>
 <hr />
 <h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Parameter</th>
-<th>Typical Value / Range</th>
+<th>Value</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+</tr></thead><tbody>
+<tr><td>Starting current</td><td>≈ 33% of DOL</td><td>About 200% FLA</td></tr>
+<tr><td>Starting torque</td><td>≈ 33% of full</td><td>Verify motor can accelerate load</td></tr>
+<tr><td>Transition time (open)</td><td>50–200 ms</td><td>Keep short to avoid large re-accel surge</td></tr>
+<tr><td>Transition timer</td><td>5–20 s</td><td>Tuned to driven-load acceleration time</td></tr>
+<tr><td>Motor connection</td><td>6-lead, designed for delta at line voltage</td><td>Cannot use a delta-only motor</td></tr>
+<tr><td>Overload location</td><td>Downstream of the contactors, sized for delta-run line current (≈ FLA / √3 if placed inside the winding loop)</td><td>Consult drawing</td></tr>
+</tbody></table>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
 <th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>Tools Needed</th>
+</tr></thead><tbody>
+<tr><td>Big current spike at transition</td><td>Timer too long — motor slowed too much</td><td>Shorten transition timer</td><td>Stopwatch, clamp meter</td></tr>
+<tr><td>Won't transition to delta</td><td>Timer or D coil fault, S aux stuck closed</td><td>Check sequence on control wiring</td><td>DMM, ladder print</td></tr>
+<tr><td>Trips in wye</td><td>Overload mis-wired or set wrong; load too heavy for 33% torque</td><td>Verify overload position and setting</td><td>Datasheet</td></tr>
+<tr><td>Motor hums in star, never picks up</td><td>Motor load too high to accelerate at 33% torque</td><td>Move to soft-starter or VFD</td><td>Application review</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Motor is 6-lead, rated for delta at line voltage.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Interlock aux contacts wired so S and D can never be on at once.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Transition timer tuned to the actual load — not left at factory default.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Overload sized and located correctly.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Labeling of U1/V1/W1/U2/V2/W2 matches motor and drawing.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Consider replacement with soft-starter or VFD for new installs.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Direct-On-Line Starters.html">Direct-On-Line Starters</a></li>
+<li><a href="Soft Starters.html">Soft Starters</a></li>
+<li><a href="Variable Frequency Drives (VFDs) Basics.html">Variable Frequency Drives (VFDs) Basics</a></li>
+<li><a href="Motor Contactors &amp; Starters.html">Motor Contactors &amp; Starters</a></li>
+<li><a href="3-Phase Motor Basics.html">3-Phase Motor Basics</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

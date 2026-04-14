@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,100 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#alarm-design-principles">Alarm Design Principles</a></li>
+<li><a href="#typical-plc-structure">Typical PLC Structure</a></li>
+<li><a href="#data-structure">Data Structure</a></li>
+<li><a href="#fault-vs-alarm">Fault vs. Alarm</a></li>
+<li><a href="#isa-182-alarm-management">ISA-18.2 Alarm Management</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">06_PLC_Programming_&amp;_Logic</span><span class="bc-sep"> / </span><span class="bc-current">Alarms &amp; Fault Detection</span></nav>
         <h1 class="page-title">Alarms &amp; Fault Detection</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLC Programming &amp; Logic</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#alarm</span> <span class="tag">#fault</span> <span class="tag">#diagnostics</span> <span class="tag">#HMI</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLC Programming &amp; Logic</code><br/><strong>Tags:</strong> <code>#alarm #fault #diagnostics #HMI</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Good alarm logic tells an operator what is wrong, not that something is wrong. Bad alarm logic generates alarm storms, trains operators to ignore them, and hides the real problem when it matters.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="alarm-design-principles">Alarm Design Principles</h2>
+<ul><li>Every alarm has a unique ID, a clear message, and a documented response.</li><li>Alarms are latched in logic so a transient fault still appears on the HMI.</li><li>Alarms are cleared by an explicit Acknowledge + Reset sequence — not auto-cleared.</li><li>Severity classes: Info / Warning / Alarm / Critical Shutdown.</li><li>Avoid double-alarming — if A causes B, suppress B while A is active.</li><li>Time-stamp every alarm at the PLC (scan-synchronous), not at the HMI.</li></ul>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="typical-plc-structure">Typical PLC Structure</h2>
+<pre><code>Alarm 'Conveyor Jam':
+  Condition:   Motor_Running AND NOT Zero_Speed_Sensor AND Delay.DN
+  Latch:       RS with ack as reset
+  Action:      Stop motor, set machine to Faulted state
+  HMI ID:      AL_Conv1_Jam
+  Message:     'Conveyor 1 jam detected, clear debris and reset'
+</code></pre>
+<hr />
+<h2 id="data-structure">Data Structure</h2>
+<p>Use a UDT / struct with the fields below so every alarm has the same shape.</p>
+<p>Fields: ID (int), Active (bool), Latched (bool), Ack (bool), Severity (int), Message (string), TimeStamp (DT), Value (real), SetPoint (real).</p>
+<hr />
+<h2 id="fault-vs-alarm">Fault vs. Alarm</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th></th>
+<th>Alarm</th>
+<th>Fault</th>
+</tr></thead><tbody>
+<tr><td>Effect on machine</td><td>Usually keeps running, notifies operator</td><td>Shuts down or pauses the sequence</td></tr>
+<tr><td>Reset</td><td>Acknowledge</td><td>Acknowledge + explicit reset + conditions cleared</td></tr>
+<tr><td>Typical examples</td><td>High temperature, low pressure warning</td><td>E-stop active, motor overload tripped, drive fault</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="isa-182-alarm-management">ISA-18.2 Alarm Management</h2>
+<p>The ISA-18.2 standard sets rationalization rules: every alarm should be operable, unique, timely, necessary. Worth reading if you're drowning in alarms.</p>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Alarm list maintained as a separate document with messages and responses.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Each alarm has an HMI message and a diagnostic help entry.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Alarm history logged with timestamps.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Acknowledge and reset behavior tested.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Suppression logic prevents alarm storms during normal shutdowns.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Set - Reset Latch.html">Set - Reset Latch</a></li>
+<li><a href="Interlocking &amp; Permissives.html">Interlocking &amp; Permissives</a></li>
+<li><a href="../07_HMI_SCADA_Systems/Tag Management &amp; Alarms.html">Tag Management &amp; Alarms</a></li>
+<li><a href="../09_Troubleshooting_&_Diagnostics/General Troubleshooting Methodology.html">General Troubleshooting Methodology</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

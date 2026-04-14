@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,85 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#integration-checklist">Integration Checklist</a></li>
+<li><a href="#common-pitfalls">Common Pitfalls</a></li>
+<li><a href="#recommended-architecture">Recommended Architecture</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">10_System_Integration_&amp;_Commissioning</span><span class="bc-sep"> / </span><span class="bc-current">PLC-HMI-VFD Integration</span></nav>
         <h1 class="page-title">PLC-HMI-VFD Integration</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">System Integration &amp; Commissioning</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#integration</span> <span class="tag">#PLC</span> <span class="tag">#HMI</span> <span class="tag">#VFD</span> <span class="tag">#commissioning</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>System Integration &amp; Commissioning</code><br/><strong>Tags:</strong> <code>#integration #PLC #HMI #VFD #commissioning</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Pulling the PLC, HMI, and drives together into a single working system is its own skill. Each alone is simple; the integration is where pieces disagree on protocol, timing, addresses, and fault handling.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="integration-checklist">Integration Checklist</h2>
+<ol><li>IP plan published and matched by all devices. See <a href="../08_Industrial_Networks_&_Protocols/IP Addressing &amp; Subnetting.html">IP Addressing</a>.</li><li>PLC communication modules configured for the drive and HMI protocols.</li><li>Drive added to PLC controller organizer with correct EDS / GSD / ESI file.</li><li>Connection parameters (RPI, slot, connection timeout) tuned.</li><li>HMI connected, tags imported, faceplates instantiated.</li><li>Alarms propagated from drive faults to PLC and onward to HMI.</li><li>Commands and status mapped both ways for drive control.</li><li>Speed reference path validated (local vs. remote).</li><li>Safety interlocks verified — drive Safe-Torque-Off, emergency stop.</li><li>Recovery from power cycle and network loss tested.</li></ol>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+<ul><li>EDS file revision doesn't match drive firmware — configuration errors appear subtle.</li><li>Command source parameter left in keypad mode after bench testing.</li><li>HMI button writes directly to the drive tag, bypassing PLC sequence logic.</li><li>Drive's network-loss reaction set to 'maintain last speed' for a hoist.</li><li>Drive parameters not saved to flash after commissioning — first power cycle clears them.</li><li>Time sync missing — alarms across PLC / drive / HMI don't line up.</li></ul>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="recommended-architecture">Recommended Architecture</h2>
+<pre><code>HMI ---(tags)--- PLC ---(implicit I/O)--- Drive
+                 |
+                 +-- state machine / interlocks / sequence
+                 |
+                 +-- alarm aggregation
+
+Operator buttons go to PLC tags, NEVER directly to drive control bits.
+PLC is the single source of truth for drive commands.
+</code></pre>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Parameter file archived for each drive.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> PLC program archived; HMI project archived.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Alarm propagation verified by deliberate fault injection.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Manual override (local/remote) tested.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> System runs through a complete cycle with no operator intervention.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Commissioning report signed — see <a href="Commissioning Reports &amp; Sign-off.html">Commissioning Reports</a>.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Startup Sequences.html">Startup Sequences</a></li>
+<li><a href="Commissioning Reports &amp; Sign-off.html">Commissioning Reports &amp; Sign-off</a></li>
+<li><a href="../04_Motor_Control/VFD Parameters &amp; Setup.html">VFD Parameters &amp; Setup</a></li>
+<li><a href="../07_HMI_SCADA_Systems/Connecting HMI to PLC (EthernetIP, Modbus).html">Connecting HMI to PLC (EthernetIP, Modbus)</a></li>
+<li><a href="../06_PLC_Programming_&_Logic/HMI IO Tags &amp; Linking.html">HMI IO Tags &amp; Linking</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

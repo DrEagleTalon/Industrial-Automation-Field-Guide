@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,80 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#the-method">The Method</a></li>
+<li><a href="#divide-conquer">Divide &amp; Conquer</a></li>
+<li><a href="#safety-first">Safety First</a></li>
+<li><a href="#documentation-habits">Documentation Habits</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">09_Troubleshooting_&amp;_Diagnostics</span><span class="bc-sep"> / </span><span class="bc-current">General Troubleshooting Methodology</span></nav>
         <h1 class="page-title">General Troubleshooting Methodology</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Troubleshooting &amp; Diagnostics</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#troubleshooting</span> <span class="tag">#method</span> <span class="tag">#divideandconquer</span> <span class="tag">#rootcause</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Troubleshooting &amp; Diagnostics</code><br/><strong>Tags:</strong> <code>#troubleshooting #method #divideandconquer #rootcause</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Good troubleshooting is a disciplined process, not a talent. A junior tech with a clean method will out-diagnose a senior tech working on intuition every time.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="the-method">The Method</h2>
+<ol><li><strong>Verify the problem</strong> — witness it or reproduce it; don't work from second-hand reports alone.</li><li><strong>Check what changed</strong> — 90% of new problems come from a recent change (software, parts, parameters, maintenance).</li><li><strong>Gather evidence</strong> — fault codes, alarms, recent history, operator description.</li><li><strong>Form a hypothesis</strong> — what's the simplest explanation that fits the evidence?</li><li><strong>Test safely</strong> — one thing at a time, reversible steps first.</li><li><strong>Confirm root cause</strong> — not just the symptom. If you can't explain <em>why</em>, you'll see it again.</li><li><strong>Document</strong> — for yourself (next time) and for the team.</li></ol>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="divide-conquer">Divide &amp; Conquer</h2>
+<ul><li>Break the system into halves and test at the boundary.</li><li>For signal problems, measure upstream and downstream of suspect component.</li><li>For logic problems, test one permissive at a time.</li><li>For network problems, test physical layer before protocol.</li></ul>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="safety-first">Safety First</h2>
+<ul><li>LOTO before any work inside a panel. See <a href="../01_Electrical_Fundamentals/Lockout Tagout (LOTO) Procedures.html">LOTO</a>.</li><li>PPE rated for the available fault current and arc flash.</li><li>Never bypass a safety device to 'check something quickly'.</li><li>Two hands on the meter — one behind your back when probing live.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="documentation-habits">Documentation Habits</h2>
+<ul><li>Log the symptom, cause, and fix for every non-trivial event.</li><li>Record meter readings, fault codes, timestamps.</li><li>Update the schematic if the field wiring doesn't match.</li><li>Photograph the condition before you touch anything you can't easily restore.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Problem reproduced and described precisely.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Recent changes identified and ruled in or out.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Evidence collected before parts are swapped.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Root cause documented — not just 'replaced contactor'.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Power Circuit Faults.html">Power Circuit Faults</a></li>
+<li><a href="Control Circuit Faults.html">Control Circuit Faults</a></li>
+<li><a href="../14_Soft_Skills_Workflow/Reading Schematics &amp; Wiring Diagrams.html">Reading Schematics &amp; Wiring Diagrams</a></li>
+<li><a href="../14_Soft_Skills_Workflow/Writing Work Orders &amp; Reports.html">Writing Work Orders &amp; Reports</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,102 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#plc-sizes">PLC Sizes</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">05_PLCs &amp; Automation Hardware</span><span class="bc-sep"> / </span><span class="bc-current">What is a PLC</span></nav>
         <h1 class="page-title">What is a PLC</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLCs &amp; Automation Hardware</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 61131-1, IEC 61131-2</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">ControlLogix, CompactLogix, S7-1500, Modicon, Omron</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#PLC</span> <span class="tag">#controller</span> <span class="tag">#scan</span> <span class="tag">#automation</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLCs &amp; Automation Hardware</code><br/><strong>Tags:</strong> <code>#PLC #controller #scan #automation</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>A Programmable Logic Controller (PLC) is a purpose-built industrial computer that executes control programs deterministically in a repeating scan. It reads inputs, runs user logic, and writes outputs — over and over — with predictable timing that ordinary PCs can't match. PLCs replaced rooms full of hard-wired relays in the 1970s and remain the core of discrete and process control today.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h3>What a PLC is</h3><ul><li>A ruggedized controller with CPU, memory, communications, and a chassis or rack of I/O modules.</li><li>Designed for noisy, hot, vibrating, dirty electrical environments.</li><li>Programmed in <a href="../06_PLC_Programming_&_Logic/Ladder Logic Basics.html">Ladder Logic</a>, Structured Text, Function Block, Instruction List, or SFC (see <a href="../11_Standards_and_Codes/IEC 61131-3 – PLC Programming.html">IEC 61131-3</a>).</li><li>Executes a scan cycle (input → logic → output) typically every 1 to 50 milliseconds.</li></ul><h3>The scan cycle</h3><ol><li><strong>Input scan</strong> — all physical inputs are latched into an input image table.</li><li><strong>Program execution</strong> — user logic runs against the input image and updates the output image.</li><li><strong>Output scan</strong> — output image is written to physical output modules.</li><li><strong>Housekeeping</strong> — comms, diagnostics, watchdog, user-task scheduling.</li></ol><h3>Why deterministic scan matters</h3><p>Interlock, emergency stop, and machine timing logic must execute within a known time budget every cycle. A PC running Windows can't guarantee that. A PLC can.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="architecture">Architecture</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr></thead><tbody>
+<tr><td>CPU / processor</td><td>Executes the program, manages tasks, holds the I/O image</td></tr>
+<tr><td>Power supply</td><td>Converts control-panel 24 VDC or 120 VAC to logic voltages</td></tr>
+<tr><td>Backplane / rack</td><td>Carries power and communication between modules</td></tr>
+<tr><td>Discrete I/O</td><td>On/off inputs and outputs — see <a href="Discrete IO Modules.html">Discrete I/O</a></td></tr>
+<tr><td>Analog I/O</td><td>Continuous signals — see <a href="Analog IO Basics.html">Analog I/O</a></td></tr>
+<tr><td>Specialty I/O</td><td>High-speed counter, motion, weigh, thermocouple</td></tr>
+<tr><td>Communications</td><td>Ethernet/IP, PROFINET, Modbus, DeviceNet, serial</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<h2 id="plc-sizes">PLC Sizes</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Class</th>
+<th>Examples</th>
+<th>Typical Use</th>
+</tr></thead><tbody>
+<tr><td>Micro / Nano</td><td>Micro800, LOGO!, CLICK</td><td>Small machines, replaces 10–40 relays</td></tr>
+<tr><td>Small</td><td>MicroLogix, S7-1200, CompactLogix 5370</td><td>OEM machines, small process skids</td></tr>
+<tr><td>Medium</td><td>ControlLogix 5570/5580, S7-1500, CompactLogix 5380</td><td>Lines, cells, typical plant controls</td></tr>
+<tr><td>Large</td><td>ControlLogix 5580 L8x, S7-1500 F, Modicon M580</td><td>High I/O count, redundant, process</td></tr>
+<tr><td>Safety / hybrid</td><td>GuardLogix, S7-1500 F, Modicon Safety</td><td>Functional-safety integrated controllers</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Controller memory sized for program + future growth (target ≤60% used).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Firmware revision documented and matched across development and field.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Communication module IP / node addresses recorded on the drawing.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Battery / NVRAM status noted for legacy platforms.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Backup of running program kept in the panel binder and in version control.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="PLC vs Relay Logic.html">PLC vs Relay Logic</a></li>
+<li><a href="Discrete IO Modules.html">Discrete IO Modules</a></li>
+<li><a href="Analog IO Basics.html">Analog IO Basics</a></li>
+<li><a href="../06_PLC_Programming_&_Logic/Ladder Logic Basics.html">Ladder Logic Basics</a></li>
+<li><a href="../11_Standards_and_Codes/IEC 61131-3 – PLC Programming.html">IEC 61131-3</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>
