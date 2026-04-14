@@ -1,19 +1,19 @@
 ---
 title: "README"
-version: "1.2.0"
+version: "1.4.0"
 status: "Draft"
 author: ["Yusuf Talan Saunders"]
 editors: ["Yusuf Talan Saunders"]
 contributors: ["Yusuf Talan Saunders"]
 category: ["Documentation", "Meta"]
 tags: ["#readme", "#docs", "#meta", "#guide"]
-last-updated: "2025-07-08"
-reviewed: "2025-07-08"
+last-updated: "2026-04-14"
+reviewed: "2026-04-14"
 ---
 
 # Industrial Automation Field Guide
 
-A living, open-source field guide for industrial controls, automation, electrical, process, and systems technicians and engineers.  
+A living, open-source field guide for industrial controls, automation, electrical, process, and systems technicians and engineers.
 
 This guide covers:
 
@@ -26,30 +26,84 @@ This guide covers:
 - Troubleshooting methodologies
 - Preventive & predictive maintenance
 
-## License
+---
 
-This project is licensed under the GNU GPLv3. See the LICENSE file for details.
+## Browse the Field Guide
 
-## Contributing
+- **[Master Table of Contents](markdown/00_Index/Index.md)** — full index of every topic, rendered in markdown for GitHub.
+- **[HTML Site Index](00_Index/Index.html)** — same TOC, rendered for the website.
+- **[Site Landing Page](index.html)** — quick-browse landing page (HTML).
+- **[Markdown Source Mirror](markdown/)** — every `.md` file in a parallel tree, ready to be extracted as a standalone repo.
 
-Contributions are welcome. Please fork the repository, make your changes, and submit a pull request.  
-For style and metadata conventions, see `how-to-use-this-vault.md`.
+### Sections at a Glance
+
+The guide is organized into 14 sections. Each row links to the markdown source (best for reading directly on GitHub) and the rendered HTML pages.
+
+| # | Section | Source (Markdown) | Rendered (HTML) |
+|---|---------|-------------------|-----------------|
+| I    | Electrical Fundamentals             | [markdown/01_Electrical_Fundamentals/](markdown/01_Electrical_Fundamentals/)                       | [01_Electrical_Fundamentals/](01_Electrical_Fundamentals/)                       |
+| II   | Power Distribution & Wiring         | [markdown/02_Power_Distribution/](markdown/02_Power_Distribution/)                                 | [02_Power_Distribution/](02_Power_Distribution/)                                 |
+| III  | Control Devices & Circuits          | [markdown/03_Control_Devices/](markdown/03_Control_Devices/)                                       | [03_Control_Devices/](03_Control_Devices/)                                       |
+| IV   | Motor Control Systems               | [markdown/04_Motor_Control/](markdown/04_Motor_Control/)                                           | [04_Motor_Control/](04_Motor_Control/)                                           |
+| V    | PLCs & Automation Hardware          | [markdown/05_PLCs & Automation Hardware/](markdown/05_PLCs%20%26%20Automation%20Hardware/)         | [05_PLCs & Automation Hardware/](05_PLCs%20%26%20Automation%20Hardware/)         |
+| VI   | PLC Programming & Logic             | [markdown/06_PLC_Programming_&_Logic/](markdown/06_PLC_Programming_%26_Logic/)                     | [06_PLC_Programming_&_Logic/](06_PLC_Programming_%26_Logic/)                     |
+| VII  | HMI / SCADA Systems                 | [markdown/07_HMI_SCADA_Systems/](markdown/07_HMI_SCADA_Systems/)                                   | [07_HMI_SCADA_Systems/](07_HMI_SCADA_Systems/)                                   |
+| VIII | Industrial Networks & Protocols     | [markdown/08_Industrial_Networks_&_Protocols/](markdown/08_Industrial_Networks_%26_Protocols/)     | [08_Industrial_Networks_&_Protocols/](08_Industrial_Networks_%26_Protocols/)     |
+| IX   | Troubleshooting & Diagnostics       | [markdown/09_Troubleshooting_&_Diagnostics/](markdown/09_Troubleshooting_%26_Diagnostics/)         | [09_Troubleshooting_&_Diagnostics/](09_Troubleshooting_%26_Diagnostics/)         |
+| X    | System Integration & Commissioning  | [markdown/10_System_Integration_&_Commissioning/](markdown/10_System_Integration_%26_Commissioning/) | [10_System_Integration_&_Commissioning/](10_System_Integration_%26_Commissioning/) |
+| XI   | Standards & Codes                   | [markdown/11_Standards_and_Codes/](markdown/11_Standards_and_Codes/)                               | [11_Standards_and_Codes/](11_Standards_and_Codes/)                               |
+| XII  | Safety Systems (Advanced)           | [markdown/12_Safety_Systems_Advanced/](markdown/12_Safety_Systems_Advanced/)                       | [12_Safety_Systems_Advanced/](12_Safety_Systems_Advanced/)                       |
+| XIII | Specialty Topics                    | [markdown/13_Specialty_Topics/](markdown/13_Specialty_Topics/)                                     | [13_Specialty_Topics/](13_Specialty_Topics/)                                     |
+| XIV  | Soft Skills & Workflow              | [markdown/14_Soft_Skills_Workflow/](markdown/14_Soft_Skills_Workflow/)                             | [14_Soft_Skills_Workflow/](14_Soft_Skills_Workflow/)                             |
+
+> For the full per-topic list with every page linked, open the **[Master Table of Contents](markdown/00_Index/Index.md)**.
 
 ---
 
-*Created and maintained by Yusuf Talan Saunders.*
+## Repository Layout
 
-*Industrial Automation Field Guide: A living, open-source field guide for industrial controls, automation, electrical, and process technicians and engineers. Covers everything from basic electrical theory, motor control, PLCs, HMIs, SCADA, VFDs, troubleshooting methods, to industrial networking and safety systems.*
+```
+.
+├── 00_Index/                   Table of Contents (HTML, rendered for the site)
+├── 01_Electrical_Fundamentals/ … through …
+├── 14_Soft_Skills_Workflow/    Section folders — rendered HTML pages for the site
+├── instructions/               Vault guide, folder structure doc, page templates (HTML)
+├── markdown/                   Full mirror of every .md file (standalone-repo ready)
+│   ├── 00_Index/Index.md       Master TOC (markdown)
+│   ├── instructions/           Markdown copies of the four guide documents
+│   └── 01_… 14_…/              Section folders with all topic markdown files
+├── scripts/                    Python generators (convert_to_html.py, generate_pages.py, content_*.py)
+├── index.html                  Site landing page
+├── README.md / README.html     This file
+├── CHANGELOG.md / CHANGELOG.html
+└── LICENSE
+```
 
-## How to Use This Vault / Field Guide
+---
 
-This document explains how to maintain, edit, and expand the Industrial Automation Field Guide vault.
+## Instructions & Templates
 
-It includes standards for versioning, descriptions of all YAML properties, and guidelines for adding changelogs.
+The [`instructions/`](instructions/) folder holds the meta-documentation that used to live at the root of the repo. Each document is available as both HTML (rendered for the site) and Markdown (in [`markdown/instructions/`](markdown/instructions/), best for reading on GitHub).
 
-This ensures that anyone contributing to this field guide can follow consistent practices.
-  
-### Versioning System
+| # | Document | Markdown (GitHub) | HTML (site) |
+|---|----------|-------------------|-------------|
+| 01 | **How to Use This Vault** — versioning, YAML frontmatter, editing conventions, local changelog format. | [MD](markdown/instructions/01%20How%20to%20Use%20This%20Vault.md) | [HTML](instructions/01%20How%20to%20Use%20This%20Vault.html) |
+| 02 | **Top-Level Folder Structure** — map of section folders and what belongs where. | [MD](markdown/instructions/02%20Top-Level%20Folder%20Structure.md) | [HTML](instructions/02%20Top-Level%20Folder%20Structure.html) |
+| 03 | **TEMPLATE for Industrial Engineers Field Guide** — filled-out example page showing every section. | [MD](markdown/instructions/03%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.md) | [HTML](instructions/03%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.html) |
+| 04 | **BLANK TEMPLATE for Industrial Engineers Field Guide** — empty page skeleton to copy for new topics. | [MD](markdown/instructions/04%20BLANK%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.md) | [HTML](instructions/04%20BLANK%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.html) |
+
+### Contributing workflow (short version)
+
+1. Read **[01 How to Use This Vault](markdown/instructions/01%20How%20to%20Use%20This%20Vault.md)** for versioning + YAML rules.
+2. Check **[02 Top-Level Folder Structure](markdown/instructions/02%20Top-Level%20Folder%20Structure.md)** to place your page in the right section.
+3. Copy **[04 BLANK TEMPLATE](markdown/instructions/04%20BLANK%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.md)** into the right [`markdown/`](markdown/) section folder and fill it out. Reference **[03 TEMPLATE](markdown/instructions/03%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.md)** for a complete example.
+4. Run `python scripts/convert_to_html.py` to regenerate the HTML output.
+5. Update the master [Index](markdown/00_Index/Index.md) and [CHANGELOG.md](CHANGELOG.md).
+6. Submit a pull request.
+
+---
+
+## Versioning System
 
 The version system follows this structure:
 
@@ -58,190 +112,34 @@ The version system follows this structure:
 - `XX` = MAJOR: Major milestone releases. Significant new sections, major structure changes, or complete reorganizations (for example, adding an entire Robotics section, or restructuring all troubleshooting content).
 - `YY` = MINOR: Adding new topics, new subsections, major new examples, substantial improvements to explanations, or new diagrams and illustrations in existing topics.
 - `ZZ` = PATCH: Minor edits, typo fixes, slight wording changes, small new examples, or other incremental additions.
-  
-#### Examples of Versions
+
+### Examples of Versions
 
 | Version | Meaning                                                                    |
 | ------- | -------------------------------------------------------------------------- |
-| 1.0.0   | First “official” complete draft of the field guide with all core sections. |
+| 1.0.0   | First "official" complete draft of the field guide with all core sections. |
 | 1.1.0   | Added a whole new section on IO-Link Devices.                              |
 | 1.1.3   | Fixed typos in the PLC chapter, added two example diagrams.                |
 | 2.0.0   | Major overhaul: moved Troubleshooting to top, added Learning Paths.        |
 | 2.1.0   | Added SCADA Cloud chapter.                                                 |
 | 2.1.1   | Added two photos of control panels.                                        |
 
-### YAML Example Format & Description of Each YAML Frontmatter Property
+See the full instructions in [01 How to Use This Vault](markdown/instructions/01%20How%20to%20Use%20This%20Vault.md) for YAML property reference, local changelog format, and editing best practices.
 
-Every topic page in this vault starts with a YAML frontmatter block.
-
-This metadata powers advanced linking, querying, and version control throughout the field guide.
-
-It must always be placed at the very top of the markdown file.
-
-#### EXAMPLE YAML PROPERTY FORMAT
+For project-wide history, see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-title: "Motor Contactors"
+## License
 
-version: "1.0.0"
+This project is licensed under the GNU GPLv3. See the [LICENSE](LICENSE) file for details.
 
-status: "final"
+## Contributing
 
-author: ["Yusuf Talan Saunders"]
-
-editors: ["Fatou Cham"]
-
-contributors: ["Rickena Saunders", "Team at Huhtamaki"]
-
-category: ["Motor Control Systems"]
-
-tags: ["#motor", "#starter", "#troubleshooting"]
-
-difficulty: "Intermediate"
-
-related-topics: ["Overload Relays", "Motor Wiring & Rotation Checking"]
-
-standards: ["NEC 430", "IEC 60947-4-1"]
-
-equipment: ["Allen Bradley 100-C09", "Siemens Sirius"]
-
-to-be-completed-by: "2025-09-01"
-
-last-updated: "2025-07-07"
-
-reviewed: "2025-07-07"
+Contributions are welcome. Please fork the repository, make your changes, and submit a pull request. For style and metadata conventions, see [`markdown/instructions/01 How to Use This Vault.md`](markdown/instructions/01%20How%20to%20Use%20This%20Vault.md).
 
 ---
 
-#### title
+*Created and maintained by Yusuf Talan Saunders.*
 
-- The main title of this topic.
-- Does not need to match the filename.
-- Example:  title: "Motor Contactors"
-
-#### version
-
-- Tracks this topic’s specific version, using the field guide’s MAJOR.MINOR.PATCH system.
-- Example: version: "1.0.0"
-
-#### status
-
-- Current editorial or technical status of this topic.
-- Allowed values:
-	- draft
-	- in-review
-	- final  
-- Example:  status: "draft"
-
-##### author
-
-- Original author(s) of this topic page.
-- Type: list of names.
-- Example: author: ["Yusuf Talan Saunders"]
-
-##### editors
-
-- Those who provided editorial review or substantive revisions.
-- Type: list of names.
-- Example: editors: ["Fatou Cham"]
-  
-##### contributors
-
-- Anyone who submitted ideas, field examples, or troubleshooting help.
-- Type: list of names.
-- Example: contributors: ["Rickena Saunders", "Team at Huhtamaki"]
-
-##### category
-
-- The section of the field guide this topic belongs to.
-- Type: list of strings.
-- Examples:
-	- category: ["Motor Control Systems"]
-	- category: ["PLCs & Automation Hardware"]
-	- category: ["Documentation"]
-	- category: ["Meta"]
-
-##### tags
-
-- Free-form hashtags for quick linking and search.
-- Type: list of strings.
-- Example: tags: ["#motor", "#starter", "#fieldguide", "#meta", "#docs"]
-
-##### difficulty
-
-- The technical depth of this topic.
-- Allowed values:  
-	- Beginner
-	- Intermediate
-	- Advanced
-- Example: difficulty: "Intermediate"
-
-##### related-topics
-
-- Points to other topic pages that are closely linked to this one.
-- Type: list of strings.
-- Example: related-topics: ["Overload Relays", "Motor Wiring & Rotation Checking"]
-
-##### standards
-
-- Any official standards or codes referenced on this page.
-- Type: list of strings.
-- Examples:
-	- standards: ["NEC 430", "IEC 60947-4-1"]
-	- standards: ["none"]
-
-##### equipment
-
-- Specific devices, manufacturers, or models discussed on this page.
-- Type: list of strings.
-- Example:
-	- equipment: ["Allen Bradley PowerFlex 525", "Siemens Sirius"]
-	- equipment: ["none"]
-
-##### to-be-completed-by
-
-- The target date for getting this topic to at least in-review state.
-- Example: to-be-completed-by: "2025-09-01"
-
-##### last-updated
-
-- The date of the last meaningful content change on this topic.
-- Example: last-updated: "2025-07-07"
-
-##### reviewed
-
-- The last date this topic was technically reviewed for accuracy.
-- Example: reviewed: "2025-07-07"  
-
-### Best Practices for Editing This Field Guide
-
-Each topic page should end with a ## Local Changelog section. This provides an audit trail for when and why changes were made.
-
-- Always update the version, last-updated, and reviewed fields in the YAML when making any changes.
-- Use the Local Changelog to record what you did, why, and by whom.
-- Keep explanations in clear, concise language with examples relevant to industrial environments.
-- When adding troubleshooting tables, prefer bullet points and short diagnostic instructions.
-- When adding new topics or moving sections, also update the master INDEX.md and CHANGELOG.md.
-
-#### Where to Keep Global Changes
-
-Global changes to the entire field guide — such as reorganizing multiple sections, adding major new chapters, or performing global style edits — should be documented in the root CHANGELOG.md file.
-
-#### Local Changelog Format Example
-
-|Date      |Version|Author              |Notes                                |
-|----------|-------|--------------------|-------------------------------------|
-|2025-07-07|0.1.0  |Yusuf Talan Saunders|initial draft of Motor Contactors    |
-|2025-07-12|0.1.1  |Yusuf Talan Saunders|Added overload wiring diagram        |
-
-
-### Summary of Key Lists for YAML
-
-| Property   | Typical or Allowed Values                           |
-| ---------- | --------------------------------------------------- |
-| status     | draft, in-review, final                             |
-| difficulty | Beginner, Intermediate, Advanced                    |
-| tags       | Always use hashtags, e.g. ["#motor", "#fieldguide"] |
-| standards  | Any standards, or ["none"]                          |
-| equipment  | Specific devices, or ["none"]                       |
+*Industrial Automation Field Guide: A living, open-source field guide for industrial controls, automation, electrical, and process technicians and engineers. Covers everything from basic electrical theory, motor control, PLCs, HMIs, SCADA, VFDs, troubleshooting methods, to industrial networking and safety systems.*
