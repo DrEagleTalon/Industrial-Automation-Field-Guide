@@ -8,3 +8,8 @@ desktop.ini
 *.tmp
 .cache/
 
+# Python bytecode caches
+__pycache__/
+*.pyc
+*.pyo
+

@@ -348,28 +348,18 @@ a:hover { text-decoration: underline; }
       <div id="toc">
       <div class="toc">
 <ul>
-<li><a href="#license">License</a></li>
-<li><a href="#contributing">Contributing</a></li>
-<li><a href="#how-to-use-this-vault-field-guide">How to Use This Vault / Field Guide</a><ul>
+<li><a href="#browse-the-field-guide">Browse the Field Guide</a><ul>
+<li><a href="#sections-at-a-glance">Sections at a Glance</a></li>
+</ul></li>
+<li><a href="#repository-layout">Repository Layout</a></li>
+<li><a href="#instructions-templates">Instructions &amp; Templates</a><ul>
+<li><a href="#contributing-workflow-short-version">Contributing workflow</a></li>
+</ul></li>
 <li><a href="#versioning-system">Versioning System</a><ul>
 <li><a href="#examples-of-versions">Examples of Versions</a></li>
-</ul>
-</li>
-<li><a href="#yaml-example-format-description-of-each-yaml-frontmatter-property">YAML Example Format &amp; Description of Each YAML Frontmatter Property</a><ul>
-<li><a href="#example-yaml-property-format">EXAMPLE YAML PROPERTY FORMAT</a></li>
-<li><a href="#title">title</a></li>
-<li><a href="#version">version</a></li>
-<li><a href="#status">status</a></li>
-</ul>
-</li>
-<li><a href="#best-practices-for-editing-this-field-guide">Best Practices for Editing This Field Guide</a><ul>
-<li><a href="#where-to-keep-global-changes">Where to Keep Global Changes</a></li>
-<li><a href="#local-changelog-format-example">Local Changelog Format Example</a></li>
-</ul>
-</li>
-<li><a href="#summary-of-key-lists-for-yaml">Summary of Key Lists for YAML</a></li>
-</ul>
-</li>
+</ul></li>
+<li><a href="#license">License</a></li>
+<li><a href="#contributing">Contributing</a></li>
 </ul>
 </div>
 
@@ -383,17 +373,17 @@ a:hover { text-decoration: underline; }
         <h1 class="page-title">README</h1>
         <div class="meta-block">
 <div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-draft">Draft</span></span></div>
-<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.2.0</span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.4.0</span></div>
 <div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Documentation, Meta</span></div>
 <div class="meta-row"><span class="meta-label">Author</span><span class="meta-value">Yusuf Talan Saunders</span></div>
-<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2025-07-08</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-14</span></div>
 <div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#readme</span> <span class="tag">#docs</span> <span class="tag">#meta</span> <span class="tag">#guide</span></span></div>
 </div>
       </header>
 
       <article id="content">
 <h1 id="industrial-automation-field-guide">Industrial Automation Field Guide</h1>
-<p>A living, open-source field guide for industrial controls, automation, electrical, process, and systems technicians and engineers.  </p>
+<p>A living, open-source field guide for industrial controls, automation, electrical, process, and systems technicians and engineers.</p>
 <p>This guide covers:</p>
 <ul>
 <li>Basic electrical theory, wiring, and power distribution</li>
@@ -405,19 +395,110 @@ a:hover { text-decoration: underline; }
 <li>Troubleshooting methodologies</li>
 <li>Preventive &amp; predictive maintenance</li>
 </ul>
-<h2 id="license">License</h2>
-<p>This project is licensed under the GNU GPLv3. See the LICENSE file for details.</p>
-<h2 id="contributing">Contributing</h2>
-<p>Contributions are welcome. Please fork the repository, make your changes, and submit a pull request.<br />
-For style and metadata conventions, see <code>how-to-use-this-vault.md</code>.</p>
+
 <hr />
-<p><em>Created and maintained by Yusuf Talan Saunders.</em></p>
-<p><em>Industrial Automation Field Guide: A living, open-source field guide for industrial controls, automation, electrical, and process technicians and engineers. Covers everything from basic electrical theory, motor control, PLCs, HMIs, SCADA, VFDs, troubleshooting methods, to industrial networking and safety systems.</em></p>
-<h2 id="how-to-use-this-vault-field-guide">How to Use This Vault / Field Guide</h2>
-<p>This document explains how to maintain, edit, and expand the Industrial Automation Field Guide vault.</p>
-<p>It includes standards for versioning, descriptions of all YAML properties, and guidelines for adding changelogs.</p>
-<p>This ensures that anyone contributing to this field guide can follow consistent practices.</p>
-<h3 id="versioning-system">Versioning System</h3>
+
+<h2 id="browse-the-field-guide">Browse the Field Guide</h2>
+<ul>
+<li><strong><a href="markdown/00_Index/Index.md">Master Table of Contents</a></strong> &mdash; full index of every topic, rendered in markdown for GitHub.</li>
+<li><strong><a href="00_Index/Index.html">HTML Site Index</a></strong> &mdash; same TOC, rendered for the website.</li>
+<li><strong><a href="index.html">Site Landing Page</a></strong> &mdash; quick-browse landing page (HTML).</li>
+<li><strong><a href="markdown/">Markdown Source Mirror</a></strong> &mdash; every <code>.md</code> file in a parallel tree, ready to be extracted as a standalone repo.</li>
+</ul>
+
+<h3 id="sections-at-a-glance">Sections at a Glance</h3>
+<p>The guide is organized into 14 sections. Each row links to the markdown source (best for reading directly on GitHub) and the rendered HTML pages.</p>
+<table>
+<thead>
+<tr><th>#</th><th>Section</th><th>Source (Markdown)</th><th>Rendered (HTML)</th></tr>
+</thead>
+<tbody>
+<tr><td>I</td><td>Electrical Fundamentals</td><td><a href="markdown/01_Electrical_Fundamentals/">markdown/01_Electrical_Fundamentals/</a></td><td><a href="01_Electrical_Fundamentals/">01_Electrical_Fundamentals/</a></td></tr>
+<tr><td>II</td><td>Power Distribution &amp; Wiring</td><td><a href="markdown/02_Power_Distribution/">markdown/02_Power_Distribution/</a></td><td><a href="02_Power_Distribution/">02_Power_Distribution/</a></td></tr>
+<tr><td>III</td><td>Control Devices &amp; Circuits</td><td><a href="markdown/03_Control_Devices/">markdown/03_Control_Devices/</a></td><td><a href="03_Control_Devices/">03_Control_Devices/</a></td></tr>
+<tr><td>IV</td><td>Motor Control Systems</td><td><a href="markdown/04_Motor_Control/">markdown/04_Motor_Control/</a></td><td><a href="04_Motor_Control/">04_Motor_Control/</a></td></tr>
+<tr><td>V</td><td>PLCs &amp; Automation Hardware</td><td><a href="markdown/05_PLCs%20%26%20Automation%20Hardware/">markdown/05_PLCs &amp; Automation Hardware/</a></td><td><a href="05_PLCs%20%26%20Automation%20Hardware/">05_PLCs &amp; Automation Hardware/</a></td></tr>
+<tr><td>VI</td><td>PLC Programming &amp; Logic</td><td><a href="markdown/06_PLC_Programming_%26_Logic/">markdown/06_PLC_Programming_&amp;_Logic/</a></td><td><a href="06_PLC_Programming_%26_Logic/">06_PLC_Programming_&amp;_Logic/</a></td></tr>
+<tr><td>VII</td><td>HMI / SCADA Systems</td><td><a href="markdown/07_HMI_SCADA_Systems/">markdown/07_HMI_SCADA_Systems/</a></td><td><a href="07_HMI_SCADA_Systems/">07_HMI_SCADA_Systems/</a></td></tr>
+<tr><td>VIII</td><td>Industrial Networks &amp; Protocols</td><td><a href="markdown/08_Industrial_Networks_%26_Protocols/">markdown/08_Industrial_Networks_&amp;_Protocols/</a></td><td><a href="08_Industrial_Networks_%26_Protocols/">08_Industrial_Networks_&amp;_Protocols/</a></td></tr>
+<tr><td>IX</td><td>Troubleshooting &amp; Diagnostics</td><td><a href="markdown/09_Troubleshooting_%26_Diagnostics/">markdown/09_Troubleshooting_&amp;_Diagnostics/</a></td><td><a href="09_Troubleshooting_%26_Diagnostics/">09_Troubleshooting_&amp;_Diagnostics/</a></td></tr>
+<tr><td>X</td><td>System Integration &amp; Commissioning</td><td><a href="markdown/10_System_Integration_%26_Commissioning/">markdown/10_System_Integration_&amp;_Commissioning/</a></td><td><a href="10_System_Integration_%26_Commissioning/">10_System_Integration_&amp;_Commissioning/</a></td></tr>
+<tr><td>XI</td><td>Standards &amp; Codes</td><td><a href="markdown/11_Standards_and_Codes/">markdown/11_Standards_and_Codes/</a></td><td><a href="11_Standards_and_Codes/">11_Standards_and_Codes/</a></td></tr>
+<tr><td>XII</td><td>Safety Systems (Advanced)</td><td><a href="markdown/12_Safety_Systems_Advanced/">markdown/12_Safety_Systems_Advanced/</a></td><td><a href="12_Safety_Systems_Advanced/">12_Safety_Systems_Advanced/</a></td></tr>
+<tr><td>XIII</td><td>Specialty Topics</td><td><a href="markdown/13_Specialty_Topics/">markdown/13_Specialty_Topics/</a></td><td><a href="13_Specialty_Topics/">13_Specialty_Topics/</a></td></tr>
+<tr><td>XIV</td><td>Soft Skills &amp; Workflow</td><td><a href="markdown/14_Soft_Skills_Workflow/">markdown/14_Soft_Skills_Workflow/</a></td><td><a href="14_Soft_Skills_Workflow/">14_Soft_Skills_Workflow/</a></td></tr>
+</tbody>
+</table>
+<blockquote><p>For the full per-topic list with every page linked, open the <strong><a href="markdown/00_Index/Index.md">Master Table of Contents</a></strong>.</p></blockquote>
+
+<hr />
+
+<h2 id="repository-layout">Repository Layout</h2>
+<pre><code>.
+&#9500;&#9472;&#9472; 00_Index/                   Table of Contents (HTML, rendered for the site)
+&#9500;&#9472;&#9472; 01_Electrical_Fundamentals/ &hellip; through &hellip;
+&#9500;&#9472;&#9472; 14_Soft_Skills_Workflow/    Section folders &mdash; rendered HTML pages for the site
+&#9500;&#9472;&#9472; instructions/               Vault guide, folder structure doc, page templates (HTML)
+&#9500;&#9472;&#9472; markdown/                   Full mirror of every .md file (standalone-repo ready)
+&#9474;   &#9500;&#9472;&#9472; 00_Index/Index.md       Master TOC (markdown)
+&#9474;   &#9500;&#9472;&#9472; instructions/           Markdown copies of the four guide documents
+&#9474;   &#9492;&#9472;&#9472; 01_&hellip; 14_&hellip;/              Section folders with all topic markdown files
+&#9500;&#9472;&#9472; scripts/                    Python generators (convert_to_html.py, generate_pages.py, content_*.py)
+&#9500;&#9472;&#9472; index.html                  Site landing page
+&#9500;&#9472;&#9472; README.md / README.html     This file
+&#9500;&#9472;&#9472; CHANGELOG.md / CHANGELOG.html
+&#9492;&#9472;&#9472; LICENSE
+</code></pre>
+
+<hr />
+
+<h2 id="instructions-templates">Instructions &amp; Templates</h2>
+<p>The <a href="instructions/"><code>instructions/</code></a> folder holds the meta-documentation that used to live at the root of the repo. Each document is available as both HTML (rendered for the site) and Markdown (in <a href="markdown/instructions/"><code>markdown/instructions/</code></a>, best for reading on GitHub).</p>
+<table>
+<thead>
+<tr><th>#</th><th>Document</th><th>Markdown (GitHub)</th><th>HTML (site)</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td><strong>How to Use This Vault</strong> &mdash; versioning, YAML frontmatter, editing conventions, local changelog format.</td>
+<td><a href="markdown/instructions/01%20How%20to%20Use%20This%20Vault.md">MD</a></td>
+<td><a href="instructions/01%20How%20to%20Use%20This%20Vault.html">HTML</a></td>
+</tr>
+<tr>
+<td>02</td>
+<td><strong>Top-Level Folder Structure</strong> &mdash; map of section folders and what belongs where.</td>
+<td><a href="markdown/instructions/02%20Top-Level%20Folder%20Structure.md">MD</a></td>
+<td><a href="instructions/02%20Top-Level%20Folder%20Structure.html">HTML</a></td>
+</tr>
+<tr>
+<td>03</td>
+<td><strong>TEMPLATE for Industrial Engineers Field Guide</strong> &mdash; filled-out example page showing every section.</td>
+<td><a href="markdown/instructions/03%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.md">MD</a></td>
+<td><a href="instructions/03%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.html">HTML</a></td>
+</tr>
+<tr>
+<td>04</td>
+<td><strong>BLANK TEMPLATE for Industrial Engineers Field Guide</strong> &mdash; empty page skeleton to copy for new topics.</td>
+<td><a href="markdown/instructions/04%20BLANK%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.md">MD</a></td>
+<td><a href="instructions/04%20BLANK%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.html">HTML</a></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="contributing-workflow-short-version">Contributing workflow (short version)</h3>
+<ol>
+<li>Read <strong><a href="markdown/instructions/01%20How%20to%20Use%20This%20Vault.md">01 How to Use This Vault</a></strong> for versioning + YAML rules.</li>
+<li>Check <strong><a href="markdown/instructions/02%20Top-Level%20Folder%20Structure.md">02 Top-Level Folder Structure</a></strong> to place your page in the right section.</li>
+<li>Copy <strong><a href="markdown/instructions/04%20BLANK%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.md">04 BLANK TEMPLATE</a></strong> into the right <a href="markdown/"><code>markdown/</code></a> section folder and fill it out. Reference <strong><a href="markdown/instructions/03%20TEMPLATE%20for%20Industrial%20Engineers%20Field%20Guide.md">03 TEMPLATE</a></strong> for a complete example.</li>
+<li>Run <code>python scripts/convert_to_html.py</code> to regenerate the HTML output.</li>
+<li>Update the master <a href="markdown/00_Index/Index.md">Index</a> and <a href="CHANGELOG.md">CHANGELOG.md</a>.</li>
+<li>Submit a pull request.</li>
+</ol>
+
+<hr />
+
+<h2 id="versioning-system">Versioning System</h2>
 <p>The version system follows this structure:</p>
 <p><code>XX.YY.ZZ</code></p>
 <ul>
@@ -425,244 +506,39 @@ For style and metadata conventions, see <code>how-to-use-this-vault.md</code>.</
 <li><code>YY</code> = MINOR: Adding new topics, new subsections, major new examples, substantial improvements to explanations, or new diagrams and illustrations in existing topics.</li>
 <li><code>ZZ</code> = PATCH: Minor edits, typo fixes, slight wording changes, small new examples, or other incremental additions.</li>
 </ul>
-<h4 id="examples-of-versions">Examples of Versions</h4>
+
+<h3 id="examples-of-versions">Examples of Versions</h3>
 <table>
 <thead>
-<tr>
-<th>Version</th>
-<th>Meaning</th>
-</tr>
+<tr><th>Version</th><th>Meaning</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>1.0.0</td>
-<td>First “official” complete draft of the field guide with all core sections.</td>
-</tr>
-<tr>
-<td>1.1.0</td>
-<td>Added a whole new section on IO-Link Devices.</td>
-</tr>
-<tr>
-<td>1.1.3</td>
-<td>Fixed typos in the PLC chapter, added two example diagrams.</td>
-</tr>
-<tr>
-<td>2.0.0</td>
-<td>Major overhaul: moved Troubleshooting to top, added Learning Paths.</td>
-</tr>
-<tr>
-<td>2.1.0</td>
-<td>Added SCADA Cloud chapter.</td>
-</tr>
-<tr>
-<td>2.1.1</td>
-<td>Added two photos of control panels.</td>
-</tr>
+<tr><td>1.0.0</td><td>First &quot;official&quot; complete draft of the field guide with all core sections.</td></tr>
+<tr><td>1.1.0</td><td>Added a whole new section on IO-Link Devices.</td></tr>
+<tr><td>1.1.3</td><td>Fixed typos in the PLC chapter, added two example diagrams.</td></tr>
+<tr><td>2.0.0</td><td>Major overhaul: moved Troubleshooting to top, added Learning Paths.</td></tr>
+<tr><td>2.1.0</td><td>Added SCADA Cloud chapter.</td></tr>
+<tr><td>2.1.1</td><td>Added two photos of control panels.</td></tr>
 </tbody>
 </table>
-<h3 id="yaml-example-format-description-of-each-yaml-frontmatter-property">YAML Example Format &amp; Description of Each YAML Frontmatter Property</h3>
-<p>Every topic page in this vault starts with a YAML frontmatter block.</p>
-<p>This metadata powers advanced linking, querying, and version control throughout the field guide.</p>
-<p>It must always be placed at the very top of the markdown file.</p>
-<h4 id="example-yaml-property-format">EXAMPLE YAML PROPERTY FORMAT</h4>
+<p>See the full instructions in <a href="markdown/instructions/01%20How%20to%20Use%20This%20Vault.md">01 How to Use This Vault</a> for YAML property reference, local changelog format, and editing best practices.</p>
+<p>For project-wide history, see <a href="CHANGELOG.html">CHANGELOG</a>.</p>
+
 <hr />
-<p>title: "Motor Contactors"</p>
-<p>version: "1.0.0"</p>
-<p>status: "final"</p>
-<p>author: ["Yusuf Talan Saunders"]</p>
-<p>editors: ["Fatou Cham"]</p>
-<p>contributors: ["Rickena Saunders", "Team at Huhtamaki"]</p>
-<p>category: ["Motor Control Systems"]</p>
-<p>tags: ["#motor", "#starter", "#troubleshooting"]</p>
-<p>difficulty: "Intermediate"</p>
-<p>related-topics: ["Overload Relays", "Motor Wiring &amp; Rotation Checking"]</p>
-<p>standards: ["NEC 430", "IEC 60947-4-1"]</p>
-<p>equipment: ["Allen Bradley 100-C09", "Siemens Sirius"]</p>
-<p>to-be-completed-by: "2025-09-01"</p>
-<p>last-updated: "2025-07-07"</p>
-<p>reviewed: "2025-07-07"</p>
+
+<h2 id="license">License</h2>
+<p>This project is licensed under the GNU GPLv3. See the <a href="LICENSE">LICENSE</a> file for details.</p>
+
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome. Please fork the repository, make your changes, and submit a pull request. For style and metadata conventions, see <a href="markdown/instructions/01%20How%20to%20Use%20This%20Vault.md"><code>markdown/instructions/01 How to Use This Vault.md</code></a>.</p>
+
 <hr />
-<h4 id="title">title</h4>
-<ul>
-<li>The main title of this topic.</li>
-<li>Does not need to match the filename.</li>
-<li>Example:  title: "Motor Contactors"</li>
-</ul>
-<h4 id="version">version</h4>
-<ul>
-<li>Tracks this topic’s specific version, using the field guide’s MAJOR.MINOR.PATCH system.</li>
-<li>Example: version: "1.0.0"</li>
-</ul>
-<h4 id="status">status</h4>
-<ul>
-<li>Current editorial or technical status of this topic.</li>
-<li>Allowed values:<ul>
-<li>draft</li>
-<li>in-review</li>
-<li>final  </li>
-</ul>
-</li>
-<li>Example:  status: "draft"</li>
-</ul>
-<h5 id="author">author</h5>
-<ul>
-<li>Original author(s) of this topic page.</li>
-<li>Type: list of names.</li>
-<li>Example: author: ["Yusuf Talan Saunders"]</li>
-</ul>
-<h5 id="editors">editors</h5>
-<ul>
-<li>Those who provided editorial review or substantive revisions.</li>
-<li>Type: list of names.</li>
-<li>Example: editors: ["Fatou Cham"]</li>
-</ul>
-<h5 id="contributors">contributors</h5>
-<ul>
-<li>Anyone who submitted ideas, field examples, or troubleshooting help.</li>
-<li>Type: list of names.</li>
-<li>Example: contributors: ["Rickena Saunders", "Team at Huhtamaki"]</li>
-</ul>
-<h5 id="category">category</h5>
-<ul>
-<li>The section of the field guide this topic belongs to.</li>
-<li>Type: list of strings.</li>
-<li>Examples:<ul>
-<li>category: ["Motor Control Systems"]</li>
-<li>category: ["PLCs &amp; Automation Hardware"]</li>
-<li>category: ["Documentation"]</li>
-<li>category: ["Meta"]</li>
-</ul>
-</li>
-</ul>
-<h5 id="tags">tags</h5>
-<ul>
-<li>Free-form hashtags for quick linking and search.</li>
-<li>Type: list of strings.</li>
-<li>Example: tags: ["#motor", "#starter", "#fieldguide", "#meta", "#docs"]</li>
-</ul>
-<h5 id="difficulty">difficulty</h5>
-<ul>
-<li>The technical depth of this topic.</li>
-<li>Allowed values:  <ul>
-<li>Beginner</li>
-<li>Intermediate</li>
-<li>Advanced</li>
-</ul>
-</li>
-<li>Example: difficulty: "Intermediate"</li>
-</ul>
-<h5 id="related-topics">related-topics</h5>
-<ul>
-<li>Points to other topic pages that are closely linked to this one.</li>
-<li>Type: list of strings.</li>
-<li>Example: related-topics: ["Overload Relays", "Motor Wiring &amp; Rotation Checking"]</li>
-</ul>
-<h5 id="standards">standards</h5>
-<ul>
-<li>Any official standards or codes referenced on this page.</li>
-<li>Type: list of strings.</li>
-<li>Examples:<ul>
-<li>standards: ["NEC 430", "IEC 60947-4-1"]</li>
-<li>standards: ["none"]</li>
-</ul>
-</li>
-</ul>
-<h5 id="equipment">equipment</h5>
-<ul>
-<li>Specific devices, manufacturers, or models discussed on this page.</li>
-<li>Type: list of strings.</li>
-<li>Example:<ul>
-<li>equipment: ["Allen Bradley PowerFlex 525", "Siemens Sirius"]</li>
-<li>equipment: ["none"]</li>
-</ul>
-</li>
-</ul>
-<h5 id="to-be-completed-by">to-be-completed-by</h5>
-<ul>
-<li>The target date for getting this topic to at least in-review state.</li>
-<li>Example: to-be-completed-by: "2025-09-01"</li>
-</ul>
-<h5 id="last-updated">last-updated</h5>
-<ul>
-<li>The date of the last meaningful content change on this topic.</li>
-<li>Example: last-updated: "2025-07-07"</li>
-</ul>
-<h5 id="reviewed">reviewed</h5>
-<ul>
-<li>The last date this topic was technically reviewed for accuracy.</li>
-<li>Example: reviewed: "2025-07-07"  </li>
-</ul>
-<h3 id="best-practices-for-editing-this-field-guide">Best Practices for Editing This Field Guide</h3>
-<p>Each topic page should end with a ## Local Changelog section. This provides an audit trail for when and why changes were made.</p>
-<ul>
-<li>Always update the version, last-updated, and reviewed fields in the YAML when making any changes.</li>
-<li>Use the Local Changelog to record what you did, why, and by whom.</li>
-<li>Keep explanations in clear, concise language with examples relevant to industrial environments.</li>
-<li>When adding troubleshooting tables, prefer bullet points and short diagnostic instructions.</li>
-<li>When adding new topics or moving sections, also update the master INDEX.md and CHANGELOG.md.</li>
-</ul>
-<h4 id="where-to-keep-global-changes">Where to Keep Global Changes</h4>
-<p>Global changes to the entire field guide — such as reorganizing multiple sections, adding major new chapters, or performing global style edits — should be documented in the root CHANGELOG.md file.</p>
-<h4 id="local-changelog-format-example">Local Changelog Format Example</h4>
-<table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2025-07-07</td>
-<td>0.1.0</td>
-<td>Yusuf Talan Saunders</td>
-<td>initial draft of Motor Contactors</td>
-</tr>
-<tr>
-<td>2025-07-12</td>
-<td>0.1.1</td>
-<td>Yusuf Talan Saunders</td>
-<td>Added overload wiring diagram</td>
-</tr>
-</tbody>
-</table>
-<h3 id="summary-of-key-lists-for-yaml">Summary of Key Lists for YAML</h3>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Typical or Allowed Values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>status</td>
-<td>draft, in-review, final</td>
-</tr>
-<tr>
-<td>difficulty</td>
-<td>Beginner, Intermediate, Advanced</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>Always use hashtags, e.g. ["#motor", "#fieldguide"]</td>
-</tr>
-<tr>
-<td>standards</td>
-<td>Any standards, or ["none"]</td>
-</tr>
-<tr>
-<td>equipment</td>
-<td>Specific devices, or ["none"]</td>
-</tr>
-</tbody>
-</table>
+<p><em>Created and maintained by Yusuf Talan Saunders.</em></p>
+<p><em>Industrial Automation Field Guide: A living, open-source field guide for industrial controls, automation, electrical, and process technicians and engineers. Covers everything from basic electrical theory, motor control, PLCs, HMIs, SCADA, VFDs, troubleshooting methods, to industrial networking and safety systems.</em></p>
       </article>
 
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide &mdash; v1.2.0 &mdash; Draft</p>
+        <p>Industrial Automation Field Guide &mdash; v1.4.0 &mdash; Draft</p>
       </footer>
     </div>
 

@@ -9,7 +9,7 @@ import html as _h
 import re
 import sys
 
-REPO = Path(__file__).parent
+REPO = Path(__file__).resolve().parent.parent
 
 # Read the CSS / shell from an existing page so style stays in sync.
 SHELL_FILE = REPO / "03_Control_Devices" / "Relays & Interposing Relays.html"

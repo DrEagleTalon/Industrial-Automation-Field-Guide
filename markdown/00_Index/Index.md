@@ -31,6 +31,17 @@ reviewed: 2025-07-07
 
 ---
 
+## Instructions & Templates
+
+Start here if you are new to the vault. These meta-documents live in the [instructions](../instructions/) folder.
+
+- [[01 How to Use This Vault]] — versioning, YAML frontmatter, editing conventions, local changelog format.
+- [[02 Top-Level Folder Structure]] — map of section folders and what belongs where.
+- [[03 TEMPLATE for Industrial Engineers Field Guide]] — filled-out example page showing every section.
+- [[04 BLANK TEMPLATE for Industrial Engineers Field Guide]] — empty page skeleton to copy for new topics.
+
+---
+
 ## Table of Contents
 
 > *Use this to navigate. Folder numbers keep things sorted in Obsidian. Individual topics don’t need numbering inside their files.*

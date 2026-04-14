@@ -18,7 +18,7 @@ import sys
 import html as _html
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).parent
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # ── Dependency bootstrap ──────────────────────────────────────────────────────
 
