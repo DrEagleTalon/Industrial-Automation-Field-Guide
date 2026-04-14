@@ -112,7 +112,33 @@ See [01 How to Use This Vault](instructions/01%20How%20to%20Use%20This%20Vault.m
 
 ## License
 
-This project is licensed under the GNU GPLv3. See the LICENSE file for details.
+This repository uses a **split-license model**:
+
+- **Documentation content** (prose, explanations, diagrams, tables, and other non-code educational material) is licensed under **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**. See [../LICENSE](../LICENSE).
+- **Code content** (code snippets, scripts, automation utilities, and executable examples) is licensed under **GNU General Public License v3.0 (GPL-3.0)**. See [../LICENSE-CODE](../LICENSE-CODE).
+
+### What this means in plain English
+
+You are welcome to copy, share, and adapt this project.
+
+- If you use or remix the **documentation**, you must:
+  - Give appropriate credit,
+  - Link to the CC BY-SA 4.0 license,
+  - Indicate if changes were made,
+  - Release adaptations under the same or a compatible ShareAlike license.
+- If you use or redistribute **code**, GPL-3.0 terms apply, including making source available and keeping the same license on derivative code distributions.
+
+### What you can do
+
+- Use this material for learning, internal training, and published derivative work.
+- Reuse and adapt documentation with attribution and ShareAlike.
+- Reuse and modify code under GPL-3.0 requirements.
+
+### What you cannot do
+
+- Remove attribution or imply the original authors endorse your derivative.
+- Re-license CC BY-SA documentation as proprietary/closed.
+- Distribute GPL-covered code derivatives under a non-GPL proprietary license.
 
 ## Contributing
 
