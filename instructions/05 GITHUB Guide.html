@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git-and-github-guide | Industrial Automation Field Guide</title>
+  <style>
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #f4f4f0;
+}
+a { color: #1a56a0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+#layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+#sidebar {
+  background: #1e2736;
+  color: #c8d0dc;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid #141b27;
+  scrollbar-width: thin;
+  scrollbar-color: #2e3a4e transparent;
+}
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-thumb { background: #2e3a4e; border-radius: 3px; }
+
+#sidebar-header {
+  padding: 1.4rem 1.25rem 1.1rem;
+  border-bottom: 1px solid #2e3a4e;
+}
+.site-title {
+  color: #e8ecf1;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+}
+.site-title:hover { text-decoration: none; color: #fff; }
+
+#toc { padding: 1rem 1.25rem; }
+#toc ul { list-style: none; padding: 0; margin: 0; }
+#toc ul li { margin: 0.1rem 0; }
+#toc ul li a {
+  color: #9aa5b4;
+  font-size: 0.8rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  transition: background 0.12s, color 0.12s;
+  line-height: 1.4;
+}
+#toc ul li a:hover { background: #2e3a4e; color: #e8ecf1; text-decoration: none; }
+#toc ul ul { padding-left: 0.85rem; margin-top: 0.05rem; }
+#toc ul ul li a { font-size: 0.75rem; }
+#toc ul ul ul li a { font-size: 0.71rem; color: #6b7585; }
+
+/* ── Main area ───────────────────────────────────────────────────────────── */
+#main {
+  background: #ffffff;
+  padding: 2.5rem 3.5rem;
+  max-width: 960px;
+  min-height: 100vh;
+}
+
+/* ── Breadcrumb ──────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 0.76rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+}
+.bc-sep    { color: #ccc; margin: 0 0.05rem; }
+.bc-part   { color: #888; }
+.bc-current { color: #444; font-weight: 500; }
+
+/* ── Page title ──────────────────────────────────────────────────────────── */
+.page-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Meta block ──────────────────────────────────────────────────────────── */
+.meta-block {
+  border: 1px solid #e4e4de;
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 2rem;
+  background: #fafaf7;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.8rem;
+}
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+}
+.meta-label {
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  font-size: 0.67rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.meta-value { color: #333; }
+
+.status-badge {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.status-final    { background: #d4edda; color: #155724; }
+.status-draft    { background: #fff3cd; color: #856404; }
+.status-inreview { background: #cce5ff; color: #004085; }
+.status-review   { background: #cce5ff; color: #004085; }
+
+.tag {
+  display: inline-block;
+  background: #eef1f8;
+  color: #3b5ea6;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-size: 0.71rem;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* ── Article typography ──────────────────────────────────────────────────── */
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111;
+  margin-top: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+#content h1 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #e6e6e2;
+  padding-bottom: 0.4rem;
+}
+#content h2 {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 0.3rem;
+}
+#content h3 { font-size: 1.1rem; }
+#content h4 { font-size: 1rem; }
+#content h5 { font-size: 0.9rem; }
+#content h6 { font-size: 0.85rem; color: #555; }
+
+#content p { margin-bottom: 1rem; }
+
+#content strong { font-weight: 700; }
+#content em     { font-style: italic; }
+
+#content code {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Courier New", monospace;
+  font-size: 0.84em;
+  background: #f0f0ec;
+  padding: 0.15em 0.38em;
+  border-radius: 3px;
+  border: 1px solid #deded8;
+}
+
+#content pre {
+  background: #1e2736;
+  color: #c8d0dc;
+  padding: 1.15rem 1.4rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.1rem 0 1.4rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  border: 1px solid #141b27;
+}
+#content pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+#content blockquote {
+  border-left: 4px solid #b8c4d0;
+  padding: 0.55rem 1.1rem;
+  margin: 1.1rem 0;
+  background: #f6f7fa;
+  color: #555;
+  border-radius: 0 5px 5px 0;
+}
+#content blockquote p:last-child { margin-bottom: 0; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.6rem;
+}
+#content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+#content thead th {
+  background: #1e2736;
+  color: #e8ecf1;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  font-weight: 600;
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid #141b27;
+}
+#content tbody tr:nth-child(even) { background: #f8f9fa; }
+#content tbody tr:hover { background: #edf1f8; }
+#content tbody td {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #e0e2e6;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────────── */
+#content ul,
+#content ol {
+  padding-left: 1.7rem;
+  margin-bottom: 1rem;
+}
+#content li { margin-bottom: 0.3rem; }
+#content li > ul,
+#content li > ol { margin-top: 0.2rem; margin-bottom: 0; }
+
+/* ── Task / checklist ────────────────────────────────────────────────────── */
+#content li.task {
+  list-style: none;
+  margin-left: -1.7rem;
+  padding-left: 2rem;
+  position: relative;
+}
+#content li.task .checkbox {
+  position: absolute;
+  left: 0.15rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+#content li.task.checked  { color: #555; }
+#content li.task.checked  .checkbox { color: #2e7d32; }
+#content li.task.unchecked .checkbox { color: #888; }
+
+/* ── Horizontal rule ─────────────────────────────────────────────────────── */
+#content hr {
+  border: none;
+  border-top: 1px solid #e6e6e2;
+  margin: 1.75rem 0;
+}
+
+/* ── Broken wikilinks ────────────────────────────────────────────────────── */
+.broken-link {
+  color: #b22222;
+  border-bottom: 1px dashed #b22222;
+  font-style: italic;
+  cursor: not-allowed;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+#page-footer {
+  margin-top: 3.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e6e6e2;
+  font-size: 0.76rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ── Responsive: tablet / mobile ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #layout { grid-template-columns: 1fr; }
+  #sidebar { position: static; height: auto; }
+  #main { padding: 1.75rem 1.5rem; max-width: 100%; }
+  .page-title { font-size: 1.6rem; }
+}
+@media (max-width: 600px) {
+  #main { padding: 1.25rem 1rem; }
+  .page-title { font-size: 1.35rem; }
+  .meta-block { flex-direction: column; gap: 0.35rem; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  #sidebar { display: none; }
+  #layout  { grid-template-columns: 1fr; }
+  #main    { max-width: 100%; padding: 0; box-shadow: none; }
+  #content a::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; }
+  #content pre { background: #f4f4f0; color: #222; border: 1px solid #ccc; }
+  #page-header, #page-footer { page-break-inside: avoid; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="layout">
+
+    <!-- Sidebar / page TOC -->
+    <nav id="sidebar" aria-label="Page contents">
+      <div id="sidebar-header">
+        <a href="../index.html" class="site-title">
+          Industrial Automation<br>Field Guide
+        </a>
+      </div>
+      <div id="toc">
+      <div class="toc">
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#1-why-git-and-why-automation-engineers-keep-getting-burned-by-it">1. Why Git, and Why Automation Engineers Keep Getting Burned by It</a></li>
+<li><a href="#2-the-mental-model-git-is-a-graph-not-a-folder">2. The Mental Model: Git Is a Graph, Not a Folder</a></li>
+<li><a href="#3-the-three-trees-working-index-head">3. The Three Trees: Working, Index, HEAD</a></li>
+<li><a href="#4-setup-and-first-time-configuration">4. Setup and First-Time Configuration</a></li>
+<li><a href="#5-the-basic-loop-add-commit-push">5. The Basic Loop: Add, Commit, Push</a></li>
+<li><a href="#6-branches-what-they-actually-are">6. Branches: What They Actually Are</a></li>
+<li><a href="#7-remotes-origin-upstream-fetch-vs-pull">7. Remotes: Origin, Upstream, Fetch vs. Pull</a></li>
+<li><a href="#8-merging-fast-forward-vs-three-way">8. Merging: Fast-Forward vs. Three-Way</a><ul>
+<li><a href="#fast-forward-merge">Fast-forward merge</a></li>
+<li><a href="#three-way-true-merge">Three-way (true) merge</a></li>
+</ul>
+</li>
+<li><a href="#9-rebasing-what-it-really-does">9. Rebasing: What It Really Does</a></li>
+<li><a href="#10-squashing-and-interactive-rebase">10. Squashing and Interactive Rebase</a></li>
+<li><a href="#11-ahead-behind-and-both-at-the-same-time">11. Ahead, Behind, and Both at the Same Time</a></li>
+<li><a href="#12-conflicts-reading-them-and-resolving-them">12. Conflicts: Reading Them and Resolving Them</a></li>
+<li><a href="#13-undoing-things-reset-revert-restore-reflog">13. Undoing Things: Reset, Revert, Restore, Reflog</a><ul>
+<li><a href="#git-restore-undo-changes-to-files">git restore — undo changes to files</a></li>
+<li><a href="#git-reset-move-head-and-maybe-more">git reset — move HEAD (and maybe more)</a></li>
+<li><a href="#git-revert-create-a-new-commit-that-undoes-an-old-one">git revert — create a new commit that undoes an old one</a></li>
+<li><a href="#git-reflog-the-undo-history-of-your-branch-pointers">git reflog — the undo history of your branch pointers</a></li>
+</ul>
+</li>
+<li><a href="#14-stashing">14. Stashing</a></li>
+<li><a href="#15-tags-and-releases-tying-git-to-plant-state">15. Tags and Releases — Tying Git to Plant State</a></li>
+<li><a href="#16-gitignore-and-gitattributes">16. .gitignore and .gitattributes</a></li>
+<li><a href="#17-git-lfs-and-the-binary-file-problem">17. Git LFS and the Binary File Problem</a></li>
+<li><a href="#18-pull-requests-the-github-workflow">18. Pull Requests: The GitHub Workflow</a></li>
+<li><a href="#19-common-workflows-github-flow-git-flow-trunk-based">19. Common Workflows: GitHub Flow, Git Flow, Trunk-Based</a></li>
+<li><a href="#20-i-broke-my-repo-recovery-scenarios">20. "I Broke My Repo" — Recovery Scenarios</a><ul>
+<li><a href="#i-committed-to-the-wrong-branch">"I committed to the wrong branch."</a></li>
+<li><a href="#i-committed-something-i-shouldnt-have-secrets-wrong-files">"I committed something I shouldn't have (secrets, wrong files)."</a></li>
+<li><a href="#my-working-tree-is-a-mess-and-i-just-want-to-go-back-to-the-last-commit">"My working tree is a mess and I just want to go back to the last commit."</a></li>
+<li><a href="#i-rebased-and-now-everything-is-gone">"I rebased and now everything is gone."</a></li>
+<li><a href="#i-accidentally-deleted-a-branch">"I accidentally deleted a branch."</a></li>
+<li><a href="#i-pushed-to-the-wrong-remote-wrong-branch">"I pushed to the wrong remote / wrong branch."</a></li>
+<li><a href="#nothing-i-try-is-working-and-i-just-want-to-start-over">"Nothing I try is working and I just want to start over."</a></li>
+</ul>
+</li>
+<li><a href="#21-glossary">21. Glossary</a></li>
+</ul>
+</div>
+
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div id="main">
+      <header id="page-header">
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">instructions</span><span class="bc-sep"> / </span><span class="bc-current">git-and-github-guide</span></nav>
+        <h1 class="page-title">git-and-github-guide</h1>
+
+      </header>
+
+      <article id="content">
+<h1 id="git-github-field-guide-for-automation-engineers">Git &amp; GitHub — Field Guide for Automation Engineers</h1>
+<blockquote>
+<p>A reference for engineers and technicians who did not come up through software but now need to version-control code, documentation, schematics, and deliverables. Written plainly, with diagrams, and with the binary-file reality of our trade treated as a first-class concern rather than an afterthought.</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-why-git-and-why-automation-engineers-keep-getting-burned-by-it">Why Git, and Why Automation Engineers Keep Getting Burned by It</a></li>
+<li><a href="#2-the-mental-model-git-is-a-graph-not-a-folder">The Mental Model: Git Is a Graph, Not a Folder</a></li>
+<li><a href="#3-the-three-trees-working-index-head">The Three Trees: Working, Index, HEAD</a></li>
+<li><a href="#4-setup-and-first-time-configuration">Setup and First-Time Configuration</a></li>
+<li><a href="#5-the-basic-loop-add-commit-push">The Basic Loop: Add, Commit, Push</a></li>
+<li><a href="#6-branches-what-they-actually-are">Branches: What They Actually Are</a></li>
+<li><a href="#7-remotes-origin-upstream-fetch-vs-pull">Remotes: Origin, Upstream, Fetch vs. Pull</a></li>
+<li><a href="#8-merging-fast-forward-vs-three-way">Merging: Fast-Forward vs. Three-Way</a></li>
+<li><a href="#9-rebasing-what-it-really-does">Rebasing: What It Really Does</a></li>
+<li><a href="#10-squashing-and-interactive-rebase">Squashing and Interactive Rebase</a></li>
+<li><a href="#11-ahead-behind-and-both-at-the-same-time">Ahead, Behind, and Both at the Same Time</a></li>
+<li><a href="#12-conflicts-reading-them-and-resolving-them">Conflicts: Reading Them and Resolving Them</a></li>
+<li><a href="#13-undoing-things-reset-revert-restore-reflog">Undoing Things: Reset, Revert, Restore, Reflog</a></li>
+<li><a href="#14-stashing">Stashing</a></li>
+<li><a href="#15-tags-and-releases--tying-git-to-plant-state">Tags and Releases — Tying Git to Plant State</a></li>
+<li><a href="#16-gitignore-and-gitattributes">.gitignore and .gitattributes</a></li>
+<li><a href="#17-git-lfs-and-the-binary-file-problem">Git LFS and the Binary File Problem</a></li>
+<li><a href="#18-pull-requests-the-github-workflow">Pull Requests: The GitHub Workflow</a></li>
+<li><a href="#19-common-workflows-github-flow-git-flow-trunk-based">Common Workflows: GitHub Flow, Git Flow, Trunk-Based</a></li>
+<li><a href="#20-i-broke-my-repo--recovery-scenarios">"I Broke My Repo" — Recovery Scenarios</a></li>
+<li><a href="#21-glossary">Glossary</a></li>
+</ol>
+<hr />
+<h2 id="1-why-git-and-why-automation-engineers-keep-getting-burned-by-it">1. Why Git, and Why Automation Engineers Keep Getting Burned by It</h2>
+<p>Git was built for text files that merge cleanly. That is not our world. We deal with PLC project archives, HMI runtime files, AutoCAD electrical drawings, PDFs, and compiled bytecode. Most of these are binary, and Git cannot merge them — it can only replace one with the other. This is the single most important thing to understand before you touch a repo with a <code>.ACD</code> or <code>.apa</code> file in it. Skip ahead to section 17 before you start storing PLC programs.</p>
+<p>That said, Git is still the right tool. It gives you:</p>
+<ul>
+<li>A full history of every change to every file, with author and timestamp.</li>
+<li>The ability to branch off and experiment without fear of losing the known-good version.</li>
+<li>A mechanism for two or more engineers to work the same project and reconcile their changes — for text files automatically, for binary files through a locking discipline.</li>
+<li>Integration with GitHub, which provides review, issue tracking, and off-site backup.</li>
+</ul>
+<p>The cost is a learning curve that is genuinely steep. Git's commands are not named to match what they do — <code>checkout</code> does four different things, <code>reset</code> does three, and <code>rebase</code> does something entirely different from what the word suggests. This guide tries to explain <em>what is actually happening</em> underneath, because once you see the model, the commands stop feeling arbitrary.</p>
+<hr />
+<h2 id="2-the-mental-model-git-is-a-graph-not-a-folder">2. The Mental Model: Git Is a Graph, Not a Folder</h2>
+<p>A Git repository is not a folder of files with versions. It is a <strong>directed acyclic graph</strong> (DAG) of <strong>commits</strong>. Each commit is a complete snapshot of your project at a moment in time, plus a pointer to the commit (or commits) that came before it. Branches are just labels that point at one of those commits. That is the entire model.</p>
+<p>Here is the simplest possible picture:</p>
+<pre><code>    (A) ─── (B) ─── (C) ─── (D)
+                            ▲
+                            │
+                          main
+</code></pre>
+<p>Four commits, <code>A</code> through <code>D</code>. Each arrow means "my parent is." The label <code>main</code> is a pointer to commit <code>D</code>. When you make a new commit on top of <code>D</code>, Git creates commit <code>E</code>, sets its parent to <code>D</code>, and moves the <code>main</code> pointer forward to <code>E</code>:</p>
+<pre><code>    (A) ─── (B) ─── (C) ─── (D) ─── (E)
+                                    ▲
+                                    │
+                                  main
+</code></pre>
+<p>Commits do not change. Once a commit exists, its contents and its parent are permanent and its hash (the 40-character SHA-1 identifier) is permanent with them. What moves is the branch <em>pointer</em>. Internalising this is the single biggest step up in Git fluency: <strong>commits are immutable, branches are pointers, and almost every Git command is either creating a new commit or moving a pointer.</strong></p>
+<p>Rendered as a Mermaid graph so GitHub shows it inline:</p>
+<pre><code class="language-mermaid">gitGraph
+   commit id: &quot;A&quot;
+   commit id: &quot;B&quot;
+   commit id: &quot;C&quot;
+   commit id: &quot;D&quot;
+   commit id: &quot;E&quot;
+</code></pre>
+<hr />
+<h2 id="3-the-three-trees-working-index-head">3. The Three Trees: Working, Index, HEAD</h2>
+<p>Inside your local repository, Git maintains three distinct "trees" — three separate views of your files that you move changes between.</p>
+<pre><code> ┌────────────────────┐    git add      ┌────────────────────┐    git commit   ┌────────────────────┐
+ │                    │  ────────────▶  │                    │  ────────────▶  │                    │
+ │   WORKING TREE     │                 │   INDEX (STAGING)  │                 │   HEAD (REPO)      │
+ │                    │  ◀────────────  │                    │  ◀────────────  │                    │
+ │  what's on disk    │  git restore    │  what will be in   │  git reset      │  the last commit   │
+ │  right now         │                 │  the next commit   │                 │  on current branch │
+ └────────────────────┘                 └────────────────────┘                 └────────────────────┘
+</code></pre>
+<p>The <strong>working tree</strong> is the actual files in your project folder. You edit these directly.</p>
+<p>The <strong>index</strong> (also called the staging area or cache) is a snapshot of what your next commit will look like. When you run <code>git add file.txt</code>, you are copying the current state of <code>file.txt</code> from the working tree <em>into</em> the index. The index is the rehearsal space — you build up exactly the snapshot you want, then commit it.</p>
+<p><strong>HEAD</strong> is a pointer to the current commit on the current branch. It represents "what the repo thinks the last committed state is." When you commit, Git takes the index, writes it as a new commit with HEAD as its parent, and then moves HEAD forward to the new commit.</p>
+<p><code>git status</code> is you asking Git to compare these three trees and tell you where each file stands.</p>
+<pre><code>$ git status
+On branch main
+Changes to be committed:          ← difference between INDEX and HEAD
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+        modified:   routine_main.L5X
+
+Changes not staged for commit:    ← difference between WORKING TREE and INDEX
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+        modified:   io_tags.csv
+
+Untracked files:                  ← in working tree, unknown to index and HEAD
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+        notes.md
+</code></pre>
+<p>Once you see the three trees, <code>git status</code> stops being cryptic and becomes a simple ledger.</p>
+<hr />
+<h2 id="4-setup-and-first-time-configuration">4. Setup and First-Time Configuration</h2>
+<p>Install Git from <a href="https://git-scm.com">https://git-scm.com</a>. On Windows this includes Git Bash, which is where most of the command examples in this guide will run cleanly. Then, one time per machine:</p>
+<pre><code class="language-bash">git config --global user.name  &quot;Your Full Name&quot;
+git config --global user.email &quot;you@example.com&quot;
+git config --global init.defaultBranch main
+git config --global pull.rebase false
+git config --global core.autocrlf true        # Windows
+git config --global core.autocrlf input       # macOS / Linux
+</code></pre>
+<p>The <code>user.name</code> and <code>user.email</code> get embedded in every commit you make — this is how authorship is recorded. Use the same email that is on your GitHub account so commits get attributed correctly in the web UI.</p>
+<p>The <code>core.autocrlf</code> setting handles the Windows-versus-everyone-else line-ending war. On Windows, set it to <code>true</code> so Git converts line endings to Windows style on checkout and back to Unix style on commit. On macOS or Linux, use <code>input</code> so Git does not touch what is already correct.</p>
+<p>For authentication to GitHub, do <strong>not</strong> use a password — GitHub no longer accepts them over HTTPS. Either create a personal access token (Settings → Developer settings → Personal access tokens) and use it as your password when Git prompts, or — better — set up an SSH key:</p>
+<pre><code class="language-bash">ssh-keygen -t ed25519 -C &quot;you@example.com&quot;
+cat ~/.ssh/id_ed25519.pub
+</code></pre>
+<p>Copy the printed public key into GitHub at Settings → SSH and GPG keys → New SSH key. Then clone repos with the <code>git@github.com:...</code> URL instead of <code>https://github.com/...</code> and you will never be asked for credentials again.</p>
+<hr />
+<h2 id="5-the-basic-loop-add-commit-push">5. The Basic Loop: Add, Commit, Push</h2>
+<p>Ninety percent of daily Git work is this loop:</p>
+<pre><code>  edit files  ──▶  git add  ──▶  git commit  ──▶  git push
+     ▲                                                │
+     └────────────────────────────────────────────────┘
+                  (repeat)
+</code></pre>
+<p>In commands:</p>
+<pre><code class="language-bash"># See what you've changed
+git status
+git diff                          # changes not yet staged
+git diff --staged                 # changes staged but not committed
+
+# Stage specific files, or all changes
+git add path/to/file.txt
+git add .                         # everything in current directory
+git add -p                        # interactive: review each change
+
+# Commit with a message
+git commit -m &quot;Add PID tuning notes for CIP supply pump&quot;
+
+# Send to GitHub
+git push
+</code></pre>
+<p><strong>On commit messages.</strong> Write them as if the person reading is you in six months trying to figure out why you did this. The convention that has held up across the industry is a short imperative subject line (50 characters or less, no period), then a blank line, then a longer body explaining the <em>why</em> rather than the <em>what</em>.</p>
+<pre><code>Fix false-trip on tank-1 high-level interlock
+
+The level sensor was reading briefly above setpoint during
+agitator startup due to surface turbulence. Added a 500 ms
+off-delay to the high-level bit before it latches the interlock.
+
+Refs ticket #42.
+</code></pre>
+<p><code>git commit</code> without <code>-m</code> opens your configured editor so you can write the body. Use it for any non-trivial change.</p>
+<hr />
+<h2 id="6-branches-what-they-actually-are">6. Branches: What They Actually Are</h2>
+<p>A branch is a pointer to a commit. That is all. It is a single line of text in a file at <code>.git/refs/heads/&lt;branch-name&gt;</code> containing the hash of the commit it points at. When you "create a branch" you are creating a new pointer. When you "switch branches" you are moving HEAD to point at a different branch pointer. When you "commit on a branch" you are creating a new commit and sliding that branch pointer forward.</p>
+<pre><code>Before creating a branch:                After `git switch -c feature/pid-retune`:
+
+    (A)───(B)───(C)                          (A)───(B)───(C)
+                 ▲                                        ▲
+                 │                                        │
+               main                                  main, feature/pid-retune
+                                                          ▲
+                                                         HEAD
+
+After two commits on the new branch:
+
+    (A)───(B)───(C)───(D)───(E)
+                 ▲           ▲
+                 │           │
+               main          feature/pid-retune
+                             ▲
+                            HEAD
+</code></pre>
+<p>The commands:</p>
+<pre><code class="language-bash">git branch                              # list local branches, * marks current
+git branch -a                           # include remote-tracking branches
+git switch -c feature/pid-retune        # create new branch and switch to it
+git switch main                         # switch to existing branch
+git branch -d feature/pid-retune        # delete a merged branch (safe)
+git branch -D feature/pid-retune        # delete forcefully (unmerged work will be lost)
+</code></pre>
+<p>The older command <code>git checkout</code> still works (<code>git checkout -b</code> to create, <code>git checkout &lt;branch&gt;</code> to switch), and you will see it in every tutorial written before 2020. <code>git switch</code> and <code>git restore</code> were introduced to split <code>checkout</code>'s overloaded behavior into two clearly-named commands. Use the new ones.</p>
+<p><strong>Branch naming.</strong> Pick a convention and hold the line:</p>
+<ul>
+<li><code>main</code> — the known-good line.</li>
+<li><code>feature/&lt;short-description&gt;</code> — new work, short-lived.</li>
+<li><code>fix/&lt;short-description&gt;</code> — bug fixes.</li>
+<li><code>release/&lt;version&gt;</code> — release staging, if you use a release branch model.</li>
+<li><code>hotfix/&lt;ticket&gt;</code> — emergency production fixes.</li>
+</ul>
+<p>Keep branch names lowercase, hyphenated, and descriptive. <code>feature/add-agitator-vfd-faceplate</code> is useful. <code>feature/stuff</code> is not.</p>
+<hr />
+<h2 id="7-remotes-origin-upstream-fetch-vs-pull">7. Remotes: Origin, Upstream, Fetch vs. Pull</h2>
+<p>A <strong>remote</strong> is a named pointer to another copy of the repository — usually on GitHub. When you <code>git clone</code>, Git automatically sets up a remote called <code>origin</code> pointing at wherever you cloned from.</p>
+<pre><code class="language-bash">git remote -v
+# origin  git@github.com:qist-tech/field-guide.git (fetch)
+# origin  git@github.com:qist-tech/field-guide.git (push)
+</code></pre>
+<p>Your local repo keeps track of what it thinks each remote branch looks like through <strong>remote-tracking branches</strong>, named like <code>origin/main</code>. These are not the actual remote — they are your local cache of what the remote looked like the last time you talked to it.</p>
+<pre><code> ┌────────────────────────┐                ┌────────────────────────┐
+ │   YOUR LOCAL REPO      │                │      GITHUB            │
+ │                        │   git fetch    │                        │
+ │   main            ─────┼───◀─────────── │   main                 │
+ │   origin/main          │                │                        │
+ │   (cache of remote)    │   git push     │                        │
+ │                   ─────┼──────────────▶ │                        │
+ └────────────────────────┘                └────────────────────────┘
+</code></pre>
+<p>The difference between <code>fetch</code> and <code>pull</code> is one of the most common sources of confusion:</p>
+<ul>
+<li><code>git fetch</code> downloads new commits from the remote and updates your remote-tracking branches (<code>origin/main</code>, etc.). It does <strong>not</strong> change your local branches or your working tree. Safe. Always safe.</li>
+<li><code>git pull</code> is <code>git fetch</code> followed by <code>git merge origin/&lt;branch&gt;</code> into your current branch. It downloads <em>and</em> applies changes in one step. Less safe — it can create merge commits or produce conflicts in your working tree with no warning.</li>
+</ul>
+<p>The professional habit is to <code>fetch</code> first, look at what changed, then decide how to integrate it:</p>
+<pre><code class="language-bash">git fetch origin                        # download, don't integrate
+git log --oneline HEAD..origin/main     # what's on the remote that I don't have?
+git log --oneline origin/main..HEAD     # what do I have that the remote doesn't?
+git merge origin/main                   # ...or git rebase origin/main
+</code></pre>
+<hr />
+<h2 id="8-merging-fast-forward-vs-three-way">8. Merging: Fast-Forward vs. Three-Way</h2>
+<p>There are two kinds of merge, and knowing which one is happening is half of Git fluency.</p>
+<h3 id="fast-forward-merge">Fast-forward merge</h3>
+<p>If the branch you are merging <em>into</em> has not advanced since the other branch split off, Git does not need to create a merge commit. It just slides the pointer forward.</p>
+<pre><code>Before:                            After `git merge feature/pid-retune`:
+
+    (A)───(B)───(C)                    (A)───(B)───(C)───(D)───(E)
+                 ▲                                              ▲
+                 │                                              │
+                main                                          main, feature/pid-retune
+                 │
+                 └───(D)───(E)
+                           ▲
+                           │
+                      feature/pid-retune
+</code></pre>
+<p>This is a fast-forward. No new commit is created. History stays linear.</p>
+<h3 id="three-way-true-merge">Three-way (true) merge</h3>
+<p>If both branches have moved forward independently since they diverged, Git has to create a new commit — the <strong>merge commit</strong> — that has <em>two</em> parents, one on each branch.</p>
+<pre><code>Before:                            After `git merge feature/pid-retune`:
+
+    (A)───(B)───(C)───(F)               (A)───(B)───(C)───(F)───(M)
+                 │     ▲                             │          ▲ ▲
+                 │     main                          │          │ │
+                 │                                   │          │ main
+                 └─(D)───(E)                         └─(D)───(E)─┘
+                         ▲                                   ▲
+                         feature/pid-retune                  feature/pid-retune
+</code></pre>
+<p>The commit <code>M</code> is the merge commit. Its parents are <code>F</code> and <code>E</code>. The merge commit is how Git records that two histories were brought together.</p>
+<pre><code class="language-bash"># Basic merge
+git switch main
+git merge feature/pid-retune
+
+# Force a merge commit even when fast-forward would work (preserves the fact that a branch existed)
+git merge --no-ff feature/pid-retune
+
+# Force fast-forward only — fail if a merge commit would be needed
+git merge --ff-only feature/pid-retune
+</code></pre>
+<p><code>--no-ff</code> is worth using for feature branches because it keeps the branch visible in the history. <code>--ff-only</code> is useful as a safety check: if it fails, you know the branch has diverged and you should think about whether to merge or rebase.</p>
+<hr />
+<h2 id="9-rebasing-what-it-really-does">9. Rebasing: What It Really Does</h2>
+<p>Rebase sounds exotic but does something mechanically simple: <strong>it takes a series of commits and re-creates them with a different parent.</strong> The word "re-base" is literal — you are giving those commits a new base.</p>
+<pre><code>Before rebase:                     After `git rebase main` on feature branch:
+
+    (A)───(B)───(C)───(F)               (A)───(B)───(C)───(F)
+                 │     ▲                                   │
+                 │     main                                │
+                 │                                         └─(D')──(E')
+                 └─(D)───(E)                                        ▲
+                         ▲                                          feature/pid-retune
+                         feature/pid-retune
+</code></pre>
+<p>Notice <code>(D')</code> and <code>(E')</code> — those are new commits with new hashes. They have the same <em>content changes</em> as <code>D</code> and <code>E</code>, but different parents and therefore different identities. The original <code>D</code> and <code>E</code> still exist in Git's object database for a while, but no branch points at them and they will eventually be garbage-collected.</p>
+<p>This is the essential safety rule of rebasing: <strong>never rebase commits that other people have already based their work on.</strong> If you rebase <code>main</code> after someone has pulled from it, their history and your history will have diverged in a way that is painful to reconcile. Rebase your <em>own</em> local feature branches before sharing them. Do not rebase shared branches.</p>
+<p>Rebase versus merge is not a correctness question — both produce the same final code. It is a history-shape question:</p>
+<ul>
+<li><strong>Merge</strong> preserves the true history, including the fact that branches existed in parallel. History looks like a subway map.</li>
+<li><strong>Rebase</strong> creates a linear history that reads like a clean sequence. History looks like a single track.</li>
+</ul>
+<p>For solo work or small teams keeping a clean history, rebase your feature branch onto <code>main</code> before merging, then merge fast-forward. For teams that want to see the branch topology preserved, merge with <code>--no-ff</code>.</p>
+<pre><code class="language-bash"># Update your feature branch to build on the latest main
+git switch feature/pid-retune
+git fetch origin
+git rebase origin/main
+
+# If conflicts occur during rebase, fix them, then:
+git add &lt;fixed-files&gt;
+git rebase --continue
+
+# Or abandon the rebase and go back to where you started:
+git rebase --abort
+</code></pre>
+<hr />
+<h2 id="10-squashing-and-interactive-rebase">10. Squashing and Interactive Rebase</h2>
+<p>Interactive rebase (<code>git rebase -i</code>) lets you rewrite a series of commits before you share them. The most common use is <strong>squashing</strong> — combining several small work-in-progress commits into one polished commit.</p>
+<pre><code class="language-bash">git rebase -i HEAD~5      # rewrite the last 5 commits
+</code></pre>
+<p>An editor opens with something like:</p>
+<pre><code>pick a1b2c3d  WIP fix HMI faceplate alignment
+pick b2c3d4e  WIP more alignment tweaks
+pick c3d4e5f  WIP forgot the footer
+pick d4e5f6g  Fix typo in tag description
+pick e5f6g7h  Actually fix the faceplate alignment this time
+
+# Commands:
+# p, pick   = use commit
+# r, reword = use commit, but edit the message
+# e, edit   = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup  = like &quot;squash&quot;, but discard this commit's message
+# d, drop   = remove commit
+</code></pre>
+<p>Change it to:</p>
+<pre><code>pick   a1b2c3d  WIP fix HMI faceplate alignment
+fixup  b2c3d4e
+fixup  c3d4e5f
+fixup  d4e5f6g
+fixup  e5f6g7h
+</code></pre>
+<p>Save and close. Git replays the commits, squashing the four <code>fixup</code> commits into the first one. Then it opens the editor again so you can rewrite the message to something sensible like <code>Fix HMI faceplate alignment on pump detail screens</code>.</p>
+<pre><code>Before:                            After:
+
+    (A)───(B)───(C)───(D)───(E)        (A)───(B')
+     │                     ▲                   ▲
+     │                     HEAD                HEAD
+     │
+     (five messy commits)               (one clean commit)
+</code></pre>
+<p>This is invaluable before opening a pull request. It lets you do your actual work in whatever messy sequence you need — save often, commit often, try things, back out — and then present a clean, reviewable, revertable single unit of change.</p>
+<p>Other interactive rebase uses:</p>
+<ul>
+<li><strong>Reorder commits</strong> — just reorder the lines in the editor.</li>
+<li><strong>Drop a commit</strong> — change <code>pick</code> to <code>drop</code> or delete the line.</li>
+<li><strong>Reword a message</strong> — change <code>pick</code> to <code>reword</code>; the editor will reopen for that commit.</li>
+<li><strong>Split a commit into two</strong> — change <code>pick</code> to <code>edit</code>, then when Git stops: <code>git reset HEAD~</code>, stage and commit pieces separately, then <code>git rebase --continue</code>.</li>
+</ul>
+<hr />
+<h2 id="11-ahead-behind-and-both-at-the-same-time">11. Ahead, Behind, and Both at the Same Time</h2>
+<p>When <code>git status</code> says something like this, you are seeing divergence:</p>
+<pre><code>Your branch and 'origin/main' have diverged,
+and have 3 and 2 different commits each, respectively.
+  (use &quot;git pull&quot; to merge the remote branch into yours)
+</code></pre>
+<p>"Ahead by 3" means your local branch has 3 commits that the remote does not have. "Behind by 2" means the remote has 2 commits that your local branch does not have. "Diverged" means <strong>both at once</strong> — and this is where people get stuck.</p>
+<p>Picture it:</p>
+<pre><code>                              ┌── (X)───(Y)        ← origin/main (2 commits you don't have)
+                              │
+    (A)───(B)───(C)───(D)─────┤
+                              │
+                              └── (E)───(F)───(G)   ← main          (3 commits they don't have)
+                                              ▲
+                                              HEAD
+</code></pre>
+<p><code>D</code> is the last commit you and the remote shared. You made <code>E</code>, <code>F</code>, <code>G</code> locally. Somebody else pushed <code>X</code>, <code>Y</code> to the remote. Now you want to push <code>G</code> but Git refuses — your push would erase <code>X</code> and <code>Y</code> from the remote's history.</p>
+<p>You have three honest ways out.</p>
+<p><strong>Option 1: Merge.</strong> Bring their work into yours, creating a merge commit.</p>
+<pre><code class="language-bash">git fetch origin
+git merge origin/main
+# Now you're one commit ahead (a merge commit), zero behind.
+git push
+</code></pre>
+<p>Graph after:</p>
+<pre><code>                              ┌── (X)───(Y)─┐
+                              │             │
+    (A)───(B)───(C)───(D)─────┤             (M)    ← main, HEAD, and after push, origin/main
+                              │             │
+                              └── (E)───(F)───(G)─┘
+</code></pre>
+<p><strong>Option 2: Rebase.</strong> Replay your commits on top of theirs. History stays linear.</p>
+<pre><code class="language-bash">git fetch origin
+git rebase origin/main
+# Conflicts possible — resolve each one and `git rebase --continue`.
+git push
+</code></pre>
+<p>Graph after:</p>
+<pre><code>    (A)───(B)───(C)───(D)───(X)───(Y)───(E')───(F')───(G')
+                                                        ▲
+                                                        main, HEAD
+</code></pre>
+<p><code>E'</code>, <code>F'</code>, <code>G'</code> are new commits with the same changes but new parents and new hashes.</p>
+<p><strong>Option 3: Pull with a preset strategy.</strong> <code>git pull</code> is just fetch+merge or fetch+rebase depending on config. Be explicit:</p>
+<pre><code class="language-bash">git pull --no-rebase     # fetch + merge (Option 1)
+git pull --rebase        # fetch + rebase (Option 2)
+git pull --ff-only       # fetch + fast-forward, fail if diverged (Option 3 with safety)
+</code></pre>
+<p><strong>What about <code>git push --force</code>?</strong> Do not. A force push overwrites the remote history, destroying the other person's <code>X</code> and <code>Y</code> commits. This is how teams lose work. If you absolutely must force-push (for instance, you rebased your own unshared feature branch), use <code>--force-with-lease</code>, which refuses to overwrite if the remote has moved since you last fetched:</p>
+<pre><code class="language-bash">git push --force-with-lease
+</code></pre>
+<p>Never force-push to <code>main</code> or any shared branch. That is not a Git rule, it is a working-with-other-humans rule.</p>
+<hr />
+<h2 id="12-conflicts-reading-them-and-resolving-them">12. Conflicts: Reading Them and Resolving Them</h2>
+<p>A conflict happens when Git cannot automatically reconcile two sets of changes to the same part of a file. For text files, Git marks the conflicted region like this:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+    setpoint := 145.0;   (* tuned 2026-03-15 *)
+=======
+    setpoint := 150.0;   (* tuned 2026-04-10 *)
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/pid-retune
+</code></pre>
+<p>The <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> marker begins <em>your</em> side — the version on the branch you are currently on. The <code>=======</code> separator divides the two. The <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/pid-retune</code> marker ends the <em>other</em> side — the version from the branch being merged in.</p>
+<p>Your job is to edit the file until it contains the correct final text, <em>delete all three markers</em>, save the file, then:</p>
+<pre><code class="language-bash">git add &lt;file&gt;
+git merge --continue    # or: git rebase --continue, if in a rebase
+</code></pre>
+<p><strong>For binary files there are no markers, just a message:</strong></p>
+<pre><code>CONFLICT (content): Merge conflict in PLC_Main.ACD
+warning: Cannot merge binary files: PLC_Main.ACD (HEAD vs. feature/pid-retune)
+</code></pre>
+<p>You have to choose one version or the other wholesale:</p>
+<pre><code class="language-bash">git checkout --ours   PLC_Main.ACD    # keep the version from the branch you're on
+git checkout --theirs PLC_Main.ACD    # keep the version from the branch being merged
+git add PLC_Main.ACD
+</code></pre>
+<p>This is why section 17 exists and why binary files need a locking workflow. If two engineers both edit the same PLC program in parallel, one engineer's work will be thrown away at merge time. Git cannot help you merge the ladder logic — there is no textual overlap to merge.</p>
+<p><strong>Useful tools during conflict resolution:</strong></p>
+<pre><code class="language-bash">git status                      # which files are conflicted
+git diff                        # see the conflict markers in context
+git mergetool                   # launch a configured graphical merge tool
+git merge --abort               # give up, return to pre-merge state
+git rebase --abort              # same, during a rebase
+</code></pre>
+<hr />
+<h2 id="13-undoing-things-reset-revert-restore-reflog">13. Undoing Things: Reset, Revert, Restore, Reflog</h2>
+<p>This section is the one you will come back to most. Git gives you many ways to undo, and they undo different things.</p>
+<h3 id="git-restore-undo-changes-to-files"><code>git restore</code> — undo changes to files</h3>
+<pre><code class="language-bash">git restore path/to/file.txt              # discard working tree changes to this file
+git restore --staged path/to/file.txt     # unstage this file (keep working tree changes)
+git restore --source=HEAD~2 file.txt      # reset this file to how it was 2 commits ago
+</code></pre>
+<p>Think of <code>restore</code> as operating on files. It does not touch branch pointers or commits.</p>
+<h3 id="git-reset-move-head-and-maybe-more"><code>git reset</code> — move HEAD (and maybe more)</h3>
+<p><code>reset</code> has three modes, and the difference is what it touches beyond the branch pointer:</p>
+<pre><code>                          HEAD moves?   Index changes?   Working tree changes?
+  git reset --soft  &lt;ref&gt;     yes             no                no
+  git reset --mixed &lt;ref&gt;     yes            yes                no     (default)
+  git reset --hard  &lt;ref&gt;     yes            yes               yes
+</code></pre>
+<p>All three move your current branch pointer to <code>&lt;ref&gt;</code>. <code>--soft</code> leaves your changes staged (ready to recommit). <code>--mixed</code> leaves your changes in the working tree but unstaged. <code>--hard</code> throws your changes away and resets everything to match <code>&lt;ref&gt;</code> exactly.</p>
+<pre><code class="language-bash">git reset --soft  HEAD~1      # undo last commit, keep changes staged
+git reset --mixed HEAD~1      # undo last commit, keep changes but unstaged
+git reset --hard  HEAD~1      # undo last commit and DESTROY its changes — be sure
+</code></pre>
+<p><strong><code>reset --hard</code> is the most dangerous Git command.</strong> It will discard uncommitted work without asking. Commit or stash first if you are unsure.</p>
+<h3 id="git-revert-create-a-new-commit-that-undoes-an-old-one"><code>git revert</code> — create a new commit that undoes an old one</h3>
+<p>Reset rewrites history. Revert adds to it. <code>revert</code> creates a <em>new</em> commit whose changes are the inverse of some earlier commit. This is the safe way to undo something that is already on a shared branch, because it does not rewrite history — it moves forward.</p>
+<pre><code class="language-bash">git revert &lt;commit-hash&gt;          # undo that commit by creating a new opposite commit
+git revert HEAD                   # undo the most recent commit
+git revert &lt;hash1&gt;..&lt;hash2&gt;       # revert a range
+</code></pre>
+<pre><code>Before `git revert C`:              After:
+
+    (A)───(B)───(C)                    (A)───(B)───(C)───(C⁻¹)
+                 ▲                                        ▲
+                 main                                     main
+</code></pre>
+<p><code>C⁻¹</code> is a new commit whose diff undoes <code>C</code>. Use revert on shared branches. Use reset only on your own unshared work.</p>
+<h3 id="git-reflog-the-undo-history-of-your-branch-pointers"><code>git reflog</code> — the undo history of your branch pointers</h3>
+<p>The reflog is Git's hidden safety net. Every time HEAD moves — every commit, reset, merge, rebase, checkout — Git records the old position in the reflog. This means you can almost always get back to where you were even after a destructive operation.</p>
+<pre><code class="language-bash">git reflog
+# a1b2c3d HEAD@{0}: reset: moving to HEAD~3
+# d4e5f6g HEAD@{1}: commit: Add CIP valve sequencing
+# b7c8d9e HEAD@{2}: commit: Draft PID tuning notes
+# ...
+</code></pre>
+<p>If you just ran <code>git reset --hard HEAD~3</code> and realised you wanted those commits back:</p>
+<pre><code class="language-bash">git reset --hard HEAD@{1}       # go back to where HEAD was one reflog entry ago
+</code></pre>
+<p>The reflog keeps entries for 90 days by default. As long as you act within that window, it is very difficult to truly lose committed work in Git. Uncommitted work is another matter — reflog only tracks HEAD movements, not your working tree edits.</p>
+<hr />
+<h2 id="14-stashing">14. Stashing</h2>
+<p>Stashing is a way to set aside your working-tree changes temporarily without committing them. You need it when you are partway through something and need to switch branches to deal with a hotfix.</p>
+<pre><code class="language-bash">git stash                         # stash tracked changes
+git stash -u                      # include untracked files too
+git stash push -m &quot;WIP on agitator faceplate&quot;
+git stash list                    # show all stashes
+git stash show -p stash@{0}       # show what's in a specific stash
+git stash pop                     # re-apply the most recent stash and remove it
+git stash apply stash@{1}         # re-apply a specific stash, keep it in the list
+git stash drop stash@{0}          # delete a stash
+git stash clear                   # delete all stashes
+</code></pre>
+<p>Stashes are local — they are not pushed to GitHub. They are also fragile: if you force-push or reset in a way that garbage-collects the stash's underlying objects, the stash can be lost. For anything beyond a few minutes of work, commit on a WIP branch instead of stashing.</p>
+<hr />
+<h2 id="15-tags-and-releases-tying-git-to-plant-state">15. Tags and Releases — Tying Git to Plant State</h2>
+<p>Tags are permanent, human-readable names for specific commits. In our world, a tag is how you pin a Git commit to a real-world plant state. When you tag the commit that corresponds to the PLC program currently running on Line 3, you can always come back to exactly that code if you need to roll back a change.</p>
+<p>Two kinds of tags:</p>
+<pre><code class="language-bash">git tag v1.2.0                           # lightweight tag (just a pointer)
+git tag -a v1.2.0 -m &quot;FAT passed, commissioning ready&quot;   # annotated tag (recommended)
+git push origin v1.2.0                   # push the tag to GitHub
+git push origin --tags                   # push all local tags
+</code></pre>
+<p>Annotated tags record the tagger, date, and message — they are themselves objects in Git's database. Lightweight tags are just named pointers. For anything production-relevant, use annotated tags.</p>
+<p><strong>A versioning convention that works for plant deployments:</strong></p>
+<pre><code>  v&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;[-&lt;environment&gt;]
+  ─────────────────────────────────────────
+  major = incompatible change (new I/O, new hardware)
+  minor = new feature, backward compatible
+  patch = bug fix only
+  environment = fat | sat | prod (optional suffix)
+
+  Examples:
+    v1.0.0-fat       First FAT candidate
+    v1.0.1-sat       SAT build with commissioning fixes
+    v1.1.0-prod      Production running, first post-commissioning feature release
+    v2.0.0-fat       Line expansion FAT
+</code></pre>
+<p>Pair this with GitHub Releases (the web UI feature under the "Releases" tab) to attach the compiled PLC archive, the HMI runtime, the commissioning report, and the redline drawings to the tag itself. Now the commit, the deployable artifacts, and the document trail are all tied together, and six months from now when someone asks "what was on the controller at SAT?", you have a single source of truth.</p>
+<hr />
+<h2 id="16-gitignore-and-gitattributes">16. .gitignore and .gitattributes</h2>
+<p><code>.gitignore</code> tells Git to pretend certain files do not exist. Build artifacts, temporary files, IDE configuration, credentials — none of it should be in version control.</p>
+<pre><code class="language-gitignore"># Studio 5000 / Logix Designer
+*.BAK
+*.WRK
+~$*
+Backup/
+
+# FactoryTalk View ME/SE compiled runtimes
+*.mer
+*.cab
+
+# Office temp files
+~$*.docx
+~$*.xlsx
+
+# OS cruft
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Secrets — NEVER commit these
+*.pem
+*.key
+credentials.json
+.env
+</code></pre>
+<p><strong>If you already committed a file you now want ignored</strong>, adding it to <code>.gitignore</code> does nothing for the existing commits. You have to untrack it:</p>
+<pre><code class="language-bash">git rm --cached path/to/file          # stop tracking, keep the file on disk
+git commit -m &quot;Stop tracking &lt;file&gt;&quot;
+</code></pre>
+<p>And if the file contained secrets, understand that it is still in the history. You must purge it from every commit (search for <code>git filter-repo</code> or BFG Repo-Cleaner) <em>and</em> rotate the secret — assume anything that touched a public repo is compromised.</p>
+<p><strong><code>.gitattributes</code></strong> is the less-known sibling and is more important than most engineers realise. It tells Git how to handle specific file types — particularly line endings, diff behaviour, and LFS pointers.</p>
+<pre><code class="language-gitattributes"># Treat these as binary (don't try to diff or merge)
+*.ACD     binary
+*.L5X     text eol=crlf
+*.apa     binary
+*.mer     binary
+*.pdf     binary
+*.dwg     binary
+*.xlsx    binary
+*.docx    binary
+
+# Text files always use Unix line endings in the repo
+*.md      text eol=lf
+*.py      text eol=lf
+*.sh      text eol=lf
+</code></pre>
+<p>Marking a file <code>binary</code> tells Git not to try to produce textual diffs for it, which saves you from nonsense output when you run <code>git log -p</code> on a commit that touched a PDF.</p>
+<hr />
+<h2 id="17-git-lfs-and-the-binary-file-problem">17. Git LFS and the Binary File Problem</h2>
+<p>Git was designed for source code — small text files whose entire history, stored as diffs, fits comfortably in a few megabytes. It is not efficient with large binary files. A 50 MB PLC archive, edited ten times, will make your repo grow by roughly 500 MB, because Git effectively stores each full version. Clone that repo fresh and you are downloading all 500 MB.</p>
+<p><strong>Git LFS (Large File Storage)</strong> is the fix. LFS replaces large binary files in your repo with small pointer files, and stores the actual binaries on a separate LFS server (GitHub provides this with a free quota). When you clone or check out, LFS downloads only the specific versions of the binaries you need for that commit.</p>
+<pre><code class="language-bash"># One-time install
+git lfs install
+
+# Tell LFS which file types to track (adds lines to .gitattributes)
+git lfs track &quot;*.ACD&quot;
+git lfs track &quot;*.apa&quot;
+git lfs track &quot;*.mer&quot;
+git lfs track &quot;*.pdf&quot;
+git lfs track &quot;*.dwg&quot;
+
+git add .gitattributes
+git commit -m &quot;Configure Git LFS for binary engineering files&quot;
+</code></pre>
+<p>From then on, any file matching those patterns is stored via LFS automatically.</p>
+<p><strong>LFS does not solve the merge problem.</strong> It just stores binaries efficiently. You still cannot merge two people's edits to the same PLC file. For that, you need a <strong>locking discipline</strong>:</p>
+<pre><code class="language-bash">git lfs lock   PLC_Line3_Main.ACD       # claim exclusive edit rights
+# ... edit, save, commit ...
+git lfs unlock PLC_Line3_Main.ACD       # release
+git lfs locks                            # see who has what locked
+</code></pre>
+<p>Combined with LFS's <code>lockable</code> attribute in <code>.gitattributes</code>, Git will even make the file read-only on disk for anyone who has not locked it:</p>
+<pre><code class="language-gitattributes">*.ACD     binary lockable
+*.apa     binary lockable
+</code></pre>
+<p>This is the only version-control workflow that safely handles PLC and HMI projects across a team. Without locking, you will eventually have two engineers unknowingly editing the same program, and one of them will lose their work at merge time. Make locking part of your team's standard operating procedure.</p>
+<hr />
+<h2 id="18-pull-requests-the-github-workflow">18. Pull Requests: The GitHub Workflow</h2>
+<p>A pull request (PR) is GitHub's mechanism for proposing that the commits on one branch be merged into another, with review and discussion along the way. The flow:</p>
+<pre><code> ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+ │              │    │              │    │              │    │              │    │              │
+ │ Create       │───▶│ Commit and   │───▶│ Open PR on   │───▶│ Review,      │───▶│ Merge to     │
+ │ feature      │    │ push branch  │    │ GitHub       │    │ discuss,     │    │ main, delete │
+ │ branch       │    │              │    │              │    │ revise       │    │ branch       │
+ │              │    │              │    │              │    │              │    │              │
+ └──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
+</code></pre>
+<pre><code class="language-bash"># Create and push
+git switch -c feature/add-vfd-faceplate
+# ... work, commit ...
+git push -u origin feature/add-vfd-faceplate
+</code></pre>
+<p>GitHub prints a URL in the push output. Open it in a browser to create the PR. Fill in the description with:</p>
+<ul>
+<li>What changed and why.</li>
+<li>How it was tested — ideally bench tested on a spare controller before being proposed.</li>
+<li>Any deployment steps or risks.</li>
+<li>Links to related tickets or issues.</li>
+</ul>
+<p>A reviewer then reads the diff on GitHub, leaves comments, and either approves or requests changes. You address the feedback by making more commits on the same branch and pushing — the PR updates automatically. Once approved, the PR is merged.</p>
+<p><strong>Three ways GitHub can merge a PR:</strong></p>
+<ol>
+<li><strong>Merge commit</strong> — creates a merge commit on <code>main</code>, preserving the branch topology. Good when the branch's history is worth keeping.</li>
+<li><strong>Squash and merge</strong> — collapses all the branch's commits into a single commit on <code>main</code>. Good for feature branches where the intermediate commits are not independently meaningful.</li>
+<li><strong>Rebase and merge</strong> — replays each commit individually on top of <code>main</code>, producing linear history. Good when each commit is a clean, reviewable unit.</li>
+</ol>
+<p>Pick one as your team default. Mixing them makes history inconsistent.</p>
+<p>Delete the branch after merging — GitHub has a button for it. Old merged branches clutter the repo and nothing is lost because the commits are already on <code>main</code>.</p>
+<hr />
+<h2 id="19-common-workflows-github-flow-git-flow-trunk-based">19. Common Workflows: GitHub Flow, Git Flow, Trunk-Based</h2>
+<p>Three workflow patterns dominate. Pick the one that matches your team size and release cadence.</p>
+<p><strong>GitHub Flow</strong> is the simplest. There is one long-running branch (<code>main</code>), which is always deployable. All work is done on short-lived feature branches off <code>main</code>, and merged back via pull request. No release branches, no develop branch. Best for small teams, continuous delivery, web software. Probably right for a solo contractor or a two-person shop.</p>
+<pre><code>  main   ────●────●────●────●────●────●────●────●────
+                ╲        ╱    ╲              ╱
+             feature-a      feature-b ─────●
+</code></pre>
+<p><strong>Git Flow</strong> is more ceremonious. It has <code>main</code> (only tagged releases), <code>develop</code> (integration branch), <code>feature/*</code> branches off <code>develop</code>, <code>release/*</code> branches for release stabilisation, and <code>hotfix/*</code> branches off <code>main</code> for emergency fixes. Designed for software with formal, infrequent releases and versioned deployments. Can fit an engineering consultancy if you treat plant deployments as releases, but is heavyweight for most small teams.</p>
+<pre><code>                                                   tag v1.0    tag v1.1
+  main       ────────────────────●──────────────────●──────────●────
+                                 │                  │          │
+                              (release)          (release)  (hotfix)
+                                 │                  │          │
+  develop    ────●────●────●────●────●────●────●────●────●────●────
+                   ╲    ╱         ╲       ╱
+                feature-a      feature-b
+</code></pre>
+<p><strong>Trunk-Based Development</strong> takes GitHub Flow further: very short-lived branches (hours, not days), or sometimes direct commits to <code>main</code> protected by continuous integration and feature flags. Requires mature CI and discipline. Not typical for PLC/HMI work, because you cannot easily hide half-finished control logic behind a feature flag.</p>
+<p>For a small automation shop publishing a field-guide repo or managing internal tooling: GitHub Flow is the right starting point. For a full plant engineering project with formal FAT/SAT/commissioning milestones: a simplified Git Flow with <code>main</code>, <code>develop</code>, <code>release/*</code>, and tagged deployments maps cleanly onto the real project gates.</p>
+<hr />
+<h2 id="20-i-broke-my-repo-recovery-scenarios">20. "I Broke My Repo" — Recovery Scenarios</h2>
+<h3 id="i-committed-to-the-wrong-branch">"I committed to the wrong branch."</h3>
+<pre><code class="language-bash"># You're on main, meant to be on feature/x. Last commit was the mistake.
+git log -1                                  # grab the commit hash
+git reset --hard HEAD~1                     # remove it from main
+git switch feature/x                        # (or create it)
+git cherry-pick &lt;that-hash&gt;                 # apply the commit here instead
+</code></pre>
+<h3 id="i-committed-something-i-shouldnt-have-secrets-wrong-files">"I committed something I shouldn't have (secrets, wrong files)."</h3>
+<p>If you have not pushed yet:</p>
+<pre><code class="language-bash">git reset --soft HEAD~1                     # undo the commit, keep changes staged
+# remove the bad files from staging
+git restore --staged path/to/bad-file
+# re-commit what you actually wanted
+</code></pre>
+<p>If you have already pushed, and the secret is now on GitHub: assume it is compromised. Rotate the secret immediately (change the password, revoke the key, reissue the credential). Then rewrite history with <code>git filter-repo</code> or BFG, force-push, and tell everyone who has a clone to re-clone. The secret is still in any forks or clones that existed before you rewrote, which is why rotation is the real fix.</p>
+<h3 id="my-working-tree-is-a-mess-and-i-just-want-to-go-back-to-the-last-commit">"My working tree is a mess and I just want to go back to the last commit."</h3>
+<pre><code class="language-bash">git restore .                               # discard all working-tree changes
+git clean -fd                               # also delete untracked files and directories
+</code></pre>
+<p><code>git clean</code> is as destructive as <code>reset --hard</code> — it deletes files that Git was not tracking at all. Run <code>git clean -n</code> first to see what <em>would</em> be deleted without actually deleting.</p>
+<h3 id="i-rebased-and-now-everything-is-gone">"I rebased and now everything is gone."</h3>
+<p>No, it isn't. Reflog.</p>
+<pre><code class="language-bash">git reflog
+# find the entry just before the rebase — something like &quot;rebase (start): checkout main&quot;
+git reset --hard HEAD@{5}
+</code></pre>
+<h3 id="i-accidentally-deleted-a-branch">"I accidentally deleted a branch."</h3>
+<pre><code class="language-bash">git reflog                                  # find the last commit on that branch
+git switch -c &lt;branch-name&gt; &lt;commit-hash&gt;   # recreate the branch pointing at that commit
+</code></pre>
+<h3 id="i-pushed-to-the-wrong-remote-wrong-branch">"I pushed to the wrong remote / wrong branch."</h3>
+<p>If it's your own fork, push a revert:</p>
+<pre><code class="language-bash">git revert &lt;bad-commit&gt;
+git push
+</code></pre>
+<p>If it's a shared branch and you need to remove the commit entirely, talk to the team first. Force-pushing to a shared branch without coordination is how teams lose work.</p>
+<h3 id="nothing-i-try-is-working-and-i-just-want-to-start-over">"Nothing I try is working and I just want to start over."</h3>
+<pre><code class="language-bash"># From some safe directory ABOVE your repo:
+mv broken-repo broken-repo.bak        # keep the damaged copy in case something useful is in it
+git clone &lt;url&gt; fresh-repo            # clone fresh from GitHub
+</code></pre>
+<p>There is no shame in this. The broken copy is still there if you need to recover anything with <code>git reflog</code> inside it later.</p>
+<hr />
+<h2 id="21-glossary">21. Glossary</h2>
+<ul>
+<li><strong>Blob</strong> — Git's storage object for a single file's contents at a point in time.</li>
+<li><strong>Branch</strong> — A movable pointer to a commit. Named, stored in <code>.git/refs/heads/</code>.</li>
+<li><strong>Checkout</strong> — Older command that switched branches <em>or</em> restored files; now split into <code>switch</code> and <code>restore</code>.</li>
+<li><strong>Cherry-pick</strong> — Copy a commit from one branch onto another as a new commit.</li>
+<li><strong>Clone</strong> — Download a full copy of a remote repository, including all history.</li>
+<li><strong>Commit</strong> — An immutable snapshot of the project, with metadata and parent pointer(s). Identified by a SHA-1 hash.</li>
+<li><strong>Conflict</strong> — A change Git could not merge automatically; requires human resolution.</li>
+<li><strong>DAG</strong> — Directed acyclic graph. The shape of Git history.</li>
+<li><strong>Detached HEAD</strong> — HEAD points directly at a commit rather than at a branch. Commits made here are not on any branch and can be garbage-collected.</li>
+<li><strong>Fast-forward</strong> — A merge that only needs to move a pointer forward, no merge commit needed.</li>
+<li><strong>Fetch</strong> — Download remote objects and update remote-tracking branches without changing local branches.</li>
+<li><strong>Fork</strong> — A GitHub-level copy of a repo under a different account; independent but linked.</li>
+<li><strong>HEAD</strong> — Pointer to the current commit on the current branch.</li>
+<li><strong>Index / Staging Area</strong> — Snapshot of what the next commit will contain.</li>
+<li><strong>LFS</strong> — Large File Storage. Extension that stores big binaries outside the main repo.</li>
+<li><strong>Merge</strong> — Bring two branches' histories together. May be fast-forward or create a merge commit.</li>
+<li><strong>Origin</strong> — Default name for the remote you cloned from.</li>
+<li><strong>Pull</strong> — Fetch plus merge (or fetch plus rebase) in one command.</li>
+<li><strong>Pull Request (PR)</strong> — GitHub feature for proposing a merge, with review and discussion.</li>
+<li><strong>Push</strong> — Upload local commits to a remote.</li>
+<li><strong>Rebase</strong> — Replay a series of commits onto a new base commit, creating new commits with new hashes.</li>
+<li><strong>Reflog</strong> — Log of every HEAD movement in your local repo. Safety net for most "oh no" moments.</li>
+<li><strong>Remote</strong> — Named reference to another copy of the repo (usually on GitHub).</li>
+<li><strong>Reset</strong> — Move a branch pointer, optionally also touching index and working tree.</li>
+<li><strong>Revert</strong> — Create a new commit that undoes a previous commit.</li>
+<li><strong>SHA</strong> — The 40-character hex hash that uniquely identifies a commit (or any Git object).</li>
+<li><strong>Staging</strong> — See Index.</li>
+<li><strong>Stash</strong> — Temporary save of working-tree changes, not attached to any branch.</li>
+<li><strong>Tag</strong> — Named, permanent pointer to a specific commit. Annotated tags also carry a message and author.</li>
+<li><strong>Tree</strong> — Git's storage object representing a directory structure. Not to be confused with "the three trees" (working tree / index / HEAD).</li>
+<li><strong>Upstream</strong> — For a local branch, the remote branch it is configured to pull from and push to.</li>
+<li><strong>Working Tree</strong> — The actual files on disk in your project folder.</li>
+</ul>
+<hr />
+<p><em>This guide is part of the Industrial Automation Engineer Field Guide. Contributions via pull request are welcome. Errata, clarifications, and additional recovery scenarios are especially appreciated — the goal is that no engineer ever has to lose work because Git was too opaque to learn under pressure.</em></p>
+      </article>
+
+      <footer id="page-footer">
+        <p>Industrial Automation Field Guide</p>
+      </footer>
+    </div>
+
+  </div>
+</body>
+</html>

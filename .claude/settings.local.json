@@ -10,7 +10,14 @@
       "Bash(python generate_pages.py)",
       "Bash(python)",
       "Bash(python scripts/_update_readme_html.py)",
-      "Bash(rm scripts/_update_readme_html.py)"
+      "Bash(rm scripts/_update_readme_html.py)",
+      "Bash(python scripts/convert_one_to_html.py \"markdown/04_Motor_Control/Soft Starters.md\")",
+      "Bash(python scripts/convert_one_to_html.py --help)",
+      "Bash(python scripts/convert_one_to_html.py)",
+      "Bash(python scripts/convert_one_to_html.py \"markdown/04_Motor_Control/Soft Starters.md\" -o \"markdown/04_Motor_Control/Soft Starters.html\" -q)",
+      "Bash(python scripts/convert_one_to_html.py \"doesnotexist.md\")",
+      "Bash(rm \"markdown/04_Motor_Control/Reversing Starters.html\" \"markdown/04_Motor_Control/Soft Starters.html\")",
+      "Bash(find markdown:*)"
     ]
   }
 }
