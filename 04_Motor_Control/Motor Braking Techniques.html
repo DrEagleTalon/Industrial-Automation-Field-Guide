@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,113 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#selection-matrix">Selection Matrix</a></li>
+<li><a href="#stop-categories-iec-60204-1">Stop Categories (IEC 60204-1)</a></li>
 <li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Motor Braking Techniques</span></nav>
         <h1 class="page-title">Motor Braking Techniques</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 60204-1, IEC 61800-5-2</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Mechanical brakes, DB resistors, regen units</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#braking</span> <span class="tag">#DCinject</span> <span class="tag">#plugging</span> <span class="tag">#regenerative</span> <span class="tag">#dynamicbrake</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#braking #DCinject #plugging #regenerative #dynamicbrake</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>When a motor is commanded to stop, it has two things working against quick stopping: its own rotor inertia and the inertia of the driven load. You either let it coast, dissipate that energy, or put it back onto the supply. Choosing a braking method matters when you need short stop time, accurate positioning, or reliable emergency stopping.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="methods">Methods</h2>
+<h3>1. Coast-to-stop</h3><p>Open the contactor or disable the drive. Motor free-wheels until friction stops it. Easiest, cheapest, slowest. Not acceptable for <a href="../12_Safety_Systems_Advanced/Emergency Stops (E-Stops).html">emergency stops</a> on most machines.</p><h3>2. Mechanical brake</h3><p>A spring-applied, electrically-released friction brake on the motor shaft or gearbox. Engages when de-energized — fail-safe. Required for hoists, cranes, and vertical axes. Maintenance item — pads wear.</p><h3>3. DC injection braking</h3><p>After removing AC, a DC voltage is applied to two of the stator phases. The resulting stationary field creates eddy-current torque in the rotor, braking it. Usually handled by the VFD; standalone DC-injection units exist for across-the-line starters. Effective but drops off sharply near zero speed — finish with a mechanical brake for a true hold.</p><h3>4. Dynamic braking (VFD)</h3><p>The drive's inverter dumps regenerated energy into a dynamic-brake resistor connected across the DC bus. The most common VFD stop method for high-inertia loads. Sized by duty cycle and stopping energy.</p><h3>5. Regenerative braking</h3><p>Instead of a resistor, an active front-end feeds regen energy back onto the line. Expensive but efficient, and required for continuous regen applications (downhill conveyors, test stands, cranes).</p><h3>6. Plugging</h3><p>Reverse two line leads while the motor is spinning. Produces very high braking torque but extreme currents — hard on the motor and contactors. AC-4 duty. Largely replaced by DC injection or VFD braking, but still seen on some old machinery.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="selection-matrix">Selection Matrix</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Load / Use</th>
+<th>Best Method</th>
+</tr></thead><tbody>
+<tr><td>Small conveyor, no urgency</td><td>Coast</td></tr>
+<tr><td>Frequent start/stop, moderate inertia</td><td>VFD dynamic braking</td></tr>
+<tr><td>Positioning / indexing</td><td>Vector VFD + mechanical brake</td></tr>
+<tr><td>Hoist, crane, vertical axis</td><td>Mechanical brake + VFD with encoder</td></tr>
+<tr><td>Downhill conveyor / regen load</td><td>Regenerative drive</td></tr>
+<tr><td>E-stop stop-category 0</td><td>Coast (contactor drop) with mechanical brake</td></tr>
+<tr><td>E-stop stop-category 1</td><td>Controlled stop then power removal — VFD ramp + SS1 safety function</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="stop-categories-iec-60204-1">Stop Categories (IEC 60204-1)</h2>
+<table>
+<thead><tr>
+<th>Category</th>
+<th>Description</th>
+</tr></thead><tbody>
+<tr><td>0</td><td>Immediate removal of power to actuators — coast</td></tr>
+<tr><td>1</td><td>Controlled stop with power still available, then removal of power at a stop (typical for VFDs with Safe Stop 1)</td></tr>
+<tr><td>2</td><td>Controlled stop with power kept to the motor (rare as E-stop; used as functional stop)</td></tr>
+</tbody></table>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>Step</th>
+</tr></thead><tbody>
+<tr><td>DB resistor overheats</td><td>Under-sized resistor for duty</td><td>Recalculate stopping energy and duty cycle</td></tr>
+<tr><td>DC bus over-volt trip on stop</td><td>Decel too fast, no DB resistor, failed chopper</td><td>Lengthen decel or install DB</td></tr>
+<tr><td>Motor won't stop on E-stop</td><td>Coast not achieving safe state; brake not dropping</td><td>Review stop category; verify brake release wiring</td></tr>
+<tr><td>Plugging contactor welds</td><td>AC-3 rating used for AC-4 duty</td><td>Upsize or change to VFD</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Stop category selected matches the risk assessment.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Mechanical brake installed on all vertical or hoisting applications.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> VFD braking resistor sized for worst-case duty and cooled.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> E-stop path tested end-to-end.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> DC injection current and time set to avoid motor overheating.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Variable Frequency Drives (VFDs) Basics.html">Variable Frequency Drives (VFDs) Basics</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Emergency Stops (E-Stops).html">Emergency Stops (E-Stops)</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Risk Assessments &amp; Functional Safety.html">Risk Assessments &amp; Functional Safety</a></li>
+<li><a href="Reversing Starters.html">Reversing Starters</a></li>
+<li><a href="Motor Nameplate Data.html">Motor Nameplate Data</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

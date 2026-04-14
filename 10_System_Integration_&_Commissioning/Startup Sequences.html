@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,89 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#typical-sequence">Typical Sequence</a></li>
+<li><a href="#first-scan-logic">First-Scan Logic</a></li>
+<li><a href="#power-loss-recovery">Power Loss Recovery</a></li>
+<li><a href="#cold-start-vs-warm-start">Cold Start vs Warm Start</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">10_System_Integration_&amp;_Commissioning</span><span class="bc-sep"> / </span><span class="bc-current">Startup Sequences</span></nav>
         <h1 class="page-title">Startup Sequences</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">System Integration &amp; Commissioning</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#startup</span> <span class="tag">#powerup</span> <span class="tag">#sequence</span> <span class="tag">#initialization</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>System Integration &amp; Commissioning</code><br/><strong>Tags:</strong> <code>#startup #powerup #sequence #initialization</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Powering up a machine in the right order every time — and knowing how it should behave after a power loss — is the difference between a reliable system and one that surprises operators.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="typical-sequence">Typical Sequence</h2>
+<ol><li>Main disconnect closed.</li><li>Control power transformer energized; 24 VDC supplies stable.</li><li>PLC boots; first-scan logic runs.</li><li>HMI boots; connects to PLC.</li><li>Drives power up; load parameters; self-test; wait for enable.</li><li>Safety relay / safety PLC boots; safety loop checked.</li><li>Field I/O modules online.</li><li>PLC enters a 'Ready' state once all preconditions are true.</li><li>Operator is prompted to reset faults, acknowledge, and arm the machine.</li><li>Start command is accepted and the normal sequence begins.</li></ol>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="first-scan-logic">First-Scan Logic</h2>
+<p>On every power-up, the PLC's first-scan bit (S:FS on AB, a dedicated tag on other platforms) can be used to initialize retained tags to safe values. Every motor command should be forced FALSE; sequence step should be 0 (idle); fault latches should be cleared to a known state so the machine starts from zero.</p>
+<hr />
+<h2 id="power-loss-recovery">Power Loss Recovery</h2>
+<ul><li>Decide per machine: auto-restart, auto-restart with operator ack, or manual only.</li><li>Process systems (continuous) often auto-restart to avoid batch loss.</li><li>Discrete / motion systems typically require operator ack.</li><li>Safety requires operator ack — never auto-start after an E-stop.</li><li>Document the chosen behavior and match it in logic and operator procedure.</li></ul>
+<hr />
+<h2 id="cold-start-vs-warm-start">Cold Start vs Warm Start</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Cold start</th>
+<th>Warm start</th>
+</tr></thead><tbody>
+<tr><td>PLC memory reinitialized from program</td><td>PLC resumes from last state</td></tr>
+<tr><td>Tags reset to defaults</td><td>Retentive tags kept</td></tr>
+<tr><td>Recipes reloaded</td><td>Active recipe kept</td></tr>
+<tr><td>Sequences at step 0</td><td>Current step kept — dangerous without ack</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Power-up order documented and posted at the panel.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> First-scan initialization verified.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Power-loss recovery behavior matches procedure and risk assessment.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Safety relays rearmed by operator ack, not automatically.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Sequence verified to start from idle on a cold start.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="PLC-HMI-VFD Integration.html">PLC-HMI-VFD Integration</a></li>
+<li><a href="../06_PLC_Programming_&_Logic/Basic State Machine Programming.html">Basic State Machine Programming</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Risk Assessments &amp; Functional Safety.html">Risk Assessments &amp; Functional Safety</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Emergency Stops (E-Stops).html">Emergency Stops (E-Stops)</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,114 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#syntax-essentials">Syntax Essentials</a></li>
+<li><a href="#data-structures">Data Structures</a></li>
+<li><a href="#when-st-shines">When ST Shines</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">06_PLC_Programming_&amp;_Logic</span><span class="bc-sep"> / </span><span class="bc-current">Data Blocks &amp; Structured Text</span></nav>
         <h1 class="page-title">Data Blocks &amp; Structured Text</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLC Programming &amp; Logic</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 61131-3</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#ST</span> <span class="tag">#SCL</span> <span class="tag">#datablock</span> <span class="tag">#UDT</span> <span class="tag">#IEC61131</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLC Programming &amp; Logic</code><br/><strong>Tags:</strong> <code>#ST #SCL #datablock #UDT #IEC61131</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Structured Text (ST) is the text-based IEC 61131-3 language. It looks like Pascal or a simplified C. Use it for math, loops, string handling, and any logic that would be unreadable in ladder.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="syntax-essentials">Syntax Essentials</h2>
+<pre><code>// Assignment
+Count := Count + 1;
+
+// If-then-else
+IF Temperature > 80.0 THEN
+    Fan := TRUE;
+ELSIF Temperature < 70.0 THEN
+    Fan := FALSE;
+END_IF;
+
+// Case
+CASE Step OF
+  1: StartUp();
+  2: Run();
+  ELSE Stop();
+END_CASE;
+
+// For loop
+FOR i := 0 TO 9 DO
+    Buffer[i] := 0;
+END_FOR;
+
+// Function call
+Result := Scale(Raw := Analog_In, RawMin := 6242, RawMax := 31208,
+                EU_Min := 0.0, EU_Max := 100.0);
+</code></pre>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="data-structures">Data Structures</h2>
+<h3>UDT / Struct</h3><p>Group related fields into a single user-defined type. Every AB ControlLogix programmer ends up living inside UDTs — they're the difference between a tidy project and chaos.</p><pre><code>TYPE Motor_Data :
+  STRUCT
+    Run_Cmd  : BOOL;
+    Running  : BOOL;
+    Fault    : BOOL;
+    Speed_SP : REAL;
+    Speed_PV : REAL;
+    Hours    : DINT;
+  END_STRUCT;
+END_TYPE;
+
+Motor1 : Motor_Data;
+Motor1.Run_Cmd := TRUE;
+</code></pre><h3>Arrays</h3><p>Fixed-size, indexed from 0 (Codesys, Siemens, most platforms) or from 1 (some) or configurable (Rockwell). Use for buffers, recipes, lookup tables.</p><h3>Data blocks (Siemens)</h3><p>In Siemens S7, a DB is a block of named memory. Use global DBs for shared state and instance DBs that are bound to an FB's local data. Tag-based platforms like Rockwell don't have DBs per se — everything is in the tag database.</p>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="when-st-shines">When ST Shines</h2>
+<ul><li>Scaling, filtering, PID, and math-heavy logic.</li><li>String parsing or message construction.</li><li>Looping over arrays of tags.</li><li>Complex state machines with many branches.</li><li>Algorithms that need to be version-controlled and diffed like source code.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Comments explain intent, not syntax.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> UDTs used for every repeated data shape.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Arrays have bound checks or guaranteed safe indices.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> No hard-coded magic numbers — named constants or parameters.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Functions / function-blocks have documented inputs and outputs.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Ladder Logic Basics.html">Ladder Logic Basics</a></li>
+<li><a href="Basic State Machine Programming.html">Basic State Machine Programming</a></li>
+<li><a href="../11_Standards_and_Codes/IEC 61131-3 – PLC Programming.html">IEC 61131-3 – PLC Programming</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

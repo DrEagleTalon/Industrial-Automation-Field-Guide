@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,89 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#step-by-step">Step-by-Step</a></li>
+<li><a href="#common-causes">Common Causes</a></li>
+<li><a href="#inductive-load-safety">Inductive Load Safety</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">09_Troubleshooting_&amp;_Diagnostics</span><span class="bc-sep"> / </span><span class="bc-current">PLC Output Not Driving Load</span></nav>
         <h1 class="page-title">PLC Output Not Driving Load</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Troubleshooting &amp; Diagnostics</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#PLC</span> <span class="tag">#output</span> <span class="tag">#solenoid</span> <span class="tag">#coil</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Troubleshooting &amp; Diagnostics</code><br/><strong>Tags:</strong> <code>#PLC #output #solenoid #coil</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>PLC output is commanded on in software but the field device doesn't operate. Three places can go wrong: software, module, or field wiring.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="step-by-step">Step-by-Step</h2>
+<ol><li>Online monitor: is the tag actually TRUE? (Watch for conflicting rungs writing the same output.)</li><li>Module LED for that point: lit?</li><li>If LED lit but load doesn't operate: measure voltage at the output terminal and at the load.</li><li>If LED not lit: software isn't actually commanding the point — or module is damaged.</li><li>Disconnect load; measure open-circuit voltage at the terminal when the point is commanded.</li></ol>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="common-causes">Common Causes</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Cause</th>
+<th>How to Spot</th>
+</tr></thead><tbody>
+<tr><td>Software conflict</td><td>Two rungs write the same coil; last wins, first appears dead</td></tr>
+<tr><td>Module fuse blown</td><td>Many modules have replaceable fuses per channel</td></tr>
+<tr><td>Over-current on sourcing output</td><td>Short on load side trips internal protection</td></tr>
+<tr><td>Wrong output type</td><td>Sinking output with load wired for sourcing</td></tr>
+<tr><td>No load-side common</td><td>Load has no path back to 0 V / neutral</td></tr>
+<tr><td>Interposing relay coil open</td><td>Replace relay; add suppression</td></tr>
+<tr><td>Solenoid coil open</td><td>Measure coil resistance</td></tr>
+<tr><td>Module damaged</td><td>Persistent off with no voltage at terminal</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="inductive-load-safety">Inductive Load Safety</h2>
+<p>Driving solenoids, contactor coils, or relay coils directly from a PLC output without suppression will eventually destroy the module. Use an <a href="../03_Control_Devices/Relays &amp; Interposing Relays.html">interposing relay</a>, and put a flyback diode on DC coils or an RC snubber on AC coils.</p>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> PLC online-monitor confirms the coil is commanded.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Module LED state observed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Voltage at terminal measured with and without load.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Suppression in place on inductive loads.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> No conflicting writes to the output tag.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="PLC Input Not Responding.html">PLC Input Not Responding</a></li>
+<li><a href="../05_PLCs & Automation Hardware/Discrete IO Modules.html">Discrete IO Modules</a></li>
+<li><a href="../05_PLCs & Automation Hardware/Wiring Inputs &amp; Outputs to PLCs.html">Wiring Inputs &amp; Outputs to PLCs</a></li>
+<li><a href="../03_Control_Devices/Relays &amp; Interposing Relays.html">Relays &amp; Interposing Relays</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

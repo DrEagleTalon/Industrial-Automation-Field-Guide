@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,114 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#procedure">Procedure</a></li>
+<li><a href="#safety">Safety</a></li>
 <li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Motor Megger Testing</span></nav>
         <h1 class="page-title">Motor Megger Testing</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEEE 43, IEEE 95, NETA ATS</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Megohmmeter (500 V, 1000 V, 2500 V), LOTO</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#megger</span> <span class="tag">#insulation</span> <span class="tag">#motortesting</span> <span class="tag">#IR</span> <span class="tag">#PI</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#megger #insulation #motortesting #IR #PI</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Megger testing (insulation resistance testing) measures the insulation integrity of a motor by applying a high DC voltage between the windings and ground and measuring the tiny leakage current that flows. The reading, in megohms, tells you whether the insulation system can still stand off line voltage safely. It's one of the fastest ways to screen a motor after a trip, water event, storage, or fault.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h3>Test voltages</h3><table>
+<thead><tr>
+<th>Motor Rated Voltage</th>
+<th>Megger Voltage</th>
+</tr></thead><tbody>
+<tr><td>≤ 250 V</td><td>500 V</td></tr>
+<tr><td>251–600 V</td><td>500 V or 1000 V</td></tr>
+<tr><td>601–2400 V</td><td>1000 V or 2500 V</td></tr>
+<tr><td>> 2400 V</td><td>2500 V or 5000 V</td></tr>
+</tbody></table><h3>What the reading means</h3><table>
+<thead><tr>
+<th>Reading (at 40 °C)</th>
+<th>Condition</th>
+<th>Action</th>
+</tr></thead><tbody>
+<tr><td>< 2 MΩ</td><td>Dangerous</td><td>Do not energize. Dry / inspect / replace.</td></tr>
+<tr><td>2–20 MΩ</td><td>Marginal</td><td>Investigate — moisture, contamination?</td></tr>
+<tr><td>20–500 MΩ</td><td>Acceptable</td><td>OK for service.</td></tr>
+<tr><td>> 500 MΩ</td><td>Good</td><td>Normal for a dry modern motor.</td></tr>
+<tr><td>> 5 GΩ</td><td>Excellent</td><td>Often the ceiling of small meters.</td></tr>
+</tbody></table><h3>Temperature correction</h3><p>IR roughly halves for every 10 °C rise. Always note the winding temperature when you took the reading. IEEE 43 gives correction factors — or trend at a fixed temperature.</p><h3>Polarization Index (PI)</h3><p>PI = IR at 10 min / IR at 1 min. Good insulation absorbs and polarizes — IR rises over time. A PI ≥ 2.0 is good. PI < 1.0 suggests wet or contaminated insulation. PI testing is less diagnostic on modern Class F systems with high base IR; use it for older or high-voltage machines.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="procedure">Procedure</h2>
+<ol><li><strong>Isolate and LOTO</strong> — open feeder breaker or disconnect, apply lock and tag. See <a href="../01_Electrical_Fundamentals/Lockout Tagout (LOTO) Procedures.html">LOTO procedures</a>.</li><li>Disconnect motor leads from the starter, VFD, or junction box — never megger through a drive.</li><li>Short together all three motor leads (T1, T2, T3) in the peckerhead.</li><li>Connect megger between shorted leads and motor frame ground.</li><li>Apply rated test voltage for 1 minute.</li><li>Record the 1-minute reading. If doing PI, continue for 10 minutes.</li><li>Discharge the winding to ground for at least 4× the test time.</li><li>Remove leads, restore connections, and test again in the installed configuration if needed.</li><li>Record temperature, test voltage, and leads tested.</li></ol>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="safety">Safety</h2>
+<ul><li>Meggers deliver lethal voltage — up to 5 kV DC on larger units. Never test with anyone touching the motor.</li><li>Always discharge the winding with the meter's discharge function before disconnecting.</li><li>Electronic components inside the drive, surge suppressors, or thermistors can be damaged by a megger — disconnect them.</li><li>Tag the motor with the test result and date so the next person has a baseline.</li></ul>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>Next Step</th>
+</tr></thead><tbody>
+<tr><td>IR < 1 MΩ on new motor</td><td>Water or transit damage</td><td>Dry the motor (heat + ventilation) and retest</td></tr>
+<tr><td>Low IR only on one phase</td><td>Phase-to-ground fault in one winding</td><td>Rewind required</td></tr>
+<tr><td>Intermittent trips, normal IR cold</td><td>Hot-IR degradation</td><td>Repeat test at operating temperature</td></tr>
+<tr><td>Low IR after wash-down</td><td>Moisture in cable or peckerhead</td><td>Disassemble, dry, reseal</td></tr>
+<tr><td>PI < 1.0</td><td>Wet / contaminated insulation</td><td>Dry out, retest, consider dip and bake</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> LOTO applied and verified zero voltage before test.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Motor leads disconnected from any electronics (drive, starter, surge caps).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Correct test voltage selected for motor voltage class.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> 1-minute reading recorded with winding temperature.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Test results tagged on motor and filed in maintenance log.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Winding fully discharged before re-terminating.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Motor Nameplate Data.html">Motor Nameplate Data</a></li>
+<li><a href="../01_Electrical_Fundamentals/Tools of the Trade-Megger or Insulation Tester.html">Tools of the Trade - Megger</a></li>
+<li><a href="../01_Electrical_Fundamentals/Lockout Tagout (LOTO) Procedures.html">Lockout Tagout (LOTO) Procedures</a></li>
+<li><a href="../09_Troubleshooting_&_Diagnostics/Motor Overheating &amp; Tripping.html">Motor Overheating &amp; Tripping</a></li>
+<li><a href="3-Phase Motor Basics.html">3-Phase Motor Basics</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

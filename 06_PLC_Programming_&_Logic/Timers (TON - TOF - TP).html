@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timers (TON - TOF - TP) | Industrial Automation Field Guide</title>
+  <title>Timers (TON, TOF, TP) | Industrial Automation Field Guide</title>
   <style>
 
 /* ── Reset ───────────────────────────────────────────────────────────────── */
@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,96 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#the-three-standard-timers">The Three Standard Timers</a></li>
+<li><a href="#rockwell-equivalents">Rockwell Equivalents</a></li>
+<li><a href="#common-uses">Common Uses</a></li>
+<li><a href="#sample-logic">Sample Logic</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
-        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">06_PLC_Programming_&amp;_Logic</span><span class="bc-sep"> / </span><span class="bc-current">Timers (TON - TOF - TP)</span></nav>
-        <h1 class="page-title">Timers (TON - TOF - TP)</h1>
-
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">06_PLC_Programming_&amp;_Logic</span><span class="bc-sep"> / </span><span class="bc-current">Timers (TON, TOF, TP)</span></nav>
+        <h1 class="page-title">Timers (TON, TOF, TP)</h1>
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLC Programming &amp; Logic</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 61131-3</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#timer</span> <span class="tag">#TON</span> <span class="tag">#TOF</span> <span class="tag">#TP</span> <span class="tag">#IEC61131</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLC Programming &amp; Logic</code><br/><strong>Tags:</strong> <code>#timer #TON #TOF #TP #IEC61131</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Timers are one of the four function-block types defined by IEC 61131-3 (along with counters, bistables, and edge detectors). Every PLC supports them; the behavior is standard across brands.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="the-three-standard-timers">The Three Standard Timers</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Timer</th>
+<th>Input</th>
+<th>Behavior</th>
+<th>Output</th>
+</tr></thead><tbody>
+<tr><td>TON (On-delay)</td><td>IN = TRUE for PT seconds</td><td>Starts counting when IN goes TRUE. Resets when IN goes FALSE.</td><td>Q = TRUE after PT; FALSE when IN is FALSE</td></tr>
+<tr><td>TOF (Off-delay)</td><td>IN = TRUE</td><td>Q goes TRUE immediately when IN goes TRUE. When IN goes FALSE, timer counts PT, then Q → FALSE.</td><td>Q = TRUE for PT after IN falling edge</td></tr>
+<tr><td>TP (Pulse)</td><td>IN rising edge</td><td>Q goes TRUE for exactly PT, regardless of further IN changes.</td><td>One-shot fixed-width pulse</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="rockwell-equivalents">Rockwell Equivalents</h2>
+<ul><li><strong>TON</strong> — direct equivalent. .TT = running, .DN = done, .EN = enabled, .ACC = accumulated.</li><li><strong>TOF</strong> — same concept. .DN is TRUE while the input is TRUE + during the delay.</li><li><strong>RTO</strong> — retentive timer; accumulates even when the input goes FALSE. Must be explicitly reset.</li><li>Use .PRE for preset, .ACC for accumulated, in ms.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="common-uses">Common Uses</h2>
+<ul><li><strong>Debounce</strong> a noisy sensor (TON of 20–50 ms).</li><li><strong>Delay fault reaction</strong> until a condition has been present for N seconds (prevents transient trips).</li><li><strong>One-shot horn</strong> on alarm (TP for 2 s).</li><li><strong>Post-purge</strong> fan after burner off (TOF for 60 s).</li><li><strong>Wait for acknowledge</strong> before continuing a sequence.</li></ul>
+<hr />
+<h2 id="sample-logic">Sample Logic</h2>
+<pre><code>IF Sensor THEN
+   Debounce_TON(IN := TRUE, PT := T#50ms);
+ELSE
+   Debounce_TON(IN := FALSE, PT := T#50ms);
+END_IF;
+Sensor_Filtered := Debounce_TON.Q;
+</code></pre>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Preset values are tag-driven, not hard-coded, so they can be tuned from the HMI.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Retentive timers have a clear reset condition on first-scan and fault reset.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Unit (ms vs. s) explicit in the tag name (Delay_ms).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Timers not used as a substitute for physical interlocks.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Ladder Logic Basics.html">Ladder Logic Basics</a></li>
+<li><a href="Counters.html">Counters</a></li>
+<li><a href="Basic State Machine Programming.html">Basic State Machine Programming</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

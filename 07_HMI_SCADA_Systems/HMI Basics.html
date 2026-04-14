@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,94 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#core-elements">Core Elements</a></li>
+<li><a href="#hardware-form-factors">Hardware Form Factors</a></li>
+<li><a href="#design-principles-isa-101">Design Principles (ISA-101)</a></li>
+<li><a href="#common-screens">Common Screens</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">07_HMI_SCADA_Systems</span><span class="bc-sep"> / </span><span class="bc-current">HMI Basics</span></nav>
         <h1 class="page-title">HMI Basics</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">HMI / SCADA</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">ISA-101, IEC 62682</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">PanelView, Siemens Comfort/TP, Magelis, Proface</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#HMI</span> <span class="tag">#screen</span> <span class="tag">#operator</span> <span class="tag">#panelview</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>HMI / SCADA</code><br/><strong>Tags:</strong> <code>#HMI #screen #operator #panelview</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>An HMI (Human-Machine Interface) is the touchscreen or PC-based interface an operator uses to see and control the machine. Unlike a SCADA system, an HMI is typically machine-local and shows one machine or cell.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="core-elements">Core Elements</h2>
+<ul><li><strong>Screens</strong> — pages of graphics, each covering a machine area or function.</li><li><strong>Tags</strong> — the data connection to the PLC (see <a href="../06_PLC_Programming_&_Logic/HMI IO Tags &amp; Linking.html">HMI I/O Tags</a>).</li><li><strong>Animations</strong> — visibility, color, fill, rotation driven by tag values.</li><li><strong>Controls</strong> — buttons, numeric entry, dropdowns, recipe managers.</li><li><strong>Alarms</strong> — banner, history, and summary views.</li><li><strong>Trends</strong> — time-series graphs of analog values.</li><li><strong>Security</strong> — user accounts, roles, and audit trails.</li></ul>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="hardware-form-factors">Hardware Form Factors</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
+<thead><tr>
+<th>Form Factor</th>
+<th>Typical Use</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</tr></thead><tbody>
+<tr><td>Panel-mount touchscreen</td><td>Machine-local operator interface</td><td>4" to 22" common</td></tr>
+<tr><td>PC-based thin client</td><td>Central operator stations</td><td>ThinManager / VersaVirtual</td></tr>
+<tr><td>Web-based HMI</td><td>Any browser</td><td>Ignition Perspective, FactoryTalk Optix</td></tr>
+<tr><td>Pendants</td><td>Robots, CNC, gantries</td><td>Handheld</td></tr>
+<tr><td>Mobile dashboards</td><td>Supervisor / maintenance</td><td>Read-only typically</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="design-principles-isa-101">Design Principles (ISA-101)</h2>
+<ul><li>Design for the 3am operator — simple, clear, unambiguous.</li><li>Consistent layout across screens: title bar, nav, alarm banner, footer in the same place.</li><li>Limit colors: reserve red for alarm, yellow for warning, green for running, gray for idle. Avoid rainbow dashboards.</li><li>Show process values as numbers <em>and</em> visual indicators (bar, gauge, color).</li><li>Group related items so the eye doesn't hunt.</li><li>Keep navigation shallow — target ≤ 3 clicks to any destination.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="common-screens">Common Screens</h2>
+<ul><li>Overview — whole-machine status at a glance.</li><li>Area / cell — detail of one machine section.</li><li>Manual / maintenance — force inputs, jog motors, run individual actions (with keyed access).</li><li>Alarms — active, history, shelved.</li><li>Trends — analog histories and key performance indicators.</li><li>Recipes — tunable batch or product parameters.</li><li>Diagnostics — PLC connection, I/O status, firmware info.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> HMI IP / node address documented and matches PLC communication setup.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Navigation tested from every screen back to the Home screen.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> All tags have quality-of-data indication when stale or bad.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Manual-mode screens require login and are audited.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Backup of the HMI project saved off-device.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Screen Navigation &amp; User Inputs.html">Screen Navigation &amp; User Inputs</a></li>
+<li><a href="Tag Management &amp; Alarms.html">Tag Management &amp; Alarms</a></li>
+<li><a href="Connecting HMI to PLC (EthernetIP, Modbus).html">Connecting HMI to PLC (EthernetIP, Modbus)</a></li>
+<li><a href="Basic SCADA Architecture.html">Basic SCADA Architecture</a></li>
+<li><a href="../06_PLC_Programming_&_Logic/HMI IO Tags &amp; Linking.html">HMI IO Tags &amp; Linking</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

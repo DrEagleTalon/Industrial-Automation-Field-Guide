@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,81 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#method-iso-12100">Method (ISO 12100)</a></li>
+<li><a href="#required-performance-level">Required Performance Level</a></li>
+<li><a href="#three-step-reduction">Three-Step Reduction</a></li>
+<li><a href="#validation">Validation</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">12_Safety_Systems_Advanced</span><span class="bc-sep"> / </span><span class="bc-current">Risk Assessments &amp; Functional Safety</span></nav>
         <h1 class="page-title">Risk Assessments &amp; Functional Safety</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Safety Systems (Advanced)</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">ISO 12100, ISO 13849-1, IEC 62061</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#riskassessment</span> <span class="tag">#ISO12100</span> <span class="tag">#ISO13849</span> <span class="tag">#IEC62061</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Safety Systems (Advanced)</code><br/><strong>Tags:</strong> <code>#riskassessment #ISO12100 #ISO13849 #IEC62061</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Risk assessment is the mandatory first step for every new machine or major modification. It translates hazards into a required performance level for each safety function — the foundation for everything that follows.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="method-iso-12100">Method (ISO 12100)</h2>
+<ol><li>Define the machine, its limits, and intended use.</li><li>Identify hazards at every state (run, setup, maintenance, clean).</li><li>Estimate risk: severity, frequency/exposure, possibility of avoidance.</li><li>Evaluate whether risk reduction is needed.</li><li>Apply the three-step method of risk reduction: inherently safe design → safeguards → information/warnings.</li><li>Document results.</li></ol>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="required-performance-level">Required Performance Level</h2>
+<p>Use the ISO 13849-1 risk graph to turn severity / exposure / avoidance into a Required PL (PLr). Or use the IEC 62061 method for SIL. The safety system must achieve at least the required level.</p>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="three-step-reduction">Three-Step Reduction</h2>
+<ol><li><strong>Inherently safe design</strong> — eliminate the hazard, reduce energy, guard by geometry, fail-safe defaults.</li><li><strong>Safeguarding</strong> — guards, interlocks, light curtains, E-stops, two-hand controls.</li><li><strong>Information / warnings</strong> — signs, labels, training. Last resort.</li></ol>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="validation">Validation</h2>
+<ul><li>Every safety function is tested for correct action — including failure modes.</li><li>Safety distances measured against calculated minimums.</li><li>PFHd / MTTFd calculations verified.</li><li>Documentation complete: assessment, design, validation, user instructions.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Risk assessment filed in the machine record.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Each hazard mapped to a safety function with a defined SIL / PL.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Validation test signed off.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Residual risks communicated to operators via training and signage.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../11_Standards_and_Codes/SIL - PL Functional Safety Intro.html">SIL - PL Functional Safety Intro</a></li>
+<li><a href="Emergency Stops (E-Stops).html">Emergency Stops (E-Stops)</a></li>
+<li><a href="Safety Fencing &amp; Interlocks.html">Safety Fencing &amp; Interlocks</a></li>
+<li><a href="Safety PLCs &amp; Redundancy.html">Safety PLCs &amp; Redundancy</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

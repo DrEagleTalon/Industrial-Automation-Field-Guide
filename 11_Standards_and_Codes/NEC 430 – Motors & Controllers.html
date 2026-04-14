@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,103 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#key-sections">Key Sections</a></li>
+<li><a href="#sizing-walk-through">Sizing Walk-Through</a></li>
+<li><a href="#common-mistakes">Common Mistakes</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">11_Standards_and_Codes</span><span class="bc-sep"> / </span><span class="bc-current">NEC 430 – Motors &amp; Controllers</span></nav>
         <h1 class="page-title">NEC 430 – Motors &amp; Controllers</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Standards &amp; Codes</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">NFPA 70 / NEC Article 430</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#NEC</span> <span class="tag">#Art430</span> <span class="tag">#motor</span> <span class="tag">#conductor</span> <span class="tag">#overload</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Standards &amp; Codes</code><br/><strong>Tags:</strong> <code>#NEC #Art430 #motor #conductor #overload</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>NEC Article 430 governs motor circuits in the US: conductor sizing, overload protection, short-circuit protection, disconnects, and control circuits. Every motor installation is traceable to a handful of 430 rules.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="key-sections">Key Sections</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
+<thead><tr>
+<th>Section</th>
+<th>Topic</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</tr></thead><tbody>
+<tr><td>430.6</td><td>Current used for calculations</td><td>Conductors sized from NEC tables (not nameplate); overload from nameplate FLA</td></tr>
+<tr><td>430.22</td><td>Single-motor conductor ampacity</td><td>125% of motor FLC (Table 430.250) for continuous-duty</td></tr>
+<tr><td>430.24</td><td>Multiple motors</td><td>Sum of 125% largest + 100% others</td></tr>
+<tr><td>430.32</td><td>Overload protection sizing</td><td>115% FLA for SF ≤ 1.15; 125% for SF ≥ 1.15</td></tr>
+<tr><td>430.52</td><td>Short-circuit / branch-circuit protection</td><td>Up to 250% FLC for ITB breakers (Table 430.52)</td></tr>
+<tr><td>430.102</td><td>Motor disconnect</td><td>In sight from controller and motor</td></tr>
+<tr><td>430.109</td><td>Disconnect type</td><td>Motor circuit switch, molded-case switch, etc.</td></tr>
+<tr><td>430.122</td><td>Power conversion equipment (VFDs)</td><td>110% of drive input current, plus adjustment factors</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="sizing-walk-through">Sizing Walk-Through</h2>
+<p>Example: 10 HP, 3-phase, 460 V motor.</p><pre><code>Table 430.250 FLC for 10 HP, 460 V:  14 A
+  (note: use Table FLC, not nameplate FLA, for conductor sizing)
+
+Conductor ampacity (430.22): 1.25 x 14 = 17.5 A
+  Minimum #12 AWG THHN copper (20 A @ 60 C) — typically #12 or #10
+
+Branch-circuit protection (430.52, inverse-time breaker, 250%):
+  2.50 x 14 = 35 A  -> 35 A breaker
+  May be rounded up to next standard size per 430.52(C)(1) Exception
+
+Overload (430.32, motor SF = 1.15, set from nameplate FLA = 13 A):
+  1.25 x 13 = 16.25 A maximum trip setting
+</code></pre>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="common-mistakes">Common Mistakes</h2>
+<ul><li>Using nameplate FLA instead of Table FLC to size conductors — 430.6 says no.</li><li>Confusing short-circuit breaker size with overload size.</li><li>Using motor SF amps (FLA × SF) to set the overload — violates 430.32.</li><li>VFD-fed motor sized as if it were across-the-line — drive input can be higher.</li><li>Forgetting the disconnect requirement — 430.102 needs one in sight.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Conductor size justified from Table 430.250 + 430.22.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Short-circuit protection sized per 430.52.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Overload set per 430.32 from nameplate FLA.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Disconnect in sight of controller per 430.102.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> VFD input sized per 430.122.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../04_Motor_Control/Overload Relays.html">Overload Relays</a></li>
+<li><a href="../04_Motor_Control/Motor Nameplate Data.html">Motor Nameplate Data</a></li>
+<li><a href="../02_Power_Distribution/Fuses vs Breakers.html">Fuses vs Breakers</a></li>
+<li><a href="NFPA 79 – Machinery Electrical.html">NFPA 79 – Machinery Electrical</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

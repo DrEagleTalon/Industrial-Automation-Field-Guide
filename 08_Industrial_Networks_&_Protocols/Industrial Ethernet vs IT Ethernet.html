@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,93 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#differences">Differences</a></li>
+<li><a href="#purdue-model-isa-95">Purdue Model / ISA-95</a></li>
+<li><a href="#common-otit-conflicts">Common OT/IT Conflicts</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">08_Industrial_Networks_&amp;_Protocols</span><span class="bc-sep"> / </span><span class="bc-current">Industrial Ethernet vs IT Ethernet</span></nav>
         <h1 class="page-title">Industrial Ethernet vs IT Ethernet</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Industrial Networks &amp; Protocols</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEEE 802.3, IEC 61784</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#Ethernet</span> <span class="tag">#IT</span> <span class="tag">#OT</span> <span class="tag">#industrial</span> <span class="tag">#determinism</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Industrial Networks &amp; Protocols</code><br/><strong>Tags:</strong> <code>#Ethernet #IT #OT #industrial #determinism</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Industrial Ethernet and office Ethernet share the same physical layer but are deployed very differently. Control networks need deterministic timing, tolerate harsh environments, and can't be patched on Tuesday morning while the line is running.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="differences">Differences</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Aspect</th>
+<th>IT Ethernet</th>
+<th>Industrial Ethernet</th>
+</tr></thead><tbody>
+<tr><td>Physical environment</td><td>Office (20 °C, clean)</td><td>Plant (-20 to 60 °C, vibration, dust, moisture)</td></tr>
+<tr><td>Cable</td><td>UTP Cat 5e/6 indoor</td><td>Shielded, oil-resistant, rated for conduit and drag-chain</td></tr>
+<tr><td>Connectors</td><td>RJ45</td><td>RJ45 with IP67 hood, M12 D-coded, Harting</td></tr>
+<tr><td>Switches</td><td>Managed, rack-mount</td><td>Fanless, DIN-rail, -40 to +70 °C, redundant power</td></tr>
+<tr><td>Topology</td><td>Star</td><td>Star, ring (DLR, PRP/HSR), line</td></tr>
+<tr><td>Latency determinism</td><td>Best-effort</td><td>Bounded (< 1 ms for Profinet IRT, EtherCAT)</td></tr>
+<tr><td>Protocols</td><td>HTTP, SMB, DNS</td><td>EtherNet/IP, PROFINET, EtherCAT, Modbus TCP</td></tr>
+<tr><td>Change control</td><td>Frequent</td><td>Infrequent, tightly managed</td></tr>
+<tr><td>Security focus</td><td>Confidentiality</td><td>Availability first, integrity, then confidentiality</td></tr>
+<tr><td>Patch cycles</td><td>Weekly / monthly</td><td>Annual outage windows</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="purdue-model-isa-95">Purdue Model / ISA-95</h2>
+<p>The standard reference for segmenting IT and OT networks: Level 0 (field devices) up through Level 5 (enterprise). Firewalls separate OT (0–3) from IT (4–5) with a DMZ in between. It's the pattern every industrial IT group ends up recreating whether or not they've read the document.</p>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="common-otit-conflicts">Common OT/IT Conflicts</h2>
+<ul><li>IT deploys a switch firmware update — multicast config changes, EtherNet/IP I/O drops.</li><li>IT enables DHCP on a port connected to a PLC that needs a static IP — line stops.</li><li>IT installs anti-virus on a SCADA server — historian misses samples during scans.</li><li>IT network scanner probes a PLC — PLC faults out because it wasn't designed to handle arbitrary packets.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> OT network physically and logically separated from IT by a firewall + DMZ.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> No DHCP on the control network.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Documented change-control for any firmware, config, or VLAN change.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Managed switches with monitoring (SNMP) and port security.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Industrial-rated cable and connectors on anything exposed to the plant floor.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Common Protocols.html">Common Protocols</a></li>
+<li><a href="IP Addressing &amp; Subnetting.html">IP Addressing &amp; Subnetting</a></li>
+<li><a href="Switches &amp; Managed Networks.html">Switches &amp; Managed Networks</a></li>
+<li><a href="../13_Specialty_Topics/Remote Access &amp; VPN.html">Remote Access &amp; VPN</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

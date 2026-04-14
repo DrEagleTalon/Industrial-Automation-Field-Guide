@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Automation Field Guide</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #f4f4f0;
+      padding: 2.5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    a { color: #1a56a0; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #111;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle { color: #666; font-size: 1.05rem; margin-bottom: 2.5rem; }
+    .section {
+      background: #ffffff;
+      border: 1px solid #e4e4de;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .section h2 {
+      font-size: 1.1rem;
+      color: #1e2736;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.01em;
+    }
+    .section ul { list-style: none; columns: 2; gap: 1.25rem; }
+    .section li { margin-bottom: 0.3rem; break-inside: avoid; font-size: 0.92rem; }
+    @media (max-width: 700px) {
+      .section ul { columns: 1; }
+    }
+    .footer { color: #aaa; font-size: 0.82rem; text-align: center; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+  <h1>Industrial Automation Field Guide</h1>
+  <div class="subtitle">A living field guide for new controls engineers, automation technicians, and electricians.</div>
+
+  <div class="section">
+    <h2>I. Electrical Fundamentals</h2>
+    <ul>
+      <li><a href="01_Electrical_Fundamentals/Electrical Safety &amp; PPE.html">Electrical Safety &amp; PPE</a></li>
+      <li><a href="01_Electrical_Fundamentals/Lockout Tagout (LOTO) Procedures.html">Lockout Tagout (LOTO)</a></li>
+      <li><a href="01_Electrical_Fundamentals/Basic Electrical Theory.html">Basic Electrical Theory</a></li>
+      <li><a href="01_Electrical_Fundamentals/Tools of the Trade.html">Tools of the Trade</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>II. Power Distribution &amp; Wiring</h2>
+    <ul>
+      <li><a href="02_Power_Distribution/Industrial Power Systems Overview.html">Industrial Power Systems Overview</a></li>
+      <li><a href="02_Power_Distribution/Wire Color Codes (US &amp; IEC).html">Wire Color Codes (US &amp; IEC)</a></li>
+      <li><a href="02_Power_Distribution/Panel Wiring Best Practices.html">Panel Wiring Best Practices</a></li>
+      <li><a href="02_Power_Distribution/Conduit Types and Fittings.html">Conduit Types and Fittings</a></li>
+      <li><a href="02_Power_Distribution/Fuses vs Breakers.html">Fuses vs Breakers</a></li>
+      <li><a href="02_Power_Distribution/Control Transformers.html">Control Transformers</a></li>
+      <li><a href="02_Power_Distribution/Voltage Drop – Planning and Testing.html">Voltage Drop</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>III. Control Devices &amp; Circuits</h2>
+    <ul>
+      <li><a href="03_Control_Devices/Pushbuttons, Selector Switches, Pilot Lights.html">Pushbuttons, Selector Switches, Pilot Lights</a></li>
+      <li><a href="03_Control_Devices/Relays &amp; Interposing Relays.html">Relays &amp; Interposing Relays</a></li>
+      <li><a href="03_Control_Devices/Timers &amp; Counters.html">Timers &amp; Counters</a></li>
+      <li><a href="03_Control_Devices/Limit Switches &amp; Mechanical Sensors.html">Limit Switches &amp; Mechanical Sensors</a></li>
+      <li><a href="03_Control_Devices/Proximity Sensors Inductive Capacitive.html">Proximity Sensors</a></li>
+      <li><a href="03_Control_Devices/Photoelectric Sensors.html">Photoelectric Sensors</a></li>
+      <li><a href="03_Control_Devices/Wiring &amp; Testing Control Circuits.html">Wiring &amp; Testing Control Circuits</a></li>
+      <li><a href="03_Control_Devices/Latching Circuits &amp; Seal-in Logic.html">Latching Circuits &amp; Seal-in Logic</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>IV. Motor Control Systems</h2>
+    <ul>
+      <li><a href="04_Motor_Control/3-Phase Motor Basics.html">3-Phase Motor Basics</a></li>
+      <li><a href="04_Motor_Control/Motor Nameplate Data.html">Motor Nameplate Data</a></li>
+      <li><a href="04_Motor_Control/Direct-On-Line Starters.html">Direct-On-Line Starters</a></li>
+      <li><a href="04_Motor_Control/Motor Contactors &amp; Starters.html">Motor Contactors &amp; Starters</a></li>
+      <li><a href="04_Motor_Control/Overload Relays.html">Overload Relays</a></li>
+      <li><a href="04_Motor_Control/Reversing Starters.html">Reversing Starters</a></li>
+      <li><a href="04_Motor_Control/Star-Delta Starters.html">Star-Delta Starters</a></li>
+      <li><a href="04_Motor_Control/Soft Starters.html">Soft Starters</a></li>
+      <li><a href="04_Motor_Control/Variable Frequency Drives (VFDs) Basics.html">VFDs Basics</a></li>
+      <li><a href="04_Motor_Control/VFD Parameters &amp; Setup.html">VFD Parameters &amp; Setup</a></li>
+      <li><a href="04_Motor_Control/Motor Braking Techniques.html">Motor Braking Techniques</a></li>
+      <li><a href="04_Motor_Control/Motor Megger Testing.html">Motor Megger Testing</a></li>
+      <li><a href="04_Motor_Control/Motor Wiring &amp; Rotation Checking.html">Motor Wiring &amp; Rotation Checking</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>V. PLCs &amp; Automation Hardware</h2>
+    <ul>
+      <li><a href="05_PLCs &amp; Automation Hardware/What is a PLC.html">What is a PLC</a></li>
+      <li><a href="05_PLCs &amp; Automation Hardware/PLC vs Relay Logic.html">PLC vs Relay Logic</a></li>
+      <li><a href="05_PLCs &amp; Automation Hardware/Discrete IO Modules.html">Discrete I/O Modules</a></li>
+      <li><a href="05_PLCs &amp; Automation Hardware/Analog IO Basics.html">Analog I/O Basics</a></li>
+      <li><a href="05_PLCs &amp; Automation Hardware/Sinking vs Sourcing Inputs.html">Sinking vs Sourcing Inputs</a></li>
+      <li><a href="05_PLCs &amp; Automation Hardware/Common PLC Brands &amp; Differences.html">Common PLC Brands</a></li>
+      <li><a href="05_PLCs &amp; Automation Hardware/Wiring Inputs &amp; Outputs to PLCs.html">Wiring I/O to PLCs</a></li>
+      <li><a href="05_PLCs &amp; Automation Hardware/PLC Power Supplies.html">PLC Power Supplies</a></li>
+      <li><a href="05_PLCs &amp; Automation Hardware/Safety Relays &amp; Safety PLCs.html">Safety Relays &amp; Safety PLCs</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>VI. PLC Programming &amp; Logic</h2>
+    <ul>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Ladder Logic Basics.html">Ladder Logic Basics</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Boolean Logic Review.html">Boolean Logic Review</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Start-Stop Logic.html">Start-Stop Logic</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Timers (TON - TOF - TP).html">Timers (TON, TOF, TP)</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Counters.html">Counters</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Set - Reset Latch.html">Set / Reset Latch</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Interlocking &amp; Permissives.html">Interlocking &amp; Permissives</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Alarms &amp; Fault Detection.html">Alarms &amp; Fault Detection</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/HMI IO Tags &amp; Linking.html">HMI I/O Tags &amp; Linking</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Basic State Machine Programming.html">State Machines</a></li>
+      <li><a href="06_PLC_Programming_&amp;_Logic/Data Blocks &amp; Structured Text.html">Data Blocks &amp; Structured Text</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>VII. HMI / SCADA Systems</h2>
+    <ul>
+      <li><a href="07_HMI_SCADA_Systems/HMI Basics.html">HMI Basics</a></li>
+      <li><a href="07_HMI_SCADA_Systems/Screen Navigation &amp; User Inputs.html">Screen Navigation &amp; Inputs</a></li>
+      <li><a href="07_HMI_SCADA_Systems/Tag Management &amp; Alarms.html">Tag Management &amp; Alarms</a></li>
+      <li><a href="07_HMI_SCADA_Systems/Connecting HMI to PLC (EthernetIP, Modbus).html">Connecting HMI to PLC</a></li>
+      <li><a href="07_HMI_SCADA_Systems/Basic SCADA Architecture.html">Basic SCADA Architecture</a></li>
+      <li><a href="07_HMI_SCADA_Systems/Data Logging &amp; Trends.html">Data Logging &amp; Trends</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>VIII. Industrial Networks &amp; Protocols</h2>
+    <ul>
+      <li><a href="08_Industrial_Networks_&amp;_Protocols/Industrial Ethernet vs IT Ethernet.html">Industrial vs IT Ethernet</a></li>
+      <li><a href="08_Industrial_Networks_&amp;_Protocols/IP Addressing &amp; Subnetting.html">IP Addressing &amp; Subnetting</a></li>
+      <li><a href="08_Industrial_Networks_&amp;_Protocols/Common Protocols.html">Common Protocols</a></li>
+      <li><a href="08_Industrial_Networks_&amp;_Protocols/Switches &amp; Managed Networks.html">Switches &amp; Managed Networks</a></li>
+      <li><a href="08_Industrial_Networks_&amp;_Protocols/Network Troubleshooting (Ping, ARP, etc).html">Network Troubleshooting</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>IX. Troubleshooting &amp; Diagnostics</h2>
+    <ul>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/General Troubleshooting Methodology.html">General Methodology</a></li>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/Power Circuit Faults.html">Power Circuit Faults</a></li>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/Control Circuit Faults.html">Control Circuit Faults</a></li>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/Motor Overheating &amp; Tripping.html">Motor Overheating &amp; Tripping</a></li>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/VFD Trips &amp; Fault Codes.html">VFD Trips &amp; Fault Codes</a></li>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/PLC Input Not Responding.html">PLC Input Not Responding</a></li>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/PLC Output Not Driving Load.html">PLC Output Not Driving Load</a></li>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/Sensor Not Detecting.html">Sensor Not Detecting</a></li>
+      <li><a href="09_Troubleshooting_&amp;_Diagnostics/Network Communication Loss.html">Network Comm Loss</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>X. System Integration &amp; Commissioning</h2>
+    <ul>
+      <li><a href="10_System_Integration_&amp;_Commissioning/Control Panel Layout &amp; BOM.html">Control Panel Layout &amp; BOM</a></li>
+      <li><a href="10_System_Integration_&amp;_Commissioning/IO Checkout &amp; Loop Testing.html">I/O Checkout &amp; Loop Testing</a></li>
+      <li><a href="10_System_Integration_&amp;_Commissioning/PLC-HMI-VFD Integration.html">PLC-HMI-VFD Integration</a></li>
+      <li><a href="10_System_Integration_&amp;_Commissioning/Startup Sequences.html">Startup Sequences</a></li>
+      <li><a href="10_System_Integration_&amp;_Commissioning/PID Tuning Basics.html">PID Tuning Basics</a></li>
+      <li><a href="10_System_Integration_&amp;_Commissioning/Documentation Best Practices.html">Documentation Best Practices</a></li>
+      <li><a href="10_System_Integration_&amp;_Commissioning/Change Management.html">Change Management</a></li>
+      <li><a href="10_System_Integration_&amp;_Commissioning/Commissioning Reports &amp; Sign-off.html">Commissioning Reports</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>XI. Standards &amp; Codes</h2>
+    <ul>
+      <li><a href="11_Standards_and_Codes/NEC 430 – Motors &amp; Controllers.html">NEC 430 – Motors &amp; Controllers</a></li>
+      <li><a href="11_Standards_and_Codes/UL 508A – Control Panels.html">UL 508A – Control Panels</a></li>
+      <li><a href="11_Standards_and_Codes/IEC 61131-3 – PLC Programming.html">IEC 61131-3</a></li>
+      <li><a href="11_Standards_and_Codes/NFPA 79 – Machinery Electrical.html">NFPA 79</a></li>
+      <li><a href="11_Standards_and_Codes/SIL - PL Functional Safety Intro.html">SIL / PL Intro</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>XII. Safety Systems (Advanced)</h2>
+    <ul>
+      <li><a href="12_Safety_Systems_Advanced/Emergency Stops (E-Stops).html">Emergency Stops</a></li>
+      <li><a href="12_Safety_Systems_Advanced/Two-Hand Controls.html">Two-Hand Controls</a></li>
+      <li><a href="12_Safety_Systems_Advanced/Safety Fencing &amp; Interlocks.html">Safety Fencing &amp; Interlocks</a></li>
+      <li><a href="12_Safety_Systems_Advanced/Safety PLCs &amp; Redundancy.html">Safety PLCs &amp; Redundancy</a></li>
+      <li><a href="12_Safety_Systems_Advanced/Risk Assessments &amp; Functional Safety.html">Risk Assessments</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>XIII. Specialty Topics</h2>
+    <ul>
+      <li><a href="13_Specialty_Topics/Robotic Integration.html">Robotic Integration</a></li>
+      <li><a href="13_Specialty_Topics/Servo Motors &amp; Motion Control.html">Servo Motors &amp; Motion Control</a></li>
+      <li><a href="13_Specialty_Topics/Encoders &amp; Resolvers.html">Encoders &amp; Resolvers</a></li>
+      <li><a href="13_Specialty_Topics/Industrial Wireless.html">Industrial Wireless</a></li>
+      <li><a href="13_Specialty_Topics/Remote Access &amp; VPN.html">Remote Access &amp; VPN</a></li>
+      <li><a href="13_Specialty_Topics/Panel Cooling &amp; Power Conditioning.html">Panel Cooling</a></li>
+      <li><a href="13_Specialty_Topics/IO-Link Devices.html">IO-Link Devices</a></li>
+      <li><a href="13_Specialty_Topics/Energy Monitoring &amp; Smart Breakers.html">Energy Monitoring</a></li>
+      <li><a href="13_Specialty_Topics/IIoT Gateways &amp; Edge.html">IIoT Gateways &amp; Edge</a></li>
+      <li><a href="13_Specialty_Topics/Cloud SCADA &amp; MQTT.html">Cloud SCADA &amp; MQTT</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>XIV. Soft Skills &amp; Workflow</h2>
+    <ul>
+      <li><a href="14_Soft_Skills_Workflow/Reading Schematics &amp; Wiring Diagrams.html">Reading Schematics</a></li>
+      <li><a href="14_Soft_Skills_Workflow/Using CAD Tools.html">Using CAD Tools</a></li>
+      <li><a href="14_Soft_Skills_Workflow/Writing Work Orders &amp; Reports.html">Writing Work Orders &amp; Reports</a></li>
+      <li><a href="14_Soft_Skills_Workflow/Client Communication &amp; Support.html">Client Communication</a></li>
+      <li><a href="14_Soft_Skills_Workflow/Project Handoff Docs.html">Project Handoff Docs</a></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    Industrial Automation Field Guide &mdash; generated 2026-04-13
+  </div>
+
+</body>
+</html>

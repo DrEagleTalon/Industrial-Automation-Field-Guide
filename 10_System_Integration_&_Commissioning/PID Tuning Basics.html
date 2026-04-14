@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,252 +347,99 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#the-three-terms">The Three Terms</a></li>
+<li><a href="#tuning-methods">Tuning Methods</a></li>
+<li><a href="#common-loop-types">Common Loop Types</a></li>
+<li><a href="#practical-tips">Practical Tips</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#description_1">Description</a></li>
-<li><a href="#core-concepts_1">Core Concepts</a><ul>
-<li><a href="#what-is-it_1">What is it?</a></li>
-<li><a href="#how-it-works_1">How it works</a></li>
-<li><a href="#when-to-use_1">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters_1">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams_1">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics_1">Troubleshooting &amp; Diagnostics</a></li>
-<li><a href="#field-checklist_1">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
-<li><a href="#-">---</a></li>
-<li><a href="#reference-notes_1">Reference Notes</a></li>
-<li><a href="#related-topics_1">Related Topics</a></li>
-<li><a href="#local-changelog_1">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">10_System_Integration_&amp;_Commissioning</span><span class="bc-sep"> / </span><span class="bc-current">PID Tuning Basics</span></nav>
         <h1 class="page-title">PID Tuning Basics</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">System Integration &amp; Commissioning</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#PID</span> <span class="tag">#process</span> <span class="tag">#tuning</span> <span class="tag">#ZN</span> <span class="tag">#loop</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>System Integration &amp; Commissioning</code><br/><strong>Tags:</strong> <code>#PID #process #tuning #ZN #loop</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>PID (Proportional-Integral-Derivative) is the workhorse control algorithm in process automation. Most engineers can name the three terms, far fewer can tune a loop that behaves well at the first try. The good news: you don't need to — you need a method.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="the-three-terms">The Three Terms</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Term</th>
+<th>What it does</th>
+<th>Effect</th>
+</tr></thead><tbody>
+<tr><td>P</td><td>Proportional to current error</td><td>Fast reaction; larger gain = faster and less stable</td></tr>
+<tr><td>I</td><td>Integrates error over time</td><td>Removes steady-state offset; too much causes windup and oscillation</td></tr>
+<tr><td>D</td><td>Rate of change of error</td><td>Anticipates; noisy signals cause chatter</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="tuning-methods">Tuning Methods</h2>
+<h3>Ziegler-Nichols (closed-loop)</h3><ol><li>Set I and D to zero. Raise P slowly until the PV just sustains steady oscillation.</li><li>Note the ultimate gain Ku and the oscillation period Tu.</li><li>Apply: P = 0.6 Ku, I = 2 × P / Tu, D = P × Tu / 8.</li><li>Trim from there.</li></ol><h3>Cohen-Coon (open-loop / step test)</h3><p>Bump the output by a step and record the PV response. Measure dead time L, time constant T, and process gain K. Use Cohen-Coon formulas to compute P, I, D. Better for slow dead-time-dominated processes like temperature loops.</p><h3>IMC / lambda tuning</h3><p>Pick a desired closed-loop time constant lambda. Compute P and I from the open-loop model. Simple and robust. Default for many modern process loops.</p><h3>Autotune</h3><p>Almost every modern PLC or drive has an autotune button. Works well on well-behaved loops. Review the gains before locking them in.</p>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<h2 id="common-loop-types">Common Loop Types</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Loop</th>
+<th>Typical Behavior</th>
+<th>Tuning Notes</th>
+</tr></thead><tbody>
+<tr><td>Flow</td><td>Fast, noisy</td><td>Low P, low I, little or no D</td></tr>
+<tr><td>Level</td><td>Slow, integrating</td><td>Low I gain; avoid D</td></tr>
+<tr><td>Pressure</td><td>Fast</td><td>Similar to flow</td></tr>
+<tr><td>Temperature</td><td>Slow, dead-time</td><td>High I, moderate P, small D</td></tr>
+<tr><td>Position (servo)</td><td>Fast, accurate</td><td>Cascade with velocity loop; use feed-forward</td></tr>
+</tbody></table>
+<hr />
+<h2 id="practical-tips">Practical Tips</h2>
+<ul><li>Tune one loop at a time; don't chase inter-loop interactions.</li><li>Start conservative (slow) and speed up — the opposite will damage equipment.</li><li>Avoid D on noisy signals unless you filter first.</li><li>Set output limits and anti-windup.</li><li>Trend and archive the tuning tests — you'll tune again.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<p>title: ""
-version: ""
-status: ""
-author: [""]
-editors: [""]
-contributors: [""]
-category: [""]
-tags: [""]
-difficulty: ""
-related-topics: [""]
-standards: [""]
-equipment: [""]
-to-be-completed-by: ""
-last-updated: ""
-reviewed: ""</p>
-<hr />
-<h1 id="_2"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
-<hr />
-<h2 id="description_1">Description</h2>
-<hr />
-<h2 id="core-concepts_1">Core Concepts</h2>
-<h3 id="what-is-it_1">What is it?</h3>
-<h3 id="how-it-works_1">How it works</h3>
-<h3 id="when-to-use_1">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters_1">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="wiring-diagrams_1">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics_1">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="field-checklist_1">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Output limits set on the PID block.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Anti-windup enabled.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Test tuning logged and saved.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Operator able to switch auto / manual safely.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Trend views available on HMI for setpoint, PV, output.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../05_PLCs & Automation Hardware/Analog IO Basics.html">Analog IO Basics</a></li>
+<li><a href="IO Checkout &amp; Loop Testing.html">IO Checkout &amp; Loop Testing</a></li>
+<li><a href="../07_HMI_SCADA_Systems/Data Logging &amp; Trends.html">Data Logging &amp; Trends</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
-<h2 id="-">---</h2>
-<h2 id="reference-notes_1">Reference Notes</h2>
-<hr />
-<h2 id="related-topics_1">Related Topics</h2>
-<ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
-</ul>
-<hr />
-<h2 id="local-changelog_1">Local Changelog</h2>
-<table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Version</th>
-<th>Author</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

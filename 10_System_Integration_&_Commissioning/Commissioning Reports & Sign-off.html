@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,87 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#typical-phases">Typical Phases</a></li>
+<li><a href="#what-gets-signed">What Gets Signed</a></li>
+<li><a href="#punch-list-discipline">Punch List Discipline</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">10_System_Integration_&amp;_Commissioning</span><span class="bc-sep"> / </span><span class="bc-current">Commissioning Reports &amp; Sign-off</span></nav>
         <h1 class="page-title">Commissioning Reports &amp; Sign-off</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">System Integration &amp; Commissioning</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#commissioning</span> <span class="tag">#signoff</span> <span class="tag">#acceptance</span> <span class="tag">#FAT</span> <span class="tag">#SAT</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>System Integration &amp; Commissioning</code><br/><strong>Tags:</strong> <code>#commissioning #signoff #acceptance #FAT #SAT</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>A commissioning report is the bridge between the integrator's work and the end-user's ownership. Signed and filed, it is both a legal and an operational record of how the machine was handed over.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="typical-phases">Typical Phases</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Phase</th>
+<th>Where</th>
+<th>What's tested</th>
+</tr></thead><tbody>
+<tr><td>FAT (Factory Acceptance Test)</td><td>Integrator's shop</td><td>Functional, without real process — mostly software and I/O</td></tr>
+<tr><td>SAT (Site Acceptance Test)</td><td>Customer site</td><td>Integrated with real utilities and process</td></tr>
+<tr><td>Performance Test</td><td>Site, with production material</td><td>Rate, yield, OEE, stability</td></tr>
+<tr><td>Final Handover</td><td>Site</td><td>All documents, spares, training delivered</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="what-gets-signed">What Gets Signed</h2>
+<ul><li>I/O checkout sheets.</li><li>Loop test sheets.</li><li>Safety validation report (stop categories, reaction times).</li><li>Functional test matrix (every feature exercised).</li><li>Performance test results.</li><li>Outstanding punch list with agreed dates.</li><li>Drawings marked as-built.</li><li>Program / HMI / drive backups archived.</li><li>Training sign-off per operator / maintainer.</li><li>Spares inventory confirmation.</li></ul>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="punch-list-discipline">Punch List Discipline</h2>
+<ul><li>Any unfinished item gets a number, owner, severity, and target date.</li><li>Handover does not mean 'punch list empty' — it means agreed.</li><li>Track to closure; follow up at 30 / 60 / 90 days.</li><li>Close items in writing with sign-off.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Every commissioning phase signed by both parties.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Punch list agreed with owners and dates.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> All backups archived on customer media.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Operator and maintenance training completed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Report filed in the plant binder and electronically.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="IO Checkout &amp; Loop Testing.html">IO Checkout &amp; Loop Testing</a></li>
+<li><a href="PLC-HMI-VFD Integration.html">PLC-HMI-VFD Integration</a></li>
+<li><a href="Change Management.html">Change Management</a></li>
+<li><a href="Documentation Best Practices.html">Documentation Best Practices</a></li>
+<li><a href="../14_Soft_Skills_Workflow/Project Handoff Docs.html">Project Handoff Docs</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

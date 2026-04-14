@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,93 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#voltage-check-first">Voltage Check First</a></li>
+<li><a href="#common-symptoms">Common Symptoms</a></li>
+<li><a href="#tooling">Tooling</a></li>
+<li><a href="#ghost-voltages">Ghost Voltages</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">09_Troubleshooting_&amp;_Diagnostics</span><span class="bc-sep"> / </span><span class="bc-current">Control Circuit Faults</span></nav>
         <h1 class="page-title">Control Circuit Faults</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Troubleshooting &amp; Diagnostics</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#control</span> <span class="tag">#24VDC</span> <span class="tag">#relay</span> <span class="tag">#contact</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Troubleshooting &amp; Diagnostics</code><br/><strong>Tags:</strong> <code>#control #24VDC #relay #contact</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Control-side problems are the everyday bread and butter of troubleshooting: a motor won't start, a solenoid chatters, a light stays on, an input reads wrong.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="voltage-check-first">Voltage Check First</h2>
+<ul><li>Measure supply voltage at the source (control transformer output or 24 VDC supply output).</li><li>Then measure at the target device's coil or input.</li><li>A drop of more than 10% across a run indicates high-resistance connections or undersized wire.</li></ul>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="common-symptoms">Common Symptoms</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>First Check</th>
+</tr></thead><tbody>
+<tr><td>Contactor won't pick</td><td>Open control path</td><td>Voltage at coil; aux contact positions</td></tr>
+<tr><td>Contactor chatters</td><td>Low coil voltage, intermittent contact</td><td>Supply voltage under load</td></tr>
+<tr><td>Sensor reads wrong</td><td>Sinking vs sourcing mismatch</td><td><a href="../05_PLCs & Automation Hardware/Sinking vs Sourcing Inputs.html">Polarity check</a></td></tr>
+<tr><td>Solenoid won't release</td><td>Stuck plunger or wrong coil voltage</td><td>Manual test, measure off-state voltage</td></tr>
+<tr><td>Output works in manual, not auto</td><td>Logic interlock missing</td><td><a href="../06_PLC_Programming_&_Logic/Interlocking &amp; Permissives.html">Permissive review</a></td></tr>
+<tr><td>Random faults</td><td>Loose terminal or bad wire</td><td>Re-torque; wiggle test</td></tr>
+</tbody></table>
+<hr />
+<h2 id="tooling">Tooling</h2>
+<ul><li>Multimeter (DMM) — voltage, continuity, resistance.</li><li>Clamp-on ammeter for DC and AC, down to milliamps.</li><li>Low-impedance tester (LoZ / Wiggy) to defeat ghost voltages.</li><li>Logic probe or PLC online to watch inputs / outputs in real time.</li><li>Schematic on tablet or laminated print — never troubleshoot blind.</li></ul>
+<hr />
+<h2 id="ghost-voltages">Ghost Voltages</h2>
+<p>High-impedance meters will read capacitive-coupled 'ghost' voltages on disconnected wires — often 30–60 V on a cable that is actually dead. Use a LoZ tester or a solenoid tester to check for a real circuit.</p>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Voltage measured at source and at load.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Schematic matches field wiring — or schematic updated.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Intermittent faults investigated with data log, not single-shot reading.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Loose connections re-torqued and recorded.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Power Circuit Faults.html">Power Circuit Faults</a></li>
+<li><a href="PLC Input Not Responding.html">PLC Input Not Responding</a></li>
+<li><a href="PLC Output Not Driving Load.html">PLC Output Not Driving Load</a></li>
+<li><a href="../03_Control_Devices/Wiring &amp; Testing Control Circuits.html">Wiring &amp; Testing Control Circuits</a></li>
+<li><a href="General Troubleshooting Methodology.html">General Troubleshooting Methodology</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

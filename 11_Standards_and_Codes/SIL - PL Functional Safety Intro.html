@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIL - PL Functional Safety Intro | Industrial Automation Field Guide</title>
+  <title>SIL &amp; PL Functional Safety Intro | Industrial Automation Field Guide</title>
   <style>
 
 /* ── Reset ───────────────────────────────────────────────────────────────── */
@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,101 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#the-two-frameworks">The Two Frameworks</a></li>
+<li><a href="#sil-vs-pl-cross-reference">SIL vs PL Cross-Reference</a></li>
+<li><a href="#risk-assessment-to-level">Risk Assessment to Level</a></li>
+<li><a href="#common-safety-functions">Common Safety Functions</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
-        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">11_Standards_and_Codes</span><span class="bc-sep"> / </span><span class="bc-current">SIL - PL Functional Safety Intro</span></nav>
-        <h1 class="page-title">SIL - PL Functional Safety Intro</h1>
-
+        <nav class="breadcrumb" aria-label="Location"><span class="bc-part">11_Standards_and_Codes</span><span class="bc-sep"> / </span><span class="bc-current">SIL &amp; PL Functional Safety Intro</span></nav>
+        <h1 class="page-title">SIL &amp; PL Functional Safety Intro</h1>
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Standards &amp; Codes</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 61508, IEC 62061, ISO 13849-1</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#SIL</span> <span class="tag">#PL</span> <span class="tag">#safety</span> <span class="tag">#ISO13849</span> <span class="tag">#IEC61508</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Standards &amp; Codes</code><br/><strong>Tags:</strong> <code>#SIL #PL #safety #ISO13849 #IEC61508</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Functional safety is the discipline of designing safety-related control functions so they reduce risk to a specified level, even with component failures. SIL and PL are the two common metrics — closely related, used in different domains.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="the-two-frameworks">The Two Frameworks</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Framework</th>
+<th>Level</th>
+<th>Typical Application</th>
+</tr></thead><tbody>
+<tr><td>IEC 61508 / 62061 (SIL)</td><td>SIL 1–4</td><td>Process industry, complex electronic systems</td></tr>
+<tr><td>ISO 13849-1 (PL)</td><td>PL a–e</td><td>Machinery (most factory applications)</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<h2 id="sil-vs-pl-cross-reference">SIL vs PL Cross-Reference</h2>
 <table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>SIL</th>
+<th>PL</th>
+<th>PFHd (1/hr)</th>
+<th>Reduction factor</th>
+</tr></thead><tbody>
+<tr><td>---</td><td>a</td><td>10⁻⁵ to < 10⁻⁴</td><td>Low risk reduction</td></tr>
+<tr><td>1</td><td>b</td><td>3×10⁻⁶ to < 10⁻⁵</td><td></td></tr>
+<tr><td>1</td><td>c</td><td>10⁻⁶ to < 3×10⁻⁶</td><td></td></tr>
+<tr><td>2</td><td>d</td><td>10⁻⁷ to < 10⁻⁶</td><td></td></tr>
+<tr><td>3</td><td>e</td><td>10⁻⁸ to < 10⁻⁷</td><td>Very low risk of failure</td></tr>
+</tbody></table>
+<hr />
+<h2 id="risk-assessment-to-level">Risk Assessment to Level</h2>
+<ol><li>Identify hazards using a structured method (HAZOP, FMEA, ISO 12100).</li><li>Estimate severity, frequency / exposure, and probability of avoidance.</li><li>Look up required PL or SIL from a risk graph (ISO 13849 or IEC 62061).</li><li>Design safety function to meet that level — component selection, architecture, diagnostics.</li><li>Validate by calculation (PFHd) and testing.</li></ol>
+<hr />
+<h2 id="common-safety-functions">Common Safety Functions</h2>
+<ul><li>Emergency stop (ISO 13850).</li><li>Safety-related guard interlock (ISO 14119).</li><li>Two-hand control (ISO 13851).</li><li>Safe Torque Off (STO) and Safe Stop 1/2 on drives (IEC 61800-5-2).</li><li>Safe speed, safe position monitoring.</li><li>Safety-rated light curtain muting.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Risk assessment documented.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Required SIL / PL specified for each safety function.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Architecture (Cat B / 1 / 2 / 3 / 4) justified.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Component MTTFd, DC, CCF data filed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Validation tests done and signed off.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../12_Safety_Systems_Advanced/Risk Assessments &amp; Functional Safety.html">Risk Assessments &amp; Functional Safety</a></li>
+<li><a href="../05_PLCs & Automation Hardware/Safety Relays &amp; Safety PLCs.html">Safety Relays &amp; Safety PLCs</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Emergency Stops (E-Stops).html">Emergency Stops (E-Stops)</a></li>
+<li><a href="../12_Safety_Systems_Advanced/Safety Fencing &amp; Interlocks.html">Safety Fencing &amp; Interlocks</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

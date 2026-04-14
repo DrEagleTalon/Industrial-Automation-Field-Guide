@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,114 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#selection">Selection</a></li>
 <li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Soft Starters</span></nav>
         <h1 class="page-title">Soft Starters</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 60947-4-2</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">SMC, SIRIUS 3RW, ATS, ASI solid-state starters</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#softstart</span> <span class="tag">#SCR</span> <span class="tag">#rampup</span> <span class="tag">#reducedvoltage</span> <span class="tag">#motors</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#softstart #SCR #rampup #reducedvoltage #motors</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>A soft starter uses back-to-back SCRs (silicon-controlled rectifiers) in each phase to phase-angle-control the voltage applied to the motor during start and stop. It gives a smooth voltage ramp — and therefore a smooth current and torque ramp — without any of the rotating inertia of a VFD. After the motor reaches full speed, a bypass contactor typically closes to take the SCRs out of the conducting path and eliminate continuous switching losses.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
+<h3>Why choose a soft starter over a VFD</h3><ul><li>You only need soft starting and stopping — you don't need speed control during run.</li><li>Smaller, cheaper, simpler to commission than a drive.</li><li>Lower harmonic impact at run (when bypassed) since the SCRs are out of circuit.</li><li>Panel layout is simpler — no DC bus, no dv/dt filter, no cable length limits.</li></ul><h3>Key adjustments</h3><table>
+<thead><tr>
 <th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>Purpose</th>
+<th>Typical Range</th>
+</tr></thead><tbody>
+<tr><td>Initial voltage / torque</td><td>Voltage at t=0</td><td>20–40%</td></tr>
+<tr><td>Ramp time (up)</td><td>Time to full voltage</td><td>5–30 s</td></tr>
+<tr><td>Current limit</td><td>Cap on starting current</td><td>300–500% FLA</td></tr>
+<tr><td>Ramp time (down)</td><td>Soft-stop</td><td>0–60 s</td></tr>
+<tr><td>Kick start</td><td>Short pulse at t=0 to break sticky loads</td><td>0–1 s at 80–100%</td></tr>
+</tbody></table><h3>Why a bypass contactor</h3><p>At full speed the SCRs would otherwise run hot and make noise. A bypass contactor shorts them out once the motor is at speed, so in steady state the soft starter behaves like a simple contactor. When the motor is commanded to stop, the bypass opens and the SCRs take over to ramp down.</p>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="selection">Selection</h2>
+<table>
+<thead><tr>
+<th>Factor</th>
+<th>Guidance</th>
+</tr></thead><tbody>
+<tr><td>Motor FLA</td><td>Match soft-starter current rating</td></tr>
+<tr><td>Duty class</td><td>Normal (AC-53a) or Heavy (AC-53b)</td></tr>
+<tr><td>Starts per hour</td><td>Derate aggressively; some units limit 10 starts/hr</td></tr>
+<tr><td>Bypass</td><td>Internal bypass preferred for smaller units; external bypass for large</td></tr>
+<tr><td>Inside-delta vs. in-line</td><td>Inside-delta connection can use 1/√3 current rating — saves money on large motors</td></tr>
+<tr><td>Control</td><td>Two-wire (run/stop) or three-wire (start/stop/fault)</td></tr>
+<tr><td>Communications</td><td>EtherNet/IP, Modbus, PROFINET on modern units</td></tr>
+</tbody></table>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
 <th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>Tools</th>
+</tr></thead><tbody>
+<tr><td>Nuisance trip on start</td><td>Ramp time too short for load inertia</td><td>Increase ramp time; verify current limit</td><td>Soft starter display / software</td></tr>
+<tr><td>Motor growls / vibrates during ramp</td><td>Initial voltage too low</td><td>Increase initial voltage / add kick start</td><td>Display, vibration sense</td></tr>
+<tr><td>SCR short fault</td><td>Failed SCR (phase-to-phase conduction when off)</td><td>Measure resistance line-to-line with unit off</td><td>DMM</td></tr>
+<tr><td>Overheat after a few starts</td><td>Exceeded duty rating</td><td>Review starts/hour; add cooling or go bigger</td><td>Duty review</td></tr>
+<tr><td>Bypass not closing</td><td>Control wiring, stuck contactor</td><td>Ring out bypass contactor coil</td><td>DMM</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Soft starter FLA rating ≥ motor FLA.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Initial voltage and ramp time tuned to the actual load.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Bypass contactor operation confirmed at end of ramp.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Fault contact wired to PLC input.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Comms address and port set if used.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Starts/hr within duty rating — otherwise derate.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> SCR heatsink ventilation clear; enclosure meets thermal budget — see <a href="../13_Specialty_Topics/Panel Cooling &amp; Power Conditioning.html">Panel Cooling</a>.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Variable Frequency Drives (VFDs) Basics.html">Variable Frequency Drives (VFDs) Basics</a></li>
+<li><a href="Star-Delta Starters.html">Star-Delta Starters</a></li>
+<li><a href="Direct-On-Line Starters.html">Direct-On-Line Starters</a></li>
+<li><a href="Motor Contactors &amp; Starters.html">Motor Contactors &amp; Starters</a></li>
+<li><a href="../13_Specialty_Topics/Panel Cooling &amp; Power Conditioning.html">Panel Cooling &amp; Power Conditioning</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

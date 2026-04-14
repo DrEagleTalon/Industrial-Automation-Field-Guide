@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,85 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#the-rule">The Rule</a></li>
+<li><a href="#quick-decision-chart">Quick Decision Chart</a></li>
+<li><a href="#why-it-trips-people-up">Why It Trips People Up</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">05_PLCs &amp; Automation Hardware</span><span class="bc-sep"> / </span><span class="bc-current">Sinking vs Sourcing Inputs</span></nav>
         <h1 class="page-title">Sinking vs Sourcing Inputs</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">PLCs &amp; Automation Hardware</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#sinking</span> <span class="tag">#sourcing</span> <span class="tag">#PNP</span> <span class="tag">#NPN</span> <span class="tag">#DC</span> <span class="tag">#IO</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>PLCs &amp; Automation Hardware</code><br/><strong>Tags:</strong> <code>#sinking #sourcing #PNP #NPN #DC #IO</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Sinking and sourcing describe the direction of current flow on a DC I/O point. Mix them up and the input will never see a signal, or the output will never drive the load. This single concept trips up more beginners than any other.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="the-rule">The Rule</h2>
+<h3>Input modules</h3><ul><li>A <strong>sinking input</strong> provides 0 V internally and waits for the field device to supply +V.</li><li>A <strong>sourcing input</strong> provides +V internally and waits for the field device to supply 0 V.</li><li>You need a matching field device: sinking input + PNP sensor, or sourcing input + NPN sensor. <em>Wrong way round: no signal.</em></li></ul><h3>PNP vs NPN sensor</h3><ul><li><strong>PNP (sourcing sensor)</strong> — switches +24 V to the output when active. Pairs with sinking input modules. Standard in Europe and most of the world.</li><li><strong>NPN (sinking sensor)</strong> — switches 0 V to the output when active. Pairs with sourcing input modules. Common in Asia and legacy US equipment.</li></ul><h3>Output modules</h3><p>Same vocabulary, reversed: a sourcing output switches +V to the load; a sinking output switches 0 V. Pick outputs that match your loads and field wiring standard.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="quick-decision-chart">Quick Decision Chart</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Module Type</th>
+<th>Field Device Needed</th>
+<th>Signal Goes</th>
+</tr></thead><tbody>
+<tr><td>Sinking input</td><td>PNP sensor / sourcing field device</td><td>+24 V → input point</td></tr>
+<tr><td>Sourcing input</td><td>NPN sensor / sinking field device</td><td>input point → 0 V</td></tr>
+<tr><td>Sourcing output</td><td>Load referenced to 0 V</td><td>output → load → 0 V</td></tr>
+<tr><td>Sinking output</td><td>Load referenced to +24 V</td><td>+24 V → load → output</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="why-it-trips-people-up">Why It Trips People Up</h2>
+<ul><li>Words describe current direction from the module's perspective, not the sensor's.</li><li>Some manufacturers label it 'positive logic / negative logic' which confuses more than it clarifies.</li><li>Most modern AB and Siemens modules are sinking input / PNP sensor — when in doubt, check the datasheet.</li><li>Cheap 'universal' modules let you strap either way at the common terminal; read the manual.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Module polarity confirmed in datasheet before sensor selection.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Sensor polarity labeled on each device and in the wire book.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Don't mix PNP and NPN devices on the same common unless the module allows it.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> If you see intermittent inputs, measure voltage with the sensor active and inactive.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Discrete IO Modules.html">Discrete IO Modules</a></li>
+<li><a href="../03_Control_Devices/Proximity Sensors Inductive Capacitive.html">Proximity Sensors Inductive Capacitive</a></li>
+<li><a href="Wiring Inputs &amp; Outputs to PLCs.html">Wiring Inputs &amp; Outputs to PLCs</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

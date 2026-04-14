@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,97 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#mandatory-requirements">Mandatory Requirements</a></li>
+<li><a href="#stop-categories">Stop Categories</a></li>
+<li><a href="#typical-wiring">Typical Wiring</a></li>
+<li><a href="#do-dont">Do / Don't</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">12_Safety_Systems_Advanced</span><span class="bc-sep"> / </span><span class="bc-current">Emergency Stops (E-Stops)</span></nav>
         <h1 class="page-title">Emergency Stops (E-Stops)</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Safety Systems (Advanced)</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">ISO 13850, NFPA 79, IEC 60204-1</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#estop</span> <span class="tag">#ISO13850</span> <span class="tag">#stopcategory</span> <span class="tag">#safety</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Safety Systems (Advanced)</code><br/><strong>Tags:</strong> <code>#estop #ISO13850 #stopcategory #safety</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>An emergency stop is the last line of defense: when something goes wrong, anyone near the machine can bring it to a safe state with a single action. The rules for E-stops are highly prescribed and non-negotiable.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="mandatory-requirements">Mandatory Requirements</h2>
+<ul><li>Red palm (mushroom) button on a yellow background.</li><li>Self-latching — stays engaged after the hit; requires deliberate reset (twist or pull).</li><li>Directly operated opening contacts (positive-opening per IEC 60947-5-5).</li><li>Wired to bring the machine to its defined stop category.</li><li>Reset is a separate deliberate action, never automatic.</li><li>Every location where hazards are reachable must have an E-stop accessible.</li></ul>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="stop-categories">Stop Categories</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Category</th>
+<th>Behavior</th>
+<th>When to use</th>
+</tr></thead><tbody>
+<tr><td>0</td><td>Immediate removal of actuator power</td><td>Most common; fail-safe coast</td></tr>
+<tr><td>1</td><td>Controlled stop; power removed once stopped</td><td>Required for axes that are more dangerous coasting (long spin-down)</td></tr>
+<tr><td>2</td><td>Controlled stop; power maintained</td><td>Functional stops only, not E-stops</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="typical-wiring">Typical Wiring</h2>
+<pre><code>E-stop PB (dual channel) -> Safety relay / safety PLC
+    -> Contactor drop (cat 0) or
+    -> Drive Safe Stop 1 input + contactor drop after timer (cat 1)
+
+Dual channel detects shorts and opens even with one bad contact.
+Reset: separate pushbutton, monitored by safety relay.
+</code></pre>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="do-dont">Do / Don't</h2>
+<ul><li>Do wire E-stop directly to a safety relay or safety PLC, never to a standard PLC input as the sole action path.</li><li>Do use dual-channel wiring with cross-monitoring.</li><li>Do test E-stop function weekly or monthly per the procedure.</li><li>Don't rely on software only for stopping.</li><li>Don't use an E-stop as a routine production stop — it wears the contacts and trains operators badly.</li><li>Don't defeat or bypass E-stop for convenience.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Every E-stop is red palm on yellow background.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Dual channel with cross-monitoring to a safety relay or safety PLC.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Reset is a separate, deliberate action.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Proof-test done and signed off.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Stop category documented for each E-stop function.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../05_PLCs & Automation Hardware/Safety Relays &amp; Safety PLCs.html">Safety Relays &amp; Safety PLCs</a></li>
+<li><a href="Risk Assessments &amp; Functional Safety.html">Risk Assessments &amp; Functional Safety</a></li>
+<li><a href="Safety Fencing &amp; Interlocks.html">Safety Fencing &amp; Interlocks</a></li>
+<li><a href="../04_Motor_Control/Motor Braking Techniques.html">Motor Braking Techniques</a></li>
+<li><a href="../11_Standards_and_Codes/NFPA 79 – Machinery Electrical.html">NFPA 79 – Machinery Electrical</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

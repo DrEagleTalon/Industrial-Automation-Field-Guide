@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,197 +347,127 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">🔹 What is it?</a></li>
-<li><a href="#how-it-works">🔹 How it works</a></li>
-<li><a href="#when-to-use">🔹 When to Use</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#sizing-selection">Sizing &amp; Selection</a></li>
+<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#field-checklist">Field Checklist</a></li>
+<li><a href="#related-topics">Related Topics</a></li>
+<li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</li>
-<li><a href="#troubleshooting-diagnostics">🛠️ Troubleshooting &amp; Diagnostics</a></li>
-<li><a href="#specifications-parameters">📏 Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">📐 Wiring &amp; Diagrams</a></li>
-<li><a href="#reference-notes">📎 Reference Notes</a></li>
-<li><a href="#related-topics">📂 Related Topics</a></li>
-<li><a href="#field-checklist">✅ Field Checklist</a></li>
-</ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Motor Contactors &amp; Starters</span></nav>
         <h1 class="page-title">Motor Contactors &amp; Starters</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 60947-4-1, NEMA ICS 2</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Magnetic contactors, combination starters</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#contactor</span> <span class="tag">#starter</span> <span class="tag">#coil</span> <span class="tag">#auxcontact</span> <span class="tag">#AC3</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="motor-contactors-starters">Motor Contactors &amp; Starters</h1>
-<p><strong>Category:</strong> <code>Motor Control</code><br />
-<strong>Tags:</strong> #contactors #motorstarters #motorcontrol #automation #troubleshooting #fieldguide
-<strong>Difficulty:</strong> <code>Beginner</code><br />
-<strong>Last Updated:</strong> <code>2025-06-23</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#contactor #starter #coil #auxcontact #AC3</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
-<p><strong>Motor contactors and starters</strong> are core components in industrial motor control systems. A <strong>contactor</strong> is an electromechanical switch used to control high-current loads (such as motors), while a <strong>starter</strong> combines a contactor with an <strong>overload relay</strong> to provide both control and protection.</p>
+<p>A contactor is an electromechanical switch sized and rated for motor loads. A 'starter' is a contactor plus an <a href="Overload Relays.html">overload relay</a> bundled together to both switch and protect a motor. In practice the words are used interchangeably on a shop floor.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">🔹 What is it?</h3>
-<ul>
-<li><strong>Contactor</strong>: Electrically controlled switch that energizes or de-energizes a motor or load.</li>
-<li><strong>Starter</strong>: Assembly consisting of a <strong>contactor + overload relay</strong>.</li>
-<li>Used to <strong>start/stop</strong>, and <strong>protect motors</strong> from overload or stall conditions.</li>
-<li>Control logic is usually wired to pushbuttons or PLC outputs.</li>
-</ul>
-<h3 id="how-it-works">🔹 How it works</h3>
-<ul>
-<li><strong>Control voltage</strong> is applied to the <strong>coil</strong> (A1–A2).</li>
-<li>Energized coil creates a magnetic field → pulls in the armature → closes main contacts (L1-T1, L2-T2, L3-T3).</li>
-<li>When control voltage is removed, spring returns armature → contacts open → motor turns off.</li>
-<li><strong>Overload relay</strong> senses overcurrent. If triggered, it <strong>opens NC auxiliary contact</strong>, cutting control circuit to stop the motor.</li>
-</ul>
-<h3 id="when-to-use">🔹 When to Use</h3>
-<ul>
-<li>Applications requiring <strong>simple on/off motor control</strong>:</li>
-<li>Fans, pumps, conveyors, mixers, compressors.</li>
-<li>Use a <strong>starter</strong> when:</li>
-<li>You need <strong>motor overload protection</strong>.</li>
-<li>Use <strong>only a contactor</strong> when:</li>
-<li>The load is non-motor (e.g., heaters) or protection is handled externally (e.g., in VFD).</li>
-</ul>
+<h3>What is inside a contactor?</h3><ul><li>An electromagnetic coil — 24 VDC, 24 VAC, 120 VAC, or 230 VAC.</li><li>A moving armature that pulls three (or four) main power contacts closed when the coil is energized.</li><li>Auxiliary contacts (NO and NC) used in the control circuit for seal-in and interlocking.</li><li>Arc chutes that quench the arc as contacts open under load.</li></ul><h3>IEC vs NEMA ratings</h3><p>NEMA sizes are step-coded (00, 0, 1, 2, 3 …) and over-sized for general-purpose use. IEC contactors are rated by <strong>utilization category</strong> and <strong>nominal operating current (Ie)</strong> at a given voltage. An IEC 18-A contactor used at AC-3 and a NEMA Size 1 will switch about the same motor, but the IEC unit is smaller and assumes you size it closer to the load.</p><h3>Utilization categories</h3><table>
+<thead><tr>
+<th>Category</th>
+<th>Typical Use</th>
+</tr></thead><tbody>
+<tr><td>AC-1</td><td>Resistive / non-inductive loads, PF ≥ 0.95</td></tr>
+<tr><td>AC-3</td><td>Squirrel-cage motors, normal starting and stopping</td></tr>
+<tr><td>AC-4</td><td>Plugging, jogging, reversing under load</td></tr>
+<tr><td>AC-15</td><td>Control of AC electromagnets (relay coils)</td></tr>
+<tr><td>DC-1 / DC-3 / DC-5</td><td>Resistive DC / shunt-motor / series-motor loads</td></tr>
+</tbody></table>
 <hr />
-<h2 id="troubleshooting-diagnostics">🛠️ Troubleshooting &amp; Diagnostics</h2>
+<h2 id="sizing-selection">Sizing &amp; Selection</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
+<th>Parameter</th>
+<th>Selection Guidance</th>
+</tr></thead><tbody>
+<tr><td>Main contact Ie (AC-3)</td><td>≥ motor FLA</td></tr>
+<tr><td>Coil voltage</td><td>Match to control transformer / PLC output relay</td></tr>
+<tr><td>Aux contacts</td><td>At least one NO (seal-in) and one NC (reserved for interlocks)</td></tr>
+<tr><td>Mechanical life</td><td>≥ 10× expected operations</td></tr>
+<tr><td>Electrical life (AC-3)</td><td>≥ 1 million operations for a well-sized contactor</td></tr>
+<tr><td>Coil pickup / drop-out</td><td>Pickup typically 85% of rated coil voltage; drop-out 40–60%</td></tr>
+</tbody></table>
+<hr />
+<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>Typical IEC contactor terminal map:
+  L1  L2  L3            (main power in)
+  T1  T2  T3            (motor out)
+  A1  A2                (coil)
+  13/14  NO aux
+  21/22  NC aux
+
+Control wiring:
+  Control source -> Start/Stop logic -> A1
+  A2 -> control neutral / 0V
+  Seal-in: 13/14 aux in parallel with Start PB
+</code></pre>
+<hr />
+<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
+<table>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
 <th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Contactor doesn’t pull in</td>
-<td>No control voltage / open coil</td>
-<td>Measure voltage at coil terminals (A1–A2)</td>
-<td>Multimeter</td>
-</tr>
-<tr>
-<td>Contactor clicks but motor dead</td>
-<td>Worn contacts or wiring issue</td>
-<td>Check voltage on T1/T2/T3 when energized</td>
-<td>Multimeter</td>
-</tr>
-<tr>
-<td>Starter trips immediately</td>
-<td>Overload too low or jammed load</td>
-<td>Measure motor current &amp; check OLR setting</td>
-<td>Clamp meter</td>
-</tr>
-<tr>
-<td>Coil buzzing or chattering</td>
-<td>Low voltage / mechanical fault</td>
-<td>Confirm proper coil voltage &amp; alignment</td>
-<td>Multimeter</td>
-</tr>
-<tr>
-<td>Motor won’t restart after trip</td>
-<td>OLR still tripped</td>
-<td>Reset OLR and investigate root cause</td>
-<td>Visual + Manual</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>💡 <strong>Pro Tip:</strong> Always check 95-96 (NC contact) continuity on the overload relay — if open, the overload has tripped even if the contactor looks normal.</p>
-</blockquote>
+<th>Tools Needed</th>
+</tr></thead><tbody>
+<tr><td>Contactor chatters</td><td>Low coil voltage, dirty pole face, intermittent control contact</td><td>Measure coil voltage during chatter; look for contamination</td><td>DMM</td></tr>
+<tr><td>Coil burned out</td><td>Stuck armature, wrong coil voltage, surge from DC without flyback</td><td>Measure coil resistance; verify voltage matches coil</td><td>DMM</td></tr>
+<tr><td>Contacts welded</td><td>High inrush beyond AC-3 rating, repeated jogging</td><td>Replace contactor; re-evaluate size or utilization category</td><td>Visual, datasheet</td></tr>
+<tr><td>Aux contact not making</td><td>Worn contact tip, bent stab, wrong NO/NC selection</td><td>Ring out aux with contactor manually held</td><td>DMM continuity</td></tr>
+<tr><td>Motor runs with contactor de-energized</td><td>Welded main contacts</td><td>Lock out; test contact continuity with coil de-energized</td><td>DMM, LOTO</td></tr>
+</tbody></table>
 <hr />
-<h2 id="specifications-parameters">📏 Specifications &amp; Parameters</h2>
+<h2 id="field-checklist">Field Checklist</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Coil voltage matches control source within ±10%.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Contactor rating (AC-3) ≥ motor FLA.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> One aux contact reserved for <a href="../06_PLC_Programming_&amp;_Logic/Alarms &amp; Fault Detection.html">status feedback</a> to the PLC.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Power and control wires torqued to manufacturer spec.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Panel layout follows <a href="../10_System_Integration_&amp;_Commissioning/Control Panel Layout &amp; BOM.html">panel layout best practices</a>.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> For DC coils, a flyback diode or RC snubber is installed.</li></ul>
+<hr />
+<h2 id="related-topics">Related Topics</h2>
+<ul>
+<li><a href="Direct-On-Line Starters.html">Direct-On-Line Starters</a></li>
+<li><a href="Overload Relays.html">Overload Relays</a></li>
+<li><a href="../03_Control_Devices/Relays &amp; Interposing Relays.html">Relays &amp; Interposing Relays</a></li>
+<li><a href="../02_Power_Distribution/Control Transformers.html">Control Transformers</a></li>
+<li><a href="Reversing Starters.html">Reversing Starters</a></li>
+</ul>
+<hr />
+<h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value/Range</th>
+<thead><tr>
+<th>Date</th>
+<th>Version</th>
+<th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td>Coil Voltage</td>
-<td>24 VDC / 120 VAC / 230 VAC</td>
-<td>Match to control system (PLC/pushbutton)</td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-<tr>
-<td>Contact Rating</td>
-<td>9A to 500A+</td>
-<td>Based on motor FLA</td>
-</tr>
-<tr>
-<td>Overload Range</td>
-<td>Adjustable via dial</td>
-<td>Set to match motor nameplate FLA</td>
-</tr>
-<tr>
-<td>Aux Contacts</td>
-<td>NO / NC</td>
-<td>Used for interlocks and feedback</td>
-</tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">📐 Wiring &amp; Diagrams</h2>
-<pre><code class="language-plaintext">Power Circuit:
-L1 ---[ Contactor ]--- T1 -----&gt; Motor
-L2 ---[ Contactor ]--- T2 -----&gt; Motor
-L3 ---[ Contactor ]--- T3 -----&gt; Motor
-
-Control Circuit:
-L (hot) --[ STOP (NC) ]--[ START (NO) ]--[ OLR 95-96 (NC) ]--[ Coil A1 ]
-                                              |
-                                              +--[ A2 ]-- Neutral
-</code></pre>
-<ul>
-<li><strong>STOP</strong> is NC: breaks circuit to stop motor.</li>
-<li><strong>START</strong> is NO: latches control circuit via auxiliary contact.</li>
-<li><strong>OLR NC contact (95-96)</strong> interrupts circuit on overload.</li>
-</ul>
-<hr />
-<h2 id="reference-notes">📎 Reference Notes</h2>
-<ul>
-<li><strong>NEC Article 430</strong>: Motor control and protection requirements.</li>
-<li><strong>IEC 60947-4-1</strong>: Standard for low-voltage motor starters and contactors.</li>
-<li>Overload relays are typically <strong>class 10</strong> (trips in ~10s at 600% FLA).</li>
-<li>Starters are often part of <strong>MCC buckets</strong> or standalone <strong>control panels</strong>.</li>
-</ul>
-<hr />
-<h2 id="related-topics">📂 Related Topics</h2>
-<ul>
-<li><span class="broken-link">Overload Relays - Setup &amp; Testing</span></li>
-<li><span class="broken-link">VFDs - Basics &amp; Comparison</span></li>
-<li><span class="broken-link">Control Circuit Design - Pushbuttons and Interlocks</span></li>
-<li><span class="broken-link">Motor Control Ladder Logic</span></li>
-</ul>
-<hr />
-<h2 id="field-checklist">✅ Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Coil voltage present and correct</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Contactor “clicks” when energized</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Output voltage present at T1/T2/T3</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Overload dial set to motor FLA</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> NC OLR contact (95-96) closed when not tripped</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Contacts free of carbon, pitting, or welding</li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span> Control circuit wiring torqued and labeled</li>
-</ul>
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

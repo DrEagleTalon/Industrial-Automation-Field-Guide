@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,115 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
 <li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#considerations">Considerations</a></li>
 <li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Reversing Starters</span></nav>
         <h1 class="page-title">Reversing Starters</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Beginner</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">NEC 430, IEC 60947-4-1</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Two interlocked contactors, overload relay</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#reversing</span> <span class="tag">#interlock</span> <span class="tag">#forwardreverse</span> <span class="tag">#contactor</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#reversing #interlock #forwardreverse #contactor</code><br/><strong>Difficulty:</strong> <code>Beginner</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>A reversing starter swaps two of the three line leads going into the motor to flip the direction of the rotating magnetic field — and therefore the shaft rotation. It uses two contactors, one for each direction, mechanically and electrically <a href="../06_PLC_Programming_&amp;_Logic/Interlocking &amp; Permissives.html">interlocked</a> so that only one can ever be closed at a time.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h3>How to reverse a 3-phase motor</h3><p>Swap any two of the three phase conductors between the supply and the motor. Conventionally, the 'reverse' contactor swaps L1 and L3.</p><h3>The interlock problem</h3><p>If both contactors close at the same time, two line-to-line pairs short through the contactors. Result: a phase-to-phase fault, likely destruction of one or both contactors, and a likely trip of the upstream breaker.</p><h3>Three layers of interlock</h3><ol><li><strong>Mechanical interlock</strong> — a physical bar between the two contactors that prevents both armatures from pulling in at once. This is the only interlock you trust.</li><li><strong>Electrical (aux-contact) interlock</strong> — an NC aux contact from each contactor is wired in series with the <em>other</em> contactor's coil.</li><li><strong>Software interlock</strong> — the PLC's forward and reverse outputs are mutually exclusive. Good practice but not a substitute for the mechanical interlock.</li></ol>
 <hr />
 <h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<pre><code>POWER:
+  L1 L2 L3
+   |  |  |
+  [Fuses / MCP]
+   |  |  |
+   FWD contactor       REV contactor (L1<->L3 swapped)
+   |  |  |              |  |  |
+    \ \ \               / / /
+     \ \ \__+__________/ / /
+      \ \__|__+__________/ /
+       \___|__|__+_________/
+           |  |  |
+       [Overload]
+           |  |  |
+       Motor T1 T2 T3
+
+CONTROL:
+  Hot --- Stop --+-- Fwd PB -- Rev NC aux -- Fwd coil -- N
+                 |
+                 +-- Rev PB -- Fwd NC aux -- Rev coil -- N
+  Add mechanical interlock hardware between the two contactors.
+</code></pre>
+<hr />
+<h2 id="considerations">Considerations</h2>
+<ul><li><strong>Plug-stop (plugging)</strong>: reversing at full speed is AC-4 duty — use contactors rated for it or motor life suffers. Prefer a VFD or brake.</li><li>Sequence interlocks prevent direction change until speed is near zero. A zero-speed switch or time delay is common.</li><li>If the driven load can't accept reverse rotation (fans, pumps with check valves, some gearboxes), the control must mechanically prevent reverse by other means.</li><li>For frequent reversing, use a <a href="Variable Frequency Drives (VFDs) Basics.html">VFD</a> — much easier on mechanics and contacts.</li></ul>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Symptom</th>
 <th>Likely Cause</th>
 <th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<th>Tools Needed</th>
+</tr></thead><tbody>
+<tr><td>Fuses blow when pressing reverse</td><td>Mechanical interlock missing or failed</td><td>Lock out; inspect interlock lever</td><td>Visual, LOTO</td></tr>
+<tr><td>Both contactors chatter</td><td>Conflicting control signals</td><td>Check PLC ladder; verify NC aux wiring</td><td>PLC online, DMM</td></tr>
+<tr><td>Motor starts, does not reverse</td><td>Rev contactor coil not energizing</td><td>Measure coil voltage; inspect Rev aux NC</td><td>DMM</td></tr>
+<tr><td>Reverses rotation unexpectedly after maintenance</td><td>Leads swapped at motor during service</td><td>Re-verify rotation per <a href="Motor Wiring &amp; Rotation Checking.html">rotation check procedure</a></td><td>Phase-rotation meter</td></tr>
+</tbody></table>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Mechanical interlock present and operational.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Both electrical interlock aux contacts wired NC in opposite coil circuits.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Overload relay mounted downstream of both contactors, sized per motor FLA.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Mechanical load verified to accept reverse rotation.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> If plugging is used, contactors rated AC-4.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Plug-stop or direction-change delay programmed in PLC if applicable.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Motor Contactors &amp; Starters.html">Motor Contactors &amp; Starters</a></li>
+<li><a href="../06_PLC_Programming_&_Logic/Interlocking &amp; Permissives.html">Interlocking &amp; Permissives</a></li>
+<li><a href="Variable Frequency Drives (VFDs) Basics.html">Variable Frequency Drives (VFDs) Basics</a></li>
+<li><a href="Motor Wiring &amp; Rotation Checking.html">Motor Wiring &amp; Rotation Checking</a></li>
+<li><a href="Motor Braking Techniques.html">Motor Braking Techniques</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

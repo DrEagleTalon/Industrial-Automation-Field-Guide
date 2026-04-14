@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,100 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#key-terms">Key Terms</a></li>
+<li><a href="#application-patterns">Application Patterns</a></li>
+<li><a href="#commissioning-outline">Commissioning Outline</a></li>
 <li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">Variable Frequency Drives (VFDs) Basics</span></nav>
         <h1 class="page-title">Variable Frequency Drives (VFDs) Basics</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">IEC 61800-5-1 (safety), IEC 61800-3 (EMC)</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">PowerFlex, SINAMICS, ACS, Altivar, etc.</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#VFD</span> <span class="tag">#drive</span> <span class="tag">#PWM</span> <span class="tag">#inverter</span> <span class="tag">#V/Hz</span> <span class="tag">#vector</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#VFD #drive #PWM #inverter #V/Hz #vector</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>A Variable Frequency Drive (VFD) is a power electronic converter that takes fixed-frequency AC line power, rectifies it to a DC bus, and then inverts it back to variable-frequency, variable-voltage AC to drive a motor at adjustable speed. It is the most flexible method of motor control — adjustable speed, soft start, torque control, energy savings on centrifugal loads, and built-in protection.</p>
 <hr />
 <h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h3>Architecture</h3><ol><li><strong>Rectifier</strong> — diode (or active) front-end that converts line AC to DC.</li><li><strong>DC bus</strong> — large electrolytic capacitors smoothing the rectified DC (typically ~680 V on a 480 V drive).</li><li><strong>IGBT inverter</strong> — six IGBTs arranged as a three-phase bridge, switched with PWM to synthesize variable-frequency AC.</li><li><strong>Control board</strong> — runs V/Hz, sensorless vector, or flux-vector control algorithms and all drive I/O.</li></ol><h3>V/Hz and vector control</h3><ul><li><strong>V/Hz (scalar)</strong> — keeps a constant voltage-per-hertz ratio so flux stays constant. Simple, good enough for fans, pumps, conveyors.</li><li><strong>Sensorless vector</strong> — estimates rotor flux from current and voltage. Much better torque at low speed; no encoder needed.</li><li><strong>Closed-loop vector / flux vector</strong> — adds an <a href="../13_Specialty_Topics/Encoders &amp; Resolvers.html">encoder</a> for precise torque and position. Use for servo-like performance.</li></ul><h3>Why output frequency matters</h3><p>Motor speed is proportional to frequency. Running below about 30 Hz with a TEFC motor overheats it because the shaft fan is turning too slowly to cool the frame — use an inverter-duty motor, a separately-powered blower, or derate the load.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="key-terms">Key Terms</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr></thead><tbody>
+<tr><td>Carrier frequency</td><td>PWM switching frequency, 2–16 kHz. Higher = quieter motor but more drive heat.</td></tr>
+<tr><td>dv/dt</td><td>Rate of voltage change per unit time at the motor terminals. High dv/dt can stress motor insulation, especially with long cables.</td></tr>
+<tr><td>Common-mode voltage</td><td>Voltage of motor neutral with respect to ground. Causes shaft currents — use grounded bearings or shaft brushes on large motors.</td></tr>
+<tr><td>Regeneration</td><td>Motor feeding power back into the drive. Either absorbed by a dynamic brake resistor or a regenerative converter.</td></tr>
+<tr><td>DB resistor</td><td>Dynamic braking resistor — dissipates regen energy as heat.</td></tr>
+<tr><td>Skip frequencies</td><td>Bands where resonance occurs in the driven equipment; the drive avoids running at those frequencies.</td></tr>
+<tr><td>Auto-tune</td><td>Routine where the drive measures motor parameters (Rs, Lσ, flux) and populates its model.</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="application-patterns">Application Patterns</h2>
+<ul><li><strong>Centrifugal pump / fan</strong> — V/Hz or sensorless vector is fine. Huge energy savings vs. throttling.</li><li><strong>Constant-torque conveyor</strong> — sensorless vector for decent low-speed torque.</li><li><strong>Positioning / spindle</strong> — closed-loop vector with encoder.</li><li><strong>Hoists / crane</strong> — use an encoder and a dedicated mechanical brake; the drive alone is not a holding brake.</li><li><strong>Multi-motor on one drive</strong> — only if motors are sized alike and the drive is derated; no individual overload protection.</li></ul>
+<hr />
+<h2 id="commissioning-outline">Commissioning Outline</h2>
+<ol><li>Verify incoming power phasing and voltage — see <a href="../02_Power_Distribution/Industrial Power Systems Overview.html">power systems overview</a>.</li><li>Inspect motor leads and ground — use VFD-rated cable with drain shield for long runs.</li><li>Set motor nameplate parameters (voltage, FLA, RPM, kW/HP, Hz, poles).</li><li>Run auto-tune with motor uncoupled if possible.</li><li>Verify rotation at low speed before coupling.</li><li>Commission speed reference source: keypad, analog, comms (EtherNet/IP, Modbus, PROFINET).</li><li>Set stop mode (coast, ramp, DC inject), accel/decel, current limit, skip frequencies.</li><li>See <a href="VFD Parameters &amp; Setup.html">VFD Parameters &amp; Setup</a> for a detailed walk-through.</li></ol>
 <hr />
 <h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>See the dedicated page: <a href="../09_Troubleshooting_&amp;_Diagnostics/VFD Trips &amp; Fault Codes.html">VFD Trips &amp; Fault Codes</a>.</p>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Motor nameplate entered in drive before any run command.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Auto-tune run successfully on a cold motor.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Rotation verified uncoupled at low speed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Accel, decel, and current-limit parameters set to the application.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Fault relay wired to the PLC alarm input.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> EMC filter and proper shielded motor cable installed if required.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Drive fault log cleared and a baseline run archived.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="VFD Parameters &amp; Setup.html">VFD Parameters &amp; Setup</a></li>
+<li><a href="../09_Troubleshooting_&_Diagnostics/VFD Trips &amp; Fault Codes.html">VFD Trips &amp; Fault Codes</a></li>
+<li><a href="Motor Nameplate Data.html">Motor Nameplate Data</a></li>
+<li><a href="../13_Specialty_Topics/Encoders &amp; Resolvers.html">Encoders &amp; Resolvers</a></li>
+<li><a href="Motor Braking Techniques.html">Motor Braking Techniques</a></li>
+<li><a href="../13_Specialty_Topics/Panel Cooling &amp; Power Conditioning.html">Panel Cooling &amp; Power Conditioning</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

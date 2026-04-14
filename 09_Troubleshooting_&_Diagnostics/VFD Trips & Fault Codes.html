@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,94 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#family-of-common-faults">Family of Common Faults</a></li>
+<li><a href="#troubleshooting-flow">Troubleshooting Flow</a></li>
+<li><a href="#vendor-fault-reference">Vendor Fault Reference</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">09_Troubleshooting_&amp;_Diagnostics</span><span class="bc-sep"> / </span><span class="bc-current">VFD Trips &amp; Fault Codes</span></nav>
         <h1 class="page-title">VFD Trips &amp; Fault Codes</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Troubleshooting &amp; Diagnostics</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#VFD</span> <span class="tag">#faultcode</span> <span class="tag">#overcurrent</span> <span class="tag">#overvoltage</span> <span class="tag">#DCbus</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Troubleshooting &amp; Diagnostics</code><br/><strong>Tags:</strong> <code>#VFD #faultcode #overcurrent #overvoltage #DCbus</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Every VFD has a fault code list that looks intimidating but boils down to a dozen root causes. Know those and you'll solve 90% of drive trips in one pass.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
-<hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
+<h2 id="family-of-common-faults">Family of Common Faults</h2>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<thead><tr>
+<th>Fault Category</th>
+<th>Examples</th>
+<th>Typical Cause</th>
+</tr></thead><tbody>
+<tr><td>Overcurrent (F3 / F4 / F7)</td><td>OC at start, OC running</td><td>Undersized ramp, shorted motor lead, mechanical bind</td></tr>
+<tr><td>DC bus overvoltage</td><td>F5, bus high</td><td>Decel too fast, regen without DB resistor, high line voltage</td></tr>
+<tr><td>DC bus undervoltage</td><td>F6, bus low</td><td>Incoming voltage sag, missing phase, failing supply</td></tr>
+<tr><td>Ground fault</td><td>F13</td><td>Insulation failure, wet motor, long cable with high capacitance</td></tr>
+<tr><td>Overload (I²t)</td><td>F7, OL trip</td><td>Sustained high current, motor thermal model</td></tr>
+<tr><td>Motor overtemp</td><td>F71</td><td>PTC/RTD input, winding too hot, blocked cooling</td></tr>
+<tr><td>Drive overtemp</td><td>F8</td><td>Heatsink dusty, fan failure, ambient too high</td></tr>
+<tr><td>Comm loss</td><td>F81 / F83</td><td>Network cable, IP conflict, switch fault</td></tr>
+<tr><td>Encoder loss</td><td>F93</td><td>Encoder wiring, PPR wrong, noise</td></tr>
+<tr><td>Parameter fault</td><td>F100+</td><td>Inconsistent parameter set after firmware change</td></tr>
+<tr><td>Phase loss</td><td>F17</td><td>Open input or output phase</td></tr>
+<tr><td>Auto-tune fault</td><td>F80</td><td>Motor wiring wrong, locked rotor during tune</td></tr>
+</tbody></table>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
+<h2 id="troubleshooting-flow">Troubleshooting Flow</h2>
+<ol><li>Read the fault code and the timestamp — many drives store the last 10.</li><li>Check drive log for current, voltage, and speed at the moment of fault.</li><li>Cycle power and check status — does it start clean or refault immediately?</li><li>Perform a <a href="../04_Motor_Control/Motor Megger Testing.html">megger test</a> if the fault is ground or short.</li><li>Verify nameplate parameters and auto-tune values.</li><li>Check input and output waveforms if possible (scope at the output).</li><li>Review the load — mechanical bind is a frequent overcurrent culprit.</li></ol>
 <hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="vendor-fault-reference">Vendor Fault Reference</h2>
+<ul><li>Rockwell PowerFlex 525: F3 OC, F4 DC bus OV, F5 DC bus UV, F6 load loss, F7 OL, F13 GF, F63 missing phase.</li><li>Siemens SINAMICS G120: F3xxx range for power, F5xxx for current, F7xxx for bus, F9xxx for comm.</li><li>ABB ACS580: fault codes 2xxx for current, 3xxx for voltage, 4xxx for temperature.</li><li>Always keep the drive manual's fault list bookmarked on your tablet.</li></ul>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Fault code recorded with timestamp.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Drive log exported before clearing.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Motor megger tested if fault is ground or short.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Root cause documented before clearing the fault.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Parameter changes noted if any were made.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="../04_Motor_Control/Variable Frequency Drives (VFDs) Basics.html">Variable Frequency Drives (VFDs) Basics</a></li>
+<li><a href="../04_Motor_Control/VFD Parameters &amp; Setup.html">VFD Parameters &amp; Setup</a></li>
+<li><a href="Motor Overheating &amp; Tripping.html">Motor Overheating &amp; Tripping</a></li>
+<li><a href="../04_Motor_Control/Motor Megger Testing.html">Motor Megger Testing</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

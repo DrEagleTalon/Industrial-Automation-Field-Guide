@@ -337,8 +337,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
   <div id="layout">
-
-    <!-- Sidebar / page TOC -->
     <nav id="sidebar" aria-label="Page contents">
       <div id="sidebar-header">
         <a href="../index.html" class="site-title">
@@ -349,131 +347,93 @@ a:hover { text-decoration: underline; }
       <div class="toc">
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#core-concepts">Core Concepts</a><ul>
-<li><a href="#what-is-it">What is it?</a></li>
-<li><a href="#how-it-works">How it works</a></li>
-<li><a href="#when-to-use">When to Use</a></li>
-</ul>
-</li>
-<li><a href="#specifications-parameters">Specifications &amp; Parameters</a></li>
-<li><a href="#wiring-diagrams">Wiring &amp; Diagrams</a></li>
-<li><a href="#troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</a></li>
+<li><a href="#parameter-groups">Parameter Groups</a></li>
+<li><a href="#auto-tune">Auto-Tune</a></li>
+<li><a href="#commissioning-sequence">Commissioning Sequence</a></li>
 <li><a href="#field-checklist">Field Checklist</a></li>
-<li><a href="#reference-notes">Reference Notes</a></li>
 <li><a href="#related-topics">Related Topics</a></li>
 <li><a href="#local-changelog">Local Changelog</a></li>
 </ul>
-</div>
-
+      </div>
       </div>
     </nav>
-
-    <!-- Main content -->
     <div id="main">
       <header id="page-header">
         <nav class="breadcrumb" aria-label="Location"><span class="bc-part">04_Motor_Control</span><span class="bc-sep"> / </span><span class="bc-current">VFD Parameters &amp; Setup</span></nav>
         <h1 class="page-title">VFD Parameters &amp; Setup</h1>
-
+        <div class="meta-block">
+<div class="meta-row"><span class="meta-label">Status</span><span class="meta-value"><span class="status-badge status-final">Final</span></span></div>
+<div class="meta-row"><span class="meta-label">Version</span><span class="meta-value">1.0.0</span></div>
+<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">Intermediate</span></div>
+<div class="meta-row"><span class="meta-label">Category</span><span class="meta-value">Motor Control Systems</span></div>
+<div class="meta-row"><span class="meta-label">Last Updated</span><span class="meta-value">2026-04-13</span></div>
+<div class="meta-row"><span class="meta-label">Standards</span><span class="meta-value">Manufacturer-specific (PowerFlex, SINAMICS, ACS, Altivar)</span></div>
+<div class="meta-row"><span class="meta-label">Equipment</span><span class="meta-value">Any modern VFD</span></div>
+<div class="meta-row"><span class="meta-label">Tags</span><span class="meta-value"><span class="tag">#VFD</span> <span class="tag">#parameters</span> <span class="tag">#commissioning</span> <span class="tag">#autotune</span></span></div>
+        </div>
       </header>
-
       <article id="content">
-<h1 id="_1"></h1>
-<p><strong>Category:</strong> <code>**Tags:**</code><br />
-<strong>Difficulty:</strong> <code>**Last Updated:**</code><br />
-<strong>Version:</strong> <code>**Status:**</code>  </p>
+<p><strong>Category:</strong> <code>Motor Control Systems</code><br/><strong>Tags:</strong> <code>#VFD #parameters #commissioning #autotune</code><br/><strong>Difficulty:</strong> <code>Intermediate</code><br/><strong>Last Updated:</strong> <code>2026-04-13</code><br/><strong>Version:</strong> <code>1.0.0</code><br/><strong>Status:</strong> <code>final</code></p>
 <hr />
 <h2 id="description">Description</h2>
+<p>Every VFD behaves the same way at a conceptual level, even though every manufacturer names their parameters differently. This page walks through the parameter groups you'll touch during commissioning regardless of whether the drive is a PowerFlex 525, a SINAMICS G120, or an ACS580. Parameter numbers are manufacturer-specific; behaviors are universal.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
-<h3 id="what-is-it">What is it?</h3>
-<h3 id="how-it-works">How it works</h3>
-<h3 id="when-to-use">When to Use</h3>
+<h2 id="parameter-groups">Parameter Groups</h2>
+<h3>1. Motor nameplate</h3><p>The first group you enter. These parameters populate the drive's motor model. Enter them before running auto-tune.</p><table>
+<thead><tr>
+<th>Parameter (generic)</th>
+<th>Meaning</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>Motor voltage</td><td>Rated line voltage</td><td>Nameplate</td></tr>
+<tr><td>Motor FLA</td><td>Rated full-load amps</td><td>Nameplate</td></tr>
+<tr><td>Motor HP or kW</td><td>Rated mechanical output</td><td>Nameplate</td></tr>
+<tr><td>Motor RPM</td><td>Rated full-load speed</td><td>Nameplate</td></tr>
+<tr><td>Motor frequency</td><td>Rated frequency</td><td>Nameplate</td></tr>
+<tr><td>Motor poles</td><td>(Sometimes derived from RPM)</td><td>Derived</td></tr>
+</tbody></table><h3>2. Speed reference</h3><ul><li>Keypad / HIM.</li><li>Analog input 1 or 2 (4–20 mA, 0–10 V).</li><li>Preset speeds selected by discrete inputs.</li><li>Communications (EtherNet/IP, PROFINET, Modbus).</li></ul><h3>3. Accel / Decel</h3><p>Accel = time from 0 to base speed. Decel = time from base to 0. On regenerative loads, decel too fast will trip a DC bus over-voltage fault — add a dynamic-brake resistor or lengthen decel.</p><h3>4. Stop mode</h3><ul><li><strong>Ramp to stop</strong> — default; follows decel time.</li><li><strong>Coast to stop</strong> — drive inhibits output; motor free-wheels.</li><li><strong>DC injection</strong> — DC applied to the stator after decel to hold the motor at zero.</li><li><strong>Flux braking</strong> — drive increases flux to dissipate energy in motor instead of bus.</li></ul><h3>5. Control mode</h3><ul><li>V/Hz — simple loads.</li><li>Sensorless vector — most general-purpose applications.</li><li>Flux vector with encoder — precise torque / positioning.</li></ul><h3>6. Protection / limits</h3><ul><li>Current limit (typically 150% FLA).</li><li>Overload class (typically IEC class 10 or 20).</li><li>Min / max frequency.</li><li>Skip frequencies for resonance.</li><li>Thermistor / PTC input for winding temperature.</li></ul><h3>7. I/O assignments</h3><p>Map digital inputs to functions (Start, Stop, Reverse, Jog, Fault Reset). Map relay outputs to status (Running, Faulted, At-Speed). Map analog inputs to speed reference or torque reference.</p><h3>8. Communications</h3><p>Set the comm module's IP / node address, rate, and fault behavior. Most drives have parameters for 'what to do on network loss' — fault, coast, maintain speed. Critical to set per application.</p>
 <hr />
-<h2 id="specifications-parameters">Specifications &amp; Parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typical Value / Range</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="auto-tune">Auto-Tune</h2>
+<p>Auto-tune measures motor parameters the nameplate doesn't give you (stator resistance, leakage inductance, magnetizing current) and populates the drive's motor model. Two common modes:</p>
+<p><strong>Static auto-tune</strong> — motor does not rotate. Captures Rs and Lσ. Safe for coupled loads.</p>
+<p><strong>Rotational auto-tune</strong> — motor spins briefly. Captures flux and no-load current. Most accurate. Uncouple from the load if possible.</p>
 <hr />
-<h2 id="wiring-diagrams">Wiring &amp; Diagrams</h2>
-<hr />
-<h2 id="troubleshooting-diagnostics">Troubleshooting &amp; Diagnostics</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely Cause</th>
-<th>Diagnostic Step</th>
-<th>Tool(s) Needed</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h2 id="commissioning-sequence">Commissioning Sequence</h2>
+<ol><li>Power up drive; verify firmware and I/O board revision.</li><li>Factory-default the drive before starting (if you're inheriting settings, back them up first).</li><li>Enter all motor nameplate parameters.</li><li>Set control source and speed reference.</li><li>Run static auto-tune, then rotational if possible.</li><li>Set accel / decel, current limit, stop mode.</li><li>Jog at low speed uncoupled, confirm rotation.</li><li>Couple load, run at 25%, 50%, 75%, 100% speed. Log current, bus voltage, motor temp.</li><li>Archive parameter set to removable media (SD card / drive-config file).</li><li>Document final setup in commissioning report — see <a href="../10_System_Integration_&amp;_Commissioning/Commissioning Reports &amp; Sign-off.html">Commissioning Reports</a>.</li></ol>
 <hr />
 <h2 id="field-checklist">Field Checklist</h2>
-<ul>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-<li class="task unchecked"><span class="checkbox">&#x2610;</span></li>
-</ul>
-<hr />
-<h2 id="reference-notes">Reference Notes</h2>
+<ul><li class="task unchecked"><span class="checkbox">&#x2610;</span> Motor nameplate entered accurately.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Auto-tune ran without fault.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Accel/decel matches load — no bus over-volt or current-limit trips.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Skip frequencies set if driven equipment has resonance bands.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Network loss behavior set (fault vs. coast vs. hold).</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Parameter backup saved and filed.</li><li class="task unchecked"><span class="checkbox">&#x2610;</span> Overload class and motor thermal inputs configured.</li></ul>
 <hr />
 <h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>[[]]</li>
-<li>[[]]</li>
-<li>[[]]</li>
+<li><a href="Variable Frequency Drives (VFDs) Basics.html">Variable Frequency Drives (VFDs) Basics</a></li>
+<li><a href="../09_Troubleshooting_&_Diagnostics/VFD Trips &amp; Fault Codes.html">VFD Trips &amp; Fault Codes</a></li>
+<li><a href="../10_System_Integration_&_Commissioning/Commissioning Reports &amp; Sign-off.html">Commissioning Reports &amp; Sign-off</a></li>
+<li><a href="Motor Nameplate Data.html">Motor Nameplate Data</a></li>
+<li><a href="../10_System_Integration_&_Commissioning/PLC-HMI-VFD Integration.html">PLC-HMI-VFD Integration</a></li>
 </ul>
 <hr />
 <h2 id="local-changelog">Local Changelog</h2>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>Date</th>
 <th>Version</th>
 <th>Author</th>
 <th>Notes</th>
-</tr>
-</thead>
-<tbody>
+</tr></thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2026-04-13</td>
+<td>1.0.0</td>
+<td>Field Guide Team</td>
+<td>Initial full content release.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr />
       </article>
-
       <footer id="page-footer">
-        <p>Industrial Automation Field Guide</p>
+        <p>Industrial Automation Field Guide &mdash; v1.0.0 &mdash; Final</p>
       </footer>
     </div>
-
   </div>
 </body>
 </html>

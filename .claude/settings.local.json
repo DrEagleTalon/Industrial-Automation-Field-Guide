@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -v \"^.$\")",
+      "Bash(head -340 \"C:/Users/Saund/OneDrive/Documents/GitHub/Industrial-Automation-Field-Guide/04_Motor_Control/3-Phase Motor Basics.html\")",
+      "Read(//tmp/**)",
+      "Bash(where pdftoppm:*)",
+      "Bash(mkdir -p /tmp/pdfs)",
+      "Bash(pdftotext -f 1 -l 20 \"C:/Users/Saund/iCloudDrive/Documents/PLC/1756-rm003_-en-p.pdf\" /tmp/pdfs/1756-rm003-p1-20.txt)",
+      "Bash(python generate_pages.py)",
+      "Bash(python)"
+    ]
+  }
+}
